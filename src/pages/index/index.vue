@@ -1,8 +1,9 @@
 <template>
   <div class="index">
-    <Header title='东部中心人才培养基地'/>
-    <!--<p>测试数据</p>-->
-    <p>{{this.userInfo}}</p>
+    <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
+    <Search title='东部中心人才培养基地' noBackShow='noBackShow'/>
+    <Slider/>
+    <p>njkknjcda</p>
     <!--<TwoLanguageTitle english='Product' chinese='产品' linkTitle='查看更多' link="/title"></TwoLanguageTitle>-->
     <!--<TwoLanguageTitle english='Walkthrough' chinese='攻略'></TwoLanguageTitle>-->
   </div>
@@ -12,6 +13,7 @@
   import {sliderItems, searchplace} from '../../server/api'
   import Slider from '../../base/slider/slider'
   import Header from '../../components/header.vue'
+  import Search from '../../components/search.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
 
   import {mapState, mapActions} from 'vuex'
@@ -34,8 +36,6 @@
     mounted() {
       sliderItems().then(res => {
         console.log(res)
-        console.log(res)
-        console.log(res)
       })
       searchplace('qqq', 'www').then(res => {
         console.log(res)
@@ -50,6 +50,7 @@
     components: {
       Slider,
       Header,
+      Search,
       TwoLanguageTitle
     }
   }

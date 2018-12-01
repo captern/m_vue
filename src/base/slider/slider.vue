@@ -3,8 +3,8 @@
     <div class="slider-content">
       <div class="slider" ref="slider">
         <div class="slider-group" ref="sliderGroup">
-          <slot>
-          </slot>
+          <img src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
+          <img src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
         </div>
         <div class="dots">
           <span class="dot" :class="{active: currentPageIndex === index }" v-for="(item, index) in dots"></span>

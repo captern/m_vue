@@ -47,11 +47,15 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 }
 
 // post格式获取短信验证码
-
 export const mobileCode = phone => fetch('/v4/mobile/verify_code/send', {
   mobile: phone,
   scene: 'login',
   type: 'sms'
+}, 'POST')
+
+// 获取搜索结果
+export const searchRest = searchKeys => fetch('/v4/mobile/verify_code/send', {
+  searchKeys: searchKeys
 }, 'POST')
 
 // 简便的post格式

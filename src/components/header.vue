@@ -1,6 +1,7 @@
 <template>
   <div class="header">
-    <div class="back">返回</div>
+    <div class="back" v-if='showBack' @click="$router.go(-1)">返回</div>
+    <div class="back" v-else></div>
     <div class="page-title">{{title}}</div>
     <div class="menu">控制</div>
   </div>
@@ -9,30 +10,41 @@
 <script>
   export default {
     props: {
-      title: ''
+      title: '',
+      noBackShow: ''
     },
     data() {
-      return {}
+      return {
+        showBack: true,
+      }
+    },
+    methods: {
+      backShow() {
+        if (this.noBackShow) {
+          this.showBack = false
+        }
+      }
     },
     mounted() {
+      this.backShow()
     },
-    methods: {},
     components: {}
   }
 </script>
 
 <style lang="scss" scoped>
-  .header{
+  .header {
+    color: #ffffff;
     width: 100%;
-    height: 86px;
-    line-height: 86px;
-    background: red;
+    height: 100px;
+    line-height: 100px;
+    background: #161616;
     display: flex;
     text-align: center;
-    .back,.menu{
+    .back, .menu {
       flex: 1;
     }
-    .page-title{
+    .page-title {
       flex: 8;
     }
   }
