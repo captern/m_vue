@@ -5,7 +5,8 @@
     <div class="loginForm">
       <div class="name-area input-area">
         <div class="login-icon">ac</div>
-        <input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">
+        <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
+        <input class="name-input input" type="number" name="search" placeholder="13122767084" v-model="phoneNumber">
       </div>
       <div class="pas-area input-area">
         <div class="login-icon">cas</div>
@@ -17,7 +18,8 @@
         </div>
         <div class="register-link">立即注册</div>
       </div>
-      <div class="login-container">登录</div>
+      <div class="login-container" @click="mobileLogin">登录</div>
+      {{userInfo}}
     </div>
   </div>
 </template>
@@ -27,28 +29,63 @@
   import Slider from '../../base/slider/slider'
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
-  import {mapState, mapActions} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
+  import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../server/api'
 
   export default {
     data() {
       return {
-        showPassword: false, // 是否显示密码
-        phoneNumber: null, //电话号码
-//        userInfo: null, //获取到的用户信息
-        userAccount: null, //用户名
-        passWord: null, //密码
-        showAlert: false, //显示提示组件
-        alertText: null, //提示的内容
+        showPassword: false,      // 是否显示密码
+        phoneNumber: null,        //电话号码
+        userInfo: null,           //获取到的用户信息
+        userAccount: null,        //用户名
+        passWord: null,           //密码
+        showAlert: false,         //显示提示组件
+        alertText: null,          //提示的内容
       }
     },
     mounted() {
     },
     computed: {
-      ...mapState([
-        'userInfo'
-      ]),
+//      ...mapState([
+////        'userInfo'
+//        'RECORD_USERINFO',
+//      ]),
+      //检测手机号码
+      rightPhoneNumber: function () {
+        return /^1\d{10}$/gi.test(this.phoneNumber)
+      }
     },
-    methods: {},
+    methods: {
+      ...mapMutations([
+        'RECORD_USERINFO',
+      ]),
+      async mobileLogin() {
+        if (!this.phoneNumber) {
+          this.showAlert = true;
+          this.alertText = '请输入手机号';
+          alert('请输入手机号')
+          return
+        } else if (!this.passWord) {
+          this.showAlert = true;
+          this.alertText = '请输入密码';
+          alert('请输入密码')
+          return
+        } else if (!this.rightPhoneNumber) {
+          this.showAlert = true;
+          this.alertText = '手机号码不正确';
+          alert('手机号码不正确')
+          return
+        }
+        //用户名登录
+        let userInfoData = await accountLogin(this.phoneNumber, this.passWord);
+        this.userInfo = userInfoData.data
+        console.log(this.userInfo)
+
+        this.RECORD_USERINFO(this.userInfo);
+//        this.$router.go(-1);
+      }
+    },
     components: {
       Slider,
       Header,

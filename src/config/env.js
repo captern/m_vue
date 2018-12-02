@@ -7,7 +7,7 @@
  *
  */
 
-let baseUrl = 'https://www.easy-mock.com/mock/59e4590cc15ade4b6d13ef58/captern/more/ranking/dotpraise'
+let baseUrl = 'https://www.easy-mock.com/mock/5b23592f70839c5abe06ec0f/wdemo'
 let routerMode = 'hash'
 let imgBaseUrl = ''
 
