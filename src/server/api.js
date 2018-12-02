@@ -1,5 +1,5 @@
 import fetch from '../config/fetch'
-// import {getStore} from '../config/mUtils'
+import {getStore} from '../config/mUtils'
 
 // 获取首页轮播图
 export const sliderItems = () => fetch('', {
@@ -66,6 +66,10 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
   [type]: checkNumber,
   type
 })
+
+// 获取用户信息
+export const getUser = () => fetch('/v1/user', {user_id: getStore('user_id')});
+
 
 // 发送帐号
 export const sendMobile = (sendData, captcha_code, type, password) => fetch('/v1/mobile/verify_code/send', {

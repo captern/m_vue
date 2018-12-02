@@ -28,6 +28,7 @@
   import mainList from '../../components/mainList.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
 
+
   import {mapState, mapActions} from 'vuex'
 
   export default {
@@ -103,13 +104,19 @@
       searchplace('qqq', 'www').then(res => {
         console.log(res)
       })
+
+      this.getUserInfo();
     },
     computed: {
       ...mapState([
         'userInfo'
       ]),
     },
-    methods: {},
+    methods: {
+      ...mapActions([
+        'getUserInfo'
+      ]),
+    },
     components: {
       Slider,
       Header,
