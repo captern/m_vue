@@ -14,6 +14,7 @@
       <div class="user-tip">
         登录
       </div>
+      {{userInfo}}
     </div>
     <!--<TwoLanguageTitle english='Product' chinese='产品' linkTitle='查看更多' link="/title"></TwoLanguageTitle>-->
     <!--<TwoLanguageTitle english='Walkthrough' chinese='攻略'></TwoLanguageTitle>-->
@@ -116,7 +117,6 @@
         'getUserInfo'
       ]),
     },
-    methods: {},
     components: {
       Slider,
       Header,

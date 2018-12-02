@@ -6,6 +6,8 @@ Vue.use(Router)
 const Index = () => import('../pages/index/index')
 const Login = () => import('../pages/login/login')
 const Register = () => import('../pages/register/register')
+const User = () => import('../pages/user/user')
+const ChangeUserInfo = () => import('../pages/changeUserInfo/changeUserInfo')
 
 export default new Router({
   mode: 'history',
@@ -21,6 +23,14 @@ export default new Router({
     {
       path: '/register',
       component: Register
+    },
+    {
+      path: '/user',
+      component: User
+    },
+    {
+      path: '/changeuserinfo',
+      component: ChangeUserInfo
     },
     // {
     //   path: '/login',

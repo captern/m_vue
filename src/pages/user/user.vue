@@ -1,0 +1,128 @@
+<template>
+  <div class="register-page">
+    <Header title='个人中心'/>
+    <div class="user-page">
+      <div class="section-one">
+        <img class="avatar" src="https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=1488861817,1113726833&fm=202"
+             alt="用户头像">
+        <p class="phone">13122767084</p>
+      </div>
+      <div class="section-two">
+        <div class="link-items-area">
+          <router-link to="/changeuserinfo" class="link-item">修改个人资料 <span class="icon">dsa</span></router-link>
+          <router-link to="" class="link-item">修改密码</router-link>
+          <router-link to="" class="link-item">我的课程</router-link>
+          <router-link to="" class="link-item">我的收藏</router-link>
+        </div>
+        <div class="home-link-area">
+          <router-link to="/" class="home-link">首页</router-link>
+        </div>
+        <div class="logout">退出登录</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import Header from '../../components/header.vue'
+  import {mapState, mapMutations} from 'vuex'
+
+  export default {
+    data() {
+      return {
+        userName: null,          //电话号码
+//        userInfo: null,                     //获取到的用户信息
+      }
+    },
+    mounted() {
+      this.initData()
+    },
+    computed: {
+      ...mapState([
+        'userInfo',
+      ]),
+    },
+    methods: {
+      initData() {
+//        this.userName = this.userInfo.userInfo.userName
+      }
+    },
+    components: {
+      Header,
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .user-page {
+    margin-top: 113px;
+    .section-one {
+      text-align: center;
+      .avatar {
+        width: 242px;
+        height: 242px;
+        border-radius: 50%;
+      }
+      .phone {
+        margin-top: 55px;
+        font-size: 40px;
+        color: #ffffff;
+      }
+    }
+    .section-two {
+      width: 959px;
+      height: 1084px;
+      background: #ffffff;
+      border-radius: 24px;
+      margin: 112px auto 0;
+      .link-items-area {
+        width: 615px;
+        margin: 0 auto;
+        padding-top: 149px;
+        .link-item {
+          font-size: 38px;
+          height: 109px;
+          line-height: 119px;
+          display: block;
+          background: rgb(134, 193, 248);
+          margin-bottom: 35px;
+          border-radius: 24px;
+          color: #ffffff;
+          padding: 0 37px 0 45px;
+          .icon {
+            float: right;
+          }
+        }
+
+      }
+      .home-link-area {
+        width: 100%;
+        height: 125px;
+        padding-top: 20px;
+        .home-link {
+          float: right;
+          margin-right: 45px;
+          color: #ffffff;
+          width: 125px;
+          /*height: 125px;*/
+          line-height: 125px;
+          text-align: center;
+          border-radius: 50%;
+          background: rgb(134, 193, 248);
+        }
+      }
+      .logout {
+        color: #ffffff;
+        font-size: 52px;
+        width: 879px;
+        height: 105px;
+        text-align: center;
+        margin: 45px auto 0;
+        line-height: 105px;
+        border-radius: 24px;
+        background: rgb(68, 178, 237);
+      }
+    }
+  }
+</style>
+

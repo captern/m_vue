@@ -1,12 +1,11 @@
 <template>
   <div class="login-page">
     <Header title='登录'/>
-    <p>{{this.userInfo}}</p>
     <div class="loginForm">
       <div class="name-area input-area">
         <div class="login-icon">ac</div>
         <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
-        <input class="name-input input" type="number" name="search" placeholder="13122767084" v-model="phoneNumber">
+        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="13122767084" v-model="phoneNumber">
       </div>
       <div class="pas-area input-area">
         <div class="login-icon">cas</div>
@@ -16,10 +15,10 @@
         <div class="check">
           <input type="checkbox"/>记住密码
         </div>
-        <div class="register-link">立即注册</div>
+        <router-link :to="'/register'" class="register-link">立即注册</router-link>
+        <!--<div class="register-link">立即注册</div>-->
       </div>
       <div class="login-container" @click="mobileLogin">登录</div>
-      {{userInfo}}
     </div>
   </div>
 </template>
@@ -47,10 +46,10 @@
     mounted() {
     },
     computed: {
-//      ...mapState([
-////        'userInfo'
+      ...mapState([
+        'userInfo'
 //        'RECORD_USERINFO',
-//      ]),
+      ]),
       //检测手机号码
       rightPhoneNumber: function () {
         return /^1\d{10}$/gi.test(this.phoneNumber)
@@ -135,6 +134,7 @@
         }
         .register-link {
           text-align: right;
+          color: #000;
         }
       }
       .login-container {
