@@ -5,6 +5,7 @@ Vue.use(Router)
 
 const Index = () => import('../pages/index/index')
 const Login = () => import('../pages/login/login')
+const Register = () => import('../pages/register/register')
 
 export default new Router({
   mode: 'history',
@@ -16,6 +17,10 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/register',
+      component: Register
     },
     // {
     //   path: '/login',
