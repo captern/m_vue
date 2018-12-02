@@ -68,7 +68,7 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
 })
 
 // 获取用户信息
-export const getUser = () => fetch('/v1/user', {user_id: getStore('user_id')});
+export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
 // 账号密码登录
 // 手机号登录
 

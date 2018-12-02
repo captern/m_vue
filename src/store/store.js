@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 
 const state = {
-  userInfo: '用户名',         //用户信息
+  userInfo: null,         //用户信息
   login: true,            //是否登录
   imgPath: null           //头像地址
 }

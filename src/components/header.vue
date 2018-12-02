@@ -3,11 +3,14 @@
     <div class="back" v-if='showBack' @click="$router.go(-1)">返回</div>
     <div class="back" v-else></div>
     <div class="page-title">{{title}}</div>
-    <div class="menu">控制</div>
+    <div class="menu" v-if="userInfo">控制</div>
+    <div class="login_span" v-else>登录|注册</div>
+    <!--{{userInfo}}-->
   </div>
 </template>
 
 <script>
+  import {mapState, mapActions} from 'vuex'
   export default {
     props: {
       title: '',
@@ -18,15 +21,26 @@
         showBack: true,
       }
     },
+    mounted(){
+      //获取用户信息
+      this.backShow()
+//      this.getUserInfo();
+
+    },
+    computed: {
+      ...mapState([
+        'userInfo'
+      ]),
+    },
     methods: {
+      ...mapActions([
+        'getUserInfo'
+      ]),
       backShow() {
         if (this.noBackShow) {
           this.showBack = false
         }
       }
-    },
-    mounted() {
-      this.backShow()
     },
     components: {}
   }
