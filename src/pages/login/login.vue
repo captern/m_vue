@@ -30,7 +30,7 @@
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import {mapState, mapMutations} from 'vuex'
-  import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../server/api'
+  import {mobileCode, checkExsis, sendLogin, getcaptchas, login} from '../../server/api'
 
   export default {
     data() {
@@ -78,7 +78,7 @@
           return
         }
         //用户名登录
-        let userInfoData = await accountLogin(this.phoneNumber, this.passWord);
+        let userInfoData = await login(this.phoneNumber, this.passWord);
         this.userInfo = userInfoData
         console.log(this.userInfo)
 

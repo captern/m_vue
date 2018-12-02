@@ -71,8 +71,12 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
 export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
 // 账号密码登录
 // 手机号登录
-
-export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
+// 登录
+// export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
+export const login = (username, password) => fetch('/login', {username, password}, 'POST');
+// 注册
+// export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
+export const register = (username, password) => fetch('/register', {username, password}, 'POST');
 
 
 // 发送帐号
