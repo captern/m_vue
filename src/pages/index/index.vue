@@ -103,8 +103,7 @@
       })
       searchplace('qqq', 'www').then(res => {
         console.log(res)
-      })
-
+      });
       this.getUserInfo();
     },
     computed: {
@@ -117,6 +116,7 @@
         'getUserInfo'
       ]),
     },
+    methods: {},
     components: {
       Slider,
       Header,

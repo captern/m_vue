@@ -79,7 +79,7 @@
         }
         //用户名登录
         let userInfoData = await accountLogin(this.phoneNumber, this.passWord);
-        this.userInfo = userInfoData.data
+        this.userInfo = userInfoData
         console.log(this.userInfo)
 
         this.RECORD_USERINFO(this.userInfo);

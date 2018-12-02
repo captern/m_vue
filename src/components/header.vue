@@ -11,6 +11,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex'
+
   export default {
     props: {
       title: '',
@@ -21,10 +22,10 @@
         showBack: true,
       }
     },
-    mounted(){
+    mounted() {
       //获取用户信息
-      this.backShow()
-//      this.getUserInfo();
+      this.backShow();
+      this.getUserInfo();
 
     },
     computed: {
