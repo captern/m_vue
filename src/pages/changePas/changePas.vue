@@ -1,33 +1,18 @@
 <template>
   <div class="change-info-page">
-    <Header title='修改个人资料'/>
+    <Header title='修改密码'/>
     <div class="change-area">
       <div class="change-form">
-        <div class="phone-area change-item">
-          <div class="item-left">*手机号 ：</div>
-          <div class="item-right phone-number">{{phoneNumber}}</div>
-        </div>
-        <div class="sex-area change-item">
-          <div class="item-left">*性别 ：</div>
-          <div class="item-right sex-check">
-            <div class="sex-item">男</div>
-            <div class="sex-item">女</div>
-          </div>
-        </div>
         <div class="name-area change-item">
-          <div class="item-left">姓&nbsp;名 ：</div>
-          <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName">
+          <div class="item-left">*密 码 ：</div>
+          <input class="item-right" type="password" name="name" placeholder="请输入密码" v-model="newPassword">
         </div>
         <div class="IdCard-area change-item">
-          <div class="item-left">身份证号码 ：</div>
-          <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard">
-        </div>
-        <div class="work-area change-item">
-          <div class="item-left">工作单位 ：</div>
-          <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace">
+          <div class="item-left">*确认密码 ：</div>
+          <input class="item-right" type="password" name="IdCard" placeholder="请再次输入密码" v-model="repeatPassword">
         </div>
 
-        <div class="change-info" @click="changeInfo">保存</div>
+        <div class="change-info" @click="changePas">保存</div>
         <!--<div class="login-container">保存</div>-->
       </div>
     </div>
@@ -37,19 +22,14 @@
 <script>
   import Header from '../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
-  import {changeInfo} from '../../server/api'
+  import {changePas} from '../../server/api'
 
   export default {
     data() {
       return {
         user_id: null,
-        phoneNumber: null,
-        // userName: null,
-        userName: 'captern',
-        // IdCard: null,
-        IdCard: '131182199302115016',
-        // workSpace: null,
-        workSpace: '上海省上海市',
+        newPassword: null,
+        repeatPassword: null
       }
     },
     mounted() {
@@ -59,7 +39,7 @@
       ...mapState([
         'userInfo'
       ]),
-      rightIdCard: function () {
+      rightPas: function () {
         return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(this.IdCard)
       }
     },
@@ -68,33 +48,28 @@
         if (this.userInfo) {
           console.log(this.userInfo)
           this.user_id = this.userInfo.user_id
-          this.phoneNumber = this.userInfo.phoneNumber
         }
       },
-      async changeInfo() {
-        if (!this.userName) {
+      async changePas() {
+        if (!this.newPassword) {
           this.showAlert = true;
-          this.alertText = '请输入用户名';
-          alert('请输入用户名')
+          this.alertText = '请输入密码';
+          alert('请输入密码')
           return
-        } else if (!this.IdCard) {
+        } else if (!this.repeatPassword) {
           this.showAlert = true;
-          this.alertText = '请输入身份证号码';
-          alert('请输入身份证号码')
+          this.alertText = '请再次输入密码';
+          alert('请再次输入密码')
           return
-        } else if (!this.rightIdCard) {
+        } else if (this.newPassword !== this.repeatPassword) {
           this.showAlert = true;
-          this.alertText = '身份证号码输入错误';
-          alert('身份证号码输入错误')
-          return
-        } else if (!this.workSpace) {
-          this.showAlert = true;
-          this.alertText = '请输入工作地点';
-          alert('请输入工作地点')
+          this.alertText = '两次输入密码不一致';
+          alert('两次输入密码不一致')
           return
         }
         // 发送重置信息
-        let res = await changeInfo(this.user_id, this.userName, this.IdCard, this.workSpace);
+        let res = await changePas(this.user_id, this.newPassword);
+        console.log(res)
         if (res.message) {
           this.showAlert = true;
           this.alertText = res.message;
@@ -102,7 +77,7 @@
         }else{
           this.showAlert = true;
           this.alertText = '密码修改成功';
-          alert('修改用户信息成功')
+          alert('密码修改成功')
           this.$router.go(-1);
         }
       }

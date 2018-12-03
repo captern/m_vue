@@ -8,6 +8,7 @@ const Login = () => import('../pages/login/login')
 const Register = () => import('../pages/register/register')
 const User = () => import('../pages/user/user')
 const ChangeUserInfo = () => import('../pages/changeUserInfo/changeUserInfo')
+const ChangePas = () => import('../pages/changePas/changePas')
 
 export default new Router({
   mode: 'history',
@@ -31,6 +32,10 @@ export default new Router({
     {
       path: '/changeuserinfo',
       component: ChangeUserInfo
+    },
+    {
+      path: '/changepas',
+      component: ChangePas
     },
     // {
     //   path: '/login',

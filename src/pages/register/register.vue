@@ -4,7 +4,8 @@
     <div class="register-form">
       <div class="name-area input-area">
         <div class="register-icon">*立即注册</div>
-        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="请输入手机号" v-model="registerPhoneNumber">
+        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="请输入手机号"
+               v-model="registerPhoneNumber">
       </div>
       <div class="pas-area input-area">
         <div class="register-icon">*输入密码</div>
@@ -27,30 +28,28 @@
 </template>
 
 <script>
-  import {sliderItems, searchplace} from '../../server/api'
+  // import {sliderItems, searchplace} from '../../server/api'
   import Header from '../../components/header.vue'
-  import {mapState, mapMutations} from 'vuex'
-  import {mobileCode, checkExsis, sendLogin, getcaptchas, accountLogin} from '../../server/api'
+  import {mapMutations} from 'vuex'
+  import {login} from '../../server/api'
 
   export default {
     data() {
       return {
-        registerPhoneNumber: null,          //电话号码
-        userInfo: null,                     //获取到的用户信息
-        registerPassWord: null,             //密码
-        registerRepeatPas: null,            //重复密码
-        showAlert: false,                   //显示提示组件
-        alertText: null,                    //提示的内容
+        registerPhoneNumber: null, // 电话号码
+        userInfo: null, // 获取到的用户信息
+        registerPassWord: null, // 密码
+        registerRepeatPas: null, // 重复密码
+        showAlert: false, // 显示提示组件
+        alertText: null// 提示的内容
       }
     },
     mounted() {
     },
     computed: {
-      //检测手机号码
       rightPhoneNumber: function () {
         return /^1\d{10}$/gi.test(this.registerPhoneNumber)
       },
-      //检测密码
       rightPas: function () {
         return this.registerPassWord === this.registerRepeatPas
       }
@@ -61,37 +60,36 @@
       ]),
       async mobileLogin() {
         if (!this.registerPhoneNumber) {
-          this.showAlert = true;
-          this.alertText = '请输入手机号';
+          this.showAlert = true
+          this.alertText = '请输入手机号'
           alert('请输入手机号')
           return
         } else if (!this.registerPassWord) {
-          this.showAlert = true;
-          this.alertText = '请输入密码';
+          this.showAlert = true
+          this.alertText = '请输入密码'
           alert('请输入密码')
           return
         } else if (!this.registerRepeatPas) {
-          this.showAlert = true;
-          this.alertText = '请输入密码';
+          this.showAlert = true
+          this.alertText = '请输入密码'
           alert('请输入重复密码')
           return
         } else if (!this.rightPhoneNumber) {
-          this.showAlert = true;
-          this.alertText = '手机号码不正确';
+          this.showAlert = true
+          this.alertText = '手机号码不正确'
           alert('手机号码不正确')
           return
         } else if (!this.rightPas) {
-          this.showAlert = true;
-          this.alertText = '手机号码不正确';
+          this.showAlert = true
+          this.alertText = '手机号码不正确'
           alert('两次密码不正确')
           return
         }
-        //用户名登录
-        let userInfoData = await accountLogin(this.phoneNumber, this.passWord);
+        let userInfoData = await login(this.phoneNumber, this.passWord)
         this.userInfo = userInfoData
         console.log(this.userInfo)
 
-        this.RECORD_USERINFO(this.userInfo);
+        this.RECORD_USERINFO(this.userInfo)
 //        this.$router.go(-1);
       }
     },

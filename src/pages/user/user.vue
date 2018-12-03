@@ -6,11 +6,12 @@
         <img class="avatar" src="https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=1488861817,1113726833&fm=202"
              alt="用户头像">
         <p class="phone">13122767084</p>
+        <p class="phone">{{userName}}</p>
       </div>
       <div class="section-two">
         <div class="link-items-area">
           <router-link to="/changeuserinfo" class="link-item">修改个人资料 <span class="icon">dsa</span></router-link>
-          <router-link to="" class="link-item">修改密码</router-link>
+          <router-link to="/changepas" class="link-item">修改密码</router-link>
           <router-link to="" class="link-item">我的课程</router-link>
           <router-link to="" class="link-item">我的收藏</router-link>
         </div>
@@ -25,13 +26,13 @@
 
 <script>
   import Header from '../../components/header.vue'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     data() {
       return {
-        userName: null,          //电话号码
-//        userInfo: null,                     //获取到的用户信息
+        userName: ''
+        // 电话号码
       }
     },
     mounted() {
@@ -39,16 +40,23 @@
     },
     computed: {
       ...mapState([
-        'userInfo',
-      ]),
+        'userInfo'
+      ])
     },
     methods: {
       initData() {
-//        this.userName = this.userInfo.userInfo.userName
+        if (this.userInfo && this.userInfo.user_id) {
+          this.userName = this.userInfo.userName
+        }
       }
     },
     components: {
-      Header,
+      Header
+    },
+    watch: {
+      userInfo: function (value) {
+        this.initData()
+      }
     }
   }
 </script>

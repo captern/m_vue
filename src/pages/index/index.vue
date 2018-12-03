@@ -11,10 +11,13 @@
           <div class="link-name">{{listitem.name}}</div>
         </div>
       </div>
-      <div class="user-tip">
+      <router-link to="/user" class="user-tip" v-if="userInfo">
+        个人中心
+      </router-link>
+      <div class="user-tip" v-else>
         登录
       </div>
-      {{userInfo}}
+      <!--{{userInfo}}-->
     </div>
     <!--<TwoLanguageTitle english='Product' chinese='产品' linkTitle='查看更多' link="/title"></TwoLanguageTitle>-->
     <!--<TwoLanguageTitle english='Walkthrough' chinese='攻略'></TwoLanguageTitle>-->
@@ -28,7 +31,6 @@
   import Search from '../../components/search.vue'
   import mainList from '../../components/mainList.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
-
 
   import {mapState, mapActions} from 'vuex'
 
@@ -104,18 +106,18 @@
       })
       searchplace('qqq', 'www').then(res => {
         console.log(res)
-      });
-      this.getUserInfo();
+      })
+      // this.getUserInfo()
     },
     computed: {
       ...mapState([
         'userInfo'
-      ]),
+      ])
     },
     methods: {
       ...mapActions([
         'getUserInfo'
-      ]),
+      ])
     },
     components: {
       Slider,
@@ -186,6 +188,8 @@
         }
       }
       .user-tip {
+        display: block;
+        color: #ffffff;
         height: 105px;
         line-height: 105px;
         background: rgb(58, 178, 237);

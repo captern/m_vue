@@ -68,6 +68,8 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
 })
 
 // 获取用户信息
+// export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
+
 export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
 // 账号密码登录
 // 手机号登录
@@ -77,7 +79,18 @@ export const login = (username, password) => fetch('/login', {username, password
 // 注册
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
 export const register = (username, password) => fetch('/register', {username, password}, 'POST');
-
+// 修改用户信息
+export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
+  user_id,
+  userName,
+  IdCard,
+  workSpace
+}, 'POST');
+// 修改用户密码
+export const changePas = (user_id, newPassword) => fetch('/changePas', {
+  user_id,
+  newPassword
+}, 'POST');
 
 // 发送帐号
 export const sendMobile = (sendData, captcha_code, type, password) => fetch('/v1/mobile/verify_code/send', {
