@@ -18,7 +18,7 @@
         <div class="home-link-area">
           <router-link to="/" class="home-link">首页</router-link>
         </div>
-        <div class="logout">退出登录</div>
+        <div class="logout" @click="outLogin">退出登录</div>
       </div>
     </div>
   </div>
@@ -26,12 +26,13 @@
 
 <script>
   import Header from '../../components/header.vue'
-  import {mapState} from 'vuex'
+  import {mapMutations, mapState} from 'vuex'
+  import {removeStore} from '../../config/mUtils'
 
   export default {
     data() {
       return {
-        userName: ''
+        userName: null
         // 电话号码
       }
     },
@@ -44,18 +45,30 @@
       ])
     },
     methods: {
+      ...mapMutations([
+        'OUT_LOGIN'
+      ]),
       initData() {
         if (this.userInfo && this.userInfo.user_id) {
           this.userName = this.userInfo.userName
         }
-      }
+      },
+      //退出登录
+      async outLogin() {
+        this.OUT_LOGIN();
+        removeStore('user_id')
+        this.$router.replace('/')
+        // await signout();
+      },
     },
     components: {
       Header
     },
     watch: {
       userInfo: function (value) {
-        this.initData()
+        if (value && value.user_id){
+          this.initData()
+        }
       }
     }
   }

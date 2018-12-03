@@ -1,8 +1,6 @@
-import {RECORD_USERINFO, GET_USERINFO, RETSET_NAME} from './mutation-types.js'
+import {RECORD_USERINFO, GET_USERINFO, RETSET_NAME, OUT_LOGIN} from './mutation-types.js'
 
 import {setStore} from '../config/mUtils'
-
-// import {localapi, proapi} from 'src/config/env'
 
 export default {
   // 记录用户信息
@@ -30,5 +28,11 @@ export default {
     console.log('12121')
     console.log(state.userInfo)
     state.userInfo = Object.assign({}, state.userInfo, {username})
-  }
+  },
+  //退出登录
+  [OUT_LOGIN](state) {
+    state.userInfo = {};
+    console.log(state.userInfo)
+    state.login = false;
+  },
 }
