@@ -1,6 +1,10 @@
 import fetch from '../config/fetch'
 import {getStore} from '../config/mUtils'
 
+// 获取新闻信息
+export const newsList = () => fetch('/newsList', {})
+
+
 // 获取首页轮播图
 export const sliderItems = () => fetch('', {
   type: ''

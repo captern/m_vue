@@ -1,11 +1,16 @@
 <template>
   <div class="login-page">
     <Header title='登录'/>
+    <div class="logo-area">
+      <img class="logo" src="" alt="logo">
+      <div class="logo-name"></div>
+    </div>
     <div class="loginForm">
       <div class="name-area input-area">
         <div class="login-icon">ac</div>
         <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
-        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="13122767084" v-model="phoneNumber">
+        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="13122767084"
+               v-model="phoneNumber">
       </div>
       <div class="pas-area input-area">
         <div class="login-icon">cas</div>
@@ -20,6 +25,9 @@
       </div>
       <div class="login-container" @click="mobileLogin">登录</div>
     </div>
+    <!--提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
+
   </div>
 </template>
 
@@ -29,6 +37,7 @@
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import {mapState, mapMutations} from 'vuex'
+  import alertTip from '../../components/common/alertTip'
   import {mobileCode, checkExsis, sendLogin, getcaptchas, login} from '../../server/api'
 
   export default {
@@ -36,11 +45,12 @@
       return {
         showPassword: false,      // 是否显示密码
         phoneNumber: null,        //电话号码
-        userInfo: null,           //获取到的用户信息
+        // userInfo: null,           //获取到的用户信息
         userAccount: null,        //用户名
         passWord: null,           //密码
         showAlert: false,         //显示提示组件
         alertText: null,          //提示的内容
+        tipType: 'one',          //提示的内容
       }
     },
     mounted() {
@@ -63,17 +73,14 @@
         if (!this.phoneNumber) {
           this.showAlert = true;
           this.alertText = '请输入手机号';
-          alert('请输入手机号')
           return
         } else if (!this.passWord) {
           this.showAlert = true;
           this.alertText = '请输入密码';
-          alert('请输入密码')
           return
         } else if (!this.rightPhoneNumber) {
           this.showAlert = true;
           this.alertText = '手机号码不正确';
-          alert('手机号码不正确')
           return
         }
         //用户名登录
@@ -88,6 +95,7 @@
     components: {
       Slider,
       Header,
+      alertTip,
       TwoLanguageTitle
     }
   }
@@ -95,6 +103,16 @@
 
 <style lang="scss" scoped>
   .login-page {
+    .logo-area {
+      margin: 259px 0 77px;
+      text-align: center;
+      .logo {
+        width: 390px;
+        height: 273px;
+        display: inline-block;
+        /*background-color: red;*/
+      }
+    }
     .loginForm {
       margin: 0 auto;
       width: 667px;

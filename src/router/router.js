@@ -9,6 +9,7 @@ const Register = () => import('../pages/register/register')
 const User = () => import('../pages/user/user')
 const ChangeUserInfo = () => import('../pages/changeUserInfo/changeUserInfo')
 const ChangePas = () => import('../pages/changePas/changePas')
+const NewsList = () => import('../pages/newsList/newsList')
 
 export default new Router({
   mode: 'history',
@@ -36,6 +37,10 @@ export default new Router({
     {
       path: '/changepas',
       component: ChangePas
+    },
+    {
+      path: '/newslist',
+      component: NewsList
     },
     // {
     //   path: '/login',

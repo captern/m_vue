@@ -14,9 +14,11 @@
       <router-link to="/user" class="user-tip" v-if="userInfo">
         个人中心
       </router-link>
-      <div class="user-tip" v-else>
+      <router-link to="/login" class="user-tip" v-else>
         登录
-      </div>
+      </router-link>
+      <!--<alert-tip v-if="showAlert" @closeTip="showAlert = false" :alertText="alertText"/>-->
+
       <!--{{userInfo}}-->
     </div>
     <!--<TwoLanguageTitle english='Product' chinese='产品' linkTitle='查看更多' link="/title"></TwoLanguageTitle>-->
@@ -31,6 +33,7 @@
   import Search from '../../components/search.vue'
   import mainList from '../../components/mainList.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
+  import alertTip from '../../components/common/alertTip'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -97,7 +100,8 @@
             icon: '',
             subscript: 'eight'
           }
-        ]
+        ],
+        showAlert: true,
       }
     },
     mounted() {
@@ -124,6 +128,7 @@
       Header,
       Search,
       mainList,
+      alertTip,
       TwoLanguageTitle
     }
   }
@@ -136,9 +141,9 @@
     overflow: scroll;
     .main-list-area {
       min-height: 100%;
-      margin: 20px 33px;
+      margin: 28px 33px;
       background: #ffffff;
-      border-radius: 12px;
+      border-radius: 24px;
       padding-bottom: 20px;
       .main-list {
         padding: 50px 34px;
@@ -147,10 +152,10 @@
         flex-wrap: wrap;
         justify-content: space-between;
         .list-item {
-          width: 293px;
+          width: 430px;
           height: 140px;
           line-height: 140px;
-          border-radius: 12px;
+          border-radius: 24px;
           display: flex;
           .link-icon {
             flex: 1;
@@ -194,7 +199,7 @@
         line-height: 105px;
         background: rgb(58, 178, 237);
         margin: -10px 34px 20px;
-        border-radius: 12px;
+        border-radius: 24px;
         text-align: center;
       }
     }
