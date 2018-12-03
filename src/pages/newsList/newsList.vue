@@ -1,9 +1,9 @@
 <template>
-  <div class="news-page">
+  <div class="news-list-page">
     <Header title='新闻'/>
     <div class="news" v-if="newsData">
-      <!--<router-link to="/news" class="news-item" v-for="item in newsData" :key="item.newsId" :newsId="item.newsId">-->
-      <router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"
+      <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->
+      <router-link :to="'/news/' + item.newsId" class="news-item" v-for="item in newsData"
                    :key="item.newsId" :newsId="item.newsId">
         <img class="news-img" :src='item.img' alt="tupian ">
         <div class="news-dec">
@@ -45,7 +45,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .news-page {
+  .news-list-page {
     .news {
       margin: 35px;
       .news-item {

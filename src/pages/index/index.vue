@@ -6,10 +6,10 @@
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
-        <div class="list-item" :class="listitem.subscript" v-for="(listitem, index) in linkList">
+        <router-link :to="listitem.link" class="list-item" :class="listitem.subscript" v-for="(listitem, index) in linkList" :key="index">
           <div class="link-icon">{{index}}</div>
           <div class="link-name">{{listitem.name}}</div>
-        </div>
+        </router-link>
       </div>
       <router-link to="/user" class="user-tip" v-if="userInfo">
         个人中心
@@ -96,7 +96,7 @@
           },
           {
             name: '新闻',
-            link: '',
+            link: '/newslist',
             icon: '',
             subscript: 'eight'
           }
@@ -157,6 +157,7 @@
           line-height: 140px;
           border-radius: 24px;
           display: flex;
+          color: #ffffff;
           .link-icon {
             flex: 1;
             text-align: right;

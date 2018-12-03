@@ -9,7 +9,7 @@
       <div class="name-area input-area">
         <div class="login-icon">ac</div>
         <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
-        <input class="name-input input" type="number" name="search" maxlength="11" placeholder="13122767084"
+        <input class="name-input input" type="phone" name="search" maxlength="11" placeholder="手机号"
                v-model="phoneNumber">
       </div>
       <div class="pas-area input-area">
@@ -45,7 +45,7 @@
       return {
         showPassword: false,      // 是否显示密码
         phoneNumber: null,        //电话号码
-        // userInfo: null,           //获取到的用户信息
+        userInfo: null,           //获取到的用户信息
         userAccount: null,        //用户名
         passWord: null,           //密码
         showAlert: false,         //显示提示组件
@@ -56,10 +56,10 @@
     mounted() {
     },
     computed: {
-      ...mapState([
-        'userInfo'
-//        'RECORD_USERINFO',
-      ]),
+//      ...mapState([
+//        'userInfo'
+////        'RECORD_USERINFO',
+//      ]),
       //检测手机号码
       rightPhoneNumber: function () {
         return /^1\d{10}$/gi.test(this.phoneNumber)
@@ -89,7 +89,7 @@
         console.log(this.userInfo)
 
         this.RECORD_USERINFO(this.userInfo);
-//        this.$router.go(-1);
+        this.$router.go(-1);
       }
     },
     components: {

@@ -11,6 +11,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex'
+  import {getStore} from '../config/mUtils'
 
   export default {
     props: {
@@ -25,8 +26,9 @@
     mounted() {
       //获取用户信息
       this.backShow();
-      this.getUserInfo();
-
+      if(getStore('user_id')){
+        this.getUserInfo();
+      }
     },
     computed: {
       ...mapState([
@@ -60,7 +62,11 @@
       flex: 1;
     }
     .page-title {
-      flex: 8;
+      flex: 6;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 20px;
     }
   }
 </style>

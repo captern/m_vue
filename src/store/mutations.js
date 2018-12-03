@@ -1,5 +1,4 @@
 import {RECORD_USERINFO, GET_USERINFO, RETSET_NAME, OUT_LOGIN} from './mutation-types.js'
-
 import {setStore} from '../config/mUtils'
 
 export default {
@@ -7,6 +6,12 @@ export default {
   [RECORD_USERINFO](state, info) {
     state.userInfo = info
     state.login = true
+    console.log(info)
+    console.log(info)
+    console.log(info)
+    console.log(info)
+    console.log(info)
+    console.log(info)
     setStore('user_id', info.data.user_id)
   },
   // 获取用户信息存入vuex
