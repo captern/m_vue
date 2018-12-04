@@ -13,10 +13,15 @@ const NewsList = () => import('../pages/newsList/newsList')
 const News = () => import('../pages/news/news')
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',
+      redirect: '/index'
+    },
+    {
+      path: '/index',
       component: Index
     },
     {
@@ -47,9 +52,6 @@ export default new Router({
       path: '/news/:newsId',
       component: News
     },
-    // {
-    //   path: '/login',
-    //   redirect: '/recommend'
-    // },
+
   ]
 })

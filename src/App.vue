@@ -19,7 +19,7 @@
   @import "common/stylus/index";
 
   #app {
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(99, 152, 243 )), color-stop(130%, rgb(207, 163, 170)));
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(99, 152, 243 )), color-stop(130%, rgb(207, 163, 92)));
     position: absolute;
     width: 100%;
     min-height: 100%;

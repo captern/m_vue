@@ -5,13 +5,6 @@
       <div class="news-main">
         <div v-html="newsData.content"></div>
         <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
       </div>
     </div>
   </div>

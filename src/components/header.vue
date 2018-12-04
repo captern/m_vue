@@ -3,8 +3,7 @@
     <div class="back" v-if='showBack' @click="$router.go(-1)">返回</div>
     <div class="back" v-else></div>
     <div class="page-title">{{title}}</div>
-    <div class="menu" v-if="userInfo">控制</div>
-    <div class="login_span" v-else>登录|注册</div>
+    <div class="menu">控制</div>
     <!--{{userInfo}}-->
   </div>
 </template>

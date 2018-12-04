@@ -57,7 +57,7 @@
       async outLogin() {
         this.OUT_LOGIN();
         removeStore('user_id')
-        this.$router.replace('/')
+        this.$router.push('/');
         // await signout();
       },
     },

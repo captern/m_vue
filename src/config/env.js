@@ -14,7 +14,7 @@ let imgBaseUrl = ''
 if (process.env.NODE_ENV === 'development') {
   imgBaseUrl = '/img/'
 } else if (process.env.NODE_ENV === 'production') {
-  baseUrl = '//elm.cangdu.org'
+  baseUrl = 'https://www.easy-mock.com/mock/5b23592f70839c5abe06ec0f/wdemo'
   imgBaseUrl = '//elm.cangdu.org/img/'
 }
 
