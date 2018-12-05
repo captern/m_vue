@@ -1,10 +1,12 @@
 <template>
   <div class="search">
     <div class="search_form" v-if='!inputFocus'>
+      <img class="search-icon" src="../common/image/search-icon.png" alt="">
       <input type="search" name="search" placeholder="搜索内容" class="search_input" v-model="searchValue"
              @click="inputChangeFocus">
     </div>
     <form class="search_form input-focus" v-else>
+      <img class="search-icon" src="../common/image/search-icon.png" alt="">
       <input type="search" name="search" class="search_input" placeholder="搜索内容" v-model="searchValue"
              @click="inputChangeFocus" autofocus="autofocus">
       <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')"/>
@@ -14,6 +16,7 @@
 
 <script>
   import {searchRest} from '../server/api'
+
   export default {
     props: {},
     data() {
@@ -56,12 +59,19 @@
     background: #3ab2ed;
     .search_form {
       display: flex;
+      .search-icon {
+        width: auto;
+        height: auto;
+        position: absolute;
+        margin-top: 24px;
+        margin-left: 22px;
+      }
       .search_input {
         height: 88px;
         flex: 4;
         background-color: #75c9f2;
         border-radius: 24px;
-        padding: 0 20px;
+        padding: 0 20px 0 100px;
         outline: none;
         color: #ffffff;
         &:-ms-input-placeholder {
@@ -73,19 +83,19 @@
           color: #ffffff
         }
       }
-      .search_submit{
+      .search_submit {
         border-left: 1px solid #ffffff;
         background-color: #75c9f2;
         border-radius: 0 24px 24px 0;
       }
     }
-    .input-focus{
+    .input-focus {
       display: flex;
-      .search_input{
-        flex:6;
+      .search_input {
+        flex: 6;
         border-radius: 24px 0 0 24px;
       }
-      .search_submit{
+      .search_submit {
         color: #ffffff;
         text-align: center;
         flex: 1.75;

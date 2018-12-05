@@ -1,9 +1,13 @@
 <template>
   <div class="header">
-    <div class="back" v-if='showBack' @click="$router.go(-1)">返回</div>
+    <div class="back" v-if='showBack' @click="$router.go(-1)">
+      <img class="icon" src="../common/image/back-icon.png" alt="">
+    </div>
     <div class="back" v-else></div>
     <div class="page-title">{{title}}</div>
-    <div class="menu">控制</div>
+    <div class="menu">
+      <img class="icon" src="../common/image/menu-icon.png" alt="">
+    </div>
     <!--{{userInfo}}-->
   </div>
 </template>
@@ -59,6 +63,9 @@
     text-align: center;
     .back, .menu {
       flex: 1;
+      .icon{
+        vertical-align: middle;
+      }
     }
     .page-title {
       flex: 6;

@@ -7,14 +7,14 @@
  *
  */
 
-let baseUrl = 'https://www.easy-mock.com/mock/5b23592f70839c5abe06ec0f/wdemo'
+let baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
 let routerMode = 'hash'
 let imgBaseUrl = ''
 
 if (process.env.NODE_ENV === 'development') {
   imgBaseUrl = '/img/'
 } else if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'https://www.easy-mock.com/mock/5b23592f70839c5abe06ec0f/wdemo'
+  baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
   imgBaseUrl = '//elm.cangdu.org/img/'
 }
 

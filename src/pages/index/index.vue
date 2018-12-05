@@ -5,6 +5,7 @@
     <Slider/>
     <!--<mainList/>-->
     <div class="main-list-area">
+      <img src="../../common/image/link-one.png" alt="">
       <div class="main-list">
         <router-link :to="listitem.link" class="list-item" :class="listitem.subscript" v-for="(listitem, index) in linkList" :key="index">
           <div class="link-icon">{{index}}</div>
@@ -27,7 +28,7 @@
 </template>
 
 <script>
-  import {sliderItems, searchplace} from '../../server/api'
+  import {getBanner} from '../../server/api'
   import Slider from '../../base/slider/slider'
   import Header from '../../components/header.vue'
   import Search from '../../components/search.vue'
@@ -105,10 +106,8 @@
       }
     },
     mounted() {
-      sliderItems().then(res => {
-        console.log(res)
-      })
-      searchplace('qqq', 'www').then(res => {
+//      获取首页轮播图
+      getBanner().then(res => {
         console.log(res)
       })
       // this.getUserInfo()

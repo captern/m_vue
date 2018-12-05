@@ -2,15 +2,13 @@ import fetch from '../config/fetch'
 import {getStore} from '../config/mUtils'
 
 // 获取新闻列表
-export const newsList = () => fetch('/newsList', {})
+export const newsList = () => fetch('/news/get-news-list', {})
 
 // 获取新闻详情
-export const newsMain = newsId => fetch('/news/?newsId' + newsId);
+export const newsDetail = newsId => fetch('/news/news-detail?newsId' + newsId);
 
 // 获取首页轮播图
-export const sliderItems = () => fetch('', {
-  type: ''
-})
+export const getBanner = () => fetch('/news/get-banner', {})
 
 // 地址拼接在连接里面的例子
 export const currentcity = number => fetch('/v1/cities/' + number)

@@ -24,6 +24,8 @@
       </div>
       <div class="login-container" @click="mobileLogin">注册</div>
     </div>
+    <!--提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
   </div>
 </template>
 
@@ -31,6 +33,7 @@
   // import {sliderItems, searchplace} from '../../server/api'
   import Header from '../../components/header.vue'
   import {mapMutations} from 'vuex'
+  import alertTip from '../../components/common/alertTip'
   import {login} from '../../server/api'
 
   export default {
@@ -41,7 +44,8 @@
         registerPassWord: null, // 密码
         registerRepeatPas: null, // 重复密码
         showAlert: false, // 显示提示组件
-        alertText: null// 提示的内容
+        alertText: null,// 提示的内容
+        tipType: 'one',          //提示的内容
       }
     },
     mounted() {
@@ -62,27 +66,22 @@
         if (!this.registerPhoneNumber) {
           this.showAlert = true
           this.alertText = '请输入手机号'
-          alert('请输入手机号')
           return
         } else if (!this.registerPassWord) {
           this.showAlert = true
           this.alertText = '请输入密码'
-          alert('请输入密码')
           return
         } else if (!this.registerRepeatPas) {
           this.showAlert = true
           this.alertText = '请输入密码'
-          alert('请输入重复密码')
           return
         } else if (!this.rightPhoneNumber) {
           this.showAlert = true
           this.alertText = '手机号码不正确'
-          alert('手机号码不正确')
           return
         } else if (!this.rightPas) {
           this.showAlert = true
           this.alertText = '手机号码不正确'
-          alert('两次密码不正确')
           return
         }
         let userInfoData = await login(this.phoneNumber, this.passWord)
@@ -94,7 +93,8 @@
       }
     },
     components: {
-      Header
+      Header,
+      alertTip,
     }
   }
 </script>

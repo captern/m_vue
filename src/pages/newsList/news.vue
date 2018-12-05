@@ -4,7 +4,6 @@
     <div class="news-area">
       <div class="news-main">
         <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
       </div>
     </div>
   </div>
@@ -12,7 +11,7 @@
 
 <script>
   import Header from '../../components/header.vue'
-  import {newsMain} from '../../server/api'
+  import {newsDetail} from '../../server/api'
 
   export default {
     data() {
@@ -25,10 +24,8 @@
     },
     mounted() {
       this.newsId = this.$route.params.newsId;
-      //获取当前城市名字
-      newsMain(this.newsId).then(res => {
+      newsDetail(this.newsId).then(res => {
         this.newsData = res.data
-        console.log(this.newsData)
       })
     },
     methods: {},

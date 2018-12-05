@@ -2,18 +2,22 @@
   <div class="login-page">
     <Header title='登录'/>
     <div class="logo-area">
-      <img class="logo" src="" alt="logo">
+      <img class="logo" src="../../common/image/logo.png" alt="logo">
       <div class="logo-name"></div>
     </div>
     <div class="loginForm">
       <div class="name-area input-area">
-        <div class="login-icon">ac</div>
+        <div class="login-icon">
+          <img class="icon phone" src="../../common/image/phone-icon.png"/>
+        </div>
         <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
         <input class="name-input input" type="phone" name="search" maxlength="11" placeholder="手机号"
                v-model="phoneNumber">
       </div>
       <div class="pas-area input-area">
-        <div class="login-icon">cas</div>
+        <div class="login-icon">
+          <img class="icon pas" src="../../common/image/pas-icon.png"/>
+        </div>
         <input class="pas-input input" type="password" name="search" placeholder="密码" v-model="passWord">
       </div>
       <div class="check-area">
@@ -50,7 +54,7 @@
         passWord: null,           //密码
         showAlert: false,         //显示提示组件
         alertText: null,          //提示的内容
-        tipType: 'one',          //提示的内容
+        tipType: 'two',          //提示的内容
       }
     },
     mounted() {
@@ -129,6 +133,17 @@
         .login-icon {
           flex: 1;
           text-align: center;
+          font-size: 0;
+          .icon{
+            height: 40px;
+            vertical-align: middle;
+            &.phone{
+              width: 60px;
+            }
+            &.pas{
+              width: 45px;
+            }
+          }
         }
         .input {
           flex: 8;

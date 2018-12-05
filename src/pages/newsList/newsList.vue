@@ -1,14 +1,15 @@
 <template>
   <div class="news-list-page">
     <Header title='新闻'/>
-    <div class="news" v-if="newsData">
+    <div class="news" v-if="newsList">
       <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->
-      <router-link :to="'/news/' + item.newsId" class="news-item" v-for="item in newsData"
-                   :key="item.newsId" :newsId="item.newsId">
-        <img class="news-img" :src='item.img' alt="tupian ">
+      <router-link :to="'/news/' + item.id" class="news-item" v-for="(item, index) in newsList"
+                   :key="index" :newsId="item.id">
+        <img class="news-img" :src='item.cover' alt="tupian">
         <div class="news-dec">
-          <div class="news-title">{{item.title}}</div>
-          <div class="news-time">{{item.time}}</div>
+          <div class="news-title" v-html="item.content"></div>
+          <!--<div class="news-title">{{item.content}}</div>-->
+          <div class="news-time">{{item.updated_time}}</div>
         </div>
       </router-link>
     </div>
@@ -25,12 +26,15 @@
   export default {
     data() {
       return {
-        newsData: ''
+        newsList: ''
       }
     },
     mounted() {
       newsList().then(res => {
-        this.newsData = res.data.news
+        console.log(res)
+        if (res.status) {
+          this.newsList = res.data.list
+        }
       })
     },
     computed: {},
