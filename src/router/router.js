@@ -11,6 +11,8 @@ const ChangeUserInfo = () => import('../pages/changeUserInfo/changeUserInfo')
 const ChangePas = () => import('../pages/changePas/changePas')
 const NewsList = () => import('../pages/newsList/newsList')
 const News = () => import('../pages/newsList/news')
+const NoticeList = () => import('../pages/notice/noticeList')
+const Notice = () => import('../pages/notice/notice')
 
 export default new Router({
   // mode: 'history',
@@ -51,6 +53,14 @@ export default new Router({
     {
       path: '/news/:newsId',
       component: News
+    },
+    {
+      path: '/noticelist',
+      component: NoticeList
+    },
+    {
+      path: '/notice/:noticeId',
+      component: Notice
     },
 
   ]

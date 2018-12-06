@@ -49,11 +49,14 @@
         <!--<div class="login-container">保存</div>-->
       </div>
     </div>
+    <!--提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
   </div>
 </template>
 
 <script>
   import Header from '../../components/header.vue'
+  import alertTip from '../../components/common/alertTip'
   import {mapMutations, mapState} from 'vuex'
   import {changeInfo} from '../../server/api'
 
@@ -62,13 +65,12 @@
       return {
         user_id: null,
         phoneNumber: null,
-        // userName: null,
-        userName: 'captern',
-        // IdCard: null,
-        IdCard: '131182199302115016',
+        userName: null,
+        IdCard: null,
+        showAlert: false,
+        tipType: 'one',
         sex: '1',           //性别
-        // workSpace: null,
-        workSpace: '上海省上海市',
+        workSpace: null,
       }
     },
     mounted() {
@@ -92,7 +94,7 @@
       changeSex() {
         if (this.sex === '1') {
           this.sex = '2'
-        }else if(this.sex === '2'){
+        } else if (this.sex === '2') {
           this.sex = '1'
         }
       },
@@ -100,40 +102,39 @@
         if (!this.userName) {
           this.showAlert = true;
           this.alertText = '请输入用户名';
-          alert('请输入用户名')
           return
         } else if (!this.IdCard) {
           this.showAlert = true;
           this.alertText = '请输入身份证号码';
-          alert('请输入身份证号码')
           return
         } else if (!this.rightIdCard) {
           this.showAlert = true;
           this.alertText = '身份证号码输入错误';
-          alert('身份证号码输入错误')
           return
         } else if (!this.workSpace) {
           this.showAlert = true;
           this.alertText = '请输入工作地点';
-          alert('请输入工作地点')
           return
         }
         // 发送重置信息
-        let res = await changeInfo(this.user_id, this.userName, this.IdCard, this.workSpace);
-        if (res.message) {
+        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace);
+        if (res.status) {
           this.showAlert = true;
-          this.alertText = res.message;
+          this.alertText = '用户信息修改成功';
+          setTimeout(() => {
+              this.$router.go(-1);
+            }, 1000
+          )
           return
-        }else{
+        } else {
           this.showAlert = true;
-          this.alertText = '密码修改成功';
-          alert('修改用户信息成功')
-          this.$router.go(-1);
+          this.alertText = res.msg;
         }
       }
     },
     components: {
-      Header
+      Header,
+      alertTip
     },
     watch: {
       userInfo: function (value) {

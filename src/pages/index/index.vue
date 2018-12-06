@@ -2,7 +2,7 @@
   <div class="index-page">
     <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
     <Search title='东部中心人才培养基地' noBackShow='noBackShow'/>
-    <Slider/>
+    <Slider v-if="this.banner" v-bind:banner='this.banner'></Slider>
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
@@ -40,23 +40,14 @@
   export default {
     data() {
       return {
-        recommends: [
-          {
-            linkUrl: 'http://y.qq.com/w/album.html?albummid=000zQSi93tJtgY',
-            picUrl: 'http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg'
-          },
-          {
-            linkUrl: 'https://y.qq.com/m/act/TNTB/index.html?openinqqmusic=1&ADTAG=jiaodiantu',
-            picUrl: 'http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/983421.jpg'
-          }
-        ],
+        banner: null,
         showAlert: true,
       }
     },
     mounted() {
 //      获取首页轮播图
       getBanner().then(res => {
-        console.log(res)
+        this.banner = res.data
       })
       // this.getUserInfo()
     },
@@ -105,7 +96,7 @@
           border-radius: 24px;
           display: flex;
           color: #ffffff;
-          img{
+          img {
             width: 100%;
           }
         }

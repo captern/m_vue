@@ -4,6 +4,9 @@ import {getStore} from '../config/mUtils'
 // 获取新闻列表
 export const newsList = () => fetch('/news/get-news-list', {})
 
+// 获取公告列表
+export const newsNotice = () => fetch('/news/get-news-list', {})
+
 // 获取新闻详情
 export const newsDetail = newsId => fetch('/news/news-detail?newsId' + newsId);
 
@@ -74,7 +77,7 @@ export const checkExsis = (checkNumber, type) => fetch('/v1/users/exists', {
 // 获取用户信息
 // export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
 
-export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
+export const getUser = () => fetch('/user/get-user-info');
 // 账号密码登录
 // 手机号登录
 // 登录
@@ -84,16 +87,17 @@ export const login = (mobile, password) => fetch('/user/login', {mobile, passwor
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
 export const register = (mobile, password, sex) => fetch('/user/sign-up', {mobile, password, sex}, 'POST');
 // 修改用户信息
-export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
-  user_id,
-  userName,
-  IdCard,
-  workSpace
+// export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
+export const changeInfo = (name, idCard, sex, company) => fetch('/user/modify-stu', {
+  name,
+  idCard,
+  sex,
+  company
 }, 'POST');
 // 修改用户密码
-export const changePas = (user_id, newPassword) => fetch('/changePas', {
-  user_id,
-  newPassword
+export const changePas = (password, newpassword) => fetch('/user/reset-password', {
+  password,
+  newpassword
 }, 'POST');
 
 // 发送帐号

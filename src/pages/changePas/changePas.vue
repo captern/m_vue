@@ -4,8 +4,8 @@
     <div class="change-area">
       <div class="change-form">
         <div class="name-area change-item">
-          <div class="item-left"><span>*</span>密 码 ：</div>
-          <input class="item-right" type="password" name="name" placeholder="请输入密码" v-model="newPassword">
+          <div class="item-left"><span>*</span>旧 密 码 ：</div>
+          <input class="item-right" type="password" name="name" placeholder="请输入旧密码" v-model="newPassword">
         </div>
         <div class="IdCard-area change-item">
           <div class="item-left"><span>*</span>确认密码 ：</div>
@@ -60,28 +60,32 @@
       async changePas() {
         if (!this.newPassword) {
           this.showAlert = true;
-          this.alertText = '请输入密码';
+          this.alertText = '请输入旧密码';
           return
         } else if (!this.repeatPassword) {
           this.showAlert = true;
-          this.alertText = '请再次输入密码';
-          return
-        } else if (this.newPassword !== this.repeatPassword) {
-          this.showAlert = true;
-          this.alertText = '两次输入密码不一致';
+          this.alertText = '请输入新密码';
           return
         }
+//        else if (this.newPassword !== this.repeatPassword) {
+//          this.showAlert = true;
+//          this.alertText = '两次输入密码不一致';
+//          return
+//        }
         // 发送重置信息
-        let res = await changePas(this.user_id, this.newPassword);
+        let res = await changePas(this.newPassword, this.repeatPassword);
         console.log(res)
-        if (res.message) {
+        if (res.status) {
           this.showAlert = true;
-          this.alertText = res.message;
+          this.alertText = '密码修改成功';
+          setTimeout(function () {
+            this.$router.go(-1);
+          },1000)
           return
         }else{
           this.showAlert = true;
-          this.alertText = '密码修改成功';
-          this.$router.go(-1);
+          this.alertText = res.msg;
+          return
         }
       }
     },

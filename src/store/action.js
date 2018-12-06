@@ -5,6 +5,10 @@ export default {
 
   async getUserInfo({commit, state}) {
     let res = await getUser();
-    commit(GET_USERINFO, res)
+    if(res.status){
+      commit(GET_USERINFO, res)
+    }else{
+      console.log('用户信息获取失败')
+    }
   }
 }

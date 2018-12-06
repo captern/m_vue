@@ -42,28 +42,22 @@
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import {mapState, mapMutations} from 'vuex'
   import alertTip from '../../components/common/alertTip'
-  import {mobileCode, checkExsis, sendLogin, getcaptchas, login} from '../../server/api'
+  import {mobileCode, checkExsis, getcaptchas, login} from '../../server/api'
 
   export default {
     data() {
       return {
-        showPassword: false,      // 是否显示密码
         phoneNumber: null,        //电话号码
         userInfo: null,           //获取到的用户信息
-        userAccount: null,        //用户名
         passWord: null,           //密码
         showAlert: false,         //显示提示组件
         alertText: null,          //提示的内容
-        tipType: 'two',          //提示的内容
+        tipType: 'one',          //提示的内容
       }
     },
     mounted() {
     },
     computed: {
-//      ...mapState([
-//        'userInfo'
-////        'RECORD_USERINFO',
-//      ]),
       //检测手机号码
       rightPhoneNumber: function () {
         return /^1\d{10}$/gi.test(this.phoneNumber)
@@ -71,7 +65,7 @@
     },
     methods: {
       ...mapMutations([
-        'RECORD_USERINFO',
+        'GET_LOGIN',
       ]),
       async mobileLogin() {
         if (!this.phoneNumber) {
@@ -88,12 +82,19 @@
           return
         }
         //用户名登录
-        let userInfoData = await login(this.phoneNumber, this.passWord);
-        this.userInfo = userInfoData
-        console.log(this.userInfo)
-
-        this.RECORD_USERINFO(this.userInfo);
-        this.$router.go(-1);
+        let userLoginData = await login(this.phoneNumber, this.passWord);
+        if (userLoginData.status) {
+          //          设置登录状态为成功
+          this.GET_LOGIN()
+          this.$router.push('/');
+        } else if (!userLoginData.need_register) {
+          this.showAlert = true
+          this.alertText = userLoginData.msg
+        } else {
+          this.showAlert = true
+          this.tipType = 'two'
+          this.alertText = userLoginData.msg
+        }
       }
     },
     components: {
@@ -134,13 +135,13 @@
           flex: 1;
           text-align: center;
           font-size: 0;
-          .icon{
+          .icon {
             height: 40px;
             vertical-align: middle;
-            &.phone{
+            &.phone {
               width: 60px;
             }
-            &.pas{
+            &.pas {
               width: 45px;
             }
           }
@@ -166,8 +167,8 @@
           flex: 1;
           color: #FFFFFF;
         }
-        .check{
-          .rember-check{
+        .check {
+          .rember-check {
             margin-top: -8px;
             margin-right: 10px;
             margin-left: 10px;
@@ -188,21 +189,24 @@
       }
     }
   }
+
   /*input的选中和未选中样式修改*/
-  input[type="checkbox"]{
+  input[type="checkbox"] {
     -webkit-appearance: none;
-    vertical-align:middle;
-    margin-top:0;
-    background:#fff;
-    border:#ffffff solid 2px;
+    vertical-align: middle;
+    margin-top: 0;
+    background: #fff;
+    border: #ffffff solid 2px;
     border-radius: 3px;
     height: 28px;
     width: 28px;
   }
+
   input[type="checkbox"]:checked {
     background: #3ab2ed;
   }
-  input[type=checkbox]:checked::after{
+
+  input[type=checkbox]:checked::after {
     content: '';
     top: 3px;
     left: 3px;

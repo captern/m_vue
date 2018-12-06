@@ -1,7 +1,10 @@
-import {RECORD_USERINFO, GET_USERINFO, RETSET_NAME, OUT_LOGIN} from './mutation-types.js'
+import {RECORD_USERINFO, GET_LOGIN, GET_USERINFO, RETSET_NAME, OUT_LOGIN} from './mutation-types.js'
 import {setStore} from '../config/mUtils'
 
 export default {
+  [GET_LOGIN](state, info){
+    setStore('user_id', true)
+  },
   // 记录用户信息
   [RECORD_USERINFO](state, info) {
     state.userInfo = info

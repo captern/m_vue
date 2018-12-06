@@ -1,28 +1,13 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
+      <div class="swiper-slide" v-for="(item, index) in banner">
         <div class="dec-area">
-          <p class="dec">你看了男方的面孔V领；哪款大V卡米拉打开了；发；快女离开；单反；连麦；不可拉到你</p>
-          <div class="time">2018年11月25日</div>
+          <p class="dec">{{item.title}}</p>
+          <div class="time">{{item.created_time}}</div>
         </div>
-        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
+        <img class="image" :src="item.cover" alt="">
       </div>
-      <div class="swiper-slide">
-        <div class="dec-area">
-          <p class="dec">你看了男方的面孔V领；你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领；发；快女离开；单反；连麦；不可拉到你</p>
-          <div class="time">2018年11月25日</div>
-        </div>
-        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
-      </div>
-      <div class="swiper-slide">
-        <div class="dec-area">
-          <p class="dec">你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领；哪款大V卡米拉打开了；发；快女离开；单反；连麦；不可拉到你</p>
-          <div class="time">2018年11月25日</div>
-        </div>
-        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
-      </div>
-
     </div>
     <div class="swiper-pagination"></div>
   </div>
@@ -35,20 +20,7 @@
 
   export default {
     name: 'slider',
-    props: {
-      loop: {
-        type: Boolean,
-        default: true
-      },
-      autoPlay: {
-        type: Boolean,
-        default: true
-      },
-      interval: {
-        type: Number,
-        default: 4000
-      }
-    },
+    props: ['banner'],
     data() {
       return {
         dots: [],
@@ -56,6 +28,9 @@
       }
     },
     mounted() {
+      console.log(this.banner)
+      console.log(this.banner)
+      console.log(this.banner)
       new Swiper ('.swiper-container', {
         observer: true,
         loop: true,
@@ -109,6 +84,7 @@
         .image{
           height: 553px;
           width: 100%;
+          display: block;
         }
       }
     }

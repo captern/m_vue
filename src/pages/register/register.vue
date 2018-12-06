@@ -73,12 +73,13 @@
     },
     methods: {
       ...mapMutations([
+        'GET_LOGIN',
         'RECORD_USERINFO',
       ]),
       changeSex() {
         if (this.sex === '1') {
           this.sex = '2'
-        }else if(this.sex === '2'){
+        } else if (this.sex === '2') {
           this.sex = '1'
         }
       },
@@ -106,18 +107,14 @@
         }
         let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex)
         console.log(userRegisterData)
-        if(userRegisterData.state){
-          this.showAlert = true
-          this.alertText = '注册成功'
-        }else{
+        if (userRegisterData.status) {
+//          设置登录状态为成功
+          this.GET_LOGIN()
+          this.$router.push('/');
+        } else {
           this.showAlert = true
           this.alertText = userRegisterData.msg
         }
-//        this.userInfo = userInfoData
-        console.log(this.userInfo)
-
-//        this.RECORD_USERINFO(this.userInfo)
-//        this.$router.go(-1);
       }
     },
     components: {
