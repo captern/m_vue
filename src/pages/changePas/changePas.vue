@@ -4,11 +4,11 @@
     <div class="change-area">
       <div class="change-form">
         <div class="name-area change-item">
-          <div class="item-left">*密 码 ：</div>
+          <div class="item-left"><span>*</span>密 码 ：</div>
           <input class="item-right" type="password" name="name" placeholder="请输入密码" v-model="newPassword">
         </div>
         <div class="IdCard-area change-item">
-          <div class="item-left">*确认密码 ：</div>
+          <div class="item-left"><span>*</span>确认密码 ：</div>
           <input class="item-right" type="password" name="IdCard" placeholder="请再次输入密码" v-model="repeatPassword">
         </div>
 
@@ -16,12 +16,16 @@
         <!--<div class="login-container">保存</div>-->
       </div>
     </div>
+    <!--提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
+
   </div>
 </template>
 
 <script>
   import Header from '../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
+  import alertTip from '../../components/common/alertTip'
   import {changePas} from '../../server/api'
 
   export default {
@@ -29,7 +33,10 @@
       return {
         user_id: null,
         newPassword: null,
-        repeatPassword: null
+        repeatPassword: null,
+        showAlert: false, // 显示提示组件
+        alertText: null,// 提示的内容
+        tipType: 'one',          //提示的内容
       }
     },
     mounted() {
@@ -54,17 +61,14 @@
         if (!this.newPassword) {
           this.showAlert = true;
           this.alertText = '请输入密码';
-          alert('请输入密码')
           return
         } else if (!this.repeatPassword) {
           this.showAlert = true;
           this.alertText = '请再次输入密码';
-          alert('请再次输入密码')
           return
         } else if (this.newPassword !== this.repeatPassword) {
           this.showAlert = true;
           this.alertText = '两次输入密码不一致';
-          alert('两次输入密码不一致')
           return
         }
         // 发送重置信息
@@ -77,13 +81,13 @@
         }else{
           this.showAlert = true;
           this.alertText = '密码修改成功';
-          alert('密码修改成功')
           this.$router.go(-1);
         }
       }
     },
     components: {
-      Header
+      Header,
+      alertTip
     },
     watch: {
       userInfo: function (value) {
@@ -114,8 +118,16 @@
           margin-bottom: 16px;
           /*border-radius: 24px;*/
           .item-left {
-            flex: 1;
+            flex: 1.2;
             text-align: right;
+            font-size: 36px;
+            span {
+              display: inline-block;
+              font-size: 50px;
+              vertical-align: middle;
+              padding-top: 8px;
+              padding-right: 4px;
+            }
           }
           .item-right {
             margin-left: 10px;

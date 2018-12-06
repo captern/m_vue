@@ -22,7 +22,7 @@
       </div>
       <div class="check-area">
         <div class="check">
-          <input type="checkbox"/>记住密码
+          <input class="rember-check" type="checkbox"/>记住密码
         </div>
         <router-link :to="'/register'" class="register-link">立即注册</router-link>
         <!--<div class="register-link">立即注册</div>-->
@@ -37,7 +37,7 @@
 
 <script>
   import {sliderItems, searchplace} from '../../server/api'
-  import Slider from '../../base/slider/slider'
+  import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import {mapState, mapMutations} from 'vuex'
@@ -164,10 +164,17 @@
         display: flex;
         .check, .register-link {
           flex: 1;
+          color: #FFFFFF;
+        }
+        .check{
+          .rember-check{
+            margin-top: -8px;
+            margin-right: 10px;
+            margin-left: 10px;
+          }
         }
         .register-link {
           text-align: right;
-          color: #000;
         }
       }
       .login-container {
@@ -176,8 +183,41 @@
         background: rgb(58, 178, 237);
         border-radius: 24px;
         text-align: center;
+        color: #ffffff;
+        font-size: 42px;
       }
     }
   }
+  /*input的选中和未选中样式修改*/
+  input[type="checkbox"]{
+    -webkit-appearance: none;
+    vertical-align:middle;
+    margin-top:0;
+    background:#fff;
+    border:#ffffff solid 2px;
+    border-radius: 3px;
+    height: 28px;
+    width: 28px;
+  }
+  input[type="checkbox"]:checked {
+    background: #3ab2ed;
+  }
+  input[type=checkbox]:checked::after{
+    content: '';
+    top: 3px;
+    left: 3px;
+    position: absolute;
+    background: transparent;
+    border: #fff solid 2px;
+    border-top: none;
+    border-right: none;
+    height: 6px;
+    width: 10px;
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
 </style>
 

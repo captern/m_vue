@@ -79,10 +79,10 @@ export const getUser = () => fetch('/user', {user_id: getStore('user_id')});
 // 手机号登录
 // 登录
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
-export const login = (username, password) => fetch('/login', {username, password}, 'POST');
+export const login = (mobile, password) => fetch('/user/login', {mobile, password}, 'POST');
 // 注册
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
-export const register = (username, password) => fetch('/register', {username, password}, 'POST');
+export const register = (mobile, password, sex) => fetch('/user/sign-up', {mobile, password, sex}, 'POST');
 // 修改用户信息
 export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
   user_id,

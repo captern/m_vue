@@ -10,10 +10,22 @@
       </div>
       <div class="section-two">
         <div class="link-items-area">
-          <router-link to="/changeuserinfo" class="link-item">修改个人资料 <span class="icon">dsa</span></router-link>
-          <router-link to="/changepas" class="link-item">修改密码</router-link>
-          <router-link to="" class="link-item">我的课程</router-link>
-          <router-link to="" class="link-item">我的收藏</router-link>
+          <router-link to="/changeuserinfo" class="link-item">
+            修改个人资料
+            <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
+          </router-link>
+          <router-link to="/changepas" class="link-item">
+            修改密码
+            <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
+          </router-link>
+          <router-link to="" class="link-item">
+            我的课程
+            <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
+          </router-link>
+          <router-link to="" class="link-item">
+            我的收藏
+            <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
+          </router-link>
         </div>
         <div class="home-link-area">
           <router-link to="/" class="home-link">首页</router-link>
@@ -112,6 +124,11 @@
           padding: 0 37px 0 45px;
           .icon {
             float: right;
+            vertical-align: middle;
+            img{
+              width: 20px;
+              height: auto;
+            }
           }
         }
 

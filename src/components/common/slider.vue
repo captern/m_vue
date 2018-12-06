@@ -58,8 +58,7 @@
     mounted() {
       new Swiper ('.swiper-container', {
         observer: true,
-        // loop: true,
-        loop: false,
+        loop: true,
         type: 'bullets',
         speed: 500,
         // autoPlay: 1000,

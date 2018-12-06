@@ -28,7 +28,7 @@
 
 <script>
   import {getBanner} from '../../server/api'
-  import Slider from '../../base/slider/slider'
+  import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import Search from '../../components/search.vue'
   import mainList from '../../components/mainList.vue'

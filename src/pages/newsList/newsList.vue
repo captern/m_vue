@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import Slider from '../../base/slider/slider'
+  import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import {newsList} from '../../server/api'

@@ -4,18 +4,36 @@
     <div class="change-area">
       <div class="change-form">
         <div class="phone-area change-item">
-          <div class="item-left">*手机号 ：</div>
+          <div class="item-left">
+            <span>*</span>
+            手机号 ：
+          </div>
           <div class="item-right phone-number">{{phoneNumber}}</div>
         </div>
         <div class="sex-area change-item">
-          <div class="item-left">*性别 ：</div>
+          <div class="item-left">
+            <span>*</span>
+            性&nbsp;&nbsp;&nbsp;别 ：
+          </div>
           <div class="item-right sex-check">
-            <div class="sex-item">男</div>
-            <div class="sex-item">女</div>
+            <div class="sex-item" @click="changeSex()">
+            <span class="sex-icon">
+              <img v-if="this.sex === '0'" src="../../common/image/change-sex-check.png" alt="">
+              <img v-else src="../../common/image/change-sex-no.png" alt="">
+            </span>
+              男
+            </div>
+            <div class="sex-item" @click="changeSex()">
+            <span class="sex-icon">
+              <img v-if="this.sex === '0'" src="../../common/image/change-sex-no.png" alt="">
+              <img v-else src="../../common/image/change-sex-check.png" alt="">
+            </span>
+              女
+            </div>
           </div>
         </div>
         <div class="name-area change-item">
-          <div class="item-left">姓&nbsp;名 ：</div>
+          <div class="item-left">姓&nbsp;&nbsp;&nbsp;名 ：</div>
           <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName">
         </div>
         <div class="IdCard-area change-item">
@@ -48,6 +66,7 @@
         userName: 'captern',
         // IdCard: null,
         IdCard: '131182199302115016',
+        sex: '0',           //性别
         // workSpace: null,
         workSpace: '上海省上海市',
       }
@@ -66,9 +85,15 @@
     methods: {
       initData() {
         if (this.userInfo) {
-          console.log(this.userInfo)
           this.user_id = this.userInfo.user_id
           this.phoneNumber = this.userInfo.phoneNumber
+        }
+      },
+      changeSex() {
+        if (this.sex === '1') {
+          this.sex = '0'
+        }else if(this.sex === '0'){
+          this.sex = '1'
         }
       },
       async changeInfo() {
@@ -139,12 +164,20 @@
           margin-bottom: 16px;
           /*border-radius: 24px;*/
           .item-left {
-            flex: 1;
+            flex: 1.2;
             text-align: right;
+            font-size: 36px;
+            span {
+              display: inline-block;
+              font-size: 50px;
+              vertical-align: middle;
+              padding-top: 8px;
+              padding-right: 4px;
+            }
           }
           .item-right {
             margin-left: 10px;
-            flex: 2.2;
+            flex: 2;
             color: #ffffff;
             outline: none;
             &:-ms-input-placeholder {
@@ -162,6 +195,16 @@
               background: none;
               .sex-item {
                 flex: 1;
+                .sex-icon {
+                  vertical-align: middle;
+                  font-size: 0;
+                  img {
+                    width: 30px;
+                    height: 30px;
+                    vertical-align: middle;
+                    margin-top: -2px;
+                  }
+                }
               }
             }
           }

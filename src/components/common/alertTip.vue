@@ -6,8 +6,8 @@
       <!--<p class="tip_text">{{alertText}}</p>-->
       <p class="tip-text">{{alertText}}</p>
       <!--<p class="tip-text">{{tipType}}</p>-->
-      <div class="confrim" @click="closeTip" v-if="(tipType === 'one')">确认</div>
-      <div class="confrim confirm-one" v-else-if="(tipType === 'two')">
+      <div class="confrim" @click="closeTip" v-if="(tipType == 'one')">确认</div>
+      <div class="confrim confirm-one" v-else-if="(tipType == 'two')">
         <div class="confirm-one-left confirm-one-item" @click="closeTip">关闭</div>
         <div class="confirm-one-mid"></div>
         <!--<div class="confirm-one-right confirm-one-item">去注册</div>-->
@@ -97,6 +97,7 @@
         height: 108px;
         line-height: 108px;
         border-top: 0.5px solid #7e8c8d;
+        color: rgb(58, 178, 237);
         &.confirm-one {
           color: rgb(58, 178, 237);
           display: flex;
