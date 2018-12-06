@@ -18,14 +18,14 @@
           <div class="item-right sex-check">
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '0'" src="../../common/image/change-sex-check.png" alt="">
+              <img v-if="this.sex === '1'" src="../../common/image/change-sex-check.png" alt="">
               <img v-else src="../../common/image/change-sex-no.png" alt="">
             </span>
               男
             </div>
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '0'" src="../../common/image/change-sex-no.png" alt="">
+              <img v-if="this.sex === '1'" src="../../common/image/change-sex-no.png" alt="">
               <img v-else src="../../common/image/change-sex-check.png" alt="">
             </span>
               女
@@ -66,7 +66,7 @@
         userName: 'captern',
         // IdCard: null,
         IdCard: '131182199302115016',
-        sex: '0',           //性别
+        sex: '1',           //性别
         // workSpace: null,
         workSpace: '上海省上海市',
       }
@@ -91,8 +91,8 @@
       },
       changeSex() {
         if (this.sex === '1') {
-          this.sex = '0'
-        }else if(this.sex === '0'){
+          this.sex = '2'
+        }else if(this.sex === '2'){
           this.sex = '1'
         }
       },

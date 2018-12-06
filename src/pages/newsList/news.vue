@@ -19,7 +19,7 @@
       </div>
     </div>
     <!--提示框弹出部分-->
-    <enlist-tip v-if="enlistTip" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
+    <enlist-tip v-if="enlistTip" @closeTip="enlistTip = false" :tipType="tipType" :alertText="alertText"/>
 
   </div>
 </template>

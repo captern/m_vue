@@ -20,14 +20,14 @@
         <div class="sex-check input">
           <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '0'" src="../../common/image/sex-check.png" alt="">
+              <img v-if="this.sex === '1'" src="../../common/image/sex-check.png" alt="">
               <img v-else src="../../common/image/sex-no.png" alt="">
             </span>
             男
           </div>
           <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '0'" src="../../common/image/sex-no.png" alt="">
+              <img v-if="this.sex === '1'" src="../../common/image/sex-no.png" alt="">
               <img v-else src="../../common/image/sex-check.png" alt="">
             </span>
             女
@@ -55,7 +55,7 @@
         userInfo: null, // 获取到的用户信息
         registerPassWord: null, // 密码
         registerRepeatPas: null, // 重复密码
-        sex: '0',           //性别
+        sex: '1',           //性别
         showAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
@@ -77,8 +77,8 @@
       ]),
       changeSex() {
         if (this.sex === '1') {
-          this.sex = '0'
-        }else if(this.sex === '0'){
+          this.sex = '2'
+        }else if(this.sex === '2'){
           this.sex = '1'
         }
       },
@@ -104,12 +104,19 @@
           this.alertText = '手机号码不正确'
           return
         }
-        let userInfoData = await register(this.phoneNumber, this.passWord, this.sex)
-        console.log(userInfoData)
-        this.userInfo = userInfoData
+        let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex)
+        console.log(userRegisterData)
+        if(userRegisterData.state){
+          this.showAlert = true
+          this.alertText = '注册成功'
+        }else{
+          this.showAlert = true
+          this.alertText = userRegisterData.msg
+        }
+//        this.userInfo = userInfoData
         console.log(this.userInfo)
 
-        this.RECORD_USERINFO(this.userInfo)
+//        this.RECORD_USERINFO(this.userInfo)
 //        this.$router.go(-1);
       }
     },

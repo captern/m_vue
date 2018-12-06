@@ -1,16 +1,17 @@
 <template>
-  <div class="tip-page">
+  <div class="enlist-page">
     <div class="alert-bkg"></div>
     <section class="tip-area">
-      <div class="tip-title">提示</div>
-      <!--<p class="tip_text">{{alertText}}</p>-->
-      <p class="tip-text">{{alertText}}</p>
-      <!--<p class="tip-text">{{tipType}}</p>-->
-      <div class="confrim confirm-one">
-        <div class="confirm-one-left confirm-one-item" @click="closeTip">关闭</div>
+      <img class="enlist-title" src="../../common/image/enlist.png" alt="">
+      <div class="enlist-main">
+
+      </div>
+      <p>您是否要报名</p>
+      <div class="confrim-area">
+        <div class="confirm-one-left confirm-one-item" @click="closeTip">是</div>
         <div class="confirm-one-mid"></div>
         <!--<div class="confirm-one-right confirm-one-item">去注册</div>-->
-        <router-link to="/register" class="confirm-one-right confirm-one-item">去注册</router-link>
+        <div class="confirm-one-left confirm-one-item" @click="closeTip">否</div>
       </div>
     </section>
   </div>
@@ -27,7 +28,7 @@
     mounted() {
 
     },
-    props: ['alertText', 'tipType'],
+    props: ['alertText'],
     methods: {
       closeTip() {
         this.$emit('closeTip')
@@ -59,7 +60,7 @@
     opacity: 0.3;
   }
 
-  .tip-page {
+  .enlist-page {
     position: fixed;
     top: 0;
     left: 0;
@@ -71,46 +72,48 @@
     border-radius: 24px;
     .tip-area {
       position: absolute;
-      top: 715px;
+      top: calc(50% - 368px);
       left: calc(50% - 410px);
       width: 820px;
-      height: 379px;
+      height: 842px;
       overflow: hidden;
       animation: tipMove .4s;
       background-color: rgba(255, 255, 255, 1);
       border-radius: 24px;
       text-align: center;
-      .tip-title {
-        height: 126px;
-        line-height: 126px;
-        font-size: 48px;
-        color: rgb(134, 134, 134);
+      .enlist-title {
+        width: 100%;
+        height: 138px;
       }
-      .tip-text {
-        font-size: 36px;
-        height: 146px;
-        line-height: 146px;
-        overflow: hidden;
+      .enlist-main {
+        width: 639px;
+        height: 297px;
+        background: red;
+        margin: 92px auto 74px;
       }
-      .confrim {
+      p{
+        font-size: 38px;
+        color: rgb(58, 178, 237);
+        height: 46px;
+        line-height: 46px;
+        margin-bottom: 78px;
+      }
+      .confrim-area {
         height: 108px;
         line-height: 108px;
         border-top: 0.5px solid #7e8c8d;
         color: rgb(58, 178, 237);
-        &.confirm-one {
+        display: flex;
+        .confirm-one-item {
+          flex: 10;
           color: rgb(58, 178, 237);
-          display: flex;
-          .confirm-one-item {
-            flex: 10;
-            color: rgb(58, 178, 237);
-          }
-          .confirm-one-mid {
-            flex: 0.15;
-            background-color: rgb(58, 178, 237);
-            height: 70px;
-            margin-top: 18px;
-            border-radius: 60%;
-          }
+        }
+        .confirm-one-mid {
+          flex: 0.15;
+          background-color: rgb(58, 178, 237);
+          height: 70px;
+          margin-top: 18px;
+          border-radius: 60%;
         }
       }
     }
