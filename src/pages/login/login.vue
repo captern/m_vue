@@ -22,7 +22,7 @@
       </div>
       <div class="check-area">
         <div class="check">
-          <input class="rember-check" type="checkbox"/>记住密码
+          <input class="rember-check" type="checkbox" checked/>记住密码
         </div>
         <router-link :to="'/register'" class="register-link">立即注册</router-link>
         <!--<div class="register-link">立即注册</div>-->
