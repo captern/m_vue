@@ -17,6 +17,9 @@ import 'lib-flexible'
 // import vConsole from 'vconsole'
 
 fastclick.attach(document.body)
+// 引入swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
 
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')

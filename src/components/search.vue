@@ -60,8 +60,8 @@
     .search_form {
       display: flex;
       .search-icon {
-        width: auto;
-        height: auto;
+        width: 40px;
+        height: 40px;
         position: absolute;
         margin-top: 24px;
         margin-left: 22px;
@@ -71,7 +71,7 @@
         flex: 4;
         background-color: #75c9f2;
         border-radius: 24px;
-        padding: 0 20px 0 100px;
+        padding: 0 20px 0 90px;
         outline: none;
         color: #ffffff;
         &:-ms-input-placeholder {

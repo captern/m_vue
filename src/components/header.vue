@@ -64,7 +64,14 @@
     .back, .menu {
       flex: 1;
       .icon{
+        width: 24px;
+        height: 45px;
         vertical-align: middle;
+      }
+    }
+    .menu{
+      .icon{
+        width: 10px;
       }
     }
     .page-title {

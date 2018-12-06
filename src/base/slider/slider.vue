@@ -1,23 +1,37 @@
 <template>
-  <div class="slider-wrapper">
-    <div class="slider-content">
-      <div class="slider" ref="slider">
-        <div class="slider-group" ref="sliderGroup">
-          <img src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
-          <img src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="dec-area">
+          <p class="dec">你看了男方的面孔V领；哪款大V卡米拉打开了；发；快女离开；单反；连麦；不可拉到你</p>
+          <div class="time">2018年11月25日</div>
         </div>
-        <div class="dots">
-          <span class="dot" :class="{active: currentPageIndex === index }" v-for="(item, index) in dots"></span>
-        </div>
+        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
       </div>
-    </div>
-  </div>
+      <div class="swiper-slide">
+        <div class="dec-area">
+          <p class="dec">你看了男方的面孔V领；你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领；发；快女离开；单反；连麦；不可拉到你</p>
+          <div class="time">2018年11月25日</div>
+        </div>
+        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
+      </div>
+      <div class="swiper-slide">
+        <div class="dec-area">
+          <p class="dec">你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领你看了男方的面孔V领；哪款大V卡米拉打开了；发；快女离开；单反；连麦；不可拉到你</p>
+          <div class="time">2018年11月25日</div>
+        </div>
+        <img class="image" src="http://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1075114.jpg" alt="">
+      </div>
 
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {addClass} from '../../common/js/dom'
-  import BScroll from 'better-scroll'
+  import Swiper from "swiper";
+  import "swiper/dist/css/swiper.css";
+  import "./asd.css";
 
   export default {
     name: 'slider',
@@ -35,187 +49,75 @@
         default: 4000
       }
     },
-    data () {
+    data() {
       return {
         dots: [],
         currentPageIndex: 0
       }
     },
-    mounted () {
-      setTimeout(() => {
-        this._setSliderWidth()
-        this._initDots()
-        this._initSlider()
-
-        if (this.autoPlay) {
-          this._play()
-        }
-      }, 20)
-
-      window.addEventListener('resize', () => {
-        if (!this.slider || !this.slider.enabled) {
-          return
-        }
-        clearTimeout(this.resizeTimer)
-        this.resizeTimer = setTimeout(() => {
-          if (this.slider.isInTransition) {
-            this._onScrollEnd()
-          } else {
-            if (this.autoPlay) {
-              this._play()
-            }
-          }
-          this.refresh()
-        }, 60)
+    mounted() {
+      new Swiper ('.swiper-container', {
+        observer: true,
+        // loop: true,
+        loop: false,
+        type: 'bullets',
+        speed: 500,
+        // autoPlay: 1000,
+        autoplay: true,
+        initialSlide: 1,
+        preventClicksPropagation: true,
+        // scrollbar: {
+        //   el: '.swiper-scrollbar',
+        // },
+        pagination: {
+          el: '.swiper-pagination',
+        },
       })
     },
-    activated () {
-      // this.slider.enable()
-      // let pageIndex = this.slider.getCurrentPage().pageX
-      // this.slider.goToPage(pageIndex, 0, 0)
-      // this.currentPageIndex = pageIndex
-      if (this.autoPlay) {
-        this._play()
-      }
-    },
-    deactivated () {
-      this.slider.disable()
-      clearTimeout(this.timer)
-    },
-    beforeDestroy () {
-      this.slider.disable()
-      clearTimeout(this.timer)
-    },
-    methods: {
-      refresh () {
-        if (this.slider) {
-          this._setSliderWidth(true)
-          this.slider.refresh()
-        }
-      },
-      _setSliderWidth (isResize) {
-        this.children = this.$refs.sliderGroup.children
-
-        let width = 0
-        let sliderWidth = this.$refs.slider.clientWidth
-        for (let i = 0; i < this.children.length; i++) {
-          let child = this.children[i]
-          addClass(child, 'slider-item')
-
-          child.style.width = sliderWidth + 'px'
-          width += sliderWidth
-        }
-        if (this.loop && !isResize) {
-          width += 2 * sliderWidth
-        }
-        this.$refs.sliderGroup.style.width = width + 'px'
-      },
-      _initSlider () {
-        this.slider = new BScroll(this.$refs.slider, {
-          scrollX: true,
-          scrollY: false,
-          momentum: false,
-          snap: {
-            loop: this.loop,
-            threshold: 0.3,
-            speed: 400
-          }
-        })
-
-        this.slider.on('scrollEnd', this._onScrollEnd)
-
-        this.slider.on('touchend', () => {
-          if (this.autoPlay) {
-            this._play()
-          }
-        })
-
-        this.slider.on('beforeScrollStart', () => {
-          if (this.autoPlay) {
-            clearTimeout(this.timer)
-          }
-        })
-      },
-      _onScrollEnd () {
-        let pageIndex = this.slider.getCurrentPage().pageX
-        this.currentPageIndex = pageIndex
-        if (this.autoPlay) {
-          this._play()
-        }
-      },
-      _initDots () {
-        this.dots = new Array(this.children.length)
-      },
-      _play () {
-        clearTimeout(this.timer)
-        this.timer = setTimeout(() => {
-          this.slider.next()
-        }, this.interval)
-      }
-    }
   }
 </script>
 
 <style lang="scss" scoped>
-  .slider-wrapper{
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 40%;
-    overflow: hidden;
-    .slider-content{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      .slider {
-        min-height: 1px;
-        .slider-group {
-          position: relative;
-          overflow: hidden;
-          white-space: nowrap;
-          .slider-item {
-            float: left;
-            box-sizing: border-box;
+  .swiper-container{
+    font-size: 0;
+    .swiper-wrapper{
+      .swiper-slide{
+        .dec-area{
+          position: absolute;
+          bottom: 0;
+          z-index: 100;
+          width: 100%;
+          height: 134px;
+          background-color: rgba(49,49,49,0.75);
+          display: flex;
+          .dec{
+            flex: 3;
+            font-size: 30px;
+            color: #ffffff;
+            margin: 25px 25px;
+            height: 74px;
+            line-height: 37px;
             overflow: hidden;
-            text-align: center;
-            a {
-              display: block;
-              width: 100%;
-              overflow: hidden;
-              text-decoration: none;
-            }
-            img {
-              display: block;
-              width: 100%
-            }
+          }
+          .time{
+            flex: 1.25;
+            font-size: 35px;
+            color: #3ab2ed;
+            vertical-align: bottom;
+            line-height: 190px;
           }
         }
-        .dots {
-          position: absolute;
-          right: 0;
-          left: 0;
-          bottom: 12px;
-          transform: translateZ(1px);
-          text-align: center;
-          font-size: 0;
-          .dot {
-            display: inline-block;
-            margin: 0 4px;
-            @include widthHeight(8px,8px);
-            @include borderRadius(50%);
-            background: $color-text-l;
-            &.active {
-              width: 20px;
-              border-radius: 5px;
-              background: $color-text-ll;
-            }
-          }
-
+        .image{
+          height: 553px;
+          width: 100%;
         }
       }
     }
+    .swiper-pagination{
+      top: 30px;
+      .swiper-pagination-bullet{
+        display: none!important;
+      }
+    }
   }
-
 </style>
