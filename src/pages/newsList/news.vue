@@ -45,7 +45,6 @@
     },
     methods: {
       showEnlist(){
-        alert(1212)
         this.enlistTip = !this.enlistTip
       }
     },

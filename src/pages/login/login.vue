@@ -86,7 +86,7 @@
         if (userLoginData.status) {
           //          设置登录状态为成功
           this.GET_LOGIN()
-          this.$router.push('/');
+          this.$router.push('/index');
         } else if (!userLoginData.need_register) {
           this.showAlert = true
           this.alertText = userLoginData.msg
