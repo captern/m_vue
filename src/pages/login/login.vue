@@ -204,6 +204,7 @@
 
   input[type="checkbox"]:checked {
     background: #3ab2ed;
+    position: relative;
   }
 
   input[type=checkbox]:checked::after {
@@ -212,11 +213,11 @@
     left: 3px;
     position: absolute;
     background: transparent;
-    border: #fff solid 2px;
+    border: #fff solid 4px;
     border-top: none;
     border-right: none;
-    height: 6px;
-    width: 10px;
+    height: 8px;
+    width: 16px;
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);

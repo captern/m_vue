@@ -6,13 +6,13 @@
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
-        <router-link to="/newslist" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-two.png" alt=""></router-link>
-        <router-link to="/newslist" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-four.png" alt=""></router-link>
-        <router-link to="/newslist" class="list-item"><img src="../../common/image/link-five.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-five.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-six.png" alt=""></router-link>
-        <router-link to="/newslist" class="list-item"><img src="../../common/image/link-seven.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-eight.png" alt=""></router-link>
       </div>
       <router-link to="/user" class="user-tip" v-if="userInfo">
