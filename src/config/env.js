@@ -14,7 +14,7 @@ let imgBaseUrl = ''
 if (process.env.NODE_ENV === 'development') {
   imgBaseUrl = '/img/'
   let baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
-  baseUrl = 'http://www.frontend.com'
+  // baseUrl = 'http://www.frontend.com'
 } else if (process.env.NODE_ENV === 'production') {
   baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
   // baseUrl = 'http://www.frontend.com'
