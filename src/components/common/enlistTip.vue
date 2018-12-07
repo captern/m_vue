@@ -4,7 +4,18 @@
     <section class="tip-area">
       <img class="enlist-title" src="../../common/image/enlist.png" alt="">
       <div class="enlist-main">
-
+        <div class="one line">
+          <div class="left">名称 :</div>
+          <div class="right">技术服务人才中高级培训课程</div>
+        </div>
+        <div class="two line">
+          <div class="left">时间 :</div>
+          <div class="right">2018年11月15日(周四)</div>
+        </div>
+        <div class="three line">
+          <div class="left">地点 :</div>
+          <div class="right">上海市徐汇区小木桥路681号外经大厦21楼会议室</div>
+        </div>
       </div>
       <p>您是否要报名</p>
       <div class="confrim-area">
@@ -88,8 +99,29 @@
       .enlist-main {
         width: 639px;
         height: 297px;
-        background: red;
+        border:1px solid #7e8c8d;
         margin: 92px auto 74px;
+        .line{
+          height: 80px;
+          line-height: 80px;
+          display: flex;
+          font-size: 34px;
+          text-align: center;
+          border-bottom: 1px solid #7e8c8d;
+          .left{
+            flex: 1;
+            color: rgb(58, 178, 237);
+          }
+          .right{
+            text-align: left;
+            flex: 4;
+          }
+          &.three{
+            border-bottom: none;
+            padding-top: 20px;
+            line-height: 50px;
+          }
+        }
       }
       p{
         font-size: 38px;

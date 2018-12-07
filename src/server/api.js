@@ -2,13 +2,13 @@ import fetch from '../config/fetch'
 import {getStore} from '../config/mUtils'
 
 // 获取新闻列表
-export const newsList = () => fetch('/news/get-news-list', {})
+export const newsList = () => fetch('/news/get-news-list?type=2', {})
 
 // 获取公告列表
-export const newsNotice = () => fetch('/news/get-news-list', {})
+export const newsNotice = () => fetch('/news/get-news-list?type=2', {})
 
 // 获取新闻详情
-export const newsDetail = newsId => fetch('/news/news-detail?newsId' + newsId);
+export const newsDetail = newsId => fetch('/news/news-detail?newsId=' + newsId);
 
 // 获取首页轮播图
 export const getBanner = () => fetch('/news/get-banner', {})

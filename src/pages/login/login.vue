@@ -122,9 +122,19 @@
       margin: 0 auto;
       width: 667px;
       .input-area {
-
         width: 100%;
-        background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(182, 218, 250)), color-stop(100%, rgb(168, 209, 249)));
+        /*background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(182, 218, 250)), color-stop(100%, rgb(168, 209, 249)));*/
+
+
+        background: -moz-linear-gradient(top left, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(182, 218, 250)), color-stop(130%, rgb(168, 209, 249)));
+        background: -webkit-linear-gradient(top left, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
+        background: -o-linear-gradient(top left, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
+        background: -ms-linear-gradient(top left, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
+        background: linear-gradient(to bottom right, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
+
+
+
         display: flex;
         height: 106px;
 

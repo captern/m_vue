@@ -4,14 +4,14 @@
     <div class="news-area">
       <div class="news-main">
         <div class="header-area">
-          技术服务人才中高级培训课程招生简章技术服务人才中高级培训课程招生简章技术服务人才中高级培训课程招生简章
+          {{newsData.title}}
         </div>
         <div class="auther-area">
-          <div class="left">编辑：XXX</div>
-          <div class="right">2018年11月15日</div>
+          <div class="left">编辑：{{newsData.author}}</div>
+          <div class="right">{{newsData.created_time}}</div>
         </div>
         <div v-html="newsData.content"></div>
-        <div v-if="newsData.type === '1'" class="enlist-area" @click="showEnlist()">
+        <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
           报名
         </div>
         <div class="bottom-line">&nbsp;</div>

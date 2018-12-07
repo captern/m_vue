@@ -20,7 +20,7 @@
   import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
-  import {newsList} from '../../server/api'
+  import {newsNotice} from '../../server/api'
   import alertTip from '../../components/common/alertTip'
 
   export default {
@@ -30,7 +30,7 @@
       }
     },
     mounted() {
-      newsList().then(res => {
+      newsNotice().then(res => {
         console.log(res)
         if (res.status) {
           this.newsList = res.data.list
