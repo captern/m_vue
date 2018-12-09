@@ -17,7 +17,7 @@
           <div class="right">上海市徐汇区小木桥路681号外经大厦21楼会议室</div>
         </div>
       </div>
-      <p>您是否要报名</p>
+      <p class="confirm-text">您是否要报名</p>
       <div class="confrim-area">
         <div class="confirm-one-left confirm-one-item" @click="closeTip">是</div>
         <div class="confirm-one-mid"></div>
@@ -123,7 +123,7 @@
           }
         }
       }
-      p{
+      .confirm-text{
         font-size: 38px;
         color: rgb(58, 178, 237);
         height: 46px;

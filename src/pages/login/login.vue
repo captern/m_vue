@@ -89,6 +89,7 @@
           this.$router.push('/index');
         } else if (!userLoginData.need_register) {
           this.showAlert = true
+          this.tipType = 'one'
           this.alertText = userLoginData.msg
         } else {
           this.showAlert = true
