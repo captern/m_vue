@@ -3,7 +3,7 @@
     <Header title='公告'/>
     <div class="news" v-if="newsList">
       <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->
-      <router-link :to="'/news/' + item.id" class="news-item" v-for="(item, index) in newsList"
+      <router-link :to="'/notice/' + item.id" class="news-item" v-for="(item, index) in newsList"
                    :key="index" :newsId="item.id">
         <img class="news-img" :src='item.cover' alt="tupian">
         <div class="news-dec">

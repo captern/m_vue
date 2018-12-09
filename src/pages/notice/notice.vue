@@ -3,16 +3,15 @@
     <Header :title='newsData.title'/>
     <div class="news-area">
       <div class="news-main">
+        <div class="header-area">
+          {{newsData.title}}
+        </div>
+        <div class="auther-area">
+          <div class="left">编辑：{{newsData.author}}</div>
+          <div class="right">{{newsData.created_time}}</div>
+        </div>
         <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div v-html="newsData.content"></div>
-        <div class="enlist-area" @click="showEnlist()">
+        <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
           报名
         </div>
         <div class="bottom-line">&nbsp;</div>
@@ -60,6 +59,8 @@
     position: relative;
     top:0;
     overflow: scroll;
+    font-size: 32px;
+    line-height: 40px;
     .news-area {
       /*position: absolute;*/
       width: calc(100% - 70px);
@@ -80,6 +81,33 @@
           text-align: center;
           line-height: 74px;
           border-radius: 24px;
+        }
+        .header-area{
+          margin-top: 20px;
+          color: rgb(58, 178, 237);;
+          padding-right: 204px;
+          line-height: 55px;
+          font-size: 42px;
+          border-bottom: 1px solid rgb(199, 199, 199);
+          padding-bottom: 10px;
+          margin-bottom: 15px;
+        }
+        .auther-area{
+          display: flex;
+          height: 50px;
+          font-size: 34px;
+          line-height: 50px;
+          color: rgb(199, 199, 199);
+          margin-bottom: 10px;
+          .left,.right{
+            flex: 1;
+          }
+          .left{
+            text-align: left;
+          }
+          .right{
+            text-align: right;
+          }
         }
         .bottom-line{
           border-top: 1px solid rgb(199, 199, 199);
