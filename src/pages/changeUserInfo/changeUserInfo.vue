@@ -87,8 +87,9 @@
     methods: {
       initData() {
         if (this.userInfo) {
-          this.user_id = this.userInfo.user_id
-          this.phoneNumber = this.userInfo.phoneNumber
+          this.user_id = this.userInfo.id
+          this.phoneNumber = this.userInfo.mobile
+          this.sex = this.userInfo.sex
         }
       },
       changeSex() {

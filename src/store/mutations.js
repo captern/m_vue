@@ -10,26 +10,24 @@ export default {
     state.userInfo = info
     state.login = true
     console.log(info)
-    console.log(info)
-    console.log(info)
-    console.log(info)
-    console.log(info)
-    console.log(info)
     setStore('user_id', info.data.user_id)
   },
   // 获取用户信息存入vuex
   [GET_USERINFO](state, info) {
+    console.log(state)
+    console.log(info)
     if (state.userInfo && (state.userInfo.username !== info.username)) {
       return
     }
     if (!state.login) {
       return
     }
-    if (!info.message) {
-      state.userInfo = {...(info.userInfo)}
+    if (info.status) {
+      state.userInfo = {...(info.data)}
     } else {
       state.userInfo = null
     }
+    console.log(state.userInfo )
   },
   // 修改用户名
   [RETSET_NAME](state, username) {

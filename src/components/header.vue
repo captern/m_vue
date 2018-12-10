@@ -8,7 +8,6 @@
     <div class="menu">
       <img class="icon" src="../common/image/menu-icon.png" alt="">
     </div>
-    <!--{{userInfo}}-->
   </div>
 </template>
 
