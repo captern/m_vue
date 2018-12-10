@@ -1,8 +1,8 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="(item, index) in banner">
-        <div class="dec-area">
+      <div class="swiper-slide" v-for="(item, index) in banner" :jumpurl='item.title'>
+        <div class="dec-area" @click="asd()">
           <p class="dec">{{item.title}}</p>
           <div class="time">{{item.created_time}}</div>
         </div>
@@ -28,10 +28,8 @@
       }
     },
     mounted() {
-      console.log(this.banner)
-      console.log(this.banner)
-      console.log(this.banner)
-      new Swiper ('.swiper-container', {
+      var that = this
+      new Swiper('.swiper-container', {
         observer: true,
         loop: true,
         type: 'bullets',
@@ -46,25 +44,48 @@
         pagination: {
           el: '.swiper-pagination',
         },
+        on: {
+          click: function (e) {
+            const realIndex = this.realIndex;
+            that.jumpUrl(realIndex)
+          }
+        }
       })
     },
+    methods: {
+      jumpUrl(realIndex) {
+        // source  为1 表示内部连接   2表示外部链接
+        let jumpType = this.banner[realIndex].source
+        // type 为1 表示是新闻  2是公告
+        let linkType = this.banner[realIndex].type
+        if(jumpType == 1){
+          if(linkType == 1){
+            this.$router.push('/news/'+ this.banner[realIndex].id)
+          }else if(linkType == 2){
+            this.$router.push('/notice/'+ this.banner[realIndex].id)
+          }
+        }else if(jumpType == 2){
+          window.location.href=(this.banner[realIndex].link)
+        }
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
-  .swiper-container{
+  .swiper-container {
     font-size: 0;
-    .swiper-wrapper{
-      .swiper-slide{
-        .dec-area{
+    .swiper-wrapper {
+      .swiper-slide {
+        .dec-area {
           position: absolute;
           bottom: 0;
           z-index: 100;
           width: 100%;
           height: 134px;
-          background-color: rgba(49,49,49,0.75);
+          background-color: rgba(49, 49, 49, 0.75);
           display: flex;
-          .dec{
+          .dec {
             flex: 3;
             font-size: 30px;
             color: #ffffff;
@@ -73,7 +94,7 @@
             line-height: 37px;
             overflow: hidden;
           }
-          .time{
+          .time {
             flex: 1.25;
             font-size: 35px;
             color: #3ab2ed;
@@ -81,17 +102,17 @@
             line-height: 190px;
           }
         }
-        .image{
+        .image {
           height: 553px;
           width: 100%;
           display: block;
         }
       }
     }
-    .swiper-pagination{
+    .swiper-pagination {
       top: 30px;
-      .swiper-pagination-bullet{
-        display: none!important;
+      .swiper-pagination-bullet {
+        display: none !important;
       }
     }
   }
