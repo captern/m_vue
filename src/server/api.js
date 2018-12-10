@@ -16,6 +16,9 @@ export const getBanner = () => fetch('/news/get-banner', {})
 // 地址拼接在连接里面的例子
 export const currentcity = number => fetch('/v1/cities/' + number)
 
+// 退出登录
+export const logOut = newsId => fetch('/user/logout',{},"POST");
+
 // 多个参数的get接口模式
 export const searchplace = (cityid, value) => fetch('/v1/pois', {
   type: 'search',

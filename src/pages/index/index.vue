@@ -15,7 +15,7 @@
         <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-eight.png" alt=""></router-link>
       </div>
-      <router-link to="/user" class="user-tip" v-if="userInfo">
+      <router-link to="/user" class="user-tip" v-if="userInfo && login">
         个人中心
       </router-link>
       <router-link to="/login" class="user-tip" v-else>
@@ -42,6 +42,7 @@
       return {
         banner: null,
         showAlert: true,
+        getUid: false,
       }
     },
     mounted() {
@@ -53,7 +54,8 @@
     },
     computed: {
       ...mapState([
-        'userInfo'
+        'userInfo',
+        'login'
       ])
     },
     methods: {

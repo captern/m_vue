@@ -40,6 +40,7 @@
   import Header from '../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
   import {removeStore} from '../../config/mUtils'
+  import {logOut} from '../../server/api'
 
   export default {
     data() {
@@ -69,6 +70,9 @@
       async outLogin() {
         this.OUT_LOGIN();
         removeStore('user_id')
+        logOut().then(res => {
+
+        })
         this.$router.push('/index');
         // await signout();
       },
