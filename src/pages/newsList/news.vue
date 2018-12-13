@@ -12,7 +12,7 @@
         </div>
         <div v-html="newsData.content"></div>
         <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
-          报名
+          点击报名
         </div>
         <div class="bottom-line">&nbsp;</div>
       </div>
