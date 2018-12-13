@@ -34,15 +34,15 @@
         </div>
         <div class="name-area change-item">
           <div class="item-left">姓&nbsp;&nbsp;&nbsp;名 ：</div>
-          <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName">
+          <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName" v-focus="this.focus">
         </div>
         <div class="IdCard-area change-item">
           <div class="item-left">身份证号码 ：</div>
-          <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard">
+          <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard" v-focus="this.focus">
         </div>
         <div class="work-area change-item">
           <div class="item-left">工作单位 ：</div>
-          <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace">
+          <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace" v-focus="this.focus">
         </div>
 
         <div class="change-info" @click="changeInfo">保存</div>
@@ -71,6 +71,7 @@
         tipType: 'one',
         sex: '1',           //性别
         workSpace: null,
+        focus: null
       }
     },
     mounted() {
@@ -100,6 +101,7 @@
         }
       },
       async changeInfo() {
+        this.focus = ''
         if (!this.userName) {
           this.showAlert = true;
           this.alertText = '请输入用户名';
@@ -141,7 +143,17 @@
       userInfo: function (value) {
         this.initData()
       }
-    }
+    },
+    // 自定义指令
+    directives: {
+      focus: {
+        inserted: function (el, {value}) {
+          if (value) {
+            el.focus();
+          }
+        }
+      }
+    },
   }
 </script>
 

@@ -101,6 +101,7 @@
     .section-one {
       text-align: center;
       .avatar {
+        display: inline-block;
         width: 242px;
         height: 242px;
         border-radius: 50%;

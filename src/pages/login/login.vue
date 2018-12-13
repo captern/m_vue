@@ -12,13 +12,13 @@
         </div>
         <!--<input class="name-input input" type="number" name="search" placeholder="手机号" v-model="phoneNumber">-->
         <input class="name-input input" type="phone" name="search" maxlength="11" placeholder="手机号"
-               v-model="phoneNumber">
+               v-model="phoneNumber" v-focus="this.focus">
       </div>
       <div class="pas-area input-area">
         <div class="login-icon">
           <img class="icon pas" src="../../common/image/pas-icon.png"/>
         </div>
-        <input class="pas-input input" type="password" name="search" placeholder="密码" v-model="passWord">
+        <input class="pas-input input" type="password" name="search" placeholder="密码" v-model="passWord" v-focus="this.focus">
       </div>
       <div class="check-area">
         <div class="check">
@@ -53,6 +53,7 @@
         showAlert: false,         //显示提示组件
         alertText: null,          //提示的内容
         tipType: 'one',          //提示的内容
+        focus: null
       }
     },
     mounted() {
@@ -71,6 +72,7 @@
         'getUserInfo'
       ]),
       async mobileLogin() {
+        this.focus = ''
         if (!this.phoneNumber) {
           this.showAlert = true;
           this.alertText = '请输入手机号';
@@ -107,7 +109,17 @@
       Header,
       alertTip,
       TwoLanguageTitle
-    }
+    },
+    // 自定义指令
+    directives: {
+      focus: {
+        inserted: function (el, {value}) {
+          if (value) {
+            el.focus();
+          }
+        }
+      }
+    },
   }
 </script>
 

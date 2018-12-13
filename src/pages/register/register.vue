@@ -5,15 +5,15 @@
       <div class="name-area input-area">
         <div class="register-icon"><span>*</span>立即注册</div>
         <input class="name-input input" type="phone" name="search" maxlength="11" placeholder="请输入手机号"
-               v-model="registerPhoneNumber">
+               v-model="registerPhoneNumber" v-focus="this.focus">
       </div>
       <div class="pas-area input-area">
         <div class="register-icon"><span>*</span>输入密码</div>
-        <input class="pas-input input" type="password" name="search" placeholder="请输入密码" v-model="registerPassWord">
+        <input class="pas-input input" type="password" name="search" placeholder="请输入密码" v-model="registerPassWord" v-focus="this.focus">
       </div>
       <div class="repeat-pas-area input-area">
         <div class="register-icon"><span>*</span>密码确认</div>
-        <input class="pas-input input" type="password" name="search" placeholder="请再次输入密码" v-model="registerRepeatPas">
+        <input class="pas-input input" type="password" name="search" placeholder="请再次输入密码" v-model="registerRepeatPas" v-focus="this.focus">
       </div>
       <div class="sex-area input-area">
         <div class="register-icon"><span>*</span>性别选择</div>
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="register-container" @click="mobileLogin">注册</div>
+      <div class="register-container" @click="mobileRegister">注册</div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
@@ -59,6 +59,7 @@
         showAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
+        focus: null
       }
     },
     mounted() {
@@ -83,7 +84,8 @@
           this.sex = '1'
         }
       },
-      async mobileLogin() {
+      async mobileRegister() {
+        this.focus = ''
         if (!this.registerPhoneNumber) {
           this.showAlert = true
           this.alertText = '请输入手机号'
@@ -120,7 +122,17 @@
     components: {
       Header,
       alertTip,
-    }
+    },
+    // 自定义指令
+    directives: {
+      focus: {
+        inserted: function (el, {value}) {
+          if (value) {
+            el.focus();
+          }
+        }
+      }
+    },
   }
 </script>
 
