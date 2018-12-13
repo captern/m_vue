@@ -1,5 +1,5 @@
 <template>
-  <div class="news-page">
+  <div class="news-page" v-wechat-title="$route.meta.title='公告'">
     <Header :title='newsData.title'/>
     <div class="news-area">
       <div class="news-main">

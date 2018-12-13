@@ -1,5 +1,5 @@
 <template>
-  <div class="register-page">
+  <div class="register-page" v-wechat-title="$route.meta.title='注册'">
     <Header title='注册'/>
     <div class="register-form">
       <div class="name-area input-area">

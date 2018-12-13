@@ -24,6 +24,9 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')
 })
+// 动态修改 title
+import VueWechatTitle from 'vue-wechat-title'
+Vue.use(VueWechatTitle)
 
 // const historySongs = loadPlay()
 // processSongsUrl(historySongs).then((songs) => {

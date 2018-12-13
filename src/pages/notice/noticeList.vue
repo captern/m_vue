@@ -1,5 +1,5 @@
 <template>
-  <div class="news-list-page">
+  <div class="news-list-page" v-wechat-title="$route.meta.title='公告列表'">
     <Header title='公告'/>
     <div class="news" v-if="newsList">
       <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->

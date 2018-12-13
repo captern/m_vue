@@ -1,5 +1,5 @@
 <template>
-  <div class="change-info-page">
+  <div class="change-info-page" v-wechat-title="$route.meta.title='修改个人信息'">
     <Header title='修改个人资料'/>
     <div class="change-area">
       <div class="change-form">

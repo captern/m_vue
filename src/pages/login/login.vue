@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page">
+  <div class="login-page" v-wechat-title="$route.meta.title='登录'">
     <Header title='登录'/>
     <div class="logo-area">
       <img class="logo" src="../../common/image/logo.png" alt="logo">

@@ -1,5 +1,5 @@
 <template>
-  <div class="register-page">
+  <div class="register-page" v-wechat-title="$route.meta.title='用户中心'">
     <Header title='个人中心'/>
     <div class="user-page">
       <div class="section-one">
