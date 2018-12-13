@@ -40,7 +40,7 @@
   import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
-  import {mapState, mapMutations} from 'vuex'
+  import {mapState, mapMutations, mapActions} from 'vuex'
   import alertTip from '../../components/common/alertTip'
   import {mobileCode, checkExsis, getcaptchas, login} from '../../server/api'
 
@@ -67,6 +67,9 @@
       ...mapMutations([
         'GET_LOGIN',
       ]),
+      ...mapActions([
+        'getUserInfo'
+      ]),
       async mobileLogin() {
         if (!this.phoneNumber) {
           this.showAlert = true;
@@ -86,6 +89,7 @@
         if (userLoginData.status) {
           //          设置登录状态为成功
           this.GET_LOGIN()
+          this.getUserInfo();
           this.$router.push('/index');
         } else if (!userLoginData.need_register) {
           this.showAlert = true

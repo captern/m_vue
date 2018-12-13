@@ -28,6 +28,10 @@ Vue.use(VueLazyload, {
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
+router.afterEach((to,from,next) => {
+  window.scrollTo(0,0);
+})
+
 // const historySongs = loadPlay()
 // processSongsUrl(historySongs).then((songs) => {
 //   console.log(store)

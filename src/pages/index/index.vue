@@ -15,7 +15,7 @@
         <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-eight.png" alt=""></router-link>
       </div>
-      <router-link to="/user" class="user-tip" v-if="userInfo && login">
+      <router-link to="/user" class="user-tip" v-if="this.userMsg && this.login">
         个人中心
       </router-link>
       <router-link to="/login" class="user-tip" v-else>
@@ -43,14 +43,8 @@
         banner: null,
         showAlert: true,
         getUid: false,
+        userMsg: null
       }
-    },
-    mounted() {
-//      获取首页轮播图
-      getBanner().then(res => {
-        this.banner = res.data
-      })
-      // this.getUserInfo()
     },
     computed: {
       ...mapState([
@@ -58,10 +52,22 @@
         'login'
       ])
     },
+    mounted() {
+//      获取首页轮播图
+      getBanner().then(res => {
+        this.banner = res.data
+      })
+      this.initData()
+    },
     methods: {
-      ...mapActions([
-        'getUserInfo'
-      ])
+      // ...mapActions([
+      //   'getUserInfo'
+      // ]),
+      initData() {
+        if (this.userInfo && this.userInfo.id) {
+          this.userMsg = this.userInfo
+        }
+      },
     },
     components: {
       Slider,
@@ -70,6 +76,13 @@
       mainList,
       alertTip,
       TwoLanguageTitle
+    },
+    watch: {
+      userInfo: function (value) {
+        if (value && value.id){
+          this.initData()
+        }
+      }
     }
   }
 </script>

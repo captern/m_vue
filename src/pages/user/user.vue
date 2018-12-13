@@ -3,10 +3,10 @@
     <Header title='个人中心'/>
     <div class="user-page">
       <div class="section-one">
-        <img class="avatar" src="https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=1488861817,1113726833&fm=202"
-             alt="用户头像">
-        <p class="phone">13122767084</p>
-        <p class="phone">{{userName}}</p>
+        <img v-if="this.sex =='1'" class="avatar" src="" alt="男的">
+        <img v-else class="avatar" src="" alt="女的">
+        <p class="phone">{{this.mobile}}</p>
+        <p class="phone">{{this.userName}}</p>
       </div>
       <div class="section-two">
         <div class="link-items-area">
@@ -45,7 +45,9 @@
   export default {
     data() {
       return {
-        userName: null
+        userName: null,
+        mobile: null,
+        sex: null
         // 电话号码
       }
     },
@@ -62,8 +64,11 @@
         'OUT_LOGIN'
       ]),
       initData() {
-        if (this.userInfo && this.userInfo.user_id) {
+        // console.log('执行1次')
+        if (this.userInfo && this.userInfo.id) {
           this.userName = this.userInfo.userName
+          this.mobile = this.userInfo.mobile
+          this.sex = this.userInfo.sex
         }
       },
       //退出登录
@@ -80,13 +85,13 @@
     components: {
       Header
     },
-    watch: {
-      userInfo: function (value) {
-        if (value && value.user_id){
-          this.initData()
-        }
-      }
-    }
+    // watch: {
+    //   userInfo: function (value) {
+    //     if (value && value.id){
+    //       this.initData()
+    //     }
+    //   }
+    // }
   }
 </script>
 

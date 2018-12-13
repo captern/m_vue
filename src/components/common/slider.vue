@@ -110,7 +110,7 @@
       }
     }
     .swiper-pagination {
-      top: 30px;
+      bottom: 40px;
       .swiper-pagination-bullet {
         display: none !important;
       }
