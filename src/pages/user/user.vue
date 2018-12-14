@@ -40,7 +40,8 @@
   import Header from '../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
   import {removeStore} from '../../config/mUtils'
-  import {logOut} from '../../server/api'
+  import {getUser, logOut} from '../../server/api'
+  import {getStore} from '../../config/mUtils'
 
   export default {
     data() {
@@ -64,11 +65,19 @@
         'OUT_LOGIN'
       ]),
       initData() {
-        // console.log('执行1次')
-        if (this.userInfo && this.userInfo.id) {
-          this.userName = this.userInfo.userName
-          this.mobile = this.userInfo.mobile
-          this.sex = this.userInfo.sex
+        if (getStore('user_id')) {
+          getUser().then(res => {
+            if (res.status) {
+              this.userName = res.data.userName
+              this.mobile = res.data.mobile
+              this.sex = res.data.sex
+            } else {
+              console.log('用户信息获取失败')
+            }
+          })
+        }else{
+          console.log('用户未登录')
+          this.$router.push('/index');
         }
       },
       //退出登录
@@ -78,9 +87,9 @@
         logOut().then(res => {
 
         })
-        setTimeout(()=>{
+        setTimeout(() => {
           this.$router.push('/index');
-        },800)
+        }, 800)
         // this.$router.push('/index');
         // await signout();
       },
@@ -88,13 +97,6 @@
     components: {
       Header
     },
-    // watch: {
-    //   userInfo: function (value) {
-    //     if (value && value.id){
-    //       this.initData()
-    //     }
-    //   }
-    // }
   }
 </script>
 
@@ -138,7 +140,7 @@
           .icon {
             float: right;
             vertical-align: middle;
-            img{
+            img {
               width: 20px;
               height: auto;
             }
