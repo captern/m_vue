@@ -8,14 +8,17 @@
       <div class="main-list">
         <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-two.png" alt=""></router-link>
-        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-three.png" alt="">
+        </router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-four.png" alt=""></router-link>
-        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-five.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-five.png" alt="">
+        </router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-six.png" alt=""></router-link>
-        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt=""></router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt="">
+        </router-link>
         <router-link to="/newslist" class="list-item"><img src="../../common/image/link-eight.png" alt=""></router-link>
       </div>
-      <router-link to="/user" class="user-tip" v-if="this.userMsg && this.login">
+      <router-link to="/user" class="user-tip" v-if="this.userMsg">
         个人中心
       </router-link>
       <router-link to="/login" class="user-tip" v-else>
@@ -27,13 +30,14 @@
 </template>
 
 <script>
-  import {getBanner} from '../../server/api'
+  import {getUser, getBanner} from '../../server/api'
   import Slider from '../../components/common/slider'
   import Header from '../../components/header.vue'
   import Search from '../../components/search.vue'
   import mainList from '../../components/mainList.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
   import alertTip from '../../components/common/alertTip'
+  import {getStore} from '../../config/mUtils'
 
   import {mapState, mapActions} from 'vuex'
 
@@ -53,21 +57,23 @@
       ])
     },
     mounted() {
-//      获取首页轮播图
       getBanner().then(res => {
         this.banner = res.data
       })
-      this.initData()
+      if (getStore('user_id')) {
+        getUser().then(res => {
+          if (res.status) {
+            this.userMsg = res.data
+          } else {
+            console.log('用户信息获取失败')
+          }
+        })
+      }
     },
     methods: {
-      // ...mapActions([
-      //   'getUserInfo'
-      // ]),
-      initData() {
-        if (this.userInfo && this.userInfo.id) {
-          this.userMsg = this.userInfo
-        }
-      },
+      ...mapActions([
+        'getUserInfo'
+      ]),
     },
     components: {
       Slider,
@@ -77,13 +83,6 @@
       alertTip,
       TwoLanguageTitle
     },
-    watch: {
-      userInfo: function (value) {
-        if (value && value.id){
-          this.initData()
-        }
-      }
-    }
   }
 </script>
 

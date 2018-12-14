@@ -34,7 +34,6 @@
         }
       },
       searchTarget() {
-        console.log('ddd')
         this.restList = searchRest(this.geohash);
       },
       inputChangeFocus() {

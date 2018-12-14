@@ -12,7 +12,6 @@ export const playlistMixin = {
   mounted() {
     console.log(this.playlist)
     this.handlePlaylist(this.playlist)
-    console.log('qqq')
   },
   activated() {
     this.handlePlaylist(this.playlist)

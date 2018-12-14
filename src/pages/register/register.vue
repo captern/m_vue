@@ -108,7 +108,6 @@
           return
         }
         let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex)
-        console.log(userRegisterData)
         if (userRegisterData.status) {
 //          设置登录状态为成功
           this.GET_LOGIN()

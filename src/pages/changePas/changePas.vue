@@ -53,7 +53,6 @@
     methods: {
       initData() {
         if (this.userInfo) {
-          console.log(this.userInfo)
           this.user_id = this.userInfo.user_id
         }
       },
@@ -74,7 +73,6 @@
 //        }
         // 发送重置信息
         let res = await changePas(this.newPassword, this.repeatPassword);
-        console.log(res)
         if (res.status) {
           this.showAlert = true;
           this.alertText = '密码修改成功';

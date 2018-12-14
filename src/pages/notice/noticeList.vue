@@ -31,7 +31,6 @@
     },
     mounted() {
       newsNotice().then(res => {
-        console.log(res)
         if (res.status) {
           this.newsList = res.data.list
         }

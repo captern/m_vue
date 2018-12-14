@@ -15,8 +15,6 @@ export default {
   // 获取用户信息存入vuex
   [GET_USERINFO](state, info) {
     // console.log(state)
-    console.log('GET_USERINFO')
-    console.log(info)
     if (state.userInfo && (state.userInfo.username !== info.username)) {
       return
     }
@@ -28,19 +26,14 @@ export default {
     } else {
       state.userInfo = null
     }
-    console.log('state.userInfo' )
-    console.log(state.userInfo )
   },
   // 修改用户名
   [RETSET_NAME](state, username) {
-    console.log('12121')
-    console.log(state.userInfo)
     state.userInfo = Object.assign({}, state.userInfo, {username})
   },
   //退出登录
   [OUT_LOGIN](state) {
     state.userInfo = {};
-    console.log(state.userInfo)
     state.login = false;
   },
 }

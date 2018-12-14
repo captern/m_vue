@@ -28,9 +28,9 @@
     mounted() {
       //获取用户信息
       this.backShow();
-      if(getStore('user_id')){
-        this.getUserInfo();
-      }
+      // if(getStore('user_id')){
+      //   this.getUserInfo();
+      // }
     },
     computed: {
       ...mapState([
