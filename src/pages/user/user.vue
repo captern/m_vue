@@ -3,8 +3,8 @@
     <Header title='个人中心'/>
     <div class="user-page">
       <div class="section-one">
-        <img v-if="this.sex =='1'" class="avatar" src="" alt="男的">
-        <img v-else class="avatar" src="" alt="女的">
+        <img v-if="this.sex =='1'" class="avatar" src="../../common/image/man.jpeg" alt="默认头像">
+        <img v-else class="avatar" src="../../common/image/woman.jpeg" alt="默认头像">
         <p class="phone">{{this.mobile}}</p>
         <p class="phone">{{this.userName}}</p>
       </div>
