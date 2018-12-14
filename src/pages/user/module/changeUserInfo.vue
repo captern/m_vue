@@ -18,14 +18,14 @@
           <div class="item-right sex-check">
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === 1" src="../../../common/image/change-sex-check.png" alt="">
+              <img v-if="this.sex == 1" src="../../../common/image/change-sex-check.png" alt="">
               <img v-else src="../../../common/image/change-sex-no.png" alt="">
             </span>
               男
             </div>
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === 1" src="../../../common/image/change-sex-no.png" alt="">
+              <img v-if="this.sex == 1" src="../../../common/image/change-sex-no.png" alt="">
               <img v-else src="../../../common/image/change-sex-check.png" alt="">
             </span>
               女
