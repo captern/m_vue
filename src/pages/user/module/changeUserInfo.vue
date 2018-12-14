@@ -58,7 +58,8 @@
   import Header from '../../../components/header.vue'
   import alertTip from '../../../components/common/alertTip'
   import {mapMutations, mapState} from 'vuex'
-  import {changeInfo} from '../../../server/api'
+  import {getUser, changeInfo} from '../../../server/api'
+  import {getStore} from '../../../config/mUtils'
 
   export default {
     data() {
@@ -87,11 +88,25 @@
     },
     methods: {
       initData() {
-        if (this.userInfo) {
-          this.user_id = this.userInfo.id
-          this.phoneNumber = this.userInfo.mobile
-          this.sex = this.userInfo.sex
+        if (getStore('user_id')) {
+          getUser().then(res => {
+            if (res.status) {
+                this.user_id = res.data.id
+                this.phoneNumber = res.data.mobile
+                this.sex = res.data.sex
+            } else {
+              console.log('用户信息获取失败')
+            }
+          })
+        }else{
+          console.log('用户未登录')
+          this.$router.push('/index');
         }
+        // if (this.userInfo) {
+        //   this.user_id = this.userInfo.id
+        //   this.phoneNumber = this.userInfo.mobile
+        //   this.sex = this.userInfo.sex
+        // }
       },
       changeSex() {
         if (this.sex === '1') {

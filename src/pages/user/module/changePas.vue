@@ -26,7 +26,8 @@
   import Header from '../../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
   import alertTip from '../../../components/common/alertTip'
-  import {changePas} from '../../../server/api'
+  import {getUser, changePas} from '../../../server/api'
+  import {getStore} from '../../../config/mUtils'
 
   export default {
     data() {
@@ -43,17 +44,18 @@
       this.initData()
     },
     computed: {
-      ...mapState([
-        'userInfo'
-      ]),
       rightPas: function () {
         return /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(this.IdCard)
       }
     },
     methods: {
       initData() {
-        if (this.userInfo) {
-          this.user_id = this.userInfo.user_id
+        if (getStore('user_id')) {
+          // 修改密码无个人信息展示型东西，估 不用获取，  因为后台cookie 自带用户信息
+          // getUser().then(res => {})
+        }else{
+          console.log('用户未登录')
+          this.$router.push('/index');
         }
       },
       async changePas() {
@@ -91,11 +93,6 @@
       Header,
       alertTip
     },
-    watch: {
-      userInfo: function (value) {
-        this.initData()
-      }
-    }
   }
 </script>
 

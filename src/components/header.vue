@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" v-if="!isWx">
     <div class="back" v-if='showBack' @click="$router.go(-1)">
       <img class="icon" src="../common/image/back-icon.png" alt="">
     </div>
@@ -18,15 +18,17 @@
   export default {
     props: {
       title: '',
-      noBackShow: ''
+      noBackShow: '',
     },
     data() {
       return {
         showBack: true,
+        isWx: true
       }
     },
     mounted() {
       //获取用户信息
+      this.checkWx();
       this.backShow();
       // if(getStore('user_id')){
       //   this.getUserInfo();
@@ -41,6 +43,15 @@
       ...mapActions([
         'getUserInfo'
       ]),
+      checkWx(){
+        let ua = navigator.userAgent.toLowerCase();
+        let isWeixin = ua.indexOf('micromessenger') !== -1;
+        if (isWeixin) {
+          this.isWx = true
+        }else{
+          this.isWx = false
+        }
+      },
       backShow() {
         if (this.noBackShow) {
           this.showBack = false
