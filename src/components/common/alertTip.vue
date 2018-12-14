@@ -32,6 +32,8 @@
     methods: {
       closeTip() {
         this.$emit('closeTip')
+        // 将页面滚动下来，解决微信次 iOS 6.7.4 页面被键盘顶上去 未复位 bug
+        window.scrollTo(0, document.documentElement.clientHeight);
       }
     }
   }
