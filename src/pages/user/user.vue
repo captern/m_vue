@@ -78,7 +78,10 @@
         logOut().then(res => {
 
         })
-        this.$router.push('/index');
+        setTimeout(()=>{
+          this.$router.push('/index');
+        },800)
+        // this.$router.push('/index');
         // await signout();
       },
     },

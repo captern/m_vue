@@ -112,7 +112,10 @@
         if (userRegisterData.status) {
 //          设置登录状态为成功
           this.GET_LOGIN()
-          this.$router.push('/index');
+          setTimeout(()=>{
+            this.$router.push('/index');
+          },800)
+          // this.$router.push('/index');
         } else {
           this.showAlert = true
           this.alertText = userRegisterData.msg

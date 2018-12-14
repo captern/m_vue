@@ -92,7 +92,10 @@
           //          设置登录状态为成功
           this.GET_LOGIN()
           this.getUserInfo();
-          this.$router.push('/index');
+          setTimeout(()=>{
+            this.$router.push('/index');
+          },800)
+          // this.$router.push('/index');
         } else if (!userLoginData.need_register) {
           this.showAlert = true
           this.tipType = 'one'
