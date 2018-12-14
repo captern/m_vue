@@ -3,12 +3,15 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Index = () => import('../pages/index/index')
-const Login = () => import('../pages/login/login')
-const Register = () => import('../pages/register/register')
+// 用户部分
+const Login = () => import('../pages/user/login')
+const Register = () => import('../pages/user/register')
 const User = () => import('../pages/user/user')
-const ChangeUserInfo = () => import('../pages/changeUserInfo/changeUserInfo')
-const ChangePas = () => import('../pages/changePas/changePas')
+const ChangeUserInfo = () => import('../pages/user/module/changeUserInfo')
+const ChangePas = () => import('../pages/user/module/changePas')
+
+// 首页及首页列表部分
+const Index = () => import('../pages/index/index')
 const NewsList = () => import('../pages/newsList/newsList')
 const News = () => import('../pages/newsList/news')
 const NoticeList = () => import('../pages/notice/noticeList')

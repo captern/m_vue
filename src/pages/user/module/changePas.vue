@@ -23,10 +23,10 @@
 </template>
 
 <script>
-  import Header from '../../components/header.vue'
+  import Header from '../../../components/header.vue'
   import {mapMutations, mapState} from 'vuex'
-  import alertTip from '../../components/common/alertTip'
-  import {changePas} from '../../server/api'
+  import alertTip from '../../../components/common/alertTip'
+  import {changePas} from '../../../server/api'
 
   export default {
     data() {
