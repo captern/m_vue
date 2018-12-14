@@ -26,9 +26,11 @@
         isWx: true
       }
     },
+    beforeMount(){
+      this.checkWx();
+    },
     mounted() {
       //获取用户信息
-      this.checkWx();
       this.backShow();
       // if(getStore('user_id')){
       //   this.getUserInfo();
