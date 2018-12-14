@@ -18,14 +18,14 @@
           <div class="item-right sex-check">
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '1'" src="../../../common/image/change-sex-check.png" alt="">
+              <img v-if="this.sex === 1" src="../../../common/image/change-sex-check.png" alt="">
               <img v-else src="../../../common/image/change-sex-no.png" alt="">
             </span>
               男
             </div>
             <div class="sex-item" @click="changeSex()">
             <span class="sex-icon">
-              <img v-if="this.sex === '1'" src="../../../common/image/change-sex-no.png" alt="">
+              <img v-if="this.sex === 1" src="../../../common/image/change-sex-no.png" alt="">
               <img v-else src="../../../common/image/change-sex-check.png" alt="">
             </span>
               女
@@ -38,11 +38,13 @@
         </div>
         <div class="IdCard-area change-item">
           <div class="item-left">身份证号码 ：</div>
-          <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard" v-focus="this.focus">
+          <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard"
+                 v-focus="this.focus">
         </div>
         <div class="work-area change-item">
           <div class="item-left">工作单位 ：</div>
-          <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace" v-focus="this.focus">
+          <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace"
+                 v-focus="this.focus">
         </div>
 
         <div class="change-info" @click="changeInfo">保存</div>
@@ -91,14 +93,14 @@
         if (getStore('user_id')) {
           getUser().then(res => {
             if (res.status) {
-                this.user_id = res.data.id
-                this.phoneNumber = res.data.mobile
-                this.sex = res.data.sex
+              this.user_id = res.data.id
+              this.phoneNumber = res.data.mobile
+              this.sex = res.data.sex
             } else {
               console.log('用户信息获取失败')
             }
           })
-        }else{
+        } else {
           console.log('用户未登录')
           this.$router.push('/index');
         }
