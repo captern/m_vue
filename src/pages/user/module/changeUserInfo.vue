@@ -111,9 +111,9 @@
         // }
       },
       changeSex() {
-        if (this.sex === '1') {
+        if (this.sex == '1') {
           this.sex = '2'
-        } else if (this.sex === '2') {
+        } else if (this.sex == '2') {
           this.sex = '1'
         }
       },
