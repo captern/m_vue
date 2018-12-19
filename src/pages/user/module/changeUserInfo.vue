@@ -72,7 +72,7 @@
         IdCard: null,
         showAlert: false,
         tipType: 'one',
-        sex: '1',           //性别
+        sex: 1,           //性别
         workSpace: null,
         focus: null
       }
@@ -92,6 +92,7 @@
       initData() {
         if (getStore('user_id')) {
           getUser().then(res => {
+            console.log(res)
             if (res.status) {
               this.user_id = res.data.id
               this.phoneNumber = res.data.mobile
@@ -111,10 +112,10 @@
         // }
       },
       changeSex() {
-        if (this.sex == '1') {
-          this.sex = '2'
-        } else if (this.sex == '2') {
-          this.sex = '1'
+        if (this.sex == 1) {
+          this.sex = 2
+        } else if (this.sex == 2) {
+          this.sex = 1
         }
       },
       async changeInfo() {

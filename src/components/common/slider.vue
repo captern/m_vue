@@ -2,7 +2,7 @@
   <div class="swiper-container">
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for="(item, index) in banner" :jumpurl='item.title'>
-        <div class="dec-area" @click="asd()">
+        <div class="dec-area">
           <p class="dec">{{item.title}}</p>
           <div class="time">{{item.created_time}}</div>
         </div>

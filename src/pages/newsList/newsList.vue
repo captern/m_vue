@@ -2,16 +2,15 @@
   <div class="news-list-page" v-wechat-title="$route.meta.title='新闻列表'">
     <Header title='新闻'/>
     <div class="news" v-if="newsList">
-      <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->
-      <router-link :to="'/news/' + item.id" class="news-item" v-for="(item, index) in newsList"
-                   :key="index" :newsId="item.id">
+      <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"</router-link>-->
+      <div class="news-item" v-for="(item, index) in newsList" :key="index" :newsId="item.id" @click="jumpLink(index)">
         <img class="news-img" :src='item.cover' alt="tupian">
         <div class="news-dec">
           <div class="news-title" v-html="item.content"></div>
           <!--<div class="news-title">{{item.content}}</div>-->
           <div class="news-time">{{item.updated_time}}</div>
         </div>
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -37,7 +36,23 @@
       })
     },
     computed: {},
-    methods: {},
+    methods: {
+      jumpLink(realIndex) {
+        // source  为1 表示内部连接   2表示外部链接
+        let jumpType = this.newsList[realIndex].source
+        // type 为1 表示是新闻  2是公告
+        let linkType = this.newsList[realIndex].type
+        if(jumpType == 1){
+          if(linkType == 1){
+            this.$router.push('/news/'+ this.newsList[realIndex].id)
+          }else if(linkType == 2){
+            this.$router.push('/notice/'+ this.newsList[realIndex].id)
+          }
+        }else if(jumpType == 2){
+          window.location.href=(this.newsList[realIndex].link)
+        }
+      }
+    },
     components: {
       Slider,
       Header,
