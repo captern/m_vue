@@ -37,7 +37,7 @@
       }
     },
     mounted() {
-      this.newsId = this.$route.params.newsId;
+      this.newsId = this.$route.params.noticeId;
       newsDetail(this.newsId).then(res => {
         this.newsData = res.data
       })
