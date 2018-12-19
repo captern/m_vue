@@ -11,6 +11,9 @@
           <div class="news-time">{{item.updated_time}}</div>
         </div>
       </div>
+      <div class="home-link-area">
+        <router-link to="/" class="home-link">首页</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -92,6 +95,24 @@
             color: rgb(178, 178, 178);
             text-align: right;
           }
+        }
+      }
+      .home-link-area {
+        width: 100%;
+        height: 125px;
+        position: fixed;
+        bottom: 213px;
+        right: 81px;
+        /*padding-top: 20px;*/
+        .home-link {
+          float: right;
+          color: #ffffff;
+          width: 125px;
+          /*height: 125px;*/
+          line-height: 125px;
+          text-align: center;
+          border-radius: 50%;
+          background: rgb(134, 193, 248);
         }
       }
     }
