@@ -93,6 +93,13 @@
       Header,
       alertTip
     },
+    watch:{
+      showAlert:function(val,oldval){
+        if(val){
+          window.scrollTo(0, document.documentElement.clientHeight);
+        }
+      }
+    },//以V-model绑定数据时使用的数据变化监测
   }
 </script>
 
