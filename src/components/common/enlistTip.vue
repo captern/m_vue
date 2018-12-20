@@ -19,10 +19,10 @@
       </div>
       <p class="confirm-text">您是否要报名</p>
       <div class="confrim-area">
-        <div class="confirm-one-left confirm-one-item" @click="closeTip">是</div>
+        <div class="confirm-one-left confirm-one-item" @click="closeTip(true)">是</div>
         <div class="confirm-one-mid"></div>
         <!--<div class="confirm-one-right confirm-one-item">去注册</div>-->
-        <div class="confirm-one-left confirm-one-item" @click="closeTip">否</div>
+        <div class="confirm-one-left confirm-one-item" @click="closeTip(false)">否</div>
       </div>
     </section>
   </div>
@@ -41,8 +41,8 @@
     },
     props: ['alertText'],
     methods: {
-      closeTip() {
-        this.$emit('closeTip')
+      closeTip(type) {
+        this.$emit('closeTip', type)
       }
     }
   }

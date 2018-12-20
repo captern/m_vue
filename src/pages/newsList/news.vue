@@ -1,5 +1,5 @@
 <template>
-  <div class="news-page" v-wechat-title="$route.meta.title='新闻'">
+  <div class="news-page" v-wechat-title="$route.meta.title='公告'">
     <Header :title='newsData.title'/>
     <div class="news-area">
       <div class="news-main">
@@ -18,7 +18,10 @@
       </div>
     </div>
     <!--提示框弹出部分-->
-    <enlist-tip v-if="enlistTip" @closeTip="enlistTip = false" :tipType="tipType" :alertText="alertText"/>
+    <enlist-tip v-if="enlistTip" @closeTip="hideEnlist" :alertText="alertText"/>
+    <!--确定取消提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" tipType="one" alertText="报名成功"/>
+
 
   </div>
 </template>
@@ -27,13 +30,16 @@
   import Header from '../../components/header.vue'
   import {newsDetail} from '../../server/api'
   import enlistTip from '../../components/common/enlistTip'
+  import alertTip from '../../components/common/alertTip'
 
   export default {
     data() {
       return {
         newsId: '',
         newsData: '',
-        enlistTip: false
+        enlistTip: false,
+        showAlert: false,
+        alertText:'待定义'
       }
     },
     mounted() {
@@ -45,11 +51,19 @@
     methods: {
       showEnlist(){
         this.enlistTip = !this.enlistTip
+      },
+      hideEnlist(type){
+        this.enlistTip = !this.enlistTip
+        if(type){
+          this.showAlert = true
+        }else{
+        }
       }
     },
     components: {
       Header,
-      enlistTip
+      enlistTip,
+      alertTip
     }
   }
 </script>
