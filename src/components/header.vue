@@ -68,8 +68,10 @@
   .header {
     color: #ffffff;
     width: 100%;
-    height: 100px;
-    line-height: 100px;
+    /*height: 100px;*/
+    height: 70px;
+    /*line-height: 100px;*/
+    line-height: 70px;
     background: #161616;
     display: flex;
     text-align: center;
@@ -77,7 +79,7 @@
       flex: 1;
       .icon{
         width: 24px;
-        height: 45px;
+        height: 38px;
         vertical-align: middle;
       }
     }

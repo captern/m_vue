@@ -74,6 +74,7 @@
 
 <style lang="scss" scoped>
   .swiper-container {
+    height: 460px;
     font-size: 0;
     .swiper-wrapper {
       .swiper-slide {
