@@ -4,7 +4,7 @@
       <div class="swiper-slide" v-for="(item, index) in banner" :jumpurl='item.title'>
         <div class="dec-area">
           <p class="dec">{{item.title}}</p>
-          <div class="time">{{item.created_time}}</div>
+          <!--<div class="time">{{item.created_time}}</div>-->
         </div>
         <img class="image" :src="item.cover" alt="">
       </div>
@@ -83,17 +83,14 @@
           bottom: 0;
           z-index: 100;
           width: 100%;
-          height: 134px;
-          background-color: rgba(49, 49, 49, 0.75);
-          display: flex;
+          height: 102px;
+          background-color: rgba(0, 0, 0, 0.25);
           .dec {
-            flex: 3;
-            font-size: 30px;
+            font-size: 24px;
+            text-align: center;
             color: #ffffff;
-            margin: 25px 25px;
-            height: 74px;
-            line-height: 37px;
-            overflow: hidden;
+            margin: 27px 50px;
+            line-height: 30px;
           }
           .time {
             flex: 1.25;
@@ -111,9 +108,12 @@
       }
     }
     .swiper-pagination {
-      bottom: 40px;
+      top: 25px;
       .swiper-pagination-bullet {
+        width: 10px!important;
+        height: 10px!important;
         display: none !important;
+        background: white!important;
       }
     }
   }
