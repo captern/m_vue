@@ -3,15 +3,14 @@
     <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
     <Slider v-if="this.banner" v-bind:banner='this.banner'></Slider>
     <div class="main-list-area">
-      <div class="list-item" v-for="(linkItem, index) in linkList" :key="index">
+      <div class="list-item" v-for="(linkItem, index) in indexList" :key="index" @click="jumpUrl(linkItem.url, linkItem.source)">
         <div class="list-item-left">
-          {{index}}
           <img :src='"../../common/icon/icon-item-" + index + "@3x.png"' alt="">
         </div>
         <div class="list-item-right">
           <div class="list-item-right-left"></div>
           <div class="list-item-right-center">
-            {{linkItem.text}}
+            {{linkItem.title}}
           </div>
           <div class="list-item-right-right">
             <img src="../../common/icon/link-right@3x.png" alt="">
@@ -33,9 +32,7 @@
         个人中心
       </router-link>
       <div class="bottom-pop" v-if="showBottomPop">
-        <router-link to="/login" class="bottom-pop-item">创新券</router-link>
-        <router-link to="/login" class="bottom-pop-item">高校市场</router-link>
-        <router-link to="/login" class="bottom-pop-item">技术商城</router-link>
+        <div class="bottom-pop-item" v-for="(menuItem, index) in menuList" :key="index"  @click="jumpUrl(menuItem.url, menuItem.source)">{{menuItem.title}}</div>
       </div>
     </div>
   </div>
@@ -51,6 +48,7 @@
   import alertTip from '../../components/common/alertTip'
   import {getStore} from '../../config/mUtils'
   import {mapState, mapActions} from 'vuex'
+
   export default {
     data() {
       return {
@@ -59,22 +57,18 @@
         getUid: false,
         userMsg: null,
         showBottomPop: false,
-        linkList: [
+        indexList: [
           {
-            link: '/login',
-            text:'人才培养基地'
-          },
+            source: '',
+            url: '',
+            title: ''
+          }
+        ],
+        menuList: [
           {
-            link: '/login',
-            text:'活动'
-          },
-          {
-            link: '/login',
-            text:'新闻'
-          },
-          {
-            link: '/login',
-            text:'公告'
+            title: "",
+            url: "",
+            source: ''
           }
         ]
       }
@@ -92,7 +86,9 @@
       // 获取首页链接信息
       getIndexLink().then(
         res => {
-          console.log(res)
+          console.log(res.data)
+          this.indexList = res.data.index
+          this.menuList = res.data.menu
         }
       )
       if (getStore('user_id')) {
@@ -111,6 +107,15 @@
       ]),
       showPop() {
         this.showBottomPop = !this.showBottomPop
+      },
+      jumpUrl(url, source){
+        console.log(url)
+        console.log(source)
+        if(source == 1){
+          this.$router.push(url)
+        }else if(source == 2){
+          window.location.href=(url)
+        }
       }
     },
     components: {

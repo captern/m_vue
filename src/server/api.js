@@ -14,7 +14,7 @@ export const newsDetail = newsId => fetch('/news/news-detail?newsId=' + newsId);
 export const getBanner = () => fetch('/news/get-banner', {})
 
 // 获取首页链接
-export const getIndexLink = () => fetch('/news/get-banner', {})
+export const getIndexLink = () => fetch('/news/get-menu', {})
 
 // 地址拼接在连接里面的例子
 export const currentcity = number => fetch('/v1/cities/' + number)
