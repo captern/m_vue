@@ -101,7 +101,7 @@
           }
         }
         .image {
-          height: 553px;
+          height: 460px;
           width: 100%;
           display: block;
         }
