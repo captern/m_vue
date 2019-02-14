@@ -28,8 +28,14 @@
       <div class="bottom-center">
         <img src="../../common/icon/space@3x.png" alt="">
       </div>
-      <router-link class="bottom-right" to="/login">
+      <!--<router-link class="bottom-right" to="/login">-->
+        <!--个人中心-->
+      <!--</router-link>-->
+      <router-link to="/user" class="bottom-right" v-if="this.userMsg">
         个人中心
+      </router-link>
+      <router-link to="/login" class="bottom-right" v-else>
+        登录
       </router-link>
       <div class="bottom-pop" v-if="showBottomPop">
         <div class="bottom-pop-item" v-for="(menuItem, index) in menuList" :key="index"  @click="jumpUrl(menuItem.url, menuItem.source)">{{menuItem.title}}</div>

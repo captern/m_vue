@@ -19,5 +19,12 @@
 <style lang="scss">
   @import "common/stylus/index";
 
-  #app {}
+  #app {
+    background: url("./common/image/bkg.png");
+    background-size: 100% 100%;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    overflow: scroll;
+  }
 </style>
