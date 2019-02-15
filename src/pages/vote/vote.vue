@@ -1,100 +1,124 @@
 <template>
   <div class="vote-page" v-wechat-title="$route.meta.title='投票'">
-    <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
-    <p>jkmmmkllkm</p>
+    <Header title='投票' noBackShow='noBackShow'/>
+    <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
+    <div class="vote-item">
+      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
+      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
+      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    </div>
   </div>
 </template>
 
 <script>
-  import {getUser, getBanner, getIndexLink} from '../../server/api'
-  import Slider from '../../components/common/slider'
+  import {getUse, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
-  import Search from '../../components/search.vue'
-  import mainList from '../../components/mainList.vue'
-  import TwoLanguageTitle from '../../components/twoLanguageTitle'
-  import alertTip from '../../components/common/alertTip'
-  import {getStore} from '../../config/mUtils'
+  import Select from '../../components/select.vue'
   import {mapState, mapActions} from 'vuex'
 
   export default {
     data() {
       return {
-        banner: null,
-        showAlert: true,
-        getUid: false,
-        userMsg: null,
-        showBottomPop: false,
-        indexList: [
+        requestFlag: true, // 是否请求接口
+        selectAreaData: [
           {
-            source: '',
-            url: '',
-            title: ''
+            typeIndex: 0,
+            items: [
+              {
+                itemName: '全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部',
+                itemIndex: 0
+              },
+              {
+                itemName: '时间最近',
+                itemIndex: 1
+              },
+              {
+                itemName: '近&nbsp;三&nbsp;&nbsp;天',
+                itemIndex: 2
+              },
+              {
+                itemName: '一&nbsp;周&nbsp;&nbsp;内',
+                itemIndex: 3
+              },
+              {
+                itemName: '一个月内',
+                itemIndex: 4
+              }
+            ]
+          },
+          {
+            typeIndex: 1,
+            items: [
+              {
+                itemName: '全部投票',
+                itemIndex: 0
+              },
+              {
+                itemName: '正在投票',
+                itemIndex: 1
+              },
+              {
+                itemName: '投票结束',
+                itemIndex: 2
+              }
+            ]
           }
         ],
-        menuList: [
+        checked: [
           {
-            title: "",
-            url: "",
-            source: ''
+            itemName: '时间最近',
+            itemIndex: 1,
+          },
+          {
+            itemName: '全部投票',
+            itemIndex: 0,
           }
-        ]
+        ],
       }
     },
     computed: {
@@ -103,68 +127,81 @@
         'login'
       ])
     },
+    created() {
+      window.addEventListener('scroll', this.scrolling);
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.scrolling);
+    },
     mounted() {
-      getBanner().then(res => {
-        this.banner = res.data
-      })
-      // 获取首页链接信息
-      getIndexLink().then(
-        res => {
-          console.log(res.data)
-          this.indexList = res.data.index
-          this.menuList = res.data.menu
-        }
-      )
-      if (getStore('user_id')) {
-        getUser().then(res => {
-          if (res.status) {
-            this.userMsg = res.data
-          } else {
-            console.log('用户信息获取失败')
-          }
-        })
-      }
     },
     methods: {
-      ...mapActions([
-        'getUserInfo'
-      ]),
-      showPop() {
-        this.showBottomPop = !this.showBottomPop
+      changeCheck(checked) {
+        console.log('获取到子组件的选择内容');
+        console.log(checked)
       },
-      jumpUrl(url, source){
-        console.log(url)
-        console.log(source)
-        if(source == 1){
-          this.$router.push(url)
-        }else if(source == 2){
-          window.location.href=(url)
+      scrolling() {
+        console.log('dddd')
+        if (this.scrollFlag) {
+          return;
         }
-      }
+        this.scrollFlag = true;
+        setTimeout(() => {
+          this.handleScroll();
+          this.scrollFlag = false;
+        }, 20);
+      },
+      handleScroll() {
+        // 函数的作用是滚动加载电影详情信息
+        // 判断是否为请求后台中的状态，如果是则返回
+        if (this.requestFlag) {
+          return;
+        }
+        console.log('开始加载更多')
+      },
+
     },
     components: {
-      Slider,
       Header,
-      Search,
-      mainList,
-      alertTip,
-      TwoLanguageTitle
+      Select
     },
   }
 </script>
 
 <style lang="scss" scoped>
-  body{
-    background: url("../../common/image/bkg.png") 100% 100% no-repeat;
-  }
   .vote-page {
-    max-width: 100vh;
-    /*position: relative;*/
-    /*top: 0;*/
-overflow: scroll;
-    .bkg{
-      width: 100%;
-      height: 100%;
+    /*背景固定不滚动*/
+    background: url("../../common/image/bkg/bkg-two.png");
+    background-size: 100% 100%;
+    height: 100%;
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
+    /*背景固定不滚动*/
+    .vote-item {
+      background: #FFFFFF;
+      margin: 23px;
+      border-radius: 10px;
+      padding: 30px 23px;
+      .title {
+        font-size: 23px;
+        line-height: 31px;
+        color: #231815;
+      }
+      .des {
+        font-size: 18px;
+        line-height: 31px;
+        color: #727171;
+        padding-top: 14px;
+      }
+      .time {
+        text-align: right;
+        font-size: 18px;
+        line-height: 26px;
+        color: #3ab2ed;
+        padding-top: 20px;
+      }
     }
   }
 </style>
