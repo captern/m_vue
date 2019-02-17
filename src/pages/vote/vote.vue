@@ -1,56 +1,12 @@
 <template>
   <div class="vote-page" v-wechat-title="$route.meta.title='投票'">
     <Header title='投票' noBackShow='noBackShow'/>
+    <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
-    </div>
-    <div class="vote-item">
-      <p class="title">技术服务人才中高级培训课程的投票活动投票活动投票活动投票活动投票活动.........</p>
-      <p class="des">技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动技术服务人才中高级培训课程的投票活动.......</p>
-      <p class="time">投票时间：2018年12月10日-2018年12月20日</p>
+    <div class="vote-item" v-for="(item, index) in voteList">
+      <p class="title">{{item.title}}</p>
+      <p class="des">{{item.des}}</p>
+      <p class="time">{{item.time}}</p>
     </div>
   </div>
 </template>
@@ -59,7 +15,9 @@
   import {getUse, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import Select from '../../components/select.vue'
+  import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
+  import {voteList} from '../../server/voteApi'
 
   export default {
     data() {
@@ -119,6 +77,7 @@
             itemIndex: 0,
           }
         ],
+        voteList: null
       }
     },
     computed: {
@@ -134,6 +93,12 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
+      voteList().then(res => {
+        console.log(res)
+        if (res.status) {
+          this.voteList = res.data.voteList
+        }
+      })
     },
     methods: {
       changeCheck(checked) {
@@ -163,7 +128,8 @@
     },
     components: {
       Header,
-      Select
+      Select,
+      HomeIcon
     },
   }
 </script>

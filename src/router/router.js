@@ -17,6 +17,10 @@ const News = () => import('../pages/newsList/news')
 const NoticeList = () => import('../pages/notice/noticeList')
 const Notice = () => import('../pages/notice/notice')
 const Vote = () => import('../pages/vote/vote')
+const VoteItem = () => import('../pages/vote/voteItem')
+const VoteOption = () => import('../pages/vote/voteOption')
+const VoteOptionMain = () => import('../pages/vote/voteOptionMain')
+const PostVote = () => import('../pages/vote/postVote')
 
 export default new Router({
   // mode: 'history',
@@ -70,6 +74,22 @@ export default new Router({
     {
       path: '/vote',
       component: Vote
+    },
+    {
+      path: '/voteItem/:voteId',
+      component: VoteItem
+    },
+    {
+      path: '/voteOption/:voteId',
+      component: VoteOption
+    },
+    {
+      path: '/voteOptionMain/:voteId',
+      component: VoteOptionMain
+    },
+    {
+      path: '/postVote',
+      component: PostVote
     },
 
   ]

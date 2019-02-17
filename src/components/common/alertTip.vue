@@ -13,6 +13,12 @@
         <!--<div class="confirm-one-right confirm-one-item">去注册</div>-->
         <router-link to="/register" class="confirm-one-right confirm-one-item">去注册</router-link>
       </div>
+      <div class="confrim confirm-one" v-else-if="(tipType == 'three')">
+        <div class="confirm-one-left confirm-one-item" @click="closeTip">{{btnOne}}</div>
+        <div class="confirm-one-mid"></div>
+        <!--<div class="confirm-one-right confirm-one-item">去注册</div>-->
+        <div class="confirm-one-right confirm-one-item" @click="confirmTip">{{btnTwo}}</div>
+      </div>
     </section>
   </div>
 </template>
@@ -28,10 +34,14 @@
     mounted() {
 
     },
-    props: ['alertText', 'tipType'],
+    props: ['alertText', 'tipType','btnOne','btnTwo'],
     methods: {
       closeTip() {
         this.$emit('closeTip')
+      },
+      confirmTip() {
+        this.$emit('confirmTip')
+        this.closeTip()
       }
     }
   }
@@ -73,30 +83,30 @@
     border-radius: 24px;
     .tip-area {
       position: absolute;
-      top: 715px;
-      left: calc(50% - 410px);
-      width: 820px;
-      height: 379px;
+      top: 390px;
+      left: calc(50% - 249.5px);
+      width: 499px;
+      height: 231px;
       overflow: hidden;
       animation: tipMove .4s;
       background-color: rgba(255, 255, 255, 1);
       border-radius: 24px;
       text-align: center;
       .tip-title {
-        height: 126px;
-        line-height: 126px;
-        font-size: 48px;
+        height: 67px;
+        line-height: 77px;
+        font-size: 28px;
         color: rgb(134, 134, 134);
       }
       .tip-text {
-        font-size: 36px;
-        height: 146px;
-        line-height: 146px;
+        font-size: 25px;
+        height: 96px;
+        line-height: 76px;
         overflow: hidden;
       }
       .confrim {
-        height: 108px;
-        line-height: 108px;
+        height: 65px;
+        line-height: 65px;
         border-top: 0.5px solid #7e8c8d;
         color: rgb(58, 178, 237);
         &.confirm-one {
@@ -109,8 +119,8 @@
           .confirm-one-mid {
             flex: 0.15;
             background-color: rgb(58, 178, 237);
-            height: 70px;
-            margin-top: 18px;
+            height: 40px;
+            margin-top: 12.5px;
             border-radius: 60%;
           }
         }
