@@ -26,7 +26,6 @@
 
 <style lang="scss" scoped>
   .home-icon-page{
-    width: 100%;
     height: 93px;
     position: fixed;
     bottom: 177px;

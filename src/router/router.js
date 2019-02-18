@@ -23,6 +23,12 @@ const VoteOptionMain = () => import('../pages/vote/voteOptionMain')
 const PostVote = () => import('../pages/vote/postVote')
 const VoteResult = () => import('../pages/vote/voteResult')
 const VoteSuccess = () => import('../pages/vote/voteSuccess')
+// 测试部分
+const Test = () => import('../pages/test/test')
+const TestDes = () => import('../pages/test/testDes')
+const TestMain = () => import('../pages/test/testMain')
+const TestResult = () => import('../pages/test/testResult')
+const TestFail = () => import('../pages/test/testFail')
 
 export default new Router({
   // mode: 'history',
@@ -100,6 +106,27 @@ export default new Router({
     {
       path: '/voteSuccess/:voteId',
       component: VoteSuccess
+    },
+    // 测试部分
+    {
+      path: '/test',
+      component: Test
+    },
+    {
+      path: '/testDes/:testId',
+      component: TestDes
+    },
+    {
+      path: '/testMain/:testId',
+      component: TestMain
+    },
+    {
+      path: '/testResult/:testId',
+      component: TestResult
+    },
+    {
+      path: '/testFail/:testId',
+      component: TestFail
     },
 
   ]
