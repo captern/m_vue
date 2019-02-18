@@ -1,12 +1,23 @@
 <template>
-  <div class="vote-page" v-wechat-title="$route.meta.title='投票'">
-    <Header title='投票' noBackShow='noBackShow'/>
+  <div class="lesson-page" v-wechat-title="$route.meta.title='课程列表'">
+    <Header title='课程列表' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/voteItem/' + item.url " class="vote-item" v-for="(item, index) in voteList" :key="index">
-      <p class="title">{{item.title}}</p>
-      <p class="des">{{item.des}}</p>
-      <p class="time">{{item.time}}</p>
+    <router-link :to="'/lessonMain/' + item.url " class="lesson-item" v-for="(item, index) in voteList" :key="index">
+      <div class="type-one" v-if="item.img">
+        <p class="title">{{item.title}}</p>
+        <p class="des">{{item.des}}</p>
+      </div>
+      <div class="type-two" v-else>
+        <div class="author-img">
+          <img src="../../common/image/bkg/bkg-one.png" alt="">
+        </div>
+        <p class="title">{{item.title}}</p>
+      </div>
+      <div class="author-time">
+        <div class="author">主讲人：<span>张老师</span></div>
+        <div class="time">授课时间：2018年12月10号</div>
+      </div>
     </router-link>
   </div>
 </template>
@@ -53,15 +64,15 @@
             typeIndex: 1,
             items: [
               {
-                itemName: '全部投票',
+                itemName: '全部课程',
                 itemIndex: 0
               },
               {
-                itemName: '正在投票',
+                itemName: '已&nbsp;开&nbsp;&nbsp;课',
                 itemIndex: 1
               },
               {
-                itemName: '投票结束',
+                itemName: '未&nbsp;开&nbsp;&nbsp;课',
                 itemIndex: 2
               }
             ]
@@ -73,7 +84,7 @@
             itemIndex: 1,
           },
           {
-            itemName: '全部投票',
+            itemName: '全部课程',
             itemIndex: 0,
           }
         ],
@@ -135,7 +146,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .vote-page {
+  .lesson-page {
     /*背景固定不滚动*/
     background: url("../../common/image/bkg/bkg-two.png") fixed;
     background-size: 100% 100%;
@@ -143,29 +154,62 @@
     width: 100%;
     overflow: scroll;
     /*背景固定不滚动*/
-    .vote-item {
+    .lesson-item {
       background: #FFFFFF;
       margin: 23px;
       border-radius: 10px;
-      padding: 30px 23px;
+      padding: 30px 23px 5px;
       display: block;
-      .title {
-        font-size: 23px;
-        line-height: 31px;
-        color: #231815;
+      .type-one{
+        .title {
+          font-size: 23px;
+          line-height: 31px;
+          color: #231815;
+        }
+        .des {
+          font-size: 18px;
+          line-height: 31px;
+          color: #727171;
+          padding-top: 14px;
+        }
       }
-      .des {
-        font-size: 18px;
-        line-height: 31px;
-        color: #727171;
-        padding-top: 14px;
+      .type-two{
+        display: flex;
+        height: 100px;
+        align-items: center;
+        .author-img{
+          flex: 1;
+          img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }
+        }
+        .title{
+          flex: 3.5;
+          font-size: 23px;
+          line-height: 30px;
+          color: #000;
+        }
       }
-      .time {
-        text-align: right;
-        font-size: 18px;
-        line-height: 26px;
-        color: #3ab2ed;
-        padding-top: 20px;
+      .author-time {
+        display: flex;
+        .author, .time {
+          flex: 1;
+          font-size: 17px;
+          line-height: 36px;
+          /*color: #b2b2b3;*/
+          margin: 10px 0 15px;
+          color: #3ab2ed;
+        }
+        .author{
+          span{
+            color: #000;
+          }
+        }
+        .time {
+          text-align: right;
+        }
       }
     }
   }

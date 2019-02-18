@@ -142,6 +142,7 @@
     overflow: scroll;
     .main-list-area {
       border: none;
+      padding-bottom: 100px;
       .list-item {
         font-size: 0;
         height: 119px;

@@ -29,6 +29,9 @@ const TestDes = () => import('../pages/test/testDes')
 const TestMain = () => import('../pages/test/testMain')
 const TestResult = () => import('../pages/test/testResult')
 const TestFail = () => import('../pages/test/testFail')
+// 课程部分
+const LessonList = () => import('../pages/lesson/lessonList')
+const LessonMain = () => import('../pages/lesson/lessonMain')
 
 export default new Router({
   // mode: 'history',
@@ -128,6 +131,14 @@ export default new Router({
       path: '/testFail/:testId',
       component: TestFail
     },
-
+    // 课程部分
+    {
+      path: '/lessonList',
+      component: LessonList
+    },
+    {
+      path: '/lessonMain/:testId',
+      component: LessonMain
+    },
   ]
 })
