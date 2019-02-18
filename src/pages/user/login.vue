@@ -139,18 +139,22 @@
 <style lang="scss" scoped>
   .login-page {
     .logo-area {
-      margin: 259px 0 77px;
+      /*margin: 259px 0 77px;*/
+      margin: 162px 0 48px;
       text-align: center;
       .logo {
-        width: 390px;
-        height: 273px;
+        /*width: 390px;*/
+        width: 244px;
+        /*height: 273px;*/
+        height: 170px;
         display: inline-block;
         /*background-color: red;*/
       }
     }
     .loginForm {
       margin: 0 auto;
-      width: 667px;
+      /*width: 667px;*/
+      width: 417px;
       .input-area {
         width: 100%;
         /*background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, rgb(182, 218, 250)), color-stop(100%, rgb(168, 209, 249)));*/
@@ -161,22 +165,29 @@
         background: -ms-linear-gradient(top left, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
         background: linear-gradient(to bottom right, rgb(182, 218, 250) 0%, rgb(168, 209, 249) 130%);
         display: flex;
-        height: 106px;
-        line-height: 106px;
-        margin-bottom: 16px;
-        border-radius: 24px;
+        /*height: 106px;*/
+        height: 66px;
+        /*line-height: 106px;*/
+        line-height: 66px;
+        /*margin-bottom: 16px;*/
+        margin-bottom: 10px;
+        /*border-radius: 24px;*/
+        border-radius: 15px;
         .login-icon {
           flex: 1;
           text-align: center;
           font-size: 0;
           .icon {
-            height: 40px;
+            /*height: 40px;*/
+            height: 25px;
             vertical-align: middle;
             &.phone {
-              width: 60px;
+              /*width: 60px;*/
+              width: 37.5px;
             }
             &.pas {
-              width: 45px;
+              /*width: 45px;*/
+              width: 28px;
             }
           }
         }
@@ -194,8 +205,10 @@
         }
       }
       .check-area {
-        height: 106px;
-        line-height: 106px;
+        /*height: 106px;*/
+        height: 66px;
+        /*line-height: 106px;*/
+        line-height: 66px;
         display: flex;
         .check, .register-link {
           flex: 1;
@@ -203,9 +216,12 @@
         }
         .check {
           .rember-check {
-            margin-top: -8px;
-            margin-right: 10px;
-            margin-left: 10px;
+            /*margin-top: -8px;*/
+            margin-top: -5px;
+            /*margin-right: 10px;*/
+            margin-right: 6.25px;
+            /*margin-left: 10px;*/
+            margin-left: 6.25px;
           }
         }
         .register-link {
@@ -213,13 +229,17 @@
         }
       }
       .login-container {
-        height: 105px;
-        line-height: 105px;
+        /*height: 105px;*/
+        height: 65px;
+        /*line-height: 105px;*/
+        line-height: 65px;
         background: rgb(58, 178, 237);
-        border-radius: 24px;
+        /*border-radius: 24px;*/
+        border-radius: 15px;
         text-align: center;
         color: #ffffff;
-        font-size: 42px;
+        /*font-size: 42px;*/
+        font-size: 26px;
       }
     }
   }
@@ -230,10 +250,14 @@
     vertical-align: middle;
     margin-top: 0;
     background: #fff;
-    border: #ffffff solid 2px;
-    border-radius: 3px;
-    height: 28px;
-    width: 28px;
+    /*border: #ffffff solid 2px;*/
+    border: #ffffff solid 1px;
+    /*border-radius: 3px;*/
+    border-radius: 1.5px;
+    height: 17.5px;
+    /*height: 28px;*/
+    width: 17.5px;
+    /*width: 28px;*/
   }
 
   input[type="checkbox"]:checked {
@@ -243,15 +267,20 @@
 
   input[type=checkbox]:checked::after {
     content: '';
-    top: 3px;
-    left: 3px;
+    top: 1.5px;
+    /*top: 3px;*/
+    /*left: 3px;*/
+    left: 1.5px;
     position: absolute;
     background: transparent;
-    border: #fff solid 4px;
+    /*border: #fff solid 4px;*/
+    border: #fff solid 2.5px;
     border-top: none;
     border-right: none;
-    height: 8px;
-    width: 16px;
+    /*height: 8px;*/
+    height: 5px;
+    /*width: 16px;*/
+    width: 10px;
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);

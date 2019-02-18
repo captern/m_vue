@@ -8,7 +8,7 @@
           {{testData.title}}
         </div>
         <div class="heart">
-          <img src="../../common/icon/icon-item-0@3x.png" alt="">
+          <Heart heart="false"></Heart>
         </div>
       </div>
       <div class="author-time">
@@ -28,6 +28,7 @@
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import alertTip from '../../components/common/alertTip'
+  import Heart from '../../components/common/heart'
   import {mapState, mapActions} from 'vuex'
 
   import {voteMain} from '../../server/voteApi'
@@ -66,7 +67,8 @@
     components: {
       Header,
       HomeIcon,
-      alertTip
+      alertTip,
+      Heart
     },
   }
 </script>

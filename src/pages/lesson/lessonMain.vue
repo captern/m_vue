@@ -1,6 +1,6 @@
 <template>
-  <div class="vote-item-page" v-wechat-title="$route.meta.title='投票详情'">
-    <Header title='投票详情' noBackShow='noBackShow'/>
+  <div class="vote-item-page" v-wechat-title="$route.meta.title='课程详情'">
+    <Header title='课程详情' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
       <div class="header-area">
@@ -8,7 +8,7 @@
           {{voteData.title}}
         </div>
         <div class="heart">
-          <img src="../../common/icon/icon-item-0@3x.png" alt="">
+          <Heart heart="false"></Heart>
         </div>
       </div>
       <div class="author-time">
@@ -16,8 +16,11 @@
         <div class="time">{{voteData.created_time}}</div>
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
-      <router-link :to="'/voteOption/'+ voteData.id" class="vote-btn">报名</router-link>
+      <div class="vote-btn" @click="showLessonAlert">报名</div>
     </div>
+    <!--提示框弹出部分-->
+    <alert-tip v-if="showAlert" @closeTip="showLessonAlert" @confirmTip="signUp" tipType="three" alertText="是否报名本课程" btnOne="返回" btnTwo="报名"/>
+    <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="signUp" tipType="one" alertText="报名成功" btnOne="返回"/>
   </div>
 </template>
 
@@ -25,6 +28,8 @@
   import {getUse, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
+  import alertTip from '../../components/common/alertTip'
+  import Heart from '../../components/common/heart'
   import {mapState, mapActions} from 'vuex'
 
   import {voteMain} from '../../server/voteApi'
@@ -37,6 +42,7 @@
         voteData: '',
         enlistTip: false,
         showAlert: false,
+        successAlert: false,
         alertText: '待定义'
       }
     },
@@ -52,10 +58,23 @@
         this.voteData = res.data
       })
     },
-    methods: {},
+    methods: {
+      showLessonAlert(){
+        this.showAlert =! this.showAlert
+      },
+      showSuccessAlert(){
+        this.successAlert =! this.successAlert
+      },
+      signUp(){
+        console.log('baomign ')
+        this.successAlert = !this.successAlert
+      }
+    },
     components: {
       Header,
-      HomeIcon
+      HomeIcon,
+      alertTip,
+      Heart
     },
   }
 </script>
@@ -91,10 +110,6 @@
           flex: 1;
           text-align: right;
           vertical-align: top;
-          img {
-            width: 59px;
-            height: 59px;
-          }
         }
       }
       .author-time {

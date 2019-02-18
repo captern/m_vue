@@ -102,46 +102,64 @@
 
 <style lang="scss" scoped>
   .user-page {
-    margin-top: 113px;
+    /*margin-top: 113px;*/
+    margin-top: 70px;
     .section-one {
       text-align: center;
       .avatar {
         display: inline-block;
-        width: 242px;
-        height: 242px;
+        width: 151px;
+        /*width: 242px;*/
+        /*height: 242px;*/
+        height: 151px;
         border-radius: 50%;
       }
       .phone {
-        margin-top: 55px;
-        font-size: 40px;
+        margin-top: 34px;
+        /*margin-top: 55px;*/
+        /*font-size: 40px;*/
+        font-size: 25px;
         color: #ffffff;
       }
     }
     .section-two {
-      width: 959px;
-      height: 1084px;
+      width: 599px;
+      /*width: 959px;*/
+      /*height: 1084px;*/
+      height: 677px;
       background: #ffffff;
-      border-radius: 24px;
-      margin: 112px auto 0;
+      /*border-radius: 24px;*/
+      border-radius: 15px;
+      /*margin: 112px auto 0;*/
+      margin: 70px auto 0;
       .link-items-area {
-        width: 615px;
+        width: 384px;
+        /*width: 615px;*/
         margin: 0 auto;
-        padding-top: 149px;
+        /*padding-top: 149px;*/
+        padding-top: 93px;
         .link-item {
-          font-size: 38px;
-          height: 109px;
-          line-height: 119px;
+          /*font-size: 38px;*/
+          font-size: 24px;
+          height: 68px;
+          /*height: 109px;*/
+          /*line-height: 119px;*/
+          line-height: 74px;
           display: block;
           background: rgb(134, 193, 248);
-          margin-bottom: 35px;
-          border-radius: 24px;
+          margin-bottom: 22px;
+          /*margin-bottom: 35px;*/
+          /*border-radius: 24px;*/
+          border-radius: 15px;
           color: #ffffff;
-          padding: 0 37px 0 45px;
+          /*padding: 0 37px 0 45px;*/
+          padding: 0 23px 0 28px;
           .icon {
             float: right;
             vertical-align: middle;
             img {
-              width: 20px;
+              /*width: 20px;*/
+              width: 12.5px;
               height: auto;
             }
           }
@@ -150,15 +168,20 @@
       }
       .home-link-area {
         width: 100%;
-        height: 125px;
-        padding-top: 20px;
+        /*height: 125px;*/
+        height: 78px;
+        /*padding-top: 20px;*/
+        padding-top: 12.5px;
         .home-link {
           float: right;
-          margin-right: 45px;
+          /*margin-right: 45px;*/
+          margin-right: 28px;
           color: #ffffff;
-          width: 125px;
+          /*width: 125px;*/
+          width: 78px;
           /*height: 125px;*/
-          line-height: 125px;
+          /*line-height: 125px;*/
+          line-height: 78px;
           text-align: center;
           border-radius: 50%;
           background: rgb(134, 193, 248);
@@ -166,13 +189,19 @@
       }
       .logout {
         color: #ffffff;
-        font-size: 52px;
-        width: 879px;
-        height: 105px;
+        font-size: 32px;
+        /*font-size: 52px;*/
+        /*width: 879px;*/
+        width: 555px;
+        height: 66px;
+        /*height: 105px;*/
         text-align: center;
-        margin: 45px auto 0;
-        line-height: 105px;
-        border-radius: 24px;
+        /*margin: 45px auto 0;*/
+        margin: 28px auto 0;
+        /*line-height: 105px;*/
+        line-height: 66px;
+        /*border-radius: 24px;*/
+        border-radius: 15px;
         background: rgb(68, 178, 237);
       }
     }

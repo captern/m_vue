@@ -186,36 +186,50 @@
   .change-info-page {
     .change-area {
       position: absolute;
-      margin: 40px;
-      width: calc(100% - 80px);
-      height: calc(100% - 180px);;
+      /*margin: 40px;*/
+      margin: 25px;
+      width: calc(100% - 50px);
+      /*width: calc(100% - 80px);*/
+      /*height: calc(100% - 180px);;*/
+      height: calc(100% - 112.5px);
       background: #ffffff;
-      border-radius: 24px;
+      /*border-radius: 24px;*/
+      border-radius: 15px;
       .change-form {
-        width: 669px;
-        margin: 231px auto 0;
+        /*width: 669px;*/
+        width: 418px;
+        /*margin: 231px auto 0;*/
+        margin: 144px auto 0;
         color: rgb(58, 178, 237);
         .change-item {
           width: 100%;
           display: flex;
-          height: 96px;
-          line-height: 96px;
-          margin-bottom: 16px;
+          /*height: 96px;*/
+          height: 60px;
+          /*line-height: 96px;*/
+          line-height: 60px;
+          /*margin-bottom: 16px;*/
+          margin-bottom: 10px;
           /*border-radius: 24px;*/
           .item-left {
             flex: 1.2;
             text-align: right;
-            font-size: 36px;
+            /*font-size: 36px;*/
+            font-size: 22px;
             span {
               display: inline-block;
-              font-size: 50px;
+              /*font-size: 50px;*/
+              font-size: 31px;
               vertical-align: middle;
-              padding-top: 8px;
-              padding-right: 4px;
+              padding-top: 5px;
+              /*padding-top: 8px;*/
+              /*padding-right: 4px;*/
+              padding-right: 2.5px;
             }
           }
           .item-right {
-            margin-left: 10px;
+            /*margin-left: 10px;*/
+            margin-left: 6.5px;
             flex: 2;
             color: #ffffff;
             outline: none;
@@ -225,9 +239,11 @@
             &::-webkit-input-placeholder {
               color: #ffffff
             }
-            border-radius: 24px;
+            /*border-radius: 24px;*/
+            border-radius: 15px;
             background: rgb(225, 225, 225);
-            padding-left: 20px;
+            /*padding-left: 20px;*/
+            padding-left: 12.5px;
             &.sex-check {
               color: rgb(58, 178, 237);
               display: flex;
@@ -238,10 +254,12 @@
                   vertical-align: middle;
                   font-size: 0;
                   img {
-                    width: 30px;
-                    height: 30px;
+                    width: 19px;
+                    /*width: 30px;*/
+                    /*width: 30px;*/
+                    height: 19px;
                     vertical-align: middle;
-                    margin-top: -2px;
+                    margin-top: -1.5px;
                   }
                 }
               }

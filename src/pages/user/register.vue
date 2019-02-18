@@ -148,43 +148,55 @@
 <style lang="scss" scoped>
   .register-page {
     .register-form {
-      margin: 250px auto 0;
-      width: 638px;
+      /*margin: 250px auto 0;*/
+      margin: 156px auto 0;
+      /*width: 638px;*/
+      width: 399px;
       .input-area {
         width: 100%;
         display: flex;
-        height: 96px;
-        line-height: 96px;
-        margin-bottom: 22px;
+        /*height: 96px;*/
+        height: 60px;
+        /*line-height: 96px;*/
+        line-height: 60px;
+        /*margin-bottom: 22px;*/
+        margin-bottom: 14px;
         font-size: 0;
         /*border-radius: 24px;*/
         .register-icon {
           flex: 1.2;
           text-align: left;
           color: #ffffff;
-          font-size: 36px;
+          /*font-size: 36px;*/
+          font-size: 22px;
           span {
             display: inline-block;
-            font-size: 50px;
+            font-size: 32px;
+            /*font-size: 50px;*/
             vertical-align: middle;
-            padding-top: 8px;
-            padding-right: 4px;
+            padding-top: 5px;
+            /*padding-top: 8px;*/
+            /*padding-right: 4px;*/
+            padding-right: 2.5px;
           }
         }
         .input {
           flex: 2.6;
           color: #ffffff;
           outline: none;
-          font-size: 30px;
+          /*font-size: 30px;*/
+          font-size: 18px;
           &:-ms-input-placeholder {
             color: #ffffff
           }
           &::-webkit-input-placeholder {
             color: #ffffff
           }
-          border-radius: 24px;
+          /*border-radius: 24px;*/
+          border-radius: 15px;
           background: rgb(155, 201, 248);
-          padding-left: 20px;
+          /*padding-left: 20px;*/
+          padding-left: 12.5px;
         }
       }
       .sex-area {
@@ -197,24 +209,31 @@
               vertical-align: middle;
               font-size: 0;
               img {
-                width: 30px;
-                height: 30px;
+                width: 19px;
+                /*width: 30px;*/
+                /*height: 30px;*/
+                height: 19px;
                 vertical-align: middle;
-                margin-top: -2px;
+                margin-top: -1.5px;
               }
             }
           }
         }
       }
       .register-container {
-        height: 105px;
-        line-height: 105px;
+        /*height: 105px;*/
+        height: 66px;
+        line-height: 66px;
+        /*line-height: 105px;*/
         background: rgb(58, 178, 237);
-        font-size: 42px;
+        /*font-size: 42px;*/
+        font-size: 26px;
         color: #ffffff;
-        border-radius: 24px;
+        border-radius: 15px;
+        /*border-radius: 24px;*/
         text-align: center;
-        margin-top: 40px;
+        /*margin-top: 40px;*/
+        margin-top: 25px;
       }
     }
   }
