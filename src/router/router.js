@@ -21,6 +21,8 @@ const VoteItem = () => import('../pages/vote/voteItem')
 const VoteOption = () => import('../pages/vote/voteOption')
 const VoteOptionMain = () => import('../pages/vote/voteOptionMain')
 const PostVote = () => import('../pages/vote/postVote')
+const VoteResult = () => import('../pages/vote/voteResult')
+const VoteSuccess = () => import('../pages/vote/voteSuccess')
 
 export default new Router({
   // mode: 'history',
@@ -88,8 +90,16 @@ export default new Router({
       component: VoteOptionMain
     },
     {
-      path: '/postVote',
+      path: '/postVote/:voteId',
       component: PostVote
+    },
+    {
+      path: '/voteResult/:voteId',
+      component: VoteResult
+    },
+    {
+      path: '/voteSuccess/:voteId',
+      component: VoteSuccess
     },
 
   ]

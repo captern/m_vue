@@ -3,11 +3,11 @@
     <Header title='投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <div class="vote-item" v-for="(item, index) in voteList">
+    <router-link :to="'/voteItem/' + item.url " class="vote-item" v-for="(item, index) in voteList" :key="index">
       <p class="title">{{item.title}}</p>
       <p class="des">{{item.des}}</p>
       <p class="time">{{item.time}}</p>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -150,6 +150,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
+      display: block;
       .title {
         font-size: 23px;
         line-height: 31px;

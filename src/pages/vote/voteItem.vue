@@ -16,7 +16,7 @@
         <div class="time">{{voteData.created_time}}</div>
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
-      <router-link to="/voteOption" class="vote-btn">参与投票</router-link>
+      <router-link :to="'/voteOption/'+ voteData.id" class="vote-btn">参与投票</router-link>
     </div>
   </div>
 </template>
@@ -47,8 +47,7 @@
       ])
     },
     mounted() {
-//      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
+     this.voteId = this.$route.params.voteId;
       voteMain(this.voteId).then(res => {
         this.voteData = res.data
       })

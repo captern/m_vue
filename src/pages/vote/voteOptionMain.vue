@@ -12,7 +12,7 @@
         <!--</div>-->
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
-      <router-link to="/voteOption" class="vote-btn">支持投票</router-link>
+      <router-link :to="'/postVote/' + voteData.id" class="vote-btn">支持投票</router-link>
     </div>
   </div>
 </template>

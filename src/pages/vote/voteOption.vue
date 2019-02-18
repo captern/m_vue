@@ -15,7 +15,7 @@
             <div class="votes-num">
               已获得&nbsp;<span class="votes">{{item.num}}票</span>
             </div>
-            <router-link :to="'/voteOption/' + item.num" class="go-vote">支持投票</router-link>
+            <router-link :to="'/postVote/' + item.id" class="go-vote">支持投票</router-link>
           </div>
         </div>
       </div>
@@ -49,8 +49,8 @@
       ])
     },
     mounted() {
-//      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
+     this.voteId = this.$route.params.voteId;
+      // this.voteId = 4;
       voteOptions(this.voteId).then(res => {
         console.log(res)
         this.voteOptions = res.data
