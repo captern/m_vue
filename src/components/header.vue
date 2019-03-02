@@ -1,14 +1,14 @@
 <template>
-  <div class="header" v-if="!isWx">
-    <div class="back" v-if='showBack' @click="$router.go(-1)">
-      <img class="icon" src="../common/image/back-icon.png" alt="">
-    </div>
-    <div class="back" v-else></div>
-    <div class="page-title">{{title}}</div>
-    <div class="menu">
-      <img class="icon" src="../common/image/menu-icon.png" alt="">
-    </div>
-  </div>
+  <!--<div class="header" v-if="!isWx">-->
+    <!--<div class="back" v-if='showBack' @click="$router.go(-1)">-->
+      <!--<img class="icon" src="../common/image/back-icon.png" alt="">-->
+    <!--</div>-->
+    <!--<div class="back" v-else></div>-->
+    <!--<div class="page-title">{{title}}</div>-->
+    <!--<div class="menu">-->
+      <!--<img class="icon" src="../common/image/menu-icon.png" alt="">-->
+    <!--</div>-->
+  <!--</div>-->
 </template>
 
 <script>
