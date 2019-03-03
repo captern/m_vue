@@ -83,10 +83,9 @@
     border-radius: 24px;
     .tip-area {
       position: absolute;
-      top: calc(50% - 368px);
-      left: calc(50% - 410px);
-      width: 820px;
-      height: 842px;
+      top: calc(50% - 268px);
+      left: calc(50% - 247px);
+      width: 494px;
       overflow: hidden;
       animation: tipMove .4s;
       background-color: rgba(255, 255, 255, 1);
@@ -94,18 +93,17 @@
       text-align: center;
       .enlist-title {
         width: 100%;
-        height: 138px;
+        height: 74px;
       }
       .enlist-main {
-        width: 639px;
-        height: 297px;
-        border:1px solid #7e8c8d;
-        margin: 92px auto 74px;
+        width: 384px;
+        border-top:1px solid #7e8c8d;
+        margin: 56px auto 44px;
         .line{
-          height: 80px;
-          line-height: 80px;
+          height: 53px;
+          line-height: 53px;
           display: flex;
-          font-size: 34px;
+          font-size: 23px;
           text-align: center;
           border-bottom: 1px solid #7e8c8d;
           .left{
@@ -115,26 +113,26 @@
           .right{
             text-align: left;
             flex: 4;
+            color: rgb(35, 24, 21);
           }
           &.three{
-            border-bottom: none;
             padding-top: 20px;
-            line-height: 50px;
+            padding-bottom: 20px;
+            line-height: 28px;
           }
         }
       }
       .confirm-text{
-        font-size: 38px;
+        font-size: 28px;
         color: rgb(58, 178, 237);
-        height: 46px;
-        line-height: 46px;
-        margin-bottom: 78px;
+        padding-bottom: 48px;
       }
       .confrim-area {
-        height: 108px;
-        line-height: 108px;
+        height: 78px;
+        line-height: 78px;
         border-top: 0.5px solid #7e8c8d;
         color: rgb(58, 178, 237);
+        font-size: 28px;
         display: flex;
         .confirm-one-item {
           flex: 10;
@@ -143,7 +141,7 @@
         .confirm-one-mid {
           flex: 0.15;
           background-color: rgb(58, 178, 237);
-          height: 70px;
+          height: 40px;
           margin-top: 18px;
           border-radius: 60%;
         }

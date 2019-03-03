@@ -12,8 +12,10 @@ const ChangePas = () => import('../pages/user/module/changePas')
 
 // 首页及首页列表部分
 const Index = () => import('../pages/index/index')
-const NewsList = () => import('../pages/newsList/newsList')
-const News = () => import('../pages/newsList/news')
+const TalentedIndex = () => import('../pages/talented/talentedIndex')
+const ActivityIndex = () => import('../pages/activity/activityIndex')
+const NewsList = () => import('../pages/new/newsList')
+const News = () => import('../pages/new/news')
 const NoticeList = () => import('../pages/notice/noticeList')
 const Notice = () => import('../pages/notice/notice')
 const Vote = () => import('../pages/vote/vote')
@@ -40,73 +42,66 @@ export default new Router({
     {
       path: '/',
       redirect: '/index'
-    },
-    {
+    },{
       path: '/index',
       component: Index,
+    },
+    // 人才基地首页
+    {
+      path: '/talentedIndex',
+      component: TalentedIndex,
+    },
+    // 活动首页
+    {
+      path: '/activityIndex',
+      component: ActivityIndex,
     },
     {
       path: '/login',
       component: Login
-    },
-    {
+    }, {
       path: '/register',
       component: Register
-    },
-    {
+    }, {
       path: '/user',
       component: User
-    },
-    {
+    }, {
       path: '/changeuserinfo',
       component: ChangeUserInfo
-    },
-    {
+    }, {
       path: '/changepas',
       component: ChangePas
-    },
-    {
+    }, {
       path: '/newslist',
       component: NewsList
-    },
-    {
+    }, {
       path: '/news/:newsId',
       component: News
-    },
-    {
+    }, {
       path: '/noticelist',
       component: NoticeList
-    },
-    {
+    }, {
       path: '/notice/:noticeId',
       component: Notice
-    },
-
-    {
+    }, {
       path: '/vote',
       component: Vote
-    },
-    {
+    }, {
       path: '/voteItem/:voteId',
       component: VoteItem
-    },
-    {
+    }, {
       path: '/voteOption/:voteId',
       component: VoteOption
-    },
-    {
+    }, {
       path: '/voteOptionMain/:voteId',
       component: VoteOptionMain
-    },
-    {
+    }, {
       path: '/postVote/:voteId',
       component: PostVote
-    },
-    {
+    }, {
       path: '/voteResult/:voteId',
       component: VoteResult
-    },
-    {
+    }, {
       path: '/voteSuccess/:voteId',
       component: VoteSuccess
     },
@@ -114,20 +109,16 @@ export default new Router({
     {
       path: '/test',
       component: Test
-    },
-    {
+    }, {
       path: '/testDes/:testId',
       component: TestDes
-    },
-    {
+    }, {
       path: '/testMain/:testId',
       component: TestMain
-    },
-    {
+    }, {
       path: '/testResult/:testId',
       component: TestResult
-    },
-    {
+    }, {
       path: '/testFail/:testId',
       component: TestFail
     },
@@ -135,8 +126,7 @@ export default new Router({
     {
       path: '/lessonList',
       component: LessonList
-    },
-    {
+    }, {
       path: '/lessonMain/:testId',
       component: LessonMain
     },
