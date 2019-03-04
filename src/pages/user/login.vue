@@ -18,7 +18,8 @@
         <div class="login-icon">
           <img class="icon pas" src="../../common/image/pas-icon.png"/>
         </div>
-        <input class="pas-input input" type="password" name="search" placeholder="密码" v-model="passWord" v-focus="this.focus">
+        <input class="pas-input input" type="password" name="search" placeholder="密码" v-model="passWord"
+               v-focus="this.focus">
       </div>
       <div class="check-area">
         <div class="check">
@@ -92,9 +93,9 @@
           //          设置登录状态为成功
           this.GET_LOGIN()
           this.getUserInfo();
-          setTimeout(()=>{
+          setTimeout(() => {
             this.$router.push('/index');
-          },800)
+          }, 800)
           // this.$router.push('/index');
         } else if (!userLoginData.need_register) {
           this.showAlert = true
@@ -125,9 +126,9 @@
     },
 
 
-    watch:{
-      showAlert:function(val,oldval){
-        if(val){
+    watch: {
+      showAlert: function (val, oldval) {
+        if (val) {
           window.scrollTo(0, document.documentElement.clientHeight);
         }
       }
@@ -212,7 +213,7 @@
         display: flex;
         .check, .register-link {
           flex: 1;
-          color: #FFFFFF;
+          color: rgb(114, 113, 113);
         }
         .check {
           .rember-check {
@@ -237,7 +238,7 @@
         /*border-radius: 24px;*/
         border-radius: 15px;
         text-align: center;
-        color: #ffffff;
+        color: rgb(255,255,255);
         /*font-size: 42px;*/
         font-size: 26px;
       }
@@ -249,9 +250,9 @@
     -webkit-appearance: none;
     vertical-align: middle;
     margin-top: 0;
-    background: #fff;
+    background: rgb(114, 113, 113);
     /*border: #ffffff solid 2px;*/
-    border: #ffffff solid 1px;
+    border: rgb(114, 113, 113) solid 1px;
     /*border-radius: 3px;*/
     border-radius: 1.5px;
     height: 17.5px;
@@ -261,7 +262,8 @@
   }
 
   input[type="checkbox"]:checked {
-    background: #3ab2ed;
+    background: rgb(114, 113, 113);
+    /*background: #3ab2ed;*/
     position: relative;
   }
 
@@ -274,7 +276,7 @@
     position: absolute;
     background: transparent;
     /*border: #fff solid 4px;*/
-    border: #fff solid 2.5px;
+    border: #3ab2ed solid 2.5px;
     border-top: none;
     border-right: none;
     /*height: 8px;*/
