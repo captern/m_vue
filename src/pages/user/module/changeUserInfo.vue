@@ -3,6 +3,20 @@
     <Header title='修改个人资料'/>
     <div class="change-area">
       <div class="change-form">
+        <div class="avatar-area change-item">
+          <div class="item-left">
+            修改头像 ：
+          </div>
+          <div class="item-right">
+            <div class="avatar-input-area">
+              <div class="avatar-icon">
+                点击更换头像
+              </div>
+              <input type="file" class="avatar-input" name="avatar" placeholder="点击更改" ref="" @change="changeImage"
+                     accept="image/gif,image/jpeg,image/jpg,image/png">
+            </div>
+          </div>
+        </div>
         <div class="phone-area change-item">
           <div class="item-left">
             <span>*</span>
@@ -46,9 +60,12 @@
           <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace"
                  v-focus="this.focus">
         </div>
-
+        <div class="work-area change-item">
+          <div class="item-left">职 位 ：</div>
+          <input class="item-right" type="text" name="workSpace" placeholder="请输入职位" v-model="workLevel"
+                 v-focus="this.focus">
+        </div>
         <div class="change-info" @click="changeInfo">保存</div>
-        <!--<div class="login-container">保存</div>-->
       </div>
     </div>
     <!--提示框弹出部分-->
@@ -66,6 +83,8 @@
   export default {
     data() {
       return {
+        avatar: '',
+        file: '',
         user_id: null,
         phoneNumber: null,
         userName: null,
@@ -74,6 +93,7 @@
         tipType: 'one',
         sex: 1,           //性别
         workSpace: null,
+        workLevel: null,
         focus: null
       }
     },
@@ -137,8 +157,13 @@
           this.alertText = '请输入工作地点';
           return
         }
+        else if (!this.workLevel) {
+          this.showAlert = true;
+          this.alertText = '请输入工作职位';
+          return
+        }
         // 发送重置信息
-        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace);
+        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace, this.workLevel);
         if (res.status) {
           this.showAlert = true;
           this.alertText = '用户信息修改成功';
@@ -151,6 +176,58 @@
           this.showAlert = true;
           this.alertText = res.msg;
         }
+      },
+      changeImage: function (e) {
+        let file = e.target.files[0];
+        if (file) {
+          this.file = file
+          console.log(this.file)
+          let reader = new FileReader()
+          let that = this
+          reader.readAsDataURL(file)
+          reader.onload = function (e) {
+            // 这里的this 指向reader
+            that.avatar = this.result
+          }
+        }
+        console.log(this.result)
+      },
+      upload: function(){
+        let files = this.files
+        let fileData = {}
+        if(files instanceof Array) {
+          fileData = files[0]
+        } else {
+          fileData = this.file
+        }
+        // console.log('fileData', typeof fileData, fileData)
+        let data = new FormData()
+        data.append('multfile', fileData)
+        data.append('operaType', this.uploadType)
+        this.$store.dispatch('UPLOAD_HEAD', data)
+          .then(res => {
+            console.log(res)
+            this.file = '';
+            let data = res.data.data;
+            this.$emit("upload", data );
+            this.$message({
+              type: "success",
+              message: "上传成功！"
+            })
+          }).catch(err => {
+          console.log(err)
+          if(err.data.msg){
+            this.$message({
+              type: "error",
+              message: err.data.msg
+            })
+          }else {
+            this.$message({
+              type: "error",
+              message: "上传失败"
+            })
+          }
+        })
       }
     },
     components: {
@@ -172,9 +249,9 @@
         }
       }
     },
-    watch:{
-      showAlert:function(val,oldval){
-        if(val){
+    watch: {
+      showAlert: function (val, oldval) {
+        if (val) {
           window.scrollTo(0, document.documentElement.clientHeight);
         }
       }
@@ -186,31 +263,21 @@
   .change-info-page {
     .change-area {
       position: absolute;
-      /*margin: 40px;*/
       margin: 25px;
       width: calc(100% - 50px);
-      /*width: calc(100% - 80px);*/
-      /*height: calc(100% - 180px);;*/
       height: calc(100% - 112.5px);
       background: #ffffff;
-      /*border-radius: 24px;*/
       border-radius: 15px;
       .change-form {
-        /*width: 669px;*/
         width: 418px;
-        /*margin: 231px auto 0;*/
         margin: 144px auto 0;
         color: rgb(58, 178, 237);
         .change-item {
           width: 100%;
           display: flex;
-          /*height: 96px;*/
           height: 60px;
-          /*line-height: 96px;*/
           line-height: 60px;
-          /*margin-bottom: 16px;*/
           margin-bottom: 10px;
-          /*border-radius: 24px;*/
           .item-left {
             flex: 1.2;
             text-align: right;
@@ -228,7 +295,6 @@
             }
           }
           .item-right {
-            /*margin-left: 10px;*/
             margin-left: 6.5px;
             flex: 2;
             color: #ffffff;
@@ -270,15 +336,45 @@
             color: rgb(58, 178, 237);
           }
         }
+        .phone-area, .sex-area {
+          height: 35px;
+          line-height: 35px;
+        }
+        .avatar-area {
+          height: auto;
+          margin-bottom: 25px;
+          .item-right {
+            background: none;
+            .avatar-input-area {
+              width: 88px;
+              height: 88px;
+
+              .avatar-icon {
+                width: 88px;
+                height: 88px;
+                background: pink;
+                position: absolute;
+              }
+              .avatar-input {
+                position: absolute;
+                width: 88px;
+                z-index: 3;
+                height: 88px;
+                opacity: 0;
+              }
+            }
+          }
+        }
       }
       .change-info {
-        color: #ffffff;
-        height: 105px;
-        line-height: 105px;
+        color: rgb(255, 255, 255);
+        height: 68px;
+        line-height: 68px;
         text-align: center;
         background: rgb(58, 178, 237);
+        font-size: 33px;
         border-radius: 24px;
-        margin-top: 123px;
+        margin-top: 87px;
       }
     }
   }
