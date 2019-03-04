@@ -9,9 +9,7 @@
           </div>
           <div class="item-right">
             <div class="avatar-input-area">
-              <div class="avatar-icon">
-                点击更换头像
-              </div>
+              <img class="avatar-icon" :src="avatar?avatar:require('../../../common/image/user-icon.png')" alt="">
               <input type="file" class="avatar-input" name="avatar" placeholder="点击更改" ref="" @change="changeImage"
                      accept="image/gif,image/jpeg,image/jpg,image/png">
             </div>
@@ -77,7 +75,7 @@
   import Header from '../../../components/header.vue'
   import alertTip from '../../../components/common/alertTip'
   import {mapMutations, mapState} from 'vuex'
-  import {getUser, changeInfo} from '../../../server/api'
+  import {getUser, changeInfo, postAvatar} from '../../../server/api'
   import {getStore} from '../../../config/mUtils'
 
   export default {
@@ -181,51 +179,23 @@
         let file = e.target.files[0];
         if (file) {
           this.file = file
-          console.log(this.file)
           let reader = new FileReader()
           let that = this
           reader.readAsDataURL(file)
           reader.onload = function (e) {
             // 这里的this 指向reader
+            that.upload()
             that.avatar = this.result
           }
         }
-        console.log(this.result)
       },
+      // 上传用户头像部分
       upload: function(){
-        let files = this.files
-        let fileData = {}
-        if(files instanceof Array) {
-          fileData = files[0]
-        } else {
-          fileData = this.file
-        }
-        // console.log('fileData', typeof fileData, fileData)
-        let data = new FormData()
-        data.append('multfile', fileData)
-        data.append('operaType', this.uploadType)
-        this.$store.dispatch('UPLOAD_HEAD', data)
-          .then(res => {
-            console.log(res)
-            this.file = '';
-            let data = res.data.data;
-            this.$emit("upload", data );
-            this.$message({
-              type: "success",
-              message: "上传成功！"
-            })
-          }).catch(err => {
-          console.log(err)
-          if(err.data.msg){
-            this.$message({
-              type: "error",
-              message: err.data.msg
-            })
-          }else {
-            this.$message({
-              type: "error",
-              message: "上传失败"
-            })
+        postAvatar(this.avatar).then(res => {
+          if (res.status) {
+            console.log('修改用户头像成功')
+          } else {
+            console.log('修改用户头像失败')
           }
         })
       }
@@ -342,17 +312,17 @@
         }
         .avatar-area {
           height: auto;
-          margin-bottom: 25px;
+          margin-bottom: 10px;
           .item-right {
             background: none;
             .avatar-input-area {
               width: 88px;
               height: 88px;
-
+              background-color:#e1e1e1;
               .avatar-icon {
                 width: 88px;
                 height: 88px;
-                background: pink;
+                border-radius: 50%;
                 position: absolute;
               }
               .avatar-input {

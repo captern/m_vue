@@ -93,6 +93,9 @@ export const getUser = () => fetch('/user/get-user-info');
 export const login = (mobile, password) => fetch('/user/login', {mobile, password}, 'POST');
 // 注册
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
+// 上传用户头像
+export const postAvatar = (avatarUrl) => fetch('/user/sign-up', {avatarUrl}, 'POST');
+
 export const register = (mobile, password, sex) => fetch('/user/sign-up', {mobile, password, sex}, 'POST');
 // 修改用户信息
 // export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
