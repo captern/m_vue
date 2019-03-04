@@ -3,9 +3,18 @@
     <Header title='注册'/>
     <div class="register-form">
       <div class="name-area input-area">
-        <div class="register-icon"><span>*</span>立即注册</div>
+        <div class="register-icon"><span>*</span>手机号码</div>
         <input class="name-input input" type="phone" name="search" maxlength="11" placeholder="请输入手机号"
                v-model="registerPhoneNumber" v-focus="this.focus">
+      </div>
+      <div class="code-area input-area">
+        <div class="register-icon"><span>*</span>短信验证码</div>
+        <div class="code-btn-area">
+          <input class="code-input" type="phone" name="search" maxlength="11" placeholder="请输入验证码"
+                 v-model="codeNum" v-focus="this.focus">
+          <div class="code-btn" @click="getCode">{{code.text}}</div>
+        </div>
+
       </div>
       <div class="pas-area input-area">
         <div class="register-icon"><span>*</span>输入密码</div>
@@ -59,6 +68,12 @@
         showAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
+        codeNum: "",
+        getCodeLock: '',
+        code: {
+          disabled: false,
+          text: "获取验证码"
+        },
         focus: null
       }
     },
@@ -70,13 +85,49 @@
       },
       rightPas: function () {
         return this.registerPassWord === this.registerRepeatPas
-      }
+      },
+      // 获取验证码
     },
     methods: {
       ...mapMutations([
         'GET_LOGIN',
         'RECORD_USERINFO',
       ]),
+      getCode() {
+        if(this.rightPhoneNumber){
+          console.log('获取验证码')
+          this.setTime()
+          this.getCodeLock = true
+        }else{
+          this.showAlert = true
+          this.alertText = '手机号码不正确'
+        }
+
+      },
+      // 倒计时
+      setTime(timelimit = 60) {
+        if(!this.getCodeLock){
+          let self = this;
+          self.countdown = timelimit;
+          self.timer = setInterval(() => {
+            self.countdown--;
+            self.code = {
+              disabled: true,
+              text: "等待" + self.countdown + "秒"
+            };
+            if (self.countdown === 0) {
+              clearInterval(self.timer);
+              self.timer = null;
+              self.countdown = 60;
+              self.getCodeLock = false;
+              self.code = {
+                disabled: false,
+                text: "重新发送"
+              };
+            }
+          }, 1000);
+        }
+      },
       changeSex() {
         if (this.sex === '1') {
           this.sex = '2'
@@ -89,6 +140,10 @@
         if (!this.registerPhoneNumber) {
           this.showAlert = true
           this.alertText = '请输入手机号'
+          return
+        } else if (!this.getCodeLock) {
+          this.showAlert = true
+          this.alertText = '请输入验证码'
           return
         } else if (!this.registerPassWord) {
           this.showAlert = true
@@ -151,7 +206,7 @@
       /*margin: 250px auto 0;*/
       margin: 156px auto 0;
       /*width: 638px;*/
-      width: 399px;
+      width: 413px;
       .input-area {
         width: 100%;
         display: flex;
@@ -161,42 +216,73 @@
         line-height: 60px;
         /*margin-bottom: 22px;*/
         margin-bottom: 14px;
-        font-size: 0;
         /*border-radius: 24px;*/
         .register-icon {
-          flex: 1.2;
-          text-align: left;
+          flex: 1;
+          text-align: right;
           color: #ffffff;
           /*font-size: 36px;*/
-          font-size: 22px;
+          font-size: 23px;
+          padding-right: 14px;
           span {
             display: inline-block;
             font-size: 32px;
             /*font-size: 50px;*/
             vertical-align: middle;
             padding-top: 5px;
-            /*padding-top: 8px;*/
-            /*padding-right: 4px;*/
             padding-right: 2.5px;
           }
         }
         .input {
-          flex: 2.6;
+          flex: 1.95;
           color: #ffffff;
           outline: none;
-          /*font-size: 30px;*/
-          font-size: 18px;
+          font-size: 17px;
           &:-ms-input-placeholder {
             color: #ffffff
           }
           &::-webkit-input-placeholder {
             color: #ffffff
           }
-          /*border-radius: 24px;*/
           border-radius: 15px;
-          background: rgb(155, 201, 248);
-          /*padding-left: 20px;*/
+          background: #9497ad;
           padding-left: 12.5px;
+        }
+      }
+      .code-area{
+        display: flex;
+        .register-icon{
+          flex: 1;
+        }
+        .code-btn-area{
+          flex: 1.95;
+          display: flex;
+          font-size: 17px;
+          .code-input{
+            display: inline-block;
+            flex: 1;
+            width: 100px;
+            outline: none;
+            &:-ms-input-placeholder {
+              color: #ffffff
+            }
+            &::-webkit-input-placeholder {
+              color: #ffffff
+            }
+            background: #9497ad;
+            border-radius: 15px;
+            padding-left: 12.5px;
+            margin-left: -5px;
+          }
+          .code-btn{
+            flex: 0.85;
+            margin-left: 12px;
+            text-align: center;
+            background: rgb(58, 178, 237);
+            border-radius: 15px;
+            padding: 0 10px;
+            color: #ffffff;
+          }
         }
       }
       .sex-area {
@@ -221,18 +307,13 @@
         }
       }
       .register-container {
-        /*height: 105px;*/
         height: 66px;
         line-height: 66px;
-        /*line-height: 105px;*/
         background: rgb(58, 178, 237);
-        /*font-size: 42px;*/
         font-size: 26px;
         color: #ffffff;
         border-radius: 15px;
-        /*border-radius: 24px;*/
         text-align: center;
-        /*margin-top: 40px;*/
         margin-top: 25px;
       }
     }
