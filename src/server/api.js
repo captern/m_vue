@@ -62,11 +62,7 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 }
 
 // post格式获取短信验证码
-export const mobileCode = phone => fetch('/v4/mobile/verify_code/send', {
-  mobile: phone,
-  scene: 'login',
-  type: 'sms'
-}, 'POST')
+export const mobileCode = mobile => fetch('/user/send-code', {mobile}, 'POST')
 
 // 获取搜索结果
 export const searchRest = searchKeys => fetch('/v4/mobile/verify_code/send', {
@@ -94,16 +90,17 @@ export const login = (mobile, password) => fetch('/user/login', {mobile, passwor
 // 注册
 // export const accountLogin = (username, password) => fetch('/login', {username, password}, 'POST');
 // 上传用户头像
-export const postAvatar = (avatarUrl) => fetch('/user/sign-up', {avatarUrl}, 'POST');
+export const postAvatar = (headImg) => fetch('/user/upload-img', {headImg}, 'POST');
 
-export const register = (mobile, password, sex) => fetch('/user/sign-up', {mobile, password, sex}, 'POST');
+export const register = (mobile, password, sex, code) => fetch('/user/sign-up', {mobile, password, sex, code}, 'POST');
 // 修改用户信息
 // export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
-export const changeInfo = (name, idCard, sex, company) => fetch('/user/modify-stu', {
+export const changeInfo = (name, idCard, sex, company, head_img) => fetch('/user/modify-stu', {
   name,
   idCard,
   sex,
-  company
+  company,
+  head_img
 }, 'POST');
 // 修改用户密码
 export const changePas = (password, newpassword) => fetch('/user/reset-password', {

@@ -55,7 +55,7 @@
   import Header from '../../components/header.vue'
   import {mapMutations} from 'vuex'
   import alertTip from '../../components/common/alertTip'
-  import {register} from '../../server/api'
+  import {register, mobileCode} from '../../server/api'
 
   export default {
     data() {
@@ -95,7 +95,15 @@
       ]),
       getCode() {
         if(this.rightPhoneNumber){
-          console.log('获取验证码')
+          mobileCode(this.registerPhoneNumber).then(res=> {
+            if(res.status){
+              this.showAlert = true
+              this.alertText = '验证码发送成功'
+            }else{
+              this.showAlert = true
+              this.alertText = res.msg
+            }
+          })
           this.setTime()
           this.getCodeLock = true
         }else{
@@ -162,7 +170,7 @@
           this.alertText = '手机号码不正确'
           return
         }
-        let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex)
+        let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex, this.codeNum)
         if (userRegisterData.status) {
 //          设置登录状态为成功
           this.GET_LOGIN()

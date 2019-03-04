@@ -82,6 +82,7 @@
     data() {
       return {
         avatar: '',
+        postAvatar: '',
         file: '',
         user_id: null,
         phoneNumber: null,
@@ -110,7 +111,6 @@
       initData() {
         if (getStore('user_id')) {
           getUser().then(res => {
-            console.log(res)
             if (res.status) {
               this.user_id = res.data.id
               this.phoneNumber = res.data.mobile
@@ -161,7 +161,7 @@
           return
         }
         // 发送重置信息
-        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace, this.workLevel);
+        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace, this.workLevel, this.postAvatar);
         if (res.status) {
           this.showAlert = true;
           this.alertText = '用户信息修改成功';
@@ -184,18 +184,21 @@
           reader.readAsDataURL(file)
           reader.onload = function (e) {
             // 这里的this 指向reader
-            that.upload()
+            that.upload(this.result)
             that.avatar = this.result
           }
         }
       },
       // 上传用户头像部分
-      upload: function(){
-        postAvatar(this.avatar).then(res => {
+      upload: function(avatar){
+        postAvatar(avatar).then(res => {
           if (res.status) {
-            console.log('修改用户头像成功')
+            this.showAlert = true;
+            this.alertText = '头像修改成功';
+            this.postAvatar = res.img
           } else {
-            console.log('修改用户头像失败')
+            this.showAlert = true;
+            this.alertText = '头像修改失败';
           }
         })
       }
