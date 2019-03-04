@@ -3,96 +3,18 @@
     <Header title='投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="test-post-area">
-      <div class="test-item">
+      <div class="test-item" v-for="(testItem, testIndex) in testData" :key="testIndex">
         <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
+          {{testIndex + 1}}、{{testItem.question}}
         </div>
         <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
-          </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options" @click="changeCheck(index)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
+          <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data" @click="changeCheck(index)">
+            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(optionIndex) !=-1}"></span></div>
+            <div class="option-dec">{{optionItem}}</div>
           </div>
         </div>
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交</div>
-
       <!--提示框弹出部分-->
       <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postVote" tipType="three" alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
@@ -100,14 +22,14 @@
 </template>
 
 <script>
-  import {getUse, getBanner, getIndexLink} from '../../server/api'
+  import {getUser, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import enlistTip from '../../components/common/enlistTip'
   import alertTip from '../../components/common/alertTip'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteMain} from '../../server/voteApi'
+  import {testMain} from '../../server/testApi'
 
   export default {
     data() {
@@ -115,7 +37,7 @@
         enlistTip: true, // 是否请求接口
         voteId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
-        voteData: '',
+        testData: '',
         showAlert: false,
         checkedId: ['1'],
         alertText: '待定义',
@@ -150,9 +72,12 @@
     },
     mounted() {
 //      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
-      voteMain(this.voteId).then(res => {
-        this.voteData = res.data
+      this.voteId = 2;
+      testMain(this.voteId).then(res => {
+        this.testData = res.data
+        console.log(res.data)
+        console.log(res.data)
+        console.log(res.data)
       })
     },
     methods: {

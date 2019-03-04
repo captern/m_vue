@@ -19,7 +19,7 @@
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
-  import {voteList} from '../../server/voteApi'
+  import {testList} from '../../server/testApi'
 
   export default {
     data() {
@@ -41,10 +41,10 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      voteList().then(res => {
+      testList().then(res => {
         console.log(res)
         if (res.status) {
-          this.voteList = res.data.voteList
+//          this.voteList = res.data.voteList
         }
       })
     },

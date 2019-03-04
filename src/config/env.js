@@ -13,7 +13,7 @@ let imgBaseUrl = ''
 
 if (process.env.NODE_ENV === 'development') {
   imgBaseUrl = '/img/'
-  // let baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
+  // baseUrl = 'https://www.easy-mock.com/mock/5c07e3027f3a33135e52a461/exapmle'
   baseUrl = 'http://ctc.netcchina.com'
   // baseUrl = 'http://127.0.0.1'
   // baseUrl = 'http://ctc.netcchina.com'
