@@ -8,7 +8,7 @@
           {{testIndex + 1}}、{{testItem.question}}
         </div>
         <div class="test-options">
-          <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data" @click="changeCheck(index)">
+          <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data" @click="changeCheck(testIndex,optionIndex)">
             <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(optionIndex) !=-1}"></span></div>
             <div class="option-dec">{{optionItem}}</div>
           </div>
@@ -41,6 +41,7 @@
         showAlert: false,
         checkedId: ['1'],
         alertText: '待定义',
+        results:[],
         options: [
           {
             id: '1',
@@ -71,21 +72,34 @@
       ])
     },
     mounted() {
+      const _this = this
 //      this.voteId = this.$route.params.voteId;
-      this.voteId = 2;
-      testMain(this.voteId).then(res => {
-        this.testData = res.data
-        console.log(res.data)
-        console.log(res.data)
-        console.log(res.data)
+      _this.voteId = 2;
+      let resultsList = new Array()
+      testMain(_this.voteId).then(res => {
+        _this.testData = res.data
+        res.data.forEach(function (testItem, testIndex) {
+          resultsList.push(
+            {
+              id: testItem.id,
+              answer: []
+            }
+          )
+        });
+//        设置结果对象
+        _this.results = resultsList
       })
     },
     methods: {
-      changeCheck(optionId) {
-        if (this.checkType === 1) {//单选
-          const newCheck = this.options[optionId].id;
-          this.checkedId = []
-          this.checkedId.push(newCheck);
+      changeCheck(testIndex,optionIndex) {
+        console.log(testIndex)
+        let question = this.testData[testIndex]
+        if (question.type === 1) {//单选
+//          const checks = this.results[testIndex].answer
+//          checks.push(optionIndex + 1);
+          this.results[testIndex].answer = [];
+          this.results[testIndex].answer.push(optionIndex + 1)
+          console.log(this.results)
         } else {//多选
           const newCheck = this.options[optionId].id;
           if (this.checkedId.indexOf(newCheck) !== -1) {
