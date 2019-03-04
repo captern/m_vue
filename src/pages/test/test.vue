@@ -2,12 +2,12 @@
   <div class="vote-page" v-wechat-title="$route.meta.title='在线测试'">
     <Header title='在线测试' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
-    <router-link :to="'/testDes/' + item.url " class="test-item" v-for="(item, index) in voteList" :key="index">
-      <p class="title">{{item.title}}</p>
-      <p class="des">{{item.des}}</p>
+    <router-link :to="'/testDes/' + item.url " class="test-item" v-for="(item, index) in testList" :key="index">
+      <p class="title">{{item.name}}</p>
+      <p class="des">{{item.desc}}</p>
       <div class="text-bottom">
-        <div class="author">发布人：<span>张老师</span></div>
-        <p class="time">{{item.time}}</p>
+        <div class="author">发布人：<span>{{item.user}}</span></div>
+        <p class="time">{{item.date}}</p>
       </div>
 
     </router-link>
@@ -25,7 +25,7 @@
     data() {
       return {
         requestFlag: true, // 是否请求接口
-        voteList: null
+        testList: null
       }
     },
     computed: {
@@ -42,9 +42,8 @@
     },
     mounted() {
       testList().then(res => {
-        console.log(res)
         if (res.status) {
-//          this.voteList = res.data.voteList
+          this.testList = res.list
         }
       })
     },
@@ -87,6 +86,7 @@
     background: url("../../common/image/bkg/bkg-two.png") fixed;
     background-size: 100% 100%;
     height: 100%;
+    min-height: 100vh;
     /*background-position: fixed;*/
     /*position: fixed;*/
     /*会导致页面滚动不触发*/
