@@ -9,14 +9,15 @@
         </div>
         <div class="test-options">
           <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data" @click="changeCheck(testIndex,optionIndex)">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(optionIndex) !=-1}"></span></div>
+            <div class="check-icon"><span class="icon" :class="{check: results[testIndex].answer.indexOf(optionIndex + 1) !=-1}"></span></div>
             <div class="option-dec">{{optionItem}}</div>
           </div>
         </div>
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交</div>
       <!--提示框弹出部分-->
-      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postVote" tipType="three" alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
+      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" alertText="请完成所有测试题后在进行提交" btnOne="返回"/>
+      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three" alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
   </div>
 </template>
@@ -27,6 +28,7 @@
   import HomeIcon from '../../components/common/homeIcon.vue'
   import enlistTip from '../../components/common/enlistTip'
   import alertTip from '../../components/common/alertTip'
+  import {postTestResult} from '../../server/testApi'
   import {mapState, mapActions} from 'vuex'
 
   import {testMain} from '../../server/testApi'
@@ -35,13 +37,15 @@
     data() {
       return {
         enlistTip: true, // 是否请求接口
-        voteId: '',
+        testId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
         testData: '',
         showAlert: false,
-        checkedId: ['1'],
+        showPop: false,
+        postTestFlag: false,
         alertText: '待定义',
         results:[],
+        postResults:[],
         options: [
           {
             id: '1',
@@ -73,10 +77,10 @@
     },
     mounted() {
       const _this = this
-//      this.voteId = this.$route.params.voteId;
-      _this.voteId = 2;
+//      this.testId = this.$route.params.testId;
+      _this.testId = 2;
       let resultsList = new Array()
-      testMain(_this.voteId).then(res => {
+      testMain(_this.testId).then(res => {
         _this.testData = res.data
         res.data.forEach(function (testItem, testIndex) {
           resultsList.push(
@@ -91,37 +95,59 @@
       })
     },
     methods: {
+      // 单选多选处置
       changeCheck(testIndex,optionIndex) {
-        console.log(testIndex)
         let question = this.testData[testIndex]
-        if (question.type === 1) {//单选
-//          const checks = this.results[testIndex].answer
-//          checks.push(optionIndex + 1);
-          this.results[testIndex].answer = [];
-          this.results[testIndex].answer.push(optionIndex + 1)
-          console.log(this.results)
-        } else {//多选
-          const newCheck = this.options[optionId].id;
-          if (this.checkedId.indexOf(newCheck) !== -1) {
-            if(this.checkedId.length > 1){
-              for (var i = 0; i < this.checkedId.length; i++) {
-                if (this.checkedId[i] == newCheck) {
-                  this.checkedId.splice(i, 1);
+        if (question.type === 2) {//多选
+          let questionAnswer = this.results[testIndex].answer
+          const newCheck = optionIndex + 1;
+          if (questionAnswer.indexOf(newCheck) !== -1) {
+            if(questionAnswer.length > 1){
+              for (var i = 0; i < questionAnswer.length; i++) {
+                if (questionAnswer[i] == newCheck) {
+                  questionAnswer.splice(i, 1);
                   break;
                 }
               }
             }
+            this.results[testIndex].answer = questionAnswer
           } else {
-            this.checkedId.push(newCheck);
+            this.results[testIndex].answer.push(newCheck)
           }
+        } else {//单选
+          // 因为是单选，所以需要先将题目清空
+          this.results[testIndex].answer = [];
+          this.results[testIndex].answer.push(optionIndex + 1)
         }
       },
       showVoteAlert(){
-        this.showAlert =! this.showAlert
+        const _this = this
+        let postResult = new Array()
+        _this.results.forEach(function (resultItem, resultIndex) {
+          if(resultItem.answer.length === 0){
+            _this.showPop = true
+          }
+          else{
+            _this.postTestFlag = true
+          }
+        })
+        _this.postResults = postResult
+        _this.postTest()
       },
-      postVote(){
+      closePop(){
+        this.showPop = !this.showPop
+      },
+      postTest(){
+        const _this = this
         console.log('发送选择')
-        this.$router.push('/testResult/1');
+        // this.$router.push('/testResult/1');
+        if(_this.postTestFlag){
+          postTestResult(_this.testId, this.results).then(res=>{
+            console.log(res)
+          })
+        }else{
+          console.log('fff')
+        }
       }
     },
     components: {
