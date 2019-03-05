@@ -4,8 +4,10 @@
     <HomeIcon></HomeIcon>
     <div class="user-page">
       <div class="section-one">
-        <img v-if="this.sex =='1'" class="avatar" src="../../common/image/man.jpeg" alt="默认头像">
-        <img v-else class="avatar" src="../../common/image/woman.jpeg" alt="默认头像">
+        <!--<img v-if="this.sex =='1'" class="avatar" src="../../common/image/man.jpeg" alt="默认头像">-->
+        <img v-if="this.sex =='1'" class="avatar" :src="head_img?head_img:require('../../common/image/man.jpeg')" alt="">
+        <!--<img v-else class="avatar" src="../../common/image/woman.jpeg" alt="默认头像">-->
+        <img v-else class="avatar" :src="head_img?head_img:require('../../common/image/woman.jpeg')" alt="">
         <p class="phone">{{this.mobile}}</p>
         <p class="phone">{{this.userName}}</p>
       </div>
@@ -15,7 +17,8 @@
             修改个人资料
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="/changepas" class="link-item">
+          <!--<router-link to="/changepascheck" class="link-item">-->
+          <router-link :to="{ path: '/changepascheck', query: { phoneNum: this.mobile }}" class="link-item">
             修改密码
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
@@ -59,7 +62,8 @@
       return {
         userName: null,
         mobile: null,
-        sex: null
+        sex: null,
+        head_img: null
         // 电话号码
       }
     },
@@ -82,6 +86,7 @@
               this.userName = res.data.userName
               this.mobile = res.data.mobile
               this.sex = res.data.sex
+              this.head_img = res.data.head_img
             } else {
               console.log('用户信息获取失败')
             }

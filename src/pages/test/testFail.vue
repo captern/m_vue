@@ -3,25 +3,22 @@
     <Header title='错题查看' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="test-post-area">
-      <div class="test-item">
+      <div class="test-item" v-for="(wrongItem, wrongIndex) in testData.wrongList" :key="wrongIndex">
         <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
+          {{wrongIndex + 1}}、{{wrongItem.question}}
         </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
+        <div class="test-options" v-for="(optionItem, optionIndex) in wrongItem.data" :key="optionIndex">
+          <div class="option-item right" v-if="wrongItem.right.indexOf(optionIndex + 1) !=-1">
+            <div class="check-icon check"><span class="icon" ></span></div>
+            <div class="option-dec">{{optionItem}}</div>
           </div>
-        </div>
-      </div>
-      <div class="test-item">
-        <div class="test-dec">
-          1、国家技术转移东部中心（NETC），是由中华人民共和国科学技术部、上海市人民政府共同推进，由上海市科学技术委员会指导、上海市科技创业中心协调设立的国家级区域技术转移平台。
-        </div>
-        <div class="test-options">
-          <div class="option-item" v-for="(item, index) in options">
-            <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
-            <div class="option-dec">{{item.dec}}</div>
+          <div class="option-item wrong" v-else-if="wrongItem.wrong.indexOf(optionIndex + 1) !=-1">
+            <div class="check-icon check"><span class="icon" ></span></div>
+            <div class="option-dec">{{optionItem}}</div>
+          </div>
+          <div class="option-item" v-else>
+            <div class="check-icon"><span class="icon" ></span></div>
+            <div class="option-dec">{{optionItem}}</div>
           </div>
         </div>
       </div>
@@ -36,6 +33,7 @@
   import enlistTip from '../../components/common/enlistTip'
   import alertTip from '../../components/common/alertTip'
   import {mapState, mapActions} from 'vuex'
+  import {getFail} from '../../server/testApi'
 
   import {voteMain} from '../../server/voteApi'
 
@@ -43,9 +41,9 @@
     data() {
       return {
         enlistTip: true, // 是否请求接口
-        voteId: '',
+        testId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
-        voteData: '',
+        testData: '',
         showAlert: false,
         checkedId: ['1'],
         alertText: '待定义',
@@ -79,10 +77,9 @@
       ])
     },
     mounted() {
-//      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
-      voteMain(this.voteId).then(res => {
-        this.voteData = res.data
+     this.testId = this.$route.params.testId;
+      getFail(this.testId).then(res => {
+        this.testData = res
       })
     },
     methods: {},
@@ -109,7 +106,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .test-item{
         border-top: 1px solid #dcdcdc;
         margin-bottom: 32px;
@@ -145,6 +142,12 @@
             .option-dec {
               flex: 513;
               display: inline-block;
+            }
+            &.right{
+              color: #119e4b;
+            }
+            &.wrong{
+              color: #e30012;
             }
           }
         }

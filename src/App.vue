@@ -12,7 +12,10 @@
 
 <script>
   export default {
-    components: {}
+    components: {},
+    mounted() {
+      console.log('adasds')
+    },
   }
 </script>
 

@@ -8,8 +8,11 @@
           {{testIndex + 1}}、{{testItem.question}}
         </div>
         <div class="test-options">
-          <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data" @click="changeCheck(testIndex,optionIndex)">
-            <div class="check-icon"><span class="icon" :class="{check: results[testIndex].answer.indexOf(optionIndex + 1) !=-1}"></span></div>
+          <div class="option-item" v-for="(optionItem, optionIndex) in testItem.data"
+               @click="changeCheck(testIndex,optionIndex)">
+            <div class="check-icon"><span class="icon"
+                                          :class="{check: results[testIndex].answer.indexOf(optionIndex + 1) !=-1}"></span>
+            </div>
             <div class="option-dec">{{optionItem}}</div>
           </div>
         </div>
@@ -17,7 +20,8 @@
       <div class="vote-btn" @click="showVoteAlert">提交</div>
       <!--提示框弹出部分-->
       <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" alertText="请完成所有测试题后在进行提交" btnOne="返回"/>
-      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three" alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
+      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three"
+                 alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
   </div>
 </template>
@@ -44,29 +48,8 @@
         showPop: false,
         postTestFlag: false,
         alertText: '待定义',
-        results:[],
-        postResults:[],
-        options: [
-          {
-            id: '1',
-            dec: '技师人才服务高级培训1号'
-          },
-          {
-            id: '2',
-            dec: '技师人才服务高级培训2号'
-          },
-          {
-            id: '3',
-            dec: '技师人才服务高级培训3号'
-          },
-          {
-            id: '4',
-            dec: '技师人才服务高级培训4号'
-          }, {
-            id: '5',
-            dec: '技师人才服务高级培训5号'
-          }
-        ]
+        results: [],
+        postResults: []
       }
     },
     computed: {
@@ -77,8 +60,8 @@
     },
     mounted() {
       const _this = this
-//      this.testId = this.$route.params.testId;
-      _this.testId = 2;
+      this.testId = this.$route.params.testId;
+      // this.testId = 2;
       let resultsList = new Array()
       testMain(_this.testId).then(res => {
         _this.testData = res.data
@@ -96,13 +79,13 @@
     },
     methods: {
       // 单选多选处置
-      changeCheck(testIndex,optionIndex) {
+      changeCheck(testIndex, optionIndex) {
         let question = this.testData[testIndex]
         if (question.type === 2) {//多选
           let questionAnswer = this.results[testIndex].answer
           const newCheck = optionIndex + 1;
           if (questionAnswer.indexOf(newCheck) !== -1) {
-            if(questionAnswer.length > 1){
+            if (questionAnswer.length > 1) {
               for (var i = 0; i < questionAnswer.length; i++) {
                 if (questionAnswer[i] == newCheck) {
                   questionAnswer.splice(i, 1);
@@ -120,32 +103,37 @@
           this.results[testIndex].answer.push(optionIndex + 1)
         }
       },
-      showVoteAlert(){
+      showVoteAlert() {
         const _this = this
         let postResult = new Array()
         _this.results.forEach(function (resultItem, resultIndex) {
-          if(resultItem.answer.length === 0){
+          if (resultItem.answer.length === 0) {
             _this.showPop = true
           }
-          else{
+          else {
             _this.postTestFlag = true
           }
         })
         _this.postResults = postResult
         _this.postTest()
       },
-      closePop(){
+      closePop() {
         this.showPop = !this.showPop
       },
-      postTest(){
+      postTest() {
         const _this = this
         console.log('发送选择')
-        // this.$router.push('/testResult/1');
-        if(_this.postTestFlag){
-          postTestResult(_this.testId, this.results).then(res=>{
+
+        if (_this.postTestFlag) {
+          console.log(_this.testId)
+          console.log(_this.results)
+          postTestResult(_this.testId, JSON.stringify(_this.results)).then(res => {
             console.log(res)
+            if (res.status) {
+              _this.$router.push('/testResult/' + this.testId);
+            }
           })
-        }else{
+        } else {
           console.log('fff')
         }
       }
@@ -176,7 +164,7 @@
       border-radius: 10px;
       padding: 30px 23px 151px;
       min-height: calc(100vh - 180px);
-      .test-item{
+      .test-item {
         border-top: 1px solid #dcdcdc;
         margin-bottom: 32px;
         padding-top: 32px;
@@ -214,7 +202,7 @@
             }
           }
         }
-        &:first-child{
+        &:first-child {
           border: none;
           padding-top: 0;
         }

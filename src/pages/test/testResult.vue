@@ -4,13 +4,13 @@
     <HomeIcon></HomeIcon>
     <div class="test-result-area">
       <div class="title">{{testData.title}}</div>
-      <div class="time">发布时间：{{testData.created_time}}</div>
+      <div class="time">发布时间：{{testData.time}}</div>
       <div class="result-area">
-        <div class="result-item"><span>得分：</span>XX分</div>
-        <div class="result-item"><span>正确：</span><span class="true">10</span>题</div>
-        <div class="result-item"><span>错误：</span><span class="false">10</span>题</div>
+        <div class="result-item"><span>得分：</span>{{testData.score}}分</div>
+        <div class="result-item"><span>正确：</span><span class="true">{{testData.right}}</span>题</div>
+        <div class="result-item"><span>错误：</span><span class="false">{{testData.wrong}}</span>题</div>
       </div>
-      <router-link to="/testFail/3" class="test-btn">查看错题</router-link>
+      <router-link :to="'/testFail/' + this.testId " class="test-btn">查看错题</router-link>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showTestAlert" @confirmTip="startTest" tipType="three" alertText="是否开始本测试？" btnOne="返回" btnTwo="开始测试"/>
@@ -18,21 +18,16 @@
 </template>
 
 <script>
-  import {getUse, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import alertTip from '../../components/common/alertTip'
   import {mapState, mapActions} from 'vuex'
-
-  import {voteMain} from '../../server/voteApi'
-
+  import {getResult} from '../../server/testApi'
   export default {
     data() {
       return {
-        requestFlag: true, // 是否请求接口
         testId: '',
         testData: '',
-        enlistTip: false,
         showAlert: false,
         alertText: '待定义'
       }
@@ -45,12 +40,13 @@
     },
     mounted() {
       this.testId = this.$route.params.testId;
-      voteMain(this.testId).then(res => {
-        this.testData = res.data
+      getResult(this.testId).then(res => {
+        if(res.status){
+          this.testData = res
+        }
       })
     },
     methods: {
-
     },
     components: {
       Header,
@@ -76,7 +72,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .title {
         font-size: 23px;
         line-height: 31px;

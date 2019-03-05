@@ -2,13 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-
 // 用户部分
 const Login = () => import('../pages/user/login')
 const Register = () => import('../pages/user/register')
 const User = () => import('../pages/user/user')
 const ChangeUserInfo = () => import('../pages/user/module/changeUserInfo')
 const ChangePas = () => import('../pages/user/module/changePas')
+const ChangePasCheck = () => import('../pages/user/module/changePasCheck')
 
 // 首页及首页列表部分
 const Index = () => import('../pages/index/index')
@@ -71,6 +71,9 @@ export default new Router({
     }, {
       path: '/changepas',
       component: ChangePas
+    }, {
+      path: '/changepascheck',
+      component: ChangePasCheck
     }, {
       path: '/newslist',
       component: NewsList
