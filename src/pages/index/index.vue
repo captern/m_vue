@@ -1,6 +1,7 @@
 <template>
   <div class="index-page" v-wechat-title="$route.meta.title='东部中心人才培养基地'">
     <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
+    <Search></Search>
     <Slider v-if="this.banner" v-bind:banner='this.banner'></Slider>
     <div class="main-list-area">
       <div class="list-item" v-for="(linkItem, index) in indexList" :key="index" @click="jumpUrl(linkItem.url, linkItem.source)">
