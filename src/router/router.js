@@ -36,13 +36,14 @@ const LessonList = () => import('../pages/lesson/lessonList')
 const LessonMain = () => import('../pages/lesson/lessonMain')
 
 export default new Router({
-  // mode: 'history',
-  mode: 'hash',
+  mode: 'history',
+  // mode: 'hash',
   routes: [
     {
       path: '/',
       redirect: '/index'
-    },{
+    },
+    {
       path: '/index',
       component: Index,
     },

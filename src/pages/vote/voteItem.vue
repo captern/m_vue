@@ -4,19 +4,20 @@
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
       <div class="header-area">
-        <div class="title">
-          {{voteData.title}}
-        </div>
+        <div class="title">{{voteData.name}}</div>
         <div class="heart">
           <img src="../../common/icon/icon-item-0@3x.png" alt="">
         </div>
       </div>
       <div class="author-time">
         <div class="author">编辑：{{voteData.author}}</div>
-        <div class="time">{{voteData.created_time}}</div>
+        <div class="time">{{voteData.time}}</div>
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
-      <router-link :to="'/voteOption/'+ voteData.id" class="vote-btn">参与投票</router-link>
+      <!--跳转 费图片-->
+      <router-link v-if="voteData.is_img == 0" :to="'/postVote/'+ voteData.id" class="vote-btn">参与投票</router-link>
+      <!--跳转图片-->
+      <router-link v-else-if="voteData.is_img == 1" :to="'/voteOption/'+ voteData.id" class="vote-btn">参与投票</router-link>
     </div>
   </div>
 </template>
@@ -48,11 +49,15 @@
     },
     mounted() {
      this.voteId = this.$route.params.voteId;
-      voteMain(this.voteId).then(res => {
+     let getData = {
+       id: this.voteId
+     }
+      voteMain(getData).then(res => {
         this.voteData = res.data
       })
     },
-    methods: {},
+    methods: {
+    },
     components: {
       Header,
       HomeIcon
@@ -76,7 +81,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .header-area {
         display: flex;
         padding-bottom: 12px;

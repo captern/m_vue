@@ -3,10 +3,10 @@
     <Header title='投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/voteItem/' + item.url " class="vote-item" v-for="(item, index) in voteList" :key="index">
-      <p class="title">{{item.title}}</p>
-      <p class="des">{{item.des}}</p>
-      <p class="time">{{item.time}}</p>
+    <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in voteList" :key="index">
+      <p class="title">{{item.name}}</p>
+      <p class="des" v-html="item.content"></p>
+      <p class="time">{{item.updated_time}}</p>
     </router-link>
   </div>
 </template>
@@ -29,23 +29,23 @@
             items: [
               {
                 itemName: '全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部',
-                itemIndex: 0
-              },
-              {
-                itemName: '时间最近',
                 itemIndex: 1
               },
               {
-                itemName: '近&nbsp;三&nbsp;&nbsp;天',
+                itemName: '时间最近',
                 itemIndex: 2
               },
               {
-                itemName: '一&nbsp;周&nbsp;&nbsp;内',
+                itemName: '近&nbsp;三&nbsp;&nbsp;天',
                 itemIndex: 3
               },
               {
-                itemName: '一个月内',
+                itemName: '一&nbsp;周&nbsp;&nbsp;内',
                 itemIndex: 4
+              },
+              {
+                itemName: '一个月内',
+                itemIndex: 5
               }
             ]
           },
@@ -54,27 +54,27 @@
             items: [
               {
                 itemName: '全部投票',
-                itemIndex: 0
-              },
-              {
-                itemName: '正在投票',
                 itemIndex: 1
               },
               {
-                itemName: '投票结束',
+                itemName: '正在投票',
                 itemIndex: 2
+              },
+              {
+                itemName: '投票结束',
+                itemIndex: 3
               }
             ]
           }
         ],
         checked: [
           {
-            itemName: '时间最近',
+            itemName: '全部',
             itemIndex: 1,
           },
           {
             itemName: '全部投票',
-            itemIndex: 0,
+            itemIndex: 1,
           }
         ],
         voteList: null
@@ -93,17 +93,25 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      voteList().then(res => {
-        console.log(res)
-        if (res.status) {
-          this.voteList = res.data.voteList
-        }
-      })
+      this.getVoteList();
     },
     methods: {
+      getVoteList(){
+        let getData = {
+          time: this.checked[0].itemIndex,
+          flag: this.checked[1].itemIndex
+        }
+        voteList(getData).then(res => {
+          console.log(res)
+          if (res.status) {
+            this.voteList = res.list
+          }
+        })
+      },
       changeCheck(checked) {
         console.log('获取到子组件的选择内容');
         console.log(checked)
+        this.getVoteList();
       },
       scrolling() {
         console.log('dddd')
@@ -140,6 +148,7 @@
     background: url("../../common/image/bkg/bkg-two.png") fixed;
     background-size: 100% 100%;
     height: 100%;
+    min-height: 100vh;
     width: 100%;
     overflow: scroll;
     /*背景固定不滚动*/

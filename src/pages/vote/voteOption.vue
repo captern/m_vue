@@ -4,11 +4,11 @@
     <HomeIcon></HomeIcon>
     <div class="vote-potion-area">
       <div class="vote-potions">
-        <div class="option-item" v-for="(item, index) in voteOptions">
+        <div class="option-item" v-for="(item, index) in voteData.list">
           <div class="option-img-area">
-            <img class="option-img" :src="item.image" alt="">
+            <img class="option-img" :src="item.img" alt="">
             <router-link :to="'/voteOptionMain/' + item.id " class="option-main-link" href="">
-              <span>查看详情</span>
+              <span @click="jumpOption(item.id)">查看详情</span>
             </router-link>
           </div>
           <div class="btn-area">
@@ -29,14 +29,14 @@
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteOptions} from '../../server/voteApi'
+  import {voteMain} from '../../server/voteApi'
 
   export default {
     data() {
       return {
         requestFlag: true, // 是否请求接口
         voteId: '',
-        voteOptions: '',
+        voteData: '',
         enlistTip: false,
         showAlert: false,
         alertText: '待定义'
@@ -49,14 +49,20 @@
       ])
     },
     mounted() {
-     this.voteId = this.$route.params.voteId;
+      this.voteId = this.$route.params.voteId;
       // this.voteId = 4;
-      voteOptions(this.voteId).then(res => {
-        console.log(res)
-        this.voteOptions = res.data
+      const getData = {
+        id: this.voteId
+      }
+      voteMain(getData).then(res => {
+        this.voteData = res.data
       })
     },
-    methods: {},
+    methods: {
+      jumpOption(optionId){
+        this.$router.push('/voteOptionMain/' + optionId);
+      }
+    },
     components: {
       Header,
       HomeIcon

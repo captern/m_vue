@@ -51,35 +51,36 @@
 
 <style lang="scss" scoped>
   .search {
-    width: calc(100% - 94px);
-    height: 88px;
-    line-height: 142px;
-    padding: 27px 47px;
+    /*width: calc(100% - 94px);*/
+    height: 55px;
+    /*line-height: 142px;*/
+    padding: 18px 30px;
     background: #3ab2ed;
     .search_form {
       display: flex;
       .search-icon {
-        width: 40px;
-        height: 40px;
+        width: 25px;
+        height: 25px;
         position: absolute;
-        margin-top: 24px;
-        margin-left: 22px;
+        margin-top: 16px;
+        margin-left: 25px;
       }
       .search_input {
-        height: 88px;
+        height: 55px;
         flex: 4;
         background-color: #75c9f2;
         border-radius: 24px;
         padding: 0 20px 0 90px;
         outline: none;
-        color: #ffffff;
+        font-size: 23px;
+        color: rgba(255, 255, 255, 0.6);
         &:-ms-input-placeholder {
           text-align: center;
-          color: #ffffff
+          color: rgba(255, 255, 255, 0.6);
         }
         &::-webkit-input-placeholder {
           text-align: center;
-          color: #ffffff
+          color: rgba(255, 255, 255, 0.6);
         }
       }
       .search_submit {

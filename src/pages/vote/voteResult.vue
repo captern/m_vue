@@ -3,16 +3,15 @@
     <Header title='投票结果' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-result-area">
-      <div class="vote-result">
-        1、技术服务人才高级培训等
-      </div>
+      <div class="vote-result">{{voteData.name}}</div>
       <div class="vote-options">
-        <div class="option-item" v-for="(item, index) in options">
-          <div class="check-icon"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
+        <div class="option-item" v-for="(item, index) in voteData.list">
+          <div class="check-icon"><span class="icon" :class="{check: item.checked == 1}"></span></div>
           <div class="option-dec">
-            {{item.dec}}
+            <div v-html="item.content"></div>
             <div class="progress">
-              <div class="progress-num" :style="{width:item.progress}">{{item.progress}}&nbsp;</div>
+              <!--<div class="progress-num" :style="{width:item.num/voteData.total_num}">{{Math.round(item.num / voteData.total_num * 10000) / 100.00 + "%"}}</div>-->
+              <div class="progress-num" :style="{width:item.num/voteData.total_num}">{{item.num}}</div>
             </div>
           </div>
         </div>
@@ -27,7 +26,7 @@
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteMain} from '../../server/voteApi'
+  import {voteResult} from '../../server/voteApi'
 
   export default {
     data() {
@@ -73,17 +72,19 @@
       ])
     },
     mounted() {
-//      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
-      voteMain(this.voteId).then(res => {
+      this.voteId = this.$route.params.voteId;
+      let getData = {
+        id: this.voteId
+      }
+      voteResult(getData).then(res => {
         this.voteData = res.data
       })
     },
     methods: {
-      showVoteAlert(){
-        this.showAlert =! this.showAlert
+      showVoteAlert() {
+        this.showAlert = !this.showAlert
       },
-      postVote(){
+      postVote() {
         console.log('发送选择')
         this.$router.push('/index');
       }
@@ -111,7 +112,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .vote-result {
         font-size: 20px;
         padding-bottom: 37px;
@@ -139,13 +140,13 @@
           .option-dec {
             flex: 513;
             display: inline-block;
-            .progress{
+            .progress {
               width: 100%;
               background: #d9dada;
               height: 20px;
               line-height: 20px;
               margin: 6px 0;
-              .progress-num{
+              .progress-num {
                 background: #5ac7f2;
                 text-align: right;
                 font-size: 17px;

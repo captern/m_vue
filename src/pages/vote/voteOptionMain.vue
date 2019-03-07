@@ -23,7 +23,7 @@
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteOptionsMain} from '../../server/voteApi'
+  import {voteOptionMain} from '../../server/voteApi'
 
   export default {
     data() {
@@ -44,8 +44,10 @@
     },
     mounted() {
       this.voteId = this.$route.params.voteId;
-      voteOptionsMain(this.voteId).then(res => {
-        console.log(res)
+      let getData = {
+        id: this.voteId
+      }
+      voteOptionMain(getData).then(res => {
         this.voteData = res.data
       })
     },
