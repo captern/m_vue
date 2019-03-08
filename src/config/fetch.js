@@ -40,6 +40,11 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
     try {
       const response = await fetch(url, requestConfig)
       const responseJson = await response.json()
+      console.log(responseJson)
+      if(!responseJson.status){
+        console.log('返回的结果失败')
+        console.log('用户未登录的结果')
+      }
       return responseJson
     } catch (error) {
       throw new Error(error)
