@@ -75,7 +75,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .header-area {
         display: flex;
         padding-bottom: 12px;
