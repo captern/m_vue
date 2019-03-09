@@ -4,23 +4,22 @@
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
       <div class="header-area">
-        <div class="title">
-          {{voteData.title}}
-        </div>
+        <div class="title">{{lessonData.name}}</div>
         <div class="heart">
-          <Heart heart="false"></Heart>
+          <Heart :heart=false v-if="lessonData.is_collect == 0"></Heart>
+          <Heart :heart=true v-else-if="lessonData.is_collect == 1"></Heart>
         </div>
       </div>
       <div class="author-time">
-        <div class="author">编辑：{{voteData.author}}</div>
-        <div class="time">{{voteData.created_time}}</div>
+        <div class="author">主讲人：{{lessonData.teacher}}</div>
+        <div class="time">{{lessonData.created_time}}</div>
       </div>
-      <div class="vote-main" v-html="voteData.content"></div>
+      <div class="vote-main" v-html="lessonData.desc"></div>
       <div class="vote-btn" @click="showLessonAlert">报名</div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showLessonAlert" @confirmTip="signUp" tipType="three" alertText="是否报名本课程" btnOne="返回" btnTwo="报名"/>
-    <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="signUp" tipType="one" alertText="报名成功" btnOne="返回"/>
+    <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="signUp" tipType="one" :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
   </div>
 </template>
 
@@ -32,18 +31,18 @@
   import Heart from '../../components/common/heart'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteMain} from '../../server/voteApi'
+  import {lessonMain, signLesson} from '../../server/lessonApi'
 
   export default {
     data() {
       return {
         requestFlag: true, // 是否请求接口
-        voteId: '',
-        voteData: '',
+        lessonId: '',
+        lessonData: '',
         enlistTip: false,
         showAlert: false,
         successAlert: false,
-        alertText: '待定义'
+        alertText: null
       }
     },
     computed: {
@@ -53,9 +52,12 @@
       ])
     },
     mounted() {
-      this.voteId = this.$route.params.voteId;
-      voteMain(this.voteId).then(res => {
-        this.voteData = res.data
+      this.lessonId = this.$route.params.lessonId;
+      let getData = {
+        id: this.lessonId
+      }
+      lessonMain(getData).then(res => {
+        this.lessonData = res.data
       })
     },
     methods: {
@@ -65,9 +67,20 @@
       showSuccessAlert(){
         this.successAlert =! this.successAlert
       },
+      // 报名课程
       signUp(){
-        console.log('baomign ')
-        this.successAlert = !this.successAlert
+        let postData = {
+          id:this.lessonId
+        }
+        signLesson(postData).then(res => {
+          if(res.status){
+            this.successAlert = !this.successAlert
+            this.alertText = '报名成功'
+          }else{
+            this.successAlert = !this.successAlert
+            this.alertText = res.msg
+          }
+        })
       }
     },
     components: {
@@ -95,7 +108,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .header-area {
         display: flex;
         padding-bottom: 12px;
@@ -129,11 +142,14 @@
         font-size: 19px;
         line-height: 30px;
         color: #000000;
+        padding-bottom: 100px;
       }
       .vote-btn {
-        display: block;
+        position: fixed;
+        left: 46px;
+        bottom: 55px;
+        width: calc(100% - 92px);
         margin: 57px auto 0;
-        width: 100%;
         height: 66px;
         line-height: 66px;
         font-size: 30px;

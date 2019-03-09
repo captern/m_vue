@@ -131,7 +131,7 @@ export default new Router({
       path: '/lessonList',
       component: LessonList
     }, {
-      path: '/lessonMain/:testId',
+      path: '/lessonMain/:lessonId',
       component: LessonMain
     },
   ]

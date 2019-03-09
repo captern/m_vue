@@ -3,32 +3,34 @@
     <Header title='课程列表' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/lessonMain/' + item.url " class="lesson-item" v-for="(item, index) in voteList" :key="index">
-      <div class="type-one" v-if="item.img">
-        <p class="title">{{item.title}}</p>
-        <p class="des">{{item.des}}</p>
+    <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
+      <div class="type-one" v-if="item.has_teacher_img == 0">
+        <p class="title">{{item.name}}</p>
+        <p class="des">{{item.desc}}</p>
       </div>
-      <div class="type-two" v-else>
+      <div class="type-two" v-else-if="item.has_teacher_img == 1">
         <div class="author-img">
           <img src="../../common/image/bkg/bkg-one.png" alt="">
         </div>
-        <p class="title">{{item.title}}</p>
+        <p class="title">{{item.name}}</p>
       </div>
       <div class="author-time">
-        <div class="author">主讲人：<span>张老师</span></div>
-        <div class="time">授课时间：2018年12月10号</div>
+        <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+        <div class="time">授课时间：{{item.study_time}}</div>
       </div>
     </router-link>
   </div>
 </template>
 
 <script>
-  import {getUse, getBanner, getIndexLink} from '../../server/api'
+  import {getUser, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import Select from '../../components/select.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
-  import {voteList} from '../../server/voteApi'
+  import {lessonList} from '../../server/lessonApi'
+
+  // 1 表示线上，2 表示线下
 
   export default {
     data() {
@@ -40,23 +42,23 @@
             items: [
               {
                 itemName: '全&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;部',
-                itemIndex: 0
-              },
-              {
-                itemName: '时间最近',
                 itemIndex: 1
               },
               {
-                itemName: '近&nbsp;三&nbsp;&nbsp;天',
+                itemName: '时间最近',
                 itemIndex: 2
               },
               {
-                itemName: '一&nbsp;周&nbsp;&nbsp;内',
+                itemName: '近&nbsp;三&nbsp;&nbsp;天',
                 itemIndex: 3
               },
               {
-                itemName: '一个月内',
+                itemName: '一&nbsp;周&nbsp;&nbsp;内',
                 itemIndex: 4
+              },
+              {
+                itemName: '一个月内',
+                itemIndex: 5
               }
             ]
           },
@@ -65,27 +67,27 @@
             items: [
               {
                 itemName: '全部课程',
-                itemIndex: 0
-              },
-              {
-                itemName: '已&nbsp;开&nbsp;&nbsp;课',
                 itemIndex: 1
               },
               {
-                itemName: '未&nbsp;开&nbsp;&nbsp;课',
+                itemName: '已&nbsp;开&nbsp;&nbsp;课',
                 itemIndex: 2
+              },
+              {
+                itemName: '未&nbsp;开&nbsp;&nbsp;课',
+                itemIndex: 3
               }
             ]
           }
         ],
         checked: [
           {
-            itemName: '时间最近',
+            itemName: '全部',
             itemIndex: 1,
           },
           {
             itemName: '全部课程',
-            itemIndex: 0,
+            itemIndex: 1,
           }
         ],
         voteList: null
@@ -104,17 +106,26 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      voteList().then(res => {
-        console.log(res)
-        if (res.status) {
-          this.voteList = res.data.voteList
-        }
-      })
+      this.getLessonList();
     },
     methods: {
       changeCheck(checked) {
         console.log('获取到子组件的选择内容');
         console.log(checked)
+        this.getLessonList();
+      },
+      getLessonList(){
+        let getData = {
+          type: 1,
+          time: this.checked[0].itemIndex,
+          flag: this.checked[1].itemIndex
+        }
+        lessonList(getData).then(res => {
+          console.log(res)
+          if (res.status) {
+            this.voteList = res.list
+          }
+        })
       },
       scrolling() {
         console.log('dddd')
@@ -153,6 +164,7 @@
     height: 100%;
     width: 100%;
     overflow: scroll;
+    min-height: 100vh;
     /*背景固定不滚动*/
     .lesson-item {
       background: #FFFFFF;
@@ -160,7 +172,7 @@
       border-radius: 10px;
       padding: 30px 23px 5px;
       display: block;
-      .type-one{
+      .type-one {
         .title {
           font-size: 23px;
           line-height: 31px;
@@ -173,19 +185,19 @@
           padding-top: 14px;
         }
       }
-      .type-two{
+      .type-two {
         display: flex;
         height: 100px;
         align-items: center;
-        .author-img{
+        .author-img {
           flex: 1;
-          img{
+          img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
           }
         }
-        .title{
+        .title {
           flex: 3.5;
           font-size: 23px;
           line-height: 30px;
@@ -202,8 +214,8 @@
           margin: 10px 0 15px;
           color: #3ab2ed;
         }
-        .author{
-          span{
+        .author {
+          span {
             color: #000;
           }
         }
