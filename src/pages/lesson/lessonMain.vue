@@ -6,8 +6,8 @@
       <div class="header-area">
         <div class="title">{{lessonData.name}}</div>
         <div class="heart">
-          <Heart :heart=false v-if="lessonData.is_collect == 0"></Heart>
-          <Heart :heart=true v-else-if="lessonData.is_collect == 1"></Heart>
+          <Heart :lessonId = "lessonData.id" :heart=false v-if="lessonData.is_collect == 0"></Heart>
+          <Heart :lessonId = "lessonData.id" :heart=true v-else-if="lessonData.is_collect == 1"></Heart>
         </div>
       </div>
       <div class="author-time">

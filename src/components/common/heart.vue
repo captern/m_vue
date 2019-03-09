@@ -2,13 +2,14 @@
   <div class="heart-area">
     <img v-if="hearted" src="../../common/icon/icon-item-0@3x.png" @click="removeHeart" alt="">
     <img v-else src="" @click="setHeart" alt="收藏">
-    <alert-tip v-if="setHeartAlert" @closeTip="removeAlert" @confirmTip="signUp" tipType="three" alertText="是否收藏本课程" btnOne="返回" btnTwo="收藏"/>
-    <alert-tip v-if="removeHeartAlert" @closeTip="removeAlert" @confirmTip="removeSignUp" tipType="three" alertText="是否取消收藏本课程" btnOne="返回" btnTwo="取消收藏"/>
+    <alert-tip v-if="setHeartAlert" @closeTip="removeAlert" @confirmTip="setcollect" tipType="three" alertText="是否收藏本课程" btnOne="返回" btnTwo="收藏"/>
+    <alert-tip v-if="removeHeartAlert" @closeTip="removeAlert" @confirmTip="removecollect" tipType="three" alertText="是否取消收藏本课程" btnOne="返回" btnTwo="取消收藏"/>
   </div>
 </template>
 
 <script>
   import alertTip from '../../components/common/alertTip'
+  import {setCollect, removeCollect} from '../../server/lessonApi'
   export default {
     data() {
       return {
@@ -17,9 +18,10 @@
         removeHeartAlert: false
       }
     },
-    props: ['heart'],
+    props: ['heart', 'lessonId'],
     mounted() {
       this.hearted = this.heart
+      console.log(this.lessonId + '课程id')
     },
     methods: {
       setHeart(){
@@ -34,14 +36,29 @@
         this.removeHeartAlert = false
       },
       // 设置收藏
-      signUp(){
+      setcollect(){
         console.log('发送设置收藏接口')
-        this.hearted = true;
+        let postData = {
+          id: this.lessonId
+        }
+        setCollect(postData).then(res=>{
+          if(res.status){
+            this.hearted = true;
+          }
+        })
       },
       // 取消收藏
-      removeSignUp(){
+      removecollect(){
+        let postData = {
+          id: this.lessonId
+        }
         console.log('发送取消收藏接口')
-        this.hearted = false
+        removeCollect(postData).then(res=>{
+          if (res.status){
+            this.hearted = false
+          }
+        })
+
       }
     },
     components: {

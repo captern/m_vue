@@ -7,16 +7,7 @@ export const lessonList = getData => fetch('/course/get-course-list', getData)
 export const lessonMain = lessonId => fetch('/course/get-course-by-id', lessonId);
 // 报名课程
 export const signLesson = lessonId => fetch('/course/sign-up-by-id', lessonId, 'POST');
-// 获取投票选项
-export const voteOptions = voteId => fetch('/get-vote-option?voteId=' + voteId);
-// 获取投票选项详情
-// export const voteOptionsMain = voteId => fetch('/get-vote-option-main?voteId=' + voteId);
-// 发送投票
-export const postVote = (id, result) => fetch('/vote/sub-vote-result', {id, result}, 'POST');
-
-
-// 获取投票结果
-export const voteResult = (id) => fetch('/vote/get-vote-result-by-id', id);
-
-// 获取选项详情
-export const voteOptionMain = (id) => fetch('/vote/get-vote-item-by-id', id);
+// 收藏课程
+export const setCollect = lessonId => fetch('/course/add-collect-by-id', lessonId, 'POST');
+// 取消收藏课程
+export const removeCollect = lessonId => fetch('/course/del-collect-by-id', lessonId, 'POST');
