@@ -9,6 +9,8 @@ const User = () => import('../pages/user/user')
 const ChangeUserInfo = () => import('../pages/user/module/changeUserInfo')
 const ChangePas = () => import('../pages/user/module/changePas')
 const ChangePasCheck = () => import('../pages/user/module/changePasCheck')
+const myCollect = () => import('../pages/user/myCollect/myCollect')           // 我的收藏
+const MyTest = () => import('../pages/user/myTest/myTest')           // 我的收藏
 
 // 首页及首页列表部分
 const Index = () => import('../pages/index/index')
@@ -63,7 +65,9 @@ export default new Router({
     }, {
       path: '/register',
       component: Register
-    }, {
+    },
+    // 用户部分
+    {
       path: '/user',
       component: User
     }, {
@@ -76,18 +80,30 @@ export default new Router({
       path: '/changepascheck',
       component: ChangePasCheck
     }, {
+      path: '/myCollect',
+      component: myCollect
+    }, {
+      path: '/myTest',
+      component: MyTest
+    },
+    // 新闻部分
+    {
       path: '/newslist',
       component: NewsList
     }, {
       path: '/news/:newsId',
       component: News
-    }, {
+    },
+    //公告部分
+    {
       path: '/noticelist',
       component: NoticeList
     }, {
       path: '/notice/:noticeId',
       component: Notice
-    }, {
+    },
+    // 投票部分
+    {
       path: '/vote',
       component: Vote
     }, {
