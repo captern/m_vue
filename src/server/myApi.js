@@ -9,6 +9,8 @@ export const myTest = () => fetch('/test/get-my-list');
 export const myVote = () => fetch('/vote/get-my-vote-list');
 // 获取我的课程列表
 export const myLesson = (postData) => fetch('/course/get-my-course', postData, 'POST');
+// 获取我的活动列表
+export const myActivity = (postData) => fetch('/course/get-my-course', postData, 'POST');
 
 
 // 获取非图片的 选项详情

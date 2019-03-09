@@ -22,7 +22,7 @@
             修改密码
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="" class="link-item">
+          <router-link to="/myLesson" class="link-item">
             我的课程
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
