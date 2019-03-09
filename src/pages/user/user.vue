@@ -26,15 +26,15 @@
             我的课程
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="" class="link-item">
+          <router-link to="/myCollect" class="link-item">
             我的收藏
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="" class="link-item">
+          <router-link to="/myTest" class="link-item">
             我的测试
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="" class="link-item">
+          <router-link to="/myVote" class="link-item">
             我的投票
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
