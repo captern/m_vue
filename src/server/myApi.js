@@ -3,8 +3,10 @@ import {getStore} from '../config/mUtils'
 
 // 获取我的收藏列表
 export const myCollect = () => fetch('/course/get-my-collect')
-// 获取投票详情
+// 获取我的测试列表
 export const myTest = () => fetch('/test/get-my-list');
+// 获取我的投票列表
+export const myVote = () => fetch('/vote/get-my-vote-list');
 // 获取非图片的 选项详情
 // export const voteMain = voteId => fetch('/vote/get-vote-by-id', voteId);
 // 获取投票选项

@@ -11,6 +11,7 @@ const ChangePas = () => import('../pages/user/module/changePas')
 const ChangePasCheck = () => import('../pages/user/module/changePasCheck')
 const myCollect = () => import('../pages/user/myCollect/myCollect')           // 我的收藏
 const MyTest = () => import('../pages/user/myTest/myTest')           // 我的收藏
+const MyVote = () => import('../pages/user/myVote/myVote')           // 我的收藏
 
 // 首页及首页列表部分
 const Index = () => import('../pages/index/index')
@@ -85,6 +86,9 @@ export default new Router({
     }, {
       path: '/myTest',
       component: MyTest
+    }, {
+      path: '/myVote',
+      component: MyVote
     },
     // 新闻部分
     {
