@@ -1,19 +1,24 @@
 <template>
-  <div class="vote-option-page" v-wechat-title="$route.meta.title='{{voteData.title}}'">
-    <Header :title='voteData.title' noBackShow='noBackShow'/>
+  <!--<div class="vote-option-page" v-wechat-title="$route.meta.title='{{voteData.name}}'">-->
+  <div class="vote-option-page" v-wechat-title="$route.meta.title='投票选项详情'">
+    <Header :title='voteData.name' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-option-area">
       <div class="header-area">
         <div class="title">
-          {{voteData.title}}
+          {{voteData.name}}
         </div>
         <!--<div class="heart">-->
           <!--<img src="../../common/icon/icon-item-0@3x.png" alt="">-->
         <!--</div>-->
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
-      <router-link :to="'/postVote/' + voteData.id" class="vote-btn">支持投票</router-link>
+      <div class="vote-btn" v-if="voteData.is_img == 1" @click="postVote">支持投票</div>
+      <router-link v-else-if="voteData.is_img == 0" :to="'/postVote/' + voteData.vid " class="vote-btn" href="">
+        支持投票
+      </router-link>
     </div>
+    <alert-tip v-if="showFalseAlert" @closeTip="showVoteFalseAlert" tipType="one" :alertText="this.falseMsg ? this.falseMsg : '请选择投票选项'" btnOne="返回"/>
   </div>
 </template>
 
@@ -22,18 +27,20 @@
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
-
-  import {voteOptionMain} from '../../server/voteApi'
+  import alertTip from '../../components/common/alertTip'
+  import {voteOptionMain, postVote} from '../../server/voteApi'
 
   export default {
     data() {
       return {
         requestFlag: true, // 是否请求接口
-        voteId: '',
+        optionId: '',
         voteData: '',
         enlistTip: false,
         showAlert: false,
-        alertText: '待定义'
+        alertText: '待定义',
+        showFalseAlert: false,
+        falseMsg: null
       }
     },
     computed: {
@@ -43,18 +50,37 @@
       ])
     },
     mounted() {
-      this.voteId = this.$route.params.voteId;
+      this.optionId = this.$route.params.voteId;
       let getData = {
-        id: this.voteId
+        id: this.optionId
       }
       voteOptionMain(getData).then(res => {
         this.voteData = res.data
       })
     },
-    methods: {},
+    methods: {
+      postVote(){
+        let postResult = new Array()
+        postResult.push(this.optionId)
+        postVote(this.voteData.vid, JSON.stringify(postResult)).then(res=>{
+          console.log(res)
+          if(res.status){ //提交成功
+            console.log('提交投票成功')
+            this.$router.push('/voteSuccess/' + this.voteData.vid);
+          }else{
+            this.showFalseAlert =!this.showFalseAlert
+            this.falseMsg = res.msg
+          }
+        })
+      },
+      showVoteFalseAlert(){
+        this.showFalseAlert = !this.showFalseAlert
+      },
+    },
     components: {
       Header,
-      HomeIcon
+      HomeIcon,
+      alertTip
     },
   }
 </script>

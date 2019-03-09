@@ -18,11 +18,11 @@
           <span>排行榜</span>
         </div>
         <div class="ranking-item-area">
-          <router-link :to="'/voteOptionMain/' + item.id " class="ranking-item" v-for="(item, index) in options" :key="index">
-            <div class="ranking-icon">{{item.id}}</div>
-            <img src="../../common/image/bkg/bkg-one.png" alt="">
-            <p class="option-dec">{{item.dec}}</p>
-            <p class="vote-num">{{item.progress}}</p>
+          <router-link :to="'/voteOptionMain/' + item.id " class="ranking-item" v-for="(item, index) in voteOptions.list" :key="index">
+            <div class="ranking-icon">{{index + 1}}</div>
+            <img :src="item.img" alt="">
+            <p class="option-dec">{{item.name}}</p>
+            <p class="vote-num">{{item.num}}票</p>
           </router-link>
         </div>
       </div>
@@ -36,7 +36,7 @@
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteMain} from '../../server/voteApi'
+  import {voteResult} from '../../server/voteApi'
 
   export default {
     data() {
@@ -44,7 +44,7 @@
         enlistTip: true, // 是否请求接口
         voteId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
-        voteData: '',
+        voteOptions: '',
         showAlert: false,
         checkedId: ['1'],
         options: [
@@ -82,10 +82,13 @@
       ])
     },
     mounted() {
-//      this.voteId = this.$route.params.voteId;
-      this.voteId = 4;
-      voteMain(this.voteId).then(res => {
-        this.voteData = res.data
+     this.voteId = this.$route.params.voteId;
+      let getData = {
+        id: this.voteId
+      }
+      // this.voteId = 4;
+      voteResult(getData).then(res => {
+        this.voteOptions = res.data
       })
     },
     methods: {
@@ -193,9 +196,11 @@
           }
           .option-dec{
             font-size: 17px;
+            height: 27px;
             line-height: 27px;
             color: #231815;
             padding: 0 10px;
+            overflow: hidden;
           }
           .vote-num{
             font-size: 21px;

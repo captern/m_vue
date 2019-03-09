@@ -15,7 +15,7 @@
             <div class="votes-num">
               已获得&nbsp;<span class="votes">{{item.num}}票</span>
             </div>
-            <router-link :to="'/postVote/' + item.id" class="go-vote">支持投票</router-link>
+            <div class="go-vote" @click="postVote(item.id)">支持投票</div>
           </div>
         </div>
       </div>
@@ -28,8 +28,7 @@
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
-
-  import {voteMain} from '../../server/voteApi'
+  import {voteMain, postVote} from '../../server/voteApi'
 
   export default {
     data() {
@@ -61,7 +60,19 @@
     methods: {
       jumpOption(optionId){
         this.$router.push('/voteOptionMain/' + optionId);
-      }
+      },
+      postVote(itemId){
+        let postResult = new Array()
+        postResult.push(itemId)
+        postVote(this.voteId, JSON.stringify(postResult)).then(res=>{
+          console.log(res)
+          if(res.status){ //提交成功
+            this.$router.push('/voteSuccess/' + this.voteId);
+          }else{
+
+          }
+        })
+      },
     },
     components: {
       Header,

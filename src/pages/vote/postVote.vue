@@ -10,7 +10,7 @@
           <div class="option-dec">
             <div class="option-dec-main" v-html="item.content" @click="changeCheck(item.id)">
             </div>
-            <div class="option-link" :class="{check: checkedId.indexOf(item.id) !=-1}">(查看详情)</div>
+            <div class="option-link" @click="jumpOption(item.id)" :class="{check: checkedId.indexOf(item.id) !=-1}">(查看详情)</div>
           </div>
         </div>
       </div>
@@ -106,6 +106,9 @@
 
           }
         })
+      },
+      jumpOption(optionId){
+        this.$router.push('/voteOptionMain/' + optionId);
       }
     },
     components: {
