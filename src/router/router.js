@@ -13,6 +13,10 @@ const myCollect = () => import('../pages/user/myCollect/myCollect')           //
 const MyTest = () => import('../pages/user/myTest/myTest')           // 我的收藏
 const MyVote = () => import('../pages/user/myVote/myVote')           // 我的收藏
 const MyLesson = () => import('../pages/user/myLesson/myLesson')           // 我的收藏
+const MyLessonMain = () => import('../pages/user/myLesson/myLessonMain')           // 我的收藏
+const CoursewareList = () => import('../pages/user/myLesson/coursewareList')       // 课件
+const Evaluate = () => import('../pages/user/myLesson/evaluate')       // 课件
+const EvaluateResult = () => import('../pages/user/myLesson/evaluateResult')       // 课件
 const MyActivity = () => import('../pages/user/myActivity/myActivity')           // 我的收藏
 
 // 首页及首页列表部分
@@ -94,6 +98,18 @@ export default new Router({
     },{
       path: '/myLesson',
       component: MyLesson
+    },{
+      path: '/myLessonMain/:lessonId',
+      component: MyLessonMain
+    },{
+      path: '/myLessonMain/coursewareList/:coursewareId',
+      component: CoursewareList
+    },{
+      path: '/myLessonMain/evaluate/:evaluateId',
+      component: Evaluate
+    },{
+      path: '/myLessonMain/evaluateResult/:evaluateId',
+      component: EvaluateResult
     }, {
       path: '/myActivity',
       component: MyActivity

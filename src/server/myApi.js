@@ -9,6 +9,19 @@ export const myTest = () => fetch('/test/get-my-list');
 export const myVote = () => fetch('/vote/get-my-vote-list');
 // 获取我的课程列表
 export const myLesson = (postData) => fetch('/course/get-my-course', postData, 'POST');
+// 获取我的课程详情
+export const myLessonMain = lessonId => fetch('/course/get-my-course-detail-by-id', lessonId);
+// 取消我的报名
+export const cancelSignIn = lessonId => fetch('/course/cancel-sign-up-by-id', lessonId, 'POST');
+// 上课签到 下课签退
+export const registerCheck = postData => fetch('/course/check-by-id', postData, 'POST');
+// 获取评价信息
+export const getEvaluate = getData => fetch('/course/get-appraise-by-cou-id', getData);
+// 提交评价信息
+export const postEvaluate = postData => fetch('/course/sub-appraise', postData, 'POST');
+// 获取评价结果
+export const getEvaluateResult = getData => fetch('/course/get-my-appraise-by-cou-id', getData);
+
 // 获取我的活动列表
 export const myActivity = (postData) => fetch('/course/get-my-course', postData, 'POST');
 

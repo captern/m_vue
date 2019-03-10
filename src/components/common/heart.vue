@@ -1,7 +1,7 @@
 <template>
   <div class="heart-area">
-    <img v-if="hearted" src="../../common/icon/icon-item-0@3x.png" @click="removeHeart" alt="">
-    <img v-else src="" @click="setHeart" alt="收藏">
+    <img v-if="hearted" src="../../common/icon/clooect_check.png" @click="removeHeart" alt="">
+    <img v-else src="../../common/icon/clooect_none.png" @click="setHeart" alt="收藏">
     <alert-tip v-if="setHeartAlert" @closeTip="removeAlert" @confirmTip="setcollect" tipType="three" alertText="是否收藏本课程" btnOne="返回" btnTwo="收藏"/>
     <alert-tip v-if="removeHeartAlert" @closeTip="removeAlert" @confirmTip="removecollect" tipType="three" alertText="是否取消收藏本课程" btnOne="返回" btnTwo="取消收藏"/>
   </div>

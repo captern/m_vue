@@ -31,6 +31,7 @@
     bottom: 177px;
     right: 44px;
     font-size: 24px;
+    z-index: 3;
     /*padding-top: 20px;*/
     .home-link {
       float: right;
