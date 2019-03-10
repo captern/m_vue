@@ -6,10 +6,24 @@
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
-        <router-link to="/" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>
-        <router-link to="/" class="list-item"><img src="../../common/image/link-two.png" alt=""></router-link>
-        <router-link to="/" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>
-        <router-link to="/" class="list-item"><img src="../../common/image/link-four.png" alt=""></router-link>
+        <router-link to="/" class="list-item">
+          活动报名
+        </router-link>
+        <router-link to="/" class="list-item">
+          活动签到
+        </router-link>
+        <router-link to="/vote" class="list-item">
+          投票
+        </router-link>
+        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt="">
+        </router-link>
+        <router-link to="/" class="list-item">
+          中心活动
+        </router-link>
+        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>-->
+        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-two.png" alt=""></router-link>-->
+        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>-->
+        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-four.png" alt=""></router-link>-->
       </div>
     </div>
     <div class="bottom-area">
@@ -32,7 +46,9 @@
         登录
       </router-link>
       <div class="bottom-pop" v-if="showBottomPop">
-        <div class="bottom-pop-item" v-for="(menuItem, index) in menuList" :key="index"  @click="jumpUrl(menuItem.url, menuItem.source)">{{menuItem.title}}</div>
+        <div class="bottom-pop-item" v-for="(menuItem, index) in menuList" :key="index"
+             @click="jumpUrl(menuItem.url, menuItem.source)">{{menuItem.title}}
+        </div>
       </div>
     </div>
   </div>
@@ -109,13 +125,13 @@
       showPop() {
         this.showBottomPop = !this.showBottomPop
       },
-      jumpUrl(url, source){
+      jumpUrl(url, source) {
         console.log(url)
         console.log(source)
-        if(source == 1){
+        if (source == 1) {
           this.$router.push(url)
-        }else if(source == 2){
-          window.location.href=(url)
+        } else if (source == 2) {
+          window.location.href = (url)
         }
       }
     },
@@ -157,7 +173,7 @@
           line-height: 140px;
           border-radius: 24px;
           display: flex;
-          color: #ffffff;
+          /*color: #ffffff;*/
           margin-top: 29px;
           img {
             width: 100%;

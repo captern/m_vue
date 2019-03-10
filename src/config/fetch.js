@@ -43,9 +43,9 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
       const responseJson = await response.json()
       console.log(responseJson)
       // 可以实现全局的拦截
-      if(!responseJson.code == 9999){
+      if(responseJson.code == 9999){
         console.log('用户未登录的结果')
-        router.push('/index');
+        router.push('/login');
       }
       return responseJson
     } catch (error) {

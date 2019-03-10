@@ -1,6 +1,6 @@
 <template>
-  <div class="index-page" v-wechat-title="$route.meta.title='东部中心人才培养基地'">
-    <Header title='东部中心人才培养基地' noBackShow='noBackShow'/>
+  <div class="index-page" v-wechat-title="$route.meta.title='国家技术转移东部中心'">
+    <Header title='国家技术转移东部中心' noBackShow='noBackShow'/>
     <Search></Search>
     <Slider v-if="this.banner" v-bind:banner='this.banner'></Slider>
     <div class="main-list-area">
