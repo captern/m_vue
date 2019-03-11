@@ -8,16 +8,16 @@
           验证码
         </div>
         <div class="mid">
-          <input type="text" placeholder="请输入短信验证码">
+          <input type="phone" placeholder="请输入短信验证码" v-model="codeNum">
         </div>
-        <div class="right">
+        <div class="right" @click = getPhoneCode()>
           发送验证码
         </div>
       </div>
       <div class="post-btn" @click="postCheck">保存</div>
     </div>
     <!--提示框弹出部分-->
-    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" alertText="验证码错误" btn-one="关闭"/>
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText ? alertText : '验证码错误'" btn-one="关闭"/>
   </div>
 </template>
 
@@ -25,6 +25,8 @@
   import Header from '../../../components/header.vue'
   import alertTip from '../../../components/common/alertTip'
   import {getUser, changePas} from '../../../server/api'
+  import {mobileCode, checkMobileCode} from '../../../server/api'
+
   export default {
     data() {
       return {
@@ -45,10 +47,34 @@
 
     },
     methods: {
+      getPhoneCode(){
+        mobileCode(this.phoneNum).then(res=>{
+          if(res.status){
+            this.showAlert = true
+            this.alertText = '验证码发送成功'
+          }else{
+            this.showAlert = true
+            this.alertText = res.msg
+          }
+        })
+      },
       postCheck(){
         console.log('addd')
         if(!this.codeNum){
           this.showAlert = true
+          this.alertText = '请填写验证码'
+        }else{
+          let postData = {
+            code: this.codeNum
+          }
+          checkMobileCode().then(res=>{
+            if(res.status){
+              this.$router.push('/changePas')
+            }else{
+              this.showAlert = true
+              this.alertText = '请填写验证码'
+            }
+          })
         }
       }
     },
