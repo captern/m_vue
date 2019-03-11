@@ -22,8 +22,8 @@
 <style lang="scss">
   @import "common/stylus/index";
   html{
-    background: url("./common/image/bkg/backage.gif") no-repeat fixed bottom;
-    background-size: 100%;
+    /*background: url("/common/image/bkg/backage.gif") no-repeat fixed bottom;*/
+    /*background-size: 100%;*/
   }
   /*#app {*/
     /*background: url("./common/image/bkg.png");*/

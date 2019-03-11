@@ -19,7 +19,7 @@
           <img src="../../common/image/activity/four.png" alt="">
           <!--<img src="../../common/image/link-seven.png" alt="">-->
         </router-link>
-        <router-link to="/" class="five">
+        <router-link to="/activityList" class="five">
           <img src="../../common/image/activity/five.png" alt="">
         </router-link>
       </div>
