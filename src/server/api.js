@@ -62,8 +62,10 @@ export const shopList = (latitude, longitude, offset, restaurant_category_id = '
 
 // post格式获取短信验证码
 export const mobileCode = mobile => fetch('/user/send-code', {mobile}, 'POST')
-//验证验证码
-export const checkMobileCode = code => fetch('/user/send-code', {code}, 'POST')
+// 获取修改密码验证码
+export const mobilePasCode = mobile => fetch('/user/send-change-code', {mobile}, 'POST')
+//验证修改密码验证码
+export const checkPasCode = postData => fetch('/user/verify-code', postData, 'POST')
 
 
 

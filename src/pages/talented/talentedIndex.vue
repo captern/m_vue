@@ -115,16 +115,16 @@
     min-height: 100vh;
     width: 100%;
     overflow: scroll;
-    .swiper-container{
-      height: 391px;
-      .swiper-wrapper{
-        .swiper-slide{
-          .image{
-            height: 391px!important;
-          }
-        }
-      }
-    }
+    /*.swiper-container{*/
+      /*height: 391px;*/
+      /*.swiper-wrapper{*/
+        /*.swiper-slide{*/
+          /*.image{*/
+            /*height: 391px!important;*/
+          /*}*/
+        /*}*/
+      /*}*/
+    /*}*/
     /*背景固定不滚动*/
     .main-list-area {
       min-height: 100%;

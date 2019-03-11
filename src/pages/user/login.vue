@@ -139,6 +139,15 @@
 
 <style lang="scss" scoped>
   .login-page {
+    background: url("../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 100vh;
+    /*background-position: fixed;*/
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
     .logo-area {
       /*margin: 259px 0 77px;*/
       margin: 162px 0 48px;

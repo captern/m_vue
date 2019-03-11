@@ -74,7 +74,8 @@
 
 <style lang="scss" scoped>
   .swiper-container {
-    height: 460px;
+    /*height: 460px;*/
+    height: 391px;
     font-size: 0;
     .swiper-wrapper {
       .swiper-slide {
@@ -101,7 +102,8 @@
           }
         }
         .image {
-          height: 460px;
+          /*height: 460px;*/
+          height: 391px;
           width: 100%;
           display: block;
         }

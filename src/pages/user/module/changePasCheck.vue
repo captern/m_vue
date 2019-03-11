@@ -25,7 +25,7 @@
   import Header from '../../../components/header.vue'
   import alertTip from '../../../components/common/alertTip'
   import {getUser, changePas} from '../../../server/api'
-  import {mobileCode, checkMobileCode} from '../../../server/api'
+  import {mobileCode, mobilePasCode, checkPasCode} from '../../../server/api'
 
   export default {
     data() {
@@ -48,7 +48,7 @@
     },
     methods: {
       getPhoneCode(){
-        mobileCode(this.phoneNum).then(res=>{
+        mobilePasCode(this.phoneNum).then(res=>{
           if(res.status){
             this.showAlert = true
             this.alertText = '验证码发送成功'
@@ -65,9 +65,10 @@
           this.alertText = '请填写验证码'
         }else{
           let postData = {
+            mobile: this.phoneNum,
             code: this.codeNum
           }
-          checkMobileCode().then(res=>{
+          checkPasCode(postData).then(res=>{
             if(res.status){
               this.$router.push('/changePas')
             }else{

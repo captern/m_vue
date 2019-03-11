@@ -38,7 +38,7 @@
             我的投票
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
-          <router-link to="" class="link-item">
+          <router-link to="/myActivity" class="link-item">
             我的活动
             <span class="icon"><img src="../../common/image/right-icon.png" alt=""></span>
           </router-link>
@@ -119,8 +119,16 @@
 
 <style lang="scss" scoped>
   .user-page {
+    background: url("../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 100vh;
+    /*background-position: fixed;*/
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
     /*margin-top: 113px;*/
-    margin-top: 70px;
     .section-one {
       text-align: center;
       .avatar {
