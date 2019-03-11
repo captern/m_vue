@@ -2,6 +2,7 @@
   <div class="vote-page" v-wechat-title="$route.meta.title='在线测试'">
     <Header title='在线测试' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
+    <Search @parentMethod="changeSearch"></Search>
     <router-link :to="'/testDes/' + item.id " class="test-item" v-for="(item, index) in testList" :key="index">
       <p class="title">{{item.name}}</p>
       <p class="des">{{item.desc}}</p>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+  import Search from '../../components/search.vue'
   import {getUse, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
@@ -25,7 +27,8 @@
     data() {
       return {
         requestFlag: true, // 是否请求接口
-        testList: null
+        testList: null,
+        searchVal: ''
       }
     },
     computed: {
@@ -41,16 +44,22 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      testList().then(res => {
-        if (res.status) {
-          this.testList = res.list
-        }
-      })
+      this.getData()
     },
     methods: {
-      changeCheck(checked) {
-        console.log('获取到子组件的选择内容');
-        console.log(checked)
+      getData() {
+        let getData = {
+          name: this.searchVal
+        }
+        testList(getData).then(res => {
+          if (res.status) {
+            this.testList = res.list
+          }
+        })
+      },
+      changeSearch(val){
+        this.searchVal = val
+        this.getData();
       },
       scrolling() {
         console.log('dddd')
@@ -75,6 +84,7 @@
     },
     components: {
       Header,
+      Search,
       HomeIcon
     },
   }
@@ -110,14 +120,14 @@
         color: #727171;
         padding-top: 14px;
       }
-      .text-bottom{
+      .text-bottom {
         display: flex;
         padding-top: 20px;
         font-size: 21px;
         color: #3ab2ed;
-        .author{
+        .author {
           flex: 1;
-          span{
+          span {
             color: #231815;
           }
         }
@@ -125,7 +135,6 @@
           flex: 1.5;
           text-align: right;
           line-height: 26px;
-
 
         }
       }

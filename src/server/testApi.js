@@ -3,7 +3,7 @@ import Vue from 'vue'
 import {getStore} from '../config/mUtils'
 
 // 获取测试列表
-export const testList = () => fetch('/test/get-list?name=', {})
+export const testList = getData => fetch('/test/get-list', getData)
 // export const testList = () => Vue.axios.get('/test/get-list?name=')
 // 获取测试详情
 export const testMain = testId => fetch('/test/get-test-by-id?id=' + testId);

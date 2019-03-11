@@ -2,6 +2,7 @@
   <div class="lesson-page" v-wechat-title="$route.meta.title='课程列表'">
     <Header title='课程列表' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
+    <Search @parentMethod="changeSearch"></Search>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
     <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
       <div class="type-one" v-if="item.has_teacher_img == 0">
@@ -24,6 +25,7 @@
 
 <script>
   import {getUser, getBanner, getIndexLink} from '../../server/api'
+  import Search from '../../components/search.vue'
   import Header from '../../components/header.vue'
   import Select from '../../components/select.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
@@ -90,7 +92,8 @@
             itemIndex: 1,
           }
         ],
-        voteList: null
+        voteList: null,
+        searchVal: ''
       }
     },
     computed: {
@@ -109,6 +112,10 @@
       this.getLessonList();
     },
     methods: {
+      changeSearch(val){
+        this.searchVal = val
+        this.getLessonList();
+      },
       changeCheck(checked) {
         console.log('获取到子组件的选择内容');
         console.log(checked)
@@ -118,7 +125,8 @@
         let getData = {
           type: 1,
           time: this.checked[0].itemIndex,
-          flag: this.checked[1].itemIndex
+          flag: this.checked[1].itemIndex,
+          name: this.searchVal
         }
         lessonList(getData).then(res => {
           console.log(res)
@@ -150,6 +158,7 @@
     },
     components: {
       Header,
+      Search,
       Select,
       HomeIcon
     },

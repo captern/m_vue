@@ -9,7 +9,7 @@
       <img class="search-icon" src="../common/image/search-icon.png" alt="">
       <input type="search" name="search" class="search_input" placeholder="搜索内容" v-model="searchValue"
              @click="inputChangeFocus" autofocus="autofocus">
-      <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget('')"/>
+      <input type="submit" name="submit" class="search_submit" @click.prevent="searchTarget()"/>
     </form>
   </div>
 </template>
@@ -34,7 +34,9 @@
         }
       },
       searchTarget() {
-        this.restList = searchRest(this.geohash);
+        let result = this.searchValue
+        this.$emit('parentMethod', this.searchValue)
+//        this.restList = searchRest(this.geohash);
       },
       inputChangeFocus() {
         if (!this.inputFocus) {

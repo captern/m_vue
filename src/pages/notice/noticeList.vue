@@ -2,6 +2,7 @@
   <div class="news-list-page" v-wechat-title="$route.meta.title='公告列表'">
     <Header title='公告'/>
     <HomeIcon></HomeIcon>
+    <Search @parentMethod="changeSearch"></Search>
     <div class="news" v-if="newsList">
       <!--<router-link :to="{path:'/news',query:{id:item.newsId}}" class="news-item" v-for="item in newsData"-->
       <!--<router-link :to="'/notice/' + item.id" class="news-item" v-for="(item, index) in new" :key="index" :newsId="item.id"></router-link>-->
@@ -19,6 +20,7 @@
 
 <script>
   import Slider from '../../components/common/slider'
+  import Search from '../../components/search.vue'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import TwoLanguageTitle from '../../components/twoLanguageTitle'
@@ -28,19 +30,29 @@
   export default {
     data() {
       return {
-        newsList: ''
+        newsList: '',
+        searchVal: ''
       }
     },
     mounted() {
-      newsNotice().then(res => {
-        if (res.status) {
-          console.log(res.data.list)
-          this.newsList = res.data.list
-        }
-      })
+      this.getData()
     },
     computed: {},
     methods: {
+      changeSearch(val){
+        this.searchVal = val
+        this.getData()
+      },
+      getData(){
+        let getData = {
+          name: this.searchVal
+        }
+        newsNotice(getData).then(res => {
+          if (res.status) {
+            this.newsList = res.data.list
+          }
+        })
+      },
       jumpLink(realIndex) {
         // source  为1 表示内部连接   2表示外部链接
         let jumpType = this.newsList[realIndex].source
@@ -62,6 +74,7 @@
       Slider,
       HomeIcon,
       Header,
+      Search,
       alertTip,
       TwoLanguageTitle,
     }
