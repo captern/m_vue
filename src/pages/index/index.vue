@@ -229,6 +229,7 @@
         background: #FFFFFF;
         width: 208px;
         height: 218px;
+        z-index: 3;
         box-shadow: 2px 2px 0 2px #f7f7f7;
         .bottom-pop-item {
           margin: 5px 10px 0;

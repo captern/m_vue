@@ -167,7 +167,7 @@
           return
         } else if (!this.rightPas) {
           this.showAlert = true
-          this.alertText = '手机号码不正确'
+          this.alertText = '两次密码不一致'
           return
         }
         let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex, this.codeNum)
@@ -210,6 +210,15 @@
 
 <style lang="scss" scoped>
   .register-page {
+    background: url("../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 100vh;
+    /*background-position: fixed;*/
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
     .register-form {
       /*margin: 250px auto 0;*/
       margin: 156px auto 0;

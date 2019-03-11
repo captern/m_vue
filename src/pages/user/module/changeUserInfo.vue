@@ -84,16 +84,24 @@
         avatar: '',
         postAvatar: '',
         file: '',
-        user_id: null,
-        phoneNumber: null,
-        userName: null,
-        IdCard: null,
+        user_id: '',
+        phoneNumber: '',
+        userName: '',
+        IdCard: '',
+        workSpace: '',
+        workLevel: '',
+        focus: '',
+
+//        user_id: null,
+//        phoneNumber: null,
+//        userName: null,
+//        IdCard: null,
+//        workSpace: null,
+//        workLevel: null,
+//        focus: null,
         showAlert: false,
         tipType: 'one',
         sex: 1,           //性别
-        workSpace: null,
-        workLevel: null,
-        focus: null
       }
     },
     mounted() {
@@ -138,28 +146,28 @@
       },
       async changeInfo() {
         this.focus = ''
-        if (!this.userName) {
-          this.showAlert = true;
-          this.alertText = '请输入用户名';
-          return
-        } else if (!this.IdCard) {
-          this.showAlert = true;
-          this.alertText = '请输入身份证号码';
-          return
-        } else if (!this.rightIdCard) {
-          this.showAlert = true;
-          this.alertText = '身份证号码输入错误';
-          return
-        } else if (!this.workSpace) {
-          this.showAlert = true;
-          this.alertText = '请输入工作地点';
-          return
-        }
-        else if (!this.workLevel) {
-          this.showAlert = true;
-          this.alertText = '请输入工作职位';
-          return
-        }
+//        if (!this.userName) {
+//          this.showAlert = true;
+//          this.alertText = '请输入用户名';
+//          return
+//        } else if (!this.IdCard) {
+//          this.showAlert = true;
+//          this.alertText = '请输入身份证号码';
+//          return
+//        } else if (!this.rightIdCard) {
+//          this.showAlert = true;
+//          this.alertText = '身份证号码输入错误';
+//          return
+//        } else if (!this.workSpace) {
+//          this.showAlert = true;
+//          this.alertText = '请输入工作地点';
+//          return
+//        }
+//        else if (!this.workLevel) {
+//          this.showAlert = true;
+//          this.alertText = '请输入工作职位';
+//          return
+//        }
         // 发送重置信息
         let postData = {
           name: this.userName,

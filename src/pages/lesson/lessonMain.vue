@@ -53,14 +53,17 @@
     },
     mounted() {
       this.lessonId = this.$route.params.lessonId;
-      let getData = {
-        id: this.lessonId
-      }
-      lessonMain(getData).then(res => {
-        this.lessonData = res.data
-      })
+      this.getMain();
     },
     methods: {
+      getMain(){
+        let getData = {
+          id: this.lessonId
+        }
+        lessonMain(getData).then(res => {
+          this.lessonData = res.data
+        })
+      },
       showLessonAlert(){
         this.showAlert =! this.showAlert
       },
@@ -76,6 +79,7 @@
           if(res.status){
             this.successAlert = !this.successAlert
             this.alertText = '报名成功'
+            this.getMain();
           }else{
             this.successAlert = !this.successAlert
             this.alertText = res.msg
