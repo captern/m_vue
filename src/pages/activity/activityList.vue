@@ -1,6 +1,6 @@
 <template>
-  <div class="lesson-page" v-wechat-title="$route.meta.title='课程列表'">
-    <Header title='课程列表' noBackShow='noBackShow'/>
+  <div class="lesson-page" v-wechat-title="$route.meta.title='中心活动'">
+    <Header title='中心活动' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="select-area">
       <div class="select-type-area">
