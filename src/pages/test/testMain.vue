@@ -19,7 +19,7 @@
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交</div>
       <!--提示框弹出部分-->
-      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" alertText="请完成所有测试题后在进行提交" btnOne="返回"/>
+      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后在进行提交'" btnOne="返回"/>
       <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three"
                  alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
@@ -131,6 +131,9 @@
             console.log(res)
             if (res.status) {
               _this.$router.push('/testResult/' + this.testId);
+            }else{
+              _this.showPop = true
+              _this.alertText = res.msg
             }
           })
         } else {
@@ -162,8 +165,8 @@
       background: #FFFFFF;
       margin: 23px;
       border-radius: 10px;
-      padding: 30px 23px 151px;
-      min-height: calc(100vh - 180px);
+      padding: 30px 23px;
+      min-height: calc(100vh - 106px);
       .test-item {
         border-top: 1px solid #dcdcdc;
         margin-bottom: 32px;

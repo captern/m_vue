@@ -1,7 +1,6 @@
 <template>
   <div class="index-page" v-wechat-title="$route.meta.title='国家技术转移东部中心'">
     <Header title='国家技术转移东部中心' noBackShow='noBackShow'/>
-    <Search></Search>
     <Slider v-if="this.banner" v-bind:banner='this.banner'></Slider>
     <div class="main-list-area">
       <div class="list-item" v-for="(linkItem, index) in indexList" :key="index" @click="jumpUrl(linkItem.url, linkItem.source)">
@@ -143,7 +142,7 @@
     overflow: scroll;
     /*min-height: calc(100vh - 100px);*/
     min-height: 100vh;
-    background: url("../../common/image/bkg/backage.gif") no-repeat fixed bottom;
+    /*background: url("../../common/image/bkg/backage.gif") no-repeat fixed bottom;*/
     .main-list-area {
       border: none;
       padding-bottom: 100px;
@@ -152,6 +151,7 @@
         height: 119px;
         display: flex;
         border: none;
+        margin-bottom: 5px;
         .list-item-left {
           flex: 29;
           img {

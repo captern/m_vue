@@ -5,7 +5,7 @@
     <div class="vote-item-area">
       <div class="header-area">
         <div class="title">
-          {{testData.title}}
+          {{testData.name}}
         </div>
         <div class="heart">
           <Heart heart="false"></Heart>
@@ -15,23 +15,27 @@
         <div class="author">发布人：{{testData.author}}</div>
         <div class="time">发布时间：{{testData.created_time}}</div>
       </div>
-      <div class="test-main" v-html="testData.content"></div>
-      <div class="test-btn" @click="showTestAlert">开始测试</div>
+      <div class="test-main" v-html="testData.des"></div>
+      <div v-if="!testData.finish" class="test-btn" @click="showTestAlert">开始测试</div>
+      <router-link  v-else :to="'/testFail/' + testId ">
+        <div class="test-btn">查看错题</div>
+      </router-link>
     </div>
     <!--提示框弹出部分-->
-    <alert-tip v-if="showAlert" @closeTip="showTestAlert" @confirmTip="startTest" tipType="three" alertText="是否开始本测试？" btnOne="返回" btnTwo="开始测试"/>
+    <alert-tip v-if="showAlert" @closeTip="showTestAlert" @confirmTip="startTest" tipType="three" alertText="是否开始本测试？"
+               btnOne="返回" btnTwo="开始测试"/>
   </div>
 </template>
 
 <script>
-  import {getUse, getBanner, getIndexLink} from '../../server/api'
+  import {getUser, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import alertTip from '../../components/common/alertTip'
   import Heart from '../../components/common/heart'
   import {mapState, mapActions} from 'vuex'
 
-  import {voteMain} from '../../server/voteApi'
+  import {testDes} from '../../server/testApi'
 
   export default {
     data() {
@@ -51,17 +55,17 @@
       ])
     },
     mounted() {
-     this.testId = this.$route.params.testId;
-      voteMain(this.testId).then(res => {
+      this.testId = this.$route.params.testId;
+      testDes(this.testId).then(res => {
         this.testData = res.data
       })
     },
     methods: {
-      showTestAlert(){
-        this.showAlert =! this.showAlert
+      showTestAlert() {
+        this.showAlert = !this.showAlert
       },
-      startTest(){
-        this.$router.push('/testMain/'+ 12)
+      startTest() {
+        this.$router.push('/testMain/' + this.testId)
       }
     },
     components: {
@@ -89,7 +93,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .header-area {
         display: flex;
         padding-bottom: 12px;
@@ -127,11 +131,13 @@
         font-size: 19px;
         line-height: 30px;
         color: #000000;
+        padding-bottom: 111px;
       }
       .test-btn {
-        display: block;
-        margin: 57px auto 0;
-        width: 100%;
+        position: fixed;
+        left: 46px;
+        bottom: 55px;
+        width: calc(100% - 92px);
         height: 66px;
         line-height: 66px;
         font-size: 30px;
