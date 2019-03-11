@@ -3,12 +3,16 @@ import {getStore} from '../config/mUtils'
 
 // 获取我的收藏列表
 export const myCollect = () => fetch('/course/get-my-collect')
+// 我的收藏详情
+export const myCollectMain = lessonId => fetch('/course/get-course-by-id', lessonId)
 // 获取我的测试列表
 export const myTest = () => fetch('/test/get-my-list');
 // 获取我的投票列表
 export const myVote = () => fetch('/vote/get-my-vote-list');
 // 获取我的课程列表
 export const myLesson = (postData) => fetch('/course/get-my-course', postData, 'POST');
+// 我的课程入口
+export const myLessonEnter = lessonId => fetch('/course/get-my-course-by-id', lessonId);
 // 获取我的课程详情
 export const myLessonMain = lessonId => fetch('/course/get-my-course-detail-by-id', lessonId);
 // 取消我的报名

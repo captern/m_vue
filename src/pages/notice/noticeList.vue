@@ -70,6 +70,12 @@
 
 <style lang="scss" scoped>
   .news-list-page {
+    /*背景固定不滚动*/
+    background: url("../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    min-height: 100vh;
+    width: 100%;
+    overflow: scroll;
     .news {
       margin: 26px;
       .news-item {

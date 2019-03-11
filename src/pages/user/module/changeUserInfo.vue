@@ -161,14 +161,24 @@
           return
         }
         // 发送重置信息
-        let res = await changeInfo(this.userName, this.IdCard, this.sex, this.workSpace, this.workLevel, this.postAvatar);
+        let postData = {
+          name: this.userName,
+          idCard: this.IdCard,
+          sex: this.sex,
+          company: this.workSpace,
+          job: this.workLevel,
+          head_img: this.postAvatar,
+        };
+        console.log(postData)
+        console.log(postData)
+        let res = await changeInfo(postData);
         if (res.status) {
           this.showAlert = true;
           this.alertText = '用户信息修改成功';
-          setTimeout(() => {
-              this.$router.go(-1);
-            }, 1000
-          )
+          // setTimeout(() => {
+          //     this.$router.go(-1);
+          //   }, 1000
+          // )
           return
         } else {
           this.showAlert = true;
@@ -195,6 +205,7 @@
           if (res.status) {
             this.showAlert = true;
             this.alertText = '头像修改成功';
+            console.log(res.img)
             this.postAvatar = res.img
           } else {
             this.showAlert = true;
@@ -234,11 +245,21 @@
 
 <style lang="scss" scoped>
   .change-info-page {
+    /*背景固定不滚动*/
+    background: url("../../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 100vh;
+    /*background-position: fixed;*/
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
     .change-area {
       position: absolute;
       margin: 25px;
       width: calc(100% - 50px);
-      height: calc(100% - 112.5px);
+      height: calc(100vh - 50px);
       background: #ffffff;
       border-radius: 15px;
       .change-form {

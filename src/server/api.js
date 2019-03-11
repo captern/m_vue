@@ -17,12 +17,11 @@ export const getBanner = () => fetch('/news/get-banner', {})
 export const getIndexLink = () => fetch('/news/get-menu', {})
 
 
-
 // 地址拼接在连接里面的例子
 export const currentcity = number => fetch('/v1/cities/' + number)
 
 // 退出登录
-export const logOut = newsId => fetch('/user/logout',{},"POST");
+export const logOut = newsId => fetch('/user/logout', {}, "POST");
 
 // 多个参数的get接口模式
 export const searchplace = (cityid, value) => fetch('/v1/pois', {
@@ -95,13 +94,7 @@ export const postAvatar = (headImg) => fetch('/user/upload-img', {headImg}, 'POS
 export const register = (mobile, password, sex, code) => fetch('/user/sign-up', {mobile, password, sex, code}, 'POST');
 // 修改用户信息
 // export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
-export const changeInfo = (name, idCard, sex, company, head_img) => fetch('/user/modify-stu', {
-  name,
-  idCard,
-  sex,
-  company,
-  head_img
-}, 'POST');
+export const changeInfo = postData => fetch('/user/modify-stu', postData, 'POST');
 // 修改用户密码
 export const changePas = (password, newpassword) => fetch('/user/reset-password', {
   password,

@@ -119,11 +119,13 @@
         font-size: 19px;
         line-height: 30px;
         color: #000000;
+        padding-bottom: 111px;
       }
       .vote-btn {
-        display: block;
-        margin: 57px auto 0;
-        width: 100%;
+        position: fixed;
+        left: 46px;
+        bottom: 55px;
+        width: calc(100% - 92px);
         height: 66px;
         line-height: 66px;
         font-size: 30px;

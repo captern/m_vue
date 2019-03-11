@@ -105,6 +105,7 @@
     height: 62px;
     line-height: 62px;
     background: #FFFFFF;
+    z-index: 100;
     .select-type-area {
       display: flex;
       .select-type {

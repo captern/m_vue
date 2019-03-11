@@ -10,9 +10,11 @@ const ChangeUserInfo = () => import('../pages/user/module/changeUserInfo')
 const ChangePas = () => import('../pages/user/module/changePas')
 const ChangePasCheck = () => import('../pages/user/module/changePasCheck')
 const myCollect = () => import('../pages/user/myCollect/myCollect')           // 我的收藏
+const MyCollectMain = () => import('../pages/user/myCollect/myCollectMain')           // 我的收藏
 const MyTest = () => import('../pages/user/myTest/myTest')           // 我的收藏
 const MyVote = () => import('../pages/user/myVote/myVote')           // 我的收藏
 const MyLesson = () => import('../pages/user/myLesson/myLesson')           // 我的收藏
+const MyLessonEnter = () => import('../pages/user/myLesson/myLessonEnter')           // 我的收藏
 const MyLessonMain = () => import('../pages/user/myLesson/myLessonMain')           // 我的收藏
 const CoursewareList = () => import('../pages/user/myLesson/coursewareList')       // 课件
 const Evaluate = () => import('../pages/user/myLesson/evaluate')       // 课件
@@ -90,6 +92,9 @@ export default new Router({
       path: '/myCollect',
       component: myCollect
     }, {
+      path: '/myCollectMain/:collectId',
+      component: MyCollectMain
+    },{
       path: '/myTest',
       component: MyTest
     }, {
@@ -98,6 +103,9 @@ export default new Router({
     },{
       path: '/myLesson',
       component: MyLesson
+    },{
+      path: '/myLessonEnter/:lessonId',
+      component: MyLessonEnter
     },{
       path: '/myLessonMain/:lessonId',
       component: MyLessonMain

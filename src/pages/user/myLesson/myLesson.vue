@@ -3,7 +3,7 @@
     <Header title='课程列表' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/myLessonMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
+    <router-link :to="'/myLessonEnter/' + item.cou_id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
       <div class="type-one" v-if="item.has_teacher_img == 0">
         <p class="title">{{item.name}}</p>
         <p class="des">{{item.desc}}</p>

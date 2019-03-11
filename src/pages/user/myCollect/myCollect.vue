@@ -2,7 +2,7 @@
   <div class="lesson-page" v-wechat-title="$route.meta.title='我的收藏'">
     <Header title='我的收藏' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
-    <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-for="(item, index) in myCollectList" :key="index">
+    <router-link :to="'/myCollectMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in myCollectList" :key="index">
       <div class="type-one" v-if="item.has_teacher_img == 0">
         <p class="title">{{item.name}}</p>
         <p class="des">{{item.desc}}</p>

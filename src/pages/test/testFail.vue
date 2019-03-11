@@ -9,11 +9,11 @@
         </div>
         <div class="test-options" v-for="(optionItem, optionIndex) in wrongItem.data" :key="optionIndex">
           <div class="option-item right" v-if="wrongItem.right.indexOf(optionIndex + 1) !=-1">
-            <div class="check-icon check"><span class="icon" ></span></div>
+            <div class="check-icon check"><span class="icon check" ></span></div>
             <div class="option-dec">{{optionItem}}</div>
           </div>
           <div class="option-item wrong" v-else-if="wrongItem.wrong.indexOf(optionIndex + 1) !=-1">
-            <div class="check-icon check"><span class="icon" ></span></div>
+            <div class="check-icon check"><span class="icon check" ></span></div>
             <div class="option-dec">{{optionItem}}</div>
           </div>
           <div class="option-item" v-else>

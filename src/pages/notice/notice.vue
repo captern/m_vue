@@ -70,11 +70,11 @@
 
 <style lang="scss" scoped>
   .news-page {
-    position: relative;
-    top:0;
+    background: url("../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    min-height: 100vh;
+    width: 100%;
     overflow: scroll;
-    font-size: 32px;
-    line-height: 40px;
     .news-area {
       /*position: absolute;*/
       width: calc(100% - 70px);
