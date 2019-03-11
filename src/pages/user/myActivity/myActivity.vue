@@ -3,16 +3,10 @@
     <Header title='课程列表' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
-      <div class="type-one" v-if="item.has_teacher_img == 0">
+    <router-link :to="'/activityMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in activityList" :key="index">
+      <div class="type-one">
         <p class="title">{{item.name}}</p>
         <p class="des">{{item.desc}}</p>
-      </div>
-      <div class="type-two" v-else-if="item.has_teacher_img == 1">
-        <div class="author-img">
-          <img src="../../../common/image/bkg/bkg-one.png" alt="">
-        </div>
-        <p class="title">{{item.name}}</p>
       </div>
       <div class="author-time">
         <div class="author">主讲人：<span>{{item.teacher}}</span></div>
@@ -29,6 +23,7 @@
   import HomeIcon from '../../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
   import {lessonList} from '../../../server/lessonApi'
+  import {myActivity} from '../../../server/myApi'
 
   // 1 表示线上，2 表示线下
 
@@ -94,7 +89,7 @@
             itemIndex: 1,
           }
         ],
-        voteList: null
+        activityList: null
       }
     },
     computed: {
@@ -110,24 +105,25 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      this.getLessonList();
+      this.getActivityList();
     },
     methods: {
       changeCheck(checked) {
         console.log('获取到子组件的选择内容');
         console.log(checked)
-        this.getLessonList();
+        this.getActivityList();
       },
-      getLessonList(){
+      getActivityList(){
         let getData = {
-          type: 1,
           time: this.checked[0].itemIndex,
           flag: this.checked[1].itemIndex
         }
-        lessonList(getData).then(res => {
+//        lessonList(getData).then(res => {
+        myActivity(getData).then(res => {
           console.log(res)
           if (res.status) {
-            this.voteList = res.list
+            this.activityList = res.data
+//            this.voteList = res.list
           }
         })
       },

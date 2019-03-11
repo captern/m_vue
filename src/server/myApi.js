@@ -25,9 +25,14 @@ export const getEvaluate = getData => fetch('/course/get-appraise-by-cou-id', ge
 export const postEvaluate = postData => fetch('/course/sub-appraise', postData, 'POST');
 // 获取评价结果
 export const getEvaluateResult = getData => fetch('/course/get-my-appraise-by-cou-id', getData);
-
 // 获取我的活动列表
-export const myActivity = (postData) => fetch('/course/get-my-course', postData, 'POST');
+export const myActivity = (getData) => fetch('/active/get-my-active',getData);
+// 获取我的活动详情
+export const activityMain = (getData) => fetch('/active/get-my-active-detail-by-id', getData);
+// 取消活动报名
+export const cancelActivity = (getData) => fetch('/active/cancel-sign-up-by-id', getData);
+// 活动签到签退
+export const activityRegister = (postData) => fetch('/active/check-by-id', postData, 'POST');
 
 
 // 获取非图片的 选项详情

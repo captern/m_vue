@@ -20,6 +20,7 @@ const CoursewareList = () => import('../pages/user/myLesson/coursewareList')    
 const Evaluate = () => import('../pages/user/myLesson/evaluate')       // 课件
 const EvaluateResult = () => import('../pages/user/myLesson/evaluateResult')       // 课件
 const MyActivity = () => import('../pages/user/myActivity/myActivity')           // 我的收藏
+const ActivityMain = () => import('../pages/user/myActivity/activityMain')           // 我的收藏
 
 // 首页及首页列表部分
 const Index = () => import('../pages/index/index')
@@ -121,6 +122,9 @@ export default new Router({
     }, {
       path: '/myActivity',
       component: MyActivity
+    },{
+      path: '/activityMain/:activityId',
+      component: ActivityMain
     },
     // 新闻部分
     {

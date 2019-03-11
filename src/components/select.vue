@@ -129,6 +129,7 @@
           border-radius: 10px;
           box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.15);
           position: absolute;
+          z-index: 100;
           top: 50px;
           left: calc(50% - 72px);
           .select-item-area {

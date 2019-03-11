@@ -7,49 +7,37 @@
     <div class="main-list-area">
       <div class="main-list">
         <router-link to="/" class="list-item">
-          活动报名
+          <img src="../../common/image/activity/one.png" alt="">
         </router-link>
         <router-link to="/" class="list-item">
-          活动签到
+          <img src="../../common/image/activity/two.png" alt="">
         </router-link>
         <router-link to="/vote" class="list-item">
-          投票
+          <img src="../../common/image/activity/three.png" alt="">
         </router-link>
-        <router-link to="/noticelist" class="list-item"><img src="../../common/image/link-seven.png" alt="">
+        <router-link to="/noticelist" class="list-item">
+          <img src="../../common/image/activity/four.png" alt="">
+          <!--<img src="../../common/image/link-seven.png" alt="">-->
         </router-link>
-        <router-link to="/" class="list-item">
-          中心活动
+        <router-link to="/" class="five">
+          <img src="../../common/image/activity/five.png" alt="">
         </router-link>
-        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-one.png" alt=""></router-link>-->
-        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-two.png" alt=""></router-link>-->
-        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-three.png" alt=""></router-link>-->
-        <!--<router-link to="/" class="list-item"><img src="../../common/image/link-four.png" alt=""></router-link>-->
       </div>
     </div>
     <div class="bottom-area">
-      <div class="bottom-left" @click="showPop" v-bind:class="{ active: showBottomPop }">
-        菜单
-        <span class="bottom-left-icon">
-          <!--<img src="../../common/icon/bottom-left-icon@3x.png" alt="">-->
-        </span>
-      </div>
+      <router-link to="/index" class="bottom-left">
+        返回主菜单
+      </router-link>
+
       <div class="bottom-center">
         <img src="../../common/icon/space@3x.png" alt="">
       </div>
-      <!--<router-link class="bottom-right" to="/login">-->
-      <!--个人中心-->
-      <!--</router-link>-->
       <router-link to="/user" class="bottom-right" v-if="this.userMsg">
         个人中心
       </router-link>
       <router-link to="/login" class="bottom-right" v-else>
         登录
       </router-link>
-      <div class="bottom-pop" v-if="showBottomPop">
-        <div class="bottom-pop-item" v-for="(menuItem, index) in menuList" :key="index"
-             @click="jumpUrl(menuItem.url, menuItem.source)">{{menuItem.title}}
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -179,6 +167,13 @@
             width: 100%;
           }
         }
+        .five{
+          width: 750px;
+          margin-top: 32px;
+          img{
+            width: 100%;
+          }
+        }
       }
       .user-tip {
         display: block;
@@ -199,6 +194,7 @@
       position: fixed;
       bottom: 0;
       display: flex;
+      border-top: 1px solid #d8d8d8;
       .bottom-left, .bottom-right {
         flex: 1;
         text-align: center;
@@ -224,28 +220,6 @@
         img {
           height: 100px;
           width: auto;
-        }
-      }
-      .bottom-pop {
-        position: fixed;
-        bottom: 90px;
-        left: 60px;
-        background: #FFFFFF;
-        width: 208px;
-        height: 218px;
-        box-shadow: 2px 2px 0 2px #f7f7f7;
-        .bottom-pop-item {
-          margin: 5px 10px 0;
-          height: 67px;
-          line-height: 67px;
-          display: block;
-          border-bottom: 1px solid #999999;
-          font-size: 32px;
-          text-align: center;
-          color: rgb(53, 53, 53);
-          &:last-child {
-            border: none;
-          }
         }
       }
     }
