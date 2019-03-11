@@ -71,7 +71,7 @@
       // 报名课程
       signUp(){
         let postData = {
-          id:this.lessonId
+          id:this.collectId
         }
         signLesson(postData).then(res => {
           if(res.status){
