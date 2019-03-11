@@ -6,10 +6,10 @@
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
-        <router-link to="/" class="list-item">
+        <router-link to="/activityList" class="list-item">
           <img src="../../common/image/activity/one.png" alt="">
         </router-link>
-        <router-link to="/" class="list-item">
+        <router-link to="/myActivity" class="list-item">
           <img src="../../common/image/activity/two.png" alt="">
         </router-link>
         <router-link to="/vote" class="list-item">

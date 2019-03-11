@@ -83,7 +83,10 @@
 <style lang="scss" scoped>
   /*向下箭头区域*/
   .icon-down-area {
-    position: relative;
+    position: -webkit-sticky;
+    position:sticky;
+    top: 0;
+    /*position: relative;*/
     .icon-down:before, .icon-down:after {
       position: absolute;
       content: '';
