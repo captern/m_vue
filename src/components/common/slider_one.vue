@@ -4,7 +4,7 @@
       <div class="swiper-slide" v-for="(item, index) in banner" :jumpurl='item.title'>
         <div class="dec-area">
           <p class="dec">{{item.title}}</p>
-          <!--<div class="time">{{item.created_time}}</div>-->
+          <div class="time">{{item.created_time}}</div>
         </div>
         <img class="image" :src="item.cover" alt="">
       </div>
@@ -92,7 +92,7 @@
             font-size: 24px;
             text-align: center;
             color: #ffffff;
-            margin: 27px 50px;
+            margin: 27px 20px;
             line-height: 30px;
           }
           .time {

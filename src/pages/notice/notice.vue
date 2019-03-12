@@ -7,8 +7,9 @@
           {{newsData.title}}
         </div>
         <div class="auther-area">
-          <div class="left">编辑：{{newsData.author}}</div>
-          <div class="right">{{newsData.created_time}}</div>
+          <!--<div class="left">编辑：{{newsData.author}}</div>-->
+          <!--<div class="right">{{newsData.created_time}}</div>-->
+          <div class="left">编辑：{{newsData.created_time}}</div>
         </div>
         <div v-html="newsData.content"></div>
         <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
@@ -99,20 +100,19 @@
         .header-area{
           margin-top: 20px;
           color: rgb(58, 178, 237);;
-          padding-right: 204px;
-          line-height: 55px;
-          font-size: 42px;
+          /*padding-right: 204px;*/
+          line-height: 37px;
+          font-size: 31px;
           border-bottom: 1px solid rgb(199, 199, 199);
-          padding-bottom: 10px;
-          margin-bottom: 15px;
+          padding-bottom: 13px;
         }
         .auther-area{
           display: flex;
-          height: 50px;
-          font-size: 34px;
+          height: 17px;
+          font-size: 17px;
           line-height: 50px;
-          color: rgb(199, 199, 199);
-          margin-bottom: 10px;
+          color: rgb(178, 178, 179);
+          margin-bottom: 35px;
           .left,.right{
             flex: 1;
           }

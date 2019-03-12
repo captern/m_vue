@@ -27,6 +27,7 @@ const Index = () => import('../pages/index/index')
 const TalentedIndex = () => import('../pages/talented/talentedIndex')
 const ActivityIndex = () => import('../pages/activity/activityIndex')
 const ActivityList = () => import('../pages/activity/activityList')
+const ActivityDec = () => import('../pages/activity/activityDec')
 const NewsList = () => import('../pages/new/newsList')
 const News = () => import('../pages/new/news')
 const NoticeList = () => import('../pages/notice/noticeList')
@@ -72,6 +73,9 @@ export default new Router({
     },{
       path: '/activityList',
       component: ActivityList,
+    },{
+      path: '/activityDec/:activityId',
+      component: ActivityDec,
     },
     {
       path: '/login',

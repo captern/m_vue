@@ -5,9 +5,9 @@
     <div class="vote-item-area">
       <div class="header-area">
         <div class="title">{{voteData.name}}</div>
-        <div class="heart">
-          <img src="../../common/icon/icon-item-0@3x.png" alt="">
-        </div>
+        <!--<div class="heart">-->
+          <!--<img src="../../common/icon/icon-item-0@3x.png" alt="">-->
+        <!--</div>-->
       </div>
       <div class="author-time">
         <div class="author">编辑：{{voteData.author}}</div>

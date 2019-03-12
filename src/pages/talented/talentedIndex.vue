@@ -37,7 +37,7 @@
 
 <script>
   import {getUser, getBanner, getIndexLink} from '../../server/api'
-  import Slider from '../../components/common/slider'
+  import Slider from '../../components/common/slider_one'
   import Header from '../../components/header.vue'
   import Search from '../../components/search.vue'
   import mainList from '../../components/mainList.vue'

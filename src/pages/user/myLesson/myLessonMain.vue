@@ -77,7 +77,8 @@
         showAlert: false,
         logOutTest: false,
         successAlert: false,
-        alertText: null
+        alertText: null,
+        myLocation:''
       }
     },
     computed: {
@@ -95,6 +96,7 @@
     },
     methods: {
       addressDetail() { //获取地理位置
+        let _this = this;
         var vm = this;
 //全局的this在方法中不能使用，需要重新定义一下
         var geolocation = new BMap.Geolocation();
@@ -108,8 +110,9 @@
                 const location = {
                   creditLongitude: r.point.lat, // 经度
                   creditLatitude: r.point.lng, // 纬度
-                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
+//                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
                 }
+                _this.myLocation = location.creditLongitude + ',' +  location.creditLatitude
                 console.log(location)
               }
             })
@@ -153,7 +156,7 @@
       registerCheck() {
         let postData = {
           id: this.lessonId,
-          coordinates: ''
+          coordinates: this.myLocation
         }
         registerCheck(postData).then(res => {
           if (res.status) {

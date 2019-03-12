@@ -8,8 +8,9 @@
           {{newsData.title}}
         </div>
         <div class="auther-area">
-          <div class="left">编辑：{{newsData.author}}</div>
-          <div class="right">{{newsData.created_time}}</div>
+          <div class="left">编辑：{{newsData.created_time}}</div>
+          <!--<div class="left">编辑：{{newsData.author}}</div>-->
+          <!--<div class="right">{{newsData.created_time}}</div>-->
         </div>
         <div class="text-area" v-html="newsData.content"></div>
         <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
