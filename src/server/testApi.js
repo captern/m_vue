@@ -11,13 +11,14 @@ export const testMain = testId => fetch('/test/get-test-by-id?id=' + testId);
 export const testDes = testId => fetch('/test/get-test-detail-by-id?id=' + testId);
 // export const testMain = voteId => fetch('/test/get-test-by-id?id=' + voteId);
 // 获取测试选项
-export const postTestResult = (id, result) => fetch('/test/submit-test', {
+export const postTestResult = (id,cou_id, result) => fetch('/test/submit-test', {
   id,
+  cou_id,
   result
 }, 'POST');
 //
-export const getResult = testId => fetch('/test/get-result?id=' + testId);
+export const getResult = getData => fetch('/test/get-result' , getData);
 
 //
-export const getFail = testId => fetch('/test/get-wrong-by-id?id=' + testId);
+export const getFail = getData => fetch('/test/get-wrong-by-id' , getData);
 

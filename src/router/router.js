@@ -177,13 +177,13 @@ export default new Router({
       path: '/testDes/:testId',
       component: TestDes
     }, {
-      path: '/testMain/:testId',
+      path: '/testMain/:testId/:lessonId',
       component: TestMain
     }, {
-      path: '/testResult/:testId',
+      path: '/testResult/:testId/:lessonId',
       component: TestResult
     }, {
-      path: '/testFail/:testId',
+      path: '/testFail/:testId/:lessonId',
       component: TestFail
     },
     // 课程部分

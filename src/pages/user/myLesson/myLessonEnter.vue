@@ -29,7 +29,7 @@
         <div class="right">
           正确:<span>{{lessonData.right}}</span>
           错误:<span>{{lessonData.wrong}}</span>
-          <router-link :to="'/testFail/' + lessonData.test_id " class="link">查看错题></router-link>
+          <router-link :to="'/testFail/' + lessonData.test_id + '/' + lessonId" class="link">查看错题></router-link>
         </div>
       </div>
     </div>

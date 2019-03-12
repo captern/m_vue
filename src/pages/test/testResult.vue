@@ -10,7 +10,7 @@
         <div class="result-item"><span>正确：</span><span class="true">{{testData.right}}</span>题</div>
         <div class="result-item"><span>错误：</span><span class="false">{{testData.wrong}}</span>题</div>
       </div>
-      <router-link :to="'/testFail/' + this.testId " class="test-btn">查看错题</router-link>
+      <router-link :to="'/testFail/' + testId + '/' + lessonId" class="test-btn">查看错题</router-link>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showTestAlert" @confirmTip="startTest" tipType="three" alertText="是否开始本测试？" btnOne="返回" btnTwo="开始测试"/>
@@ -28,6 +28,7 @@
       return {
         testId: '',
         testData: '',
+        lessonId:'',
         showAlert: false,
         alertText: '待定义'
       }
@@ -40,7 +41,11 @@
     },
     mounted() {
       this.testId = this.$route.params.testId;
-      getResult(this.testId).then(res => {
+      this.lessonId = this.$route.params.lessonId;
+      let getData = {
+        id: this.testId,
+      }
+      getResult(getData).then(res => {
         if(res.status){
           this.testData = res
         }

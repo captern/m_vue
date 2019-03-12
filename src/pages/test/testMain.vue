@@ -19,7 +19,8 @@
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交</div>
       <!--提示框弹出部分-->
-      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后在进行提交'" btnOne="返回"/>
+      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后在进行提交'"
+                 btnOne="返回"/>
       <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three"
                  alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
@@ -44,10 +45,11 @@
         testId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
         testData: '',
+        lessonId: '',
         showAlert: false,
         showPop: false,
         postTestFlag: false,
-        alertText: '待定义',
+        alertText: '',
         results: [],
         postResults: []
       }
@@ -61,6 +63,7 @@
     mounted() {
       const _this = this
       this.testId = this.$route.params.testId;
+      this.lessonId = this.$route.params.lessonId;
       // this.testId = 2;
       let resultsList = new Array()
       testMain(_this.testId).then(res => {
@@ -109,6 +112,7 @@
         _this.results.forEach(function (resultItem, resultIndex) {
           if (resultItem.answer.length === 0) {
             _this.showPop = true
+            _this.alertText = '请全部选择'
           }
           else {
             _this.postTestFlag = true
@@ -127,11 +131,11 @@
         if (_this.postTestFlag) {
           console.log(_this.testId)
           console.log(_this.results)
-          postTestResult(_this.testId, JSON.stringify(_this.results)).then(res => {
+          postTestResult(_this.testId, _this.lessonId, JSON.stringify(_this.results)).then(res => {
             console.log(res)
             if (res.status) {
-              _this.$router.push('/testResult/' + this.testId);
-            }else{
+              _this.$router.push('/testResult/' + this.testId + '/' + _this.lessonId);
+            } else {
               _this.showPop = true
               _this.alertText = res.msg
             }

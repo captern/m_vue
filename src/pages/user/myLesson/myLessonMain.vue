@@ -16,12 +16,27 @@
       </div>
       <div class="vote-main" v-html="lessonData.desc"></div>
       <div class="btns-area">
-        <router-link :to="'/myLessonMain/evaluate/' +lessonData.id" v-if="lessonData.CanAppraise" >
+        <router-link :to="'/myLessonMain/evaluate/' +lessonData.id" v-if="lessonData.CanAppraise">
           <div class="vote-btn">课程评价</div>
         </router-link>
-        <router-link :to="'/myLessonMain/coursewareList/' +lessonData.id" v-if="lessonData.files.length > 0" >
+        <router-link :to="'/myLessonMain/coursewareList/' +lessonData.id"
+                     v-if="lessonData.files && lessonData.files.length > 0">
           <div class="vote-btn">课件预览</div>
         </router-link>
+        <div v-if="lessonData.type == '1'">
+          <div v-if="lessonData.test_id && !lessonData.is_test" class="vote-btn" @click="goTest">课后测试</div>
+          <router-link v-else :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
+            <div class="vote-btn">查看错题</div>
+          </router-link>
+        </div>
+        <div v-else-if="lessonData.type == '2'">
+          <div v-if="lessonData.test_id && !lessonData.is_test" class="vote-btn" @click="goTest">课后测试</div>
+          <router-link v-else :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
+            <div class="vote-btn">查看错题</div>
+          </router-link>
+        </div>
+
+
         <div v-if="lessonData.check_but == 'start'" class="vote-btn" @click="registerCheck">上课签到</div>
         <div v-else-if="lessonData.check_but == 'end'" class="vote-btn" @click="registerCheck">下课签到</div>
         <div v-if="lessonData.canCancel" class="vote-btn" @click="showCancelAlert">取消报名</div>
@@ -39,6 +54,9 @@
 </template>
 
 <script>
+  import {MP} from '../../../common/js/map'
+  //  import BMap from 'BMap'
+  //  引入百度地图api
   import {getUser, getBanner, getIndexLink} from '../../../server/api'
   import Header from '../../../components/header.vue'
   import HomeIcon from '../../../components/common/homeIcon.vue'
@@ -70,10 +88,35 @@
     },
     mounted() {
       this.lessonId = this.$route.params.lessonId;
-      this.getData()
+      this.getData();
+
+      this.addressDetail();
+
     },
     methods: {
-      getData(){
+      addressDetail() { //获取地理位置
+        var vm = this;
+//全局的this在方法中不能使用，需要重新定义一下
+        var geolocation = new BMap.Geolocation();
+        var gc = new BMap.Geocoder();
+        geolocation.getCurrentPosition(function(r) {
+          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            const myGeo = new BMap.Geocoder()
+            myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), data => {
+              if (data.addressComponents) {
+                const result = data.addressComponents
+                const location = {
+                  creditLongitude: r.point.lat, // 经度
+                  creditLatitude: r.point.lng, // 纬度
+                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
+                }
+                console.log(location)
+              }
+            })
+          }
+        })
+      },
+      getData() {
         let getData = {
           id: this.lessonId
         }
@@ -84,7 +127,7 @@
       showCancelAlert() {
         this.showAlert = !this.showAlert
       },
-      showTestAlert(){
+      showTestAlert() {
         this.logOutTest = !this.logOutTest
       },
       showSuccessAlert() {
@@ -107,26 +150,26 @@
       },
       // 获取位置信息
 //      签到部分
-      registerCheck(){
+      registerCheck() {
         let postData = {
           id: this.lessonId,
           coordinates: ''
         }
-        registerCheck(postData).then(res=>{
-          if(res.status){
-            if(res.type == 2 && this.lessonData.test_id){//  含有课后测试 id 的签退
+        registerCheck(postData).then(res => {
+          if (res.status) {
+            if (res.type == 2 && this.lessonData.test_id) {//  含有课后测试 id 的签退
               this.logOutTest = !this.logOutTest
               this.getData()
             }
-          }else{
+          } else {
             this.successAlert = !this.successAlert
             this.alertText = res.msg
           }
         })
       },
-      goTest(){
+      goTest() {
         console.log('天竺啊测试页面')
-        this.$router.push('/testMain/' + this.lessonData.test_id)
+        this.$router.push('/testMain/' + this.lessonData.test_id + '/' + this.lessonId)
       }
     },
     components: {
