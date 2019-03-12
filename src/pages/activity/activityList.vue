@@ -14,16 +14,30 @@
         </div>
       </div>
     </div>
-    <router-link :to="'/activityMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in activityList" :key="index">
-      <div class="type-one">
-        <p class="title">{{item.name}}</p>
-        <p class="des">{{item.desc}}</p>
-      </div>
-      <div class="author-time">
-        <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-        <div class="time">授课时间：{{item.study_time}}</div>
-      </div>
-    </router-link>
+    <div v-if="pageType == 'one'">
+      <router-link :to="'/activityMain/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
+        <div class="type-one">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+          <div class="time">授课时间：{{item.start_time}}</div>
+        </div>
+      </router-link>
+    </div>
+    <div v-else-if="pageType == 'two'">
+      <router-link :to="'/testDes/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
+        <div class="type-one">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">发布人：<span>{{item.user}}</span></div>
+          <div class="time">{{item.date}}</div>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -35,14 +49,14 @@
   import {mapState, mapActions} from 'vuex'
   import {lessonList} from '../../server/lessonApi'
   import {myActivity} from '../../server/myApi'
-  import {getActivityLists} from '../../server/activityApi'
+  import {getActivityLists, getTestLists} from '../../server/activityApi'
 
   export default {
     data() {
       return {
         requestFlag: true, // 是否请求接口
-        activityList: null,
-        type: 1
+        listData: null,
+        pageType: 'one',
       }
     },
     computed: {
@@ -56,22 +70,36 @@
     destroyed() {
     },
     mounted() {
-      this.getActivityList();
+      if(this.pageType == 'one'){
+        this.getActivityList();
+      }else if(this.pageType == 'two'){
+        this.getTestList()
+      }
     },
     methods: {
       changeCheck(checked) {
+        console.log(checked)
+        if(checked == '1'){
+          this.pageType = 'one';
+          this.getActivityList();
+        }else if(checked == '2'){
+          this.pageType = 'two';
+          this.getTestList();
+        }
         this.type = checked
-        this.getActivityList();
       },
       getActivityList(){
-        let getData = {
-          type: this.type
-        }
 //        lessonList(getData).then(res => {
-        getActivityLists(getData).then(res => {
+        getActivityLists().then(res => {
           if (res.status) {
-            this.activityList = res.list
-//            this.voteList = res.list
+            this.listData = res.list
+          }
+        })
+      },
+      getTestList(){
+        getTestLists().then(res => {
+          if (res.status) {
+            this.listData = res.list
           }
         })
       },
