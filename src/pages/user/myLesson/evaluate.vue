@@ -1,6 +1,6 @@
 <template>
-  <div class="evaluate-page" v-wechat-title="$route.meta.title='课程详情'">
-    <Header title='课程详情' noBackShow='noBackShow'/>
+  <div class="evaluate-page" v-wechat-title="$route.meta.title='课程评价'">
+    <Header title='课程评价' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="evaluate-area">
       <div class="header-area">

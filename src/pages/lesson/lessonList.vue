@@ -123,7 +123,7 @@
       },
       getLessonList(){
         let getData = {
-          type: 1,
+          // type: 1,
           time: this.checked[0].itemIndex,
           flag: this.checked[1].itemIndex,
           name: this.searchVal
