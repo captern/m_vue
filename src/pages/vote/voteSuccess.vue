@@ -4,7 +4,7 @@
     <HomeIcon></HomeIcon>
     <div class="vote-success-area">
       <div class="des-area">
-        <img class="success-icon" src="../../common/icon/icon-item-0@3x.png" alt="">
+        <img class="success-icon" src="../../common/image/activity/vote-success.png" alt="">
         <p class="success-des">投票成功</p>
         <div class="btn-area">
           <div class="btn">

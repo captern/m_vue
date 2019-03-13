@@ -37,6 +37,7 @@
   export default {
     data() {
       return {
+        type: '',
         requestFlag: true, // 是否请求接口
         selectAreaData: [
           {
@@ -109,10 +110,11 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
+      this.type = this.$route.params.type;
       this.getLessonList();
     },
     methods: {
-      changeSearch(val){
+      changeSearch(val) {
         this.searchVal = val
         this.getLessonList();
       },
@@ -121,13 +123,23 @@
         console.log(checked)
         this.getLessonList();
       },
-      getLessonList(){
-        let getData = {
-          // type: 1,
-          time: this.checked[0].itemIndex,
-          flag: this.checked[1].itemIndex,
-          name: this.searchVal
+      getLessonList() {
+        let getData = ''
+        if (this.type == undefined) {
+          getData = {
+            time: this.checked[0].itemIndex,
+            flag: this.checked[1].itemIndex,
+            name: this.searchVal
+          }
+        } else {
+          getData = {
+            type: this.type,
+            time: this.checked[0].itemIndex,
+            flag: this.checked[1].itemIndex,
+            name: this.searchVal
+          }
         }
+
         lessonList(getData).then(res => {
           console.log(res)
           if (res.status) {

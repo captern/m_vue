@@ -19,8 +19,8 @@
         <router-link :to="'/myLessonMain/evaluate/' +lessonData.id" v-if="lessonData.CanAppraise">
           <div class="vote-btn">课程评价</div>
         </router-link>
-        <div v-if="lessonData.check_but == 'start'" class="vote-btn" @click="registerCheck">上课签到</div>
-        <div v-else-if="lessonData.check_but == 'end'" class="vote-btn" @click="registerCheck">下课签到</div>
+        <div v-if="lessonData.check_but == 'start'" class="vote-btn" @click="registerCheck">活动签到</div>
+        <div v-else-if="lessonData.check_but == 'end'" class="vote-btn" @click="registerCheck">活动签退</div>
         <div v-if="lessonData.canCancel" class="vote-btn" @click="showCancelAlert">取消报名</div>
       </div>
     </div>

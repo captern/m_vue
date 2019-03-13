@@ -8,8 +8,8 @@
         <img v-if="this.sex =='1'" class="avatar" :src="head_img?head_img:require('../../common/image/man.jpeg')" alt="">
         <!--<img v-else class="avatar" src="../../common/image/woman.jpeg" alt="默认头像">-->
         <img v-else class="avatar" :src="head_img?head_img:require('../../common/image/woman.jpeg')" alt="">
-        <p class="phone">{{this.mobile}}</p>
-        <p class="phone">{{this.userName}}</p>
+        <!--<p class="phone">{{mobile}}</p>-->
+        <p class="phone">{{userName}}</p>
       </div>
       <div class="section-two">
         <div class="link-items-area">
@@ -87,6 +87,7 @@
               this.mobile = res.data.mobile
               this.sex = res.data.sex
               this.head_img = res.data.head_img
+              this.userName = res.data.real_name
             } else {
               console.log('用户信息获取失败')
             }
@@ -130,6 +131,7 @@
     overflow: scroll;
     /*margin-top: 113px;*/
     .section-one {
+      padding-top: 53px;
       text-align: center;
       .avatar {
         display: inline-block;

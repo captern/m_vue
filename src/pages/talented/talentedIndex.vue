@@ -7,10 +7,10 @@
     <div class="main-list-area">
       <div class="main-list">
         <router-link to="/lessonList" class="list-item"><img src="../../common/image/talented/one.png" alt=""></router-link>
-        <router-link to="/lessonList" class="list-item"><img src="../../common/image/talented/two.png" alt=""></router-link>
-        <router-link to="/lessonList" class="list-item"><img src="../../common/image/talented/three.png" alt=""></router-link>
-        <router-link to="/lessonList" class="list-item"><img src="../../common/image/talented/four.png" alt=""></router-link>
-        <router-link to="/lessonList" class="list-item"><img src="../../common/image/talented/five.png" alt=""></router-link>
+        <router-link to="/lessonList/1" class="list-item"><img src="../../common/image/talented/two.png" alt=""></router-link>
+        <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/three.png" alt=""></router-link>
+        <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/four.png" alt=""></router-link>
+        <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/five.png" alt=""></router-link>
         <router-link to="/test" class="list-item"><img src="../../common/image/talented/six.png" alt=""></router-link>
         <router-link to="/noticelist" class="list-item"><img src="../../common/image/talented/seven.png" alt="">
         </router-link>
@@ -133,7 +133,7 @@
       background: url("../../common/image/talented/bkg.png") no-repeat fixed bottom;
       background-size: 100% 100%;
       border-radius: 24px;
-      padding-bottom: 20px;
+      padding-bottom: 100px;
       .main-list {
         padding: 3px 33px;
         /*height: 673px;*/

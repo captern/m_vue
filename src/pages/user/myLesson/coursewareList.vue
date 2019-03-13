@@ -6,7 +6,7 @@
       <div class="coursewareList-item" v-for="(item, index) in coursewareData" :key="index" @click="goLink(item.link)">
         <div class="name">{{item.name}}</div>
         <div class="link-icon">
-          <img src="" alt="icon">
+          <img src="../../../common/image/activity/right-more.png" alt="icon">
         </div>
       </div>
     </div>
@@ -95,6 +95,13 @@
         }
         .link-icon {
           flex: 1;
+          text-align: right;
+          padding-right: 10px;
+          img{
+            margin-top: 20px;
+            width: 10px;
+            height: 20px;
+          }
         }
       }
     }

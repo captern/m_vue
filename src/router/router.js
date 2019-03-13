@@ -192,7 +192,7 @@ export default new Router({
     },
     // 课程部分
     {
-      path: '/lessonList',
+      path: '/lessonList/:type?',
       component: LessonList
     }, {
       path: '/lessonMain/:lessonId',

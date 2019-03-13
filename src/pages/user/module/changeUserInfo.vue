@@ -45,7 +45,11 @@
           </div>
         </div>
         <div class="name-area change-item">
-          <div class="item-left">姓&nbsp;&nbsp;&nbsp;名 ：</div>
+
+          <div class="item-left">
+            <span>*</span>
+            姓&nbsp;&nbsp;&nbsp;名 ：
+          </div>
           <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName" v-focus="this.focus">
         </div>
         <div class="IdCard-area change-item">
@@ -123,6 +127,10 @@
               this.user_id = res.data.id
               this.phoneNumber = res.data.mobile
               this.sex = res.data.sex
+              this.userName = res.data.real_name
+              this.IdCard = res.data.id_card_number
+              this.workLevel = res.data.job
+              this.workSpace = res.data.company
             } else {
               console.log('用户信息获取失败')
             }

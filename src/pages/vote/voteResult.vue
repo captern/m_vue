@@ -10,8 +10,8 @@
           <div class="option-dec">
             <div v-html="item.content"></div>
             <div class="progress">
-              <!--<div class="progress-num" :style="{width:item.num/voteData.total_num}">{{Math.round(item.num / voteData.total_num * 10000) / 100.00 + "%"}}</div>-->
-              <div class="progress-num" :style="{width:item.num/voteData.total_num}">{{item.num}}</div>
+              <!--<div class="progress-num" :style="{width:(item.num/voteData.total_num) + '%'}">{{item.num}}</div>-->
+              <div class="progress-num" :style="{width:(item.num/voteData.total_num *100) + '%'}">{{item.num}}</div>
             </div>
           </div>
         </div>
