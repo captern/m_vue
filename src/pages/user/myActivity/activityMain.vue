@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import {MP} from '../../../common/js/map'
   import {getUser, getBanner, getIndexLink} from '../../../server/api'
   import Header from '../../../components/header.vue'
   import HomeIcon from '../../../components/common/homeIcon.vue'
@@ -53,7 +54,8 @@
         showAlert: false,
         logOutTest: false,
         successAlert: false,
-        alertText: null
+        alertText: null,
+        myLocation: ''
       }
     },
     computed: {
@@ -65,8 +67,34 @@
     mounted() {
       this.activityId = this.$route.params.activityId;
       this.getData()
+      this.addressDetail();
     },
     methods: {
+      addressDetail() { //获取地理位置
+        let _this = this;
+        var vm = this;
+//全局的this在方法中不能使用，需要重新定义一下
+        var geolocation = new BMap.Geolocation();
+        var gc = new BMap.Geocoder();
+        geolocation.getCurrentPosition(function (r) {
+          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            const myGeo = new BMap.Geocoder()
+            myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), data => {
+              if (data.addressComponents) {
+                const result = data.addressComponents
+                const location = {
+                  creditLongitude: r.point.lat, // 经度
+                  creditLatitude: r.point.lng, // 纬度
+//                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
+                }
+//                _this.myLocation = location.creditLongitude + ',' + location.creditLatitude
+                _this.myLocation = location.creditLatitude + ',' + location.creditLongitude
+                console.log(location)
+              }
+            })
+          }
+        })
+      },
       getData() {
         let getData = {
           id: this.activityId
@@ -102,7 +130,7 @@
       registerCheck() {
         let postData = {
           id: this.activityId,
-          coordinates: ''
+          coordinates: this.myLocation
         }
         activityRegister(postData).then(res => {
           if (res.status) {
@@ -116,7 +144,6 @@
         })
       },
       goTest() {
-        console.log('天竺啊测试页面')
         this.$router.push('/testMain/' + this.lessonData.test_id)
       }
     },

@@ -114,7 +114,8 @@
                   creditLatitude: r.point.lng, // 纬度
 //                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
                 }
-                _this.myLocation = location.creditLongitude + ',' + location.creditLatitude
+//                _this.myLocation = location.creditLongitude + ',' + location.creditLatitude
+                _this.myLocation = location.creditLatitude + ',' + location.creditLongitude
                 console.log(location)
               }
             })
