@@ -130,6 +130,8 @@
           color: #ffffff;
           outline: none;
           border-radius: 15px;
+          flex: 2;
+          overflow: hidden;
           input{
             outline: none;
             color: rgb(255,255,255);
