@@ -237,7 +237,7 @@
         font-size: 19px;
         line-height: 30px;
         color: #000000;
-        padding-bottom: 100px;
+        padding-bottom: 180px;
         img {
           width: 100%;
         }
