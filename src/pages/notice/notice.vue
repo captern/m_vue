@@ -3,7 +3,7 @@
     <Header :title='newsData.title'/>
     <div class="news-area">
       <div class="news-main">
-        <div class="header-area">
+        <div class="header-area" :style="{color:newsData.color}">
           {{newsData.title}}
         </div>
         <div class="auther-area">
@@ -11,7 +11,7 @@
           <!--<div class="right">{{newsData.created_time}}</div>-->
           <div class="left">编辑：{{newsData.created_time}}</div>
         </div>
-        <div v-html="newsData.content"></div>
+        <div class="text-area" v-html="newsData.content"></div>
         <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
           点击报名
         </div>
@@ -69,7 +69,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .news-page {
     background: url("../../common/image/bkg/bkg-two.png") fixed;
     background-size: 100% 100%;
@@ -121,6 +121,15 @@
           }
           .right{
             text-align: right;
+          }
+        }
+        .text-area {
+          font-size: 19px;
+          line-height: 25px;
+          color: rgb(0, 0, 0);
+          img {
+            width: 100%;
+            height: auto;
           }
         }
         .bottom-line{

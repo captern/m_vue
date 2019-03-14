@@ -14,12 +14,14 @@
         <div class="author">主讲人：{{lessonData.teacher}}</div>
         <div class="time">{{lessonData.created_time}}</div>
       </div>
-      <div class="vote-main" v-html="lessonData.desc"></div>
+      <!--<div class="vote-main" v-html="lessonData.introduction"></div>-->
+      <div class="vote-main" v-html="lessonData.introduction"></div>
       <div class="vote-btn" @click="showLessonAlert">报名</div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showLessonAlert" @confirmTip="signUp" tipType="three" alertText="是否报名本课程" btnOne="返回" btnTwo="报名"/>
     <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="signUp" tipType="one" :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
+    <alert-tip v-if="successConfirm" @closeTip="goBack" tipType="one" :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
   </div>
 </template>
 
@@ -41,6 +43,7 @@
         lessonData: '',
         enlistTip: false,
         showAlert: false,
+        successConfirm: false,
         successAlert: false,
         alertText: null
       }
@@ -70,6 +73,9 @@
       showSuccessAlert(){
         this.successAlert =! this.successAlert
       },
+      goBack(){     // 返回上一页
+        this.$router.go(-1);
+      },
       // 报名课程
       signUp(){
         let postData = {
@@ -77,9 +83,11 @@
         }
         signLesson(postData).then(res => {
           if(res.status){
-            this.successAlert = !this.successAlert
+            this.successConfirm = !this.successConfirm
             this.alertText = '报名成功'
-            this.getMain();
+//            console.log(this.lessonId)
+//            this.$router.push('/myLessonMain/' + this.lessonId)
+//            this.getMain();
           }else{
             this.successAlert = !this.successAlert
             this.alertText = res.msg
@@ -96,7 +104,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .vote-item-page {
     /*背景固定不滚动*/
     background: url("../../common/image/bkg/bkg-one.png");
@@ -147,6 +155,9 @@
         line-height: 30px;
         color: #000000;
         padding-bottom: 100px;
+        img{
+          max-width: 100%;
+        }
       }
       .vote-btn {
         position: fixed;

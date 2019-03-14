@@ -5,8 +5,8 @@
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in voteList" :key="index">
       <p class="title">{{item.name}}</p>
-      <p class="des" v-html="item.content"></p>
-      <p class="time">{{item.updated_time}}</p>
+      <p class="des">{{item.des}}</p>
+      <p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>
     </router-link>
   </div>
 </template>
@@ -162,12 +162,22 @@
         font-size: 23px;
         line-height: 31px;
         color: #231815;
+        overflow: hidden;
+        text-overflow:ellipsis;//文本溢出显示省略号
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       .des {
         font-size: 18px;
         line-height: 31px;
         color: #727171;
         padding-top: 14px;
+        overflow: hidden;
+        text-overflow:ellipsis;//文本溢出显示省略号
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
       .time {
         text-align: right;

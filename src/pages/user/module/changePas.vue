@@ -4,7 +4,7 @@
     <div class="change-area">
       <div class="change-form">
         <div class="name-area change-item">
-          <div class="item-left"><span>*</span>旧 密 码 ：</div>
+          <div class="item-left"><span>*</span>密 码 ：</div>
           <input class="item-right" type="password" name="name" placeholder="输入新密码" v-model="newPassword">
         </div>
         <div class="IdCard-area change-item">
@@ -80,7 +80,7 @@
           this.alertText = '密码修改成功';
           setTimeout(function () {
             this.$router.go(-1);
-          },1000)
+          },500)
           return
         }else{
           this.showAlert = true;
@@ -133,7 +133,7 @@
           margin-bottom: 10px;
           /*border-radius: 24px;*/
           .item-left {
-            flex: 1.2;
+            flex: 1.4;
             text-align: right;
             /*font-size: 36px;*/
             font-size: 22px;

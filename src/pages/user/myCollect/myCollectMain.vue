@@ -14,7 +14,7 @@
         <div class="author">主讲人：{{lessonData.teacher}}</div>
         <div class="time">{{lessonData.created_time}}</div>
       </div>
-      <div class="vote-main" v-html="lessonData.desc"></div>
+      <div class="vote-main" v-html="lessonData.introduction"></div>
       <div class="vote-btn" @click="showLessonAlert">报名</div>
     </div>
     <!--提示框弹出部分-->
@@ -93,7 +93,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .vote-item-page {
     /*背景固定不滚动*/
     background: url("../../../common/image/bkg/bkg-one.png");
@@ -144,6 +144,9 @@
         line-height: 30px;
         color: #000000;
         padding-bottom: 100px;
+        img{
+          max-width: 100%;
+        }
       }
       .vote-btn {
         position: fixed;

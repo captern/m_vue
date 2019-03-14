@@ -4,22 +4,44 @@
     <HomeIcon></HomeIcon>
     <Search @parentMethod="changeSearch"></Search>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
-    <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-for="(item, index) in voteList" :key="index">
-      <div class="type-one" v-if="item.has_teacher_img == 0">
-        <p class="title">{{item.name}}</p>
-        <p class="des">{{item.desc}}</p>
-      </div>
-      <div class="type-two" v-else-if="item.has_teacher_img == 1">
-        <div class="author-img">
-          <img src="../../common/image/bkg/bkg-one.png" alt="">
+    <div v-for="(item, index) in voteList" :key="index">
+      <!--已经报名课程-->
+      <router-link :to="'/myLessonMain/' + item.id " class="lesson-item" v-if="item.is_sign">
+        <div class="type-one" v-if="item.has_teacher_img == 0">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
         </div>
-        <p class="title">{{item.name}}</p>
-      </div>
-      <div class="author-time">
-        <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-        <div class="time">授课时间：{{item.study_time}}</div>
-      </div>
-    </router-link>
+        <div class="type-two" v-else-if="item.has_teacher_img == 1">
+          <div class="author-img">
+            <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
+            <img :src="item.teacher_img" alt="">
+          </div>
+          <p class="title">{{item.name}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+          <div class="time">授课时间：{{item.study_time}}</div>
+        </div>
+      </router-link>
+      <!--未来得及报名-->
+      <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-else>
+        <div class="type-one" v-if="item.has_teacher_img == 0">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
+        </div>
+        <div class="type-two" v-else-if="item.has_teacher_img == 1">
+          <div class="author-img">
+            <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
+            <img :src="item.teacher_img" alt="">
+          </div>
+          <p class="title">{{item.name}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+          <div class="time">授课时间：{{item.study_time}}</div>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 

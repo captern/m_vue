@@ -39,12 +39,13 @@
     },
     computed: {},
     methods: {
-      changeSearch(val){
+      changeSearch(val) {
         this.searchVal = val
         this.getData()
       },
-      getData(){
+      getData() {
         let getData = {
+          type: 2,
           name: this.searchVal
         }
         newsNotice(getData).then(res => {

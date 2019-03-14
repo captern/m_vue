@@ -2,10 +2,10 @@ import fetch from '../config/fetch'
 import {getStore} from '../config/mUtils'
 
 // 获取新闻列表
-export const getNewsList = getData => fetch('/news/get-news-list?type=1', getData)
+export const getNewsList = getData => fetch('/news/get-news-list', getData)
 
 // 获取公告列表
-export const newsNotice = getData => fetch('/news/get-news-list?type=2', getData)
+export const newsNotice = getData => fetch('/news/get-news-list', getData)
 
 // 获取新闻详情
 export const newsDetail = newsId => fetch('/news/news-detail?newsId=' + newsId);

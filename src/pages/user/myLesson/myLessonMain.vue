@@ -14,7 +14,7 @@
         <div class="author">主讲人：{{lessonData.teacher}}</div>
         <div class="time">{{lessonData.created_time}}</div>
       </div>
-      <div class="vote-main" v-html="lessonData.desc"></div>
+      <div class="vote-main" v-html="lessonData.introduction"></div>
       <div class="btns-area">
         <router-link :to="'/myLessonMain/evaluate/' +lessonData.id" v-if="lessonData.CanAppraise">
           <div class="vote-btn">课程评价</div>
@@ -25,13 +25,15 @@
         </router-link>
         <div v-if="lessonData.type == '1'">
           <div v-if="lessonData.test_id && !lessonData.is_test" class="vote-btn" @click="goTest">课后测试</div>
-          <router-link v-else :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
+          <router-link v-else-if="lessonData.test_id" :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
             <div class="vote-btn">查看错题</div>
           </router-link>
         </div>
         <div v-else-if="lessonData.type == '2'">
-          <div v-if="lessonData.test_id && !lessonData.is_test" class="vote-btn" @click="goTest">课后测试</div>
-          <router-link v-else :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
+          <div v-if="lessonData.test_id && !lessonData.is_test && lessonData.test_id!= '0'" class="vote-btn"
+               @click="goTest">课后测试
+          </div>
+          <router-link v-else-if="lessonData.test_id" :to="'/testFail/' + lessonData.test_id + '/' + lessonId">
             <div class="vote-btn">查看错题</div>
           </router-link>
         </div>
@@ -78,7 +80,7 @@
         logOutTest: false,
         successAlert: false,
         alertText: null,
-        myLocation:''
+        myLocation: ''
       }
     },
     computed: {
@@ -101,7 +103,7 @@
 //全局的this在方法中不能使用，需要重新定义一下
         var geolocation = new BMap.Geolocation();
         var gc = new BMap.Geocoder();
-        geolocation.getCurrentPosition(function(r) {
+        geolocation.getCurrentPosition(function (r) {
           if (this.getStatus() == BMAP_STATUS_SUCCESS) {
             const myGeo = new BMap.Geocoder()
             myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), data => {
@@ -112,7 +114,7 @@
                   creditLatitude: r.point.lng, // 纬度
 //                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
                 }
-                _this.myLocation = location.creditLongitude + ',' +  location.creditLatitude
+                _this.myLocation = location.creditLongitude + ',' + location.creditLatitude
                 console.log(location)
               }
             })
@@ -184,7 +186,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .vote-item-page {
     /*背景固定不滚动*/
     background: url("../../../common/image/bkg/bkg-one.png");
@@ -235,6 +237,9 @@
         line-height: 30px;
         color: #000000;
         padding-bottom: 100px;
+        img {
+          width: 100%;
+        }
       }
       .btns-area {
         position: fixed;

@@ -45,6 +45,7 @@
       },
       getData(){
         let getData = {
+          type: 1,
           name: this.searchVal
         }
         getNewsList(getData).then(res => {

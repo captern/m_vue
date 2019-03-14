@@ -131,6 +131,7 @@
               this.IdCard = res.data.id_card_number
               this.workLevel = res.data.job
               this.workSpace = res.data.company
+              this.avatar = res.data.head_img
             } else {
               console.log('用户信息获取失败')
             }

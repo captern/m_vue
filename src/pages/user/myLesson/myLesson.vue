@@ -10,7 +10,7 @@
       </div>
       <div class="type-two" v-else-if="item.has_teacher_img == 1">
         <div class="author-img">
-          <img src="../../../common/image/bkg/bkg-one.png" alt="">
+          <img :src="item.teacher_img" alt="">
         </div>
         <p class="title">{{item.name}}</p>
       </div>

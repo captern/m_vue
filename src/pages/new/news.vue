@@ -4,7 +4,7 @@
     <HomeIcon/>
     <div class="news-area">
       <div class="news-main">
-        <div class="header-area">
+        <div class="header-area" :style="{color:newsData.color}">
           {{newsData.title}}
         </div>
         <div class="auther-area">
@@ -71,7 +71,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   .news-page {
     /*背景固定不滚动*/
     background: url("../../common/image/bkg/bkg-two.png") fixed;
@@ -86,6 +86,7 @@
       .news-main {
         padding: 40px 35px 130px;
         display: block;
+        min-height: calc(100vh - 5px);
         .header-area {
           color: rgb(58, 178, 237);;
           padding-right: 204px;
@@ -116,7 +117,7 @@
           font-size: 19px;
           line-height: 25px;
           color: rgb(0, 0, 0);
-          img{
+          img {
             width: 100%;
             height: auto;
           }
