@@ -1,6 +1,6 @@
 <template>
-  <div class="test-post-page" v-wechat-title="$route.meta.title='投票'">
-    <Header title='投票' noBackShow='noBackShow'/>
+  <div class="test-post-page" v-wechat-title="$route.meta.title='测试'">
+    <Header title='测试' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="test-post-area">
       <div class="test-item" v-for="(testItem, testIndex) in testData" :key="testIndex">
