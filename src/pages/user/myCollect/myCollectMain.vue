@@ -1,6 +1,6 @@
 <template>
-  <div class="vote-item-page" v-wechat-title="$route.meta.title='课程详情'">
-    <Header title='课程详情' noBackShow='noBackShow'/>
+  <div class="vote-item-page" v-wechat-title="$route.meta.title='我的收藏'">
+    <Header title='我的收藏' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
       <div class="header-area">
