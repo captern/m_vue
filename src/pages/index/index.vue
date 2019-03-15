@@ -142,7 +142,8 @@
     overflow: scroll;
     /*min-height: calc(100vh - 100px);*/
     min-height: 100vh;
-    background: url("../../common/image/bkg/backage.gif") no-repeat fixed bottom;
+    background: url("../../common/image/bkg/backage.gif") no-repeat;
+    background-size: 100% 100%;
     .main-list-area {
       border: none;
       padding-bottom: 100px;
