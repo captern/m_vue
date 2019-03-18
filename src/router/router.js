@@ -136,7 +136,7 @@ export default new Router({
     },
     // 新闻部分
     {
-      path: '/newslist',
+      path: '/newslist/:type?',
       component: NewsList
     }, {
       path: '/news/:newsId',
@@ -144,7 +144,7 @@ export default new Router({
     },
     //公告部分
     {
-      path: '/noticelist',
+      path: '/noticelist/:type?',
       component: NoticeList
     }, {
       path: '/notice/:noticeId',

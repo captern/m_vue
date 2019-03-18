@@ -31,22 +31,26 @@
     data() {
       return {
         newsList: '',
-        searchVal: ''
+        searchVal: '',
+        typeId: ''
       }
     },
     mounted() {
-      this.getData()
+      this.typeId = this.$route.params.type;
+      this.getData(this.typeId )
     },
     computed: {},
     methods: {
+
       changeSearch(val){
         this.searchVal = val
         this.getData()
       },
-      getData(){
+      getData(typeId){
         let getData = {
           type: 1,
-          name: this.searchVal
+          name: this.searchVal,
+          group: typeId
         }
         getNewsList(getData).then(res => {
           if (res.status) {

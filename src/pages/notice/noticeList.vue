@@ -35,7 +35,8 @@
       }
     },
     mounted() {
-      this.getData()
+      this.typeId = this.$route.params.type;
+      this.getData(this.typeId)
     },
     computed: {},
     methods: {
@@ -43,10 +44,11 @@
         this.searchVal = val
         this.getData()
       },
-      getData() {
+      getData(typeId) {
         let getData = {
           type: 2,
-          name: this.searchVal
+          name: this.searchVal,
+          group: typeId
         }
         newsNotice(getData).then(res => {
           if (res.status) {

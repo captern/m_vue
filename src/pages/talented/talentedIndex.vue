@@ -12,9 +12,9 @@
         <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/four.png" alt=""></router-link>
         <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/five.png" alt=""></router-link>
         <router-link to="/test" class="list-item"><img src="../../common/image/talented/six.png" alt=""></router-link>
-        <router-link to="/noticelist" class="list-item"><img src="../../common/image/talented/seven.png" alt="">
+        <router-link to="/noticelist/2" class="list-item"><img src="../../common/image/talented/seven.png" alt="">
         </router-link>
-        <router-link to="/newslist" class="list-item"><img src="../../common/image/talented/eight.png" alt=""></router-link>
+        <router-link to="/newslist/2" class="list-item"><img src="../../common/image/talented/eight.png" alt=""></router-link>
       </div>
     </div>
     <div class="bottom-area">

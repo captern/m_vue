@@ -15,7 +15,7 @@
         <router-link to="/vote" class="list-item">
           <img src="../../common/image/activity/three.png" alt="">
         </router-link>
-        <router-link to="/noticelist" class="list-item">
+        <router-link to="/noticelist/3" class="list-item">
           <img src="../../common/image/activity/four.png" alt="">
           <!--<img src="../../common/image/link-seven.png" alt="">-->
         </router-link>
