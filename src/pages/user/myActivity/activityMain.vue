@@ -29,6 +29,8 @@
                alertText="是否取消报名" btnOne="返回" btnTwo="取消报名"/>
     <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="cancelSignUp" tipType="one"
                :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
+    <alert-tip v-if="cancelSuccessAlert" @closeTip="cancelSuccessJump" @confirmTip="cancelSignUp" tipType="one"
+               :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
   </div>
 </template>
 
@@ -51,6 +53,7 @@
         activityId: '',
         lessonData: '',
         enlistTip: false,
+        cancelSuccessAlert: false,
         showAlert: false,
         logOutTest: false,
         successAlert: false,
@@ -104,6 +107,10 @@
           this.lessonData = res.data
         })
       },
+      cancelSuccessJump(){
+        this.showCancelSuccess = !this.showCancelSuccess
+        this.$router.push('/myActivity');
+      },
       showCancelAlert() {
         this.showAlert = !this.showAlert
       },
@@ -117,7 +124,7 @@
         }
         cancelActivity(postData).then(res => {
           if (res.status) {
-            this.successAlert = !this.successAlert
+            this.showCancelSuccess = !this.showCancelSuccess
             this.alertText = '取消报名成功'
           } else {
             this.successAlert = !this.successAlert
@@ -203,12 +210,20 @@
         }
       }
       .vote-main {
-        font-size: 19px;
-        line-height: 30px;
-        color: #000000;
+        /*font-size: 19px;*/
+        /*line-height: 30px;*/
+        /*color: #000000;*/
         padding-bottom: 180px;
         img{
           max-width: 100%;
+        }
+        video{
+          width: 100%;
+          height: auto;
+        }
+        iframe{
+          width: 100%;
+          height: auto;
         }
       }
       .btns-area {

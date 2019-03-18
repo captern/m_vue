@@ -45,6 +45,9 @@
       </div>
     </div>
     <!--提示框弹出部分-->
+    <!--取消报名成功的弹框-->
+    <alert-tip v-if="showCancelSuccessAlert" @closeTip="cancelSuccessJump" tipType="one"
+               alertText="是否取消报名" btnOne="返回"/>
     <alert-tip v-if="showAlert" @closeTip="showCancelAlert" @confirmTip="cancelSignUp" tipType="three"
                alertText="是否取消报名" btnOne="返回" btnTwo="取消报名"/>
     <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="cancelSignUp" tipType="one"
@@ -73,6 +76,7 @@
     data() {
       return {
         requestFlag: true, // 是否请求接口
+        showCancelSuccessAlert: false,
         lessonId: '',
         lessonData: '',
         enlistTip: false,
@@ -146,13 +150,18 @@
         }
         cancelSignIn(postData).then(res => {
           if (res.status) {
-            this.successAlert = !this.successAlert
+            this.showCancelSuccessAlert = !this.showCancelSuccessAlert
             this.alertText = '取消报名成功'
           } else {
             this.successAlert = !this.successAlert
             this.alertText = res.msg
           }
         })
+      },
+      cancelSuccessJump(){
+        console.log('应该跳转了')
+        this.showCancelSuccessAlert = !this.showCancelSuccessAlert
+        this.$router.push('/myLesson');
       },
       // 获取位置信息
 //      签到部分
@@ -174,7 +183,6 @@
         })
       },
       goTest() {
-        console.log('天竺啊测试页面')
         this.$router.push('/testMain/' + this.lessonData.test_id + '/' + this.lessonId)
       }
     },
@@ -234,14 +242,18 @@
         }
       }
       .vote-main {
-        font-size: 19px;
-        line-height: 30px;
-        color: #000000;
+        /*font-size: 19px;*/
+        /*line-height: 30px;*/
+        /*color: #000000;*/
         padding-bottom: 180px;
         img {
           width: 100%;
         }
         video{
+          width: 100%;
+          height: auto;
+        }
+        iframe{
           width: 100%;
           height: auto;
         }

@@ -124,10 +124,14 @@
           }
         }
         .text-area {
-          font-size: 19px;
-          line-height: 25px;
-          color: rgb(0, 0, 0);
+          /*font-size: 19px;*/
+          /*line-height: 25px;*/
+          /*color: rgb(0, 0, 0);*/
           img {
+            width: 100%;
+            height: auto;
+          }
+          video{
             width: 100%;
             height: auto;
           }

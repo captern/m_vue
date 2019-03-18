@@ -11,7 +11,7 @@ export const newsNotice = getData => fetch('/news/get-news-list', getData)
 export const newsDetail = newsId => fetch('/news/news-detail?newsId=' + newsId);
 
 // 获取首页轮播图
-export const getBanner = () => fetch('/news/get-banner', {})
+export const getBanner = (group) => fetch('/news/get-banner', group)
 
 // 获取首页链接
 export const getIndexLink = () => fetch('/news/get-menu', {})

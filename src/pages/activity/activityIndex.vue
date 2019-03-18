@@ -85,7 +85,10 @@
       ])
     },
     mounted() {
-      getBanner().then(res => {
+      let bannerData = {
+        group: 3
+      }
+      getBanner(bannerData).then(res => {
         this.banner = res.data
       });
       // 获取首页链接信息

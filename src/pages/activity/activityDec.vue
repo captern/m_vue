@@ -194,12 +194,20 @@
         }
       }
       .vote-main {
-        font-size: 19px;
-        line-height: 30px;
-        color: #000000;
+        /*font-size: 19px;*/
+        /*line-height: 30px;*/
+        /*color: #000000;*/
         padding-bottom: 100px;
         img{
           max-width: 100%;
+        }
+        video{
+          width: 100%;
+          height: auto;
+        }
+        iframe{
+          width: 100%;
+          height: auto;
         }
       }
       .btns-area {
