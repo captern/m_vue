@@ -116,9 +116,9 @@
         }
       }
       .vote-main {
-        font-size: 19px;
-        line-height: 30px;
-        color: #000000;
+        /*font-size: 19px;*/
+        /*line-height: 30px;*/
+        /*color: #000000;*/
         padding-bottom: 111px;
         img{
           max-width: 100%;

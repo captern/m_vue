@@ -241,6 +241,10 @@
         img {
           width: 100%;
         }
+        video{
+          width: 100%;
+          height: auto;
+        }
       }
       .btns-area {
         position: fixed;

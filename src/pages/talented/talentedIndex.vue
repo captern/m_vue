@@ -127,10 +127,10 @@
     /*}*/
     /*背景固定不滚动*/
     .main-list-area {
-      min-height: 100%;
+      min-height: calc(100vh - 547px);
       margin: 28px 33px;
       /*background: #ffffff;*/
-      background: url("../../common/image/talented/bkg.png") no-repeat fixed bottom;
+      background: url("../../common/image/talented/bkg-one.png") no-repeat bottom;
       background-size: 100% 100%;
       border-radius: 24px;
       padding-bottom: 100px;

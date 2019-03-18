@@ -173,11 +173,14 @@
         line-height: 31px;
         color: #727171;
         padding-top: 14px;
-        overflow: hidden;
-        text-overflow:ellipsis;//文本溢出显示省略号
+
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*! autoprefixer: off */
         -webkit-box-orient: vertical;
+        /* autoprefixer: on */
       }
       .time {
         text-align: right;

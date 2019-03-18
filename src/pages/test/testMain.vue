@@ -102,14 +102,20 @@
           }
         } else {//单选
           // 因为是单选，所以需要先将题目清空
-          this.results[testIndex].answer = [];
-          this.results[testIndex].answer.push(optionIndex + 1)
+          if(this.results[testIndex].answer == optionIndex + 1){
+            this.results[testIndex].answer = [];
+          }else{
+            this.results[testIndex].answer = [];
+            this.results[testIndex].answer.push(optionIndex + 1)
+          }
+
         }
       },
       showVoteAlert() {
         const _this = this
         let postResult = new Array()
         _this.results.forEach(function (resultItem, resultIndex) {
+          console.log(resultItem)
           if (resultItem.answer.length === 0) {
             _this.showPop = true
             _this.alertText = '请全部选择'
@@ -140,6 +146,7 @@
               _this.alertText = res.msg
             }
           })
+
         } else {
           console.log('fff')
         }

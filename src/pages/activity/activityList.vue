@@ -17,8 +17,8 @@
     <div v-if="pageType == 'one'">
       <router-link :to="'/activityDec/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
         <div class="type-one">
-          <p class="title">{{item.name}}</p>
-          <p class="des">{{item.desc}}</p>
+          <div class="title">{{item.name}}</div>
+          <div class="des">{{item.desc}}</div>
         </div>
         <div class="author-time">
           <div class="author">主讲人：<span>{{item.teacher}}</span></div>
@@ -29,9 +29,9 @@
     <div v-else-if="pageType == 'two'">
       <router-link :to="'/voteItem/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
         <div class="vote">
-          <p class="title">{{item.name}}</p>
-          <p class="des" v-html="item.content"></p>
-          <p class="time">{{item.updated_time}}</p>
+          <div class="title">{{item.name}}</div>
+          <div class="des" v-html="item.des"></div>
+          <div class="time">{{item.end_time}}</div>
         </div>
       </router-link>
     </div>
@@ -106,7 +106,6 @@
         })
       },
       scrolling() {
-        console.log('dddd')
         if (this.scrollFlag) {
           return;
         }
@@ -185,6 +184,14 @@
           line-height: 31px;
           color: #727171;
           padding-top: 14px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          /*! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /* autoprefixer: on */
+
         }
       }
       .vote{
@@ -198,6 +205,13 @@
           line-height: 31px;
           color: #727171;
           padding-top: 14px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          /*! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /* autoprefixer: on */
         }
         .time {
           text-align: right;
