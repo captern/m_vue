@@ -18,6 +18,7 @@
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
+    <alert-tip v-if="showSuccessAlert" @closeTip="changeSucess = false" :tipType="tipType" :alertText="alertText"/>
 
   </div>
 </template>
@@ -36,6 +37,7 @@
         newPassword: null,
         repeatPassword: null,
         showAlert: false, // 显示提示组件
+        showSuccessAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
       }
@@ -58,6 +60,9 @@
           this.$router.push('/index');
         }
       },
+      changeSucess(){   // 控制修改成功之后的跳转
+        this.$router.go(-1);
+      },
       async changePas() {
         if (!this.newPassword) {
           this.showAlert = true;
@@ -76,11 +81,11 @@
         // 发送重置信息
         let res = await changePas(this.newPassword, this.repeatPassword);
         if (res.status) {
-          this.showAlert = true;
+          this.showSuccessAlert = true;
           this.alertText = '密码修改成功';
-          setTimeout(function () {
-            this.$router.go(-1);
-          },500)
+          // setTimeout(function () {
+          //
+          // },500)
           return
         }else{
           this.showAlert = true;

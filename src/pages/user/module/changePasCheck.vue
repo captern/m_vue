@@ -14,7 +14,7 @@
           发送验证码
         </div>
       </div>
-      <div class="post-btn" @click="postCheck">保存</div>
+      <div class="post-btn" @click="postCheck">下一步</div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText ? alertText : '验证码错误'" btn-one="关闭"/>
