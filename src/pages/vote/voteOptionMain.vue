@@ -123,11 +123,25 @@
         }
       }
       .vote-main {
-        font-size: 19px;
-        line-height: 30px;
         padding-top: 44px;
-        color: #000000;
         padding-bottom: 111px;
+        img{
+          max-width: 100%;
+        }
+        video{
+          width: 100%;
+          height: auto;
+        }
+        iframe{
+          width: 100%;
+          height: auto;
+        }
+        a{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
       }
       .vote-btn {
         position: fixed;

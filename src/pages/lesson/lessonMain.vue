@@ -155,6 +155,15 @@
         /*line-height: 30px;*/
         /*color: #000000;*/
         padding-bottom: 100px;
+        p{
+          max-width: 100%;
+        }
+        a{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
         img{
           max-width: 100%;
         }

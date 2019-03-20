@@ -225,6 +225,12 @@
           width: 100%;
           height: auto;
         }
+        a{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
       }
       .btns-area {
         position: fixed;

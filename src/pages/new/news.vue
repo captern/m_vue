@@ -125,6 +125,12 @@
             width: 100%;
             height: auto;
           }
+          a{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+          }
         }
         .enlist-area {
           position: fixed;

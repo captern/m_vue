@@ -37,24 +37,25 @@
             <div class="vote-btn">查看错题</div>
           </router-link>
         </div>
-
-
-        <div v-if="lessonData.check_but == 'start'" class="vote-btn" @click="registerCheck">上课签到</div>
-        <div v-else-if="lessonData.check_but == 'end'" class="vote-btn" @click="registerCheck">下课签到</div>
+        <div v-if="lessonData.check_but == 'start'" class="vote-btn" @click="registerCheckBtnEnter('1')">上课签到</div>
+        <div v-else-if="lessonData.check_but == 'end'" class="vote-btn" @click="registerCheckBtnEnter('2')">下课签到</div>
         <div v-if="lessonData.canCancel" class="vote-btn" @click="showCancelAlert">取消报名</div>
       </div>
     </div>
     <!--提示框弹出部分-->
     <!--取消报名成功的弹框-->
     <alert-tip v-if="showCancelSuccessAlert" @closeTip="cancelSuccessJump" tipType="one"
-               alertText="是否取消报名" btnOne="返回"/>
+               :alertText="alertText ? alertText : '是否取消报名'" btnOne="返回"/>
     <alert-tip v-if="showAlert" @closeTip="showCancelAlert" @confirmTip="cancelSignUp" tipType="three"
                alertText="是否取消报名" btnOne="返回" btnTwo="取消报名"/>
     <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" @confirmTip="cancelSignUp" tipType="one"
                :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
     <!--签退成功，并且有课后测试课后测试-->
     <alert-tip v-if="logOutTest" @closeTip="showTestAlert" @confirmTip="goTest" tipType="three"
-               alertText="下课签到成功" btnOne="返回" btnTwo="课后测试"/>
+               alertText="下课签退成功" btnOne="返回" btnTwo="课后测试"/>
+    <!--签到或者亲啊退的入口-->
+    <alert-tip v-if="registerEnter" @closeTip="registerEnter = !registerEnter" @confirmTip="registerCheckBtn" tipType="three"
+               :alertText="alertText ? alertText : '是否进行签到'" btnOne="返回" btnTwo=""/>
   </div>
 </template>
 
@@ -84,6 +85,7 @@
         logOutTest: false,
         successAlert: false,
         alertText: null,
+        registerEnter: false,
         myLocation: ''
       }
     },
@@ -143,6 +145,15 @@
       showSuccessAlert() {
         this.successAlert = !this.successAlert
       },
+      registerCheckBtnEnter(type){
+        console.log('其拿到或者签退')
+        this.registerEnter = !this.registerEnter
+        if(type == 1){
+          this.alertText = '是否进行上课签到'
+        }else if(type == 2){
+          this.alertText = '是否进行下课签到'
+        }
+      },
       // 取消报名课程
       cancelSignUp() {
         let postData = {
@@ -165,7 +176,7 @@
       },
       // 获取位置信息
 //      签到部分
-      registerCheck() {
+      registerCheckBtn() {
         let postData = {
           id: this.lessonId,
           coordinates: this.myLocation
@@ -246,6 +257,12 @@
         /*line-height: 30px;*/
         /*color: #000000;*/
         padding-bottom: 180px;
+        a{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
         img {
           width: 100%;
         }

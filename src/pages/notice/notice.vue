@@ -135,6 +135,12 @@
             width: 100%;
             height: auto;
           }
+          a{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+          }
         }
         .bottom-line{
           border-top: 1px solid rgb(199, 199, 199);

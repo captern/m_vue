@@ -18,7 +18,7 @@
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
-    <alert-tip v-if="showSuccessAlert" @closeTip="changeSucess = false" :tipType="tipType" :alertText="alertText"/>
+    <alert-tip v-if="showSuccessAlert" @closeTip="changeSucess" :tipType="tipType" :alertText="alertText"/>
 
   </div>
 </template>
@@ -66,11 +66,11 @@
       async changePas() {
         if (!this.newPassword) {
           this.showAlert = true;
-          this.alertText = '请输入旧密码';
+          this.alertText = '请输入新密码';
           return
         } else if (!this.repeatPassword) {
           this.showAlert = true;
-          this.alertText = '请输入新密码';
+          this.alertText = '输入新密码再次确认';
           return
         }
 //        else if (this.newPassword !== this.repeatPassword) {
@@ -86,11 +86,9 @@
           // setTimeout(function () {
           //
           // },500)
-          return
         }else{
           this.showAlert = true;
           this.alertText = res.msg;
-          return
         }
       }
     },
