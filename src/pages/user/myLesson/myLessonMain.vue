@@ -55,7 +55,7 @@
                alertText="下课签退成功" btnOne="返回" btnTwo="课后测试"/>
     <!--签到或者亲啊退的入口-->
     <alert-tip v-if="registerEnter" @closeTip="registerEnter = !registerEnter" @confirmTip="registerCheckBtn" tipType="three"
-               :alertText="alertText ? alertText : '是否进行签到'" btnOne="返回" btnTwo=""/>
+               :alertText="alertText ? alertText : '是否进行签到'" btnOne="返回" btnTwo="签到"/>
   </div>
 </template>
 
