@@ -93,17 +93,17 @@
     width: 100%;
     overflow: scroll;
     .news {
-      margin: 26px;
+      margin: 24px;
       .news-item {
         background-color: #ffffff;
-        padding: 22px 22px 0;
+        padding: 20px 20px 0;
         border-radius: 24px;
         margin-bottom: 16px;
-        height: 310px;
+        height: 414px;
         display: block;
         .news-img {
           width: 100%;
-          height: 243px;
+          height: 339px;
           display: block;
         }
         .news-dec {
