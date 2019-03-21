@@ -186,6 +186,8 @@
             if (res.type == 2 && this.lessonData.test_id) {//  含有课后测试 id 的签退
               this.logOutTest = !this.logOutTest
               this.getData()
+            }else{
+              this.getData()
             }
           } else {
             this.successAlert = !this.successAlert
