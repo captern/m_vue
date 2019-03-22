@@ -5,7 +5,9 @@
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in myVoteList" :key="index">
       <p class="title">{{item.name}}</p>
       <p class="des" v-html="item.content"></p>
-      <p class="time">{{item.updated_time}}</p>
+      <!--<p class="time">{{item.updated_time}}</p>-->
+      <p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>
+      <p class="time" v-else></p>
     </router-link>
   </div>
 </template>
@@ -81,13 +83,32 @@
         line-height: 31px;
         color: #727171;
         padding-top: 14px;
+        max-height: 93px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*! autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /* autoprefixer: on */
       }
       .time {
+        /*text-align: right;*/
+        /*font-size: 18px;*/
+        /*line-height: 26px;*/
+        /*color: #3ab2ed;*/
+        /*padding-top: 20px;*/
+
         text-align: right;
         font-size: 18px;
         line-height: 26px;
-        color: #3ab2ed;
+        color: rgb(255, 255, 255);
         padding-top: 20px;
+        span{
+          padding: 3px 5.5px;
+          background: #3ab2ed;
+          border-radius: 5px;
+        }
       }
     }
   }

@@ -11,9 +11,17 @@
             <div v-html="item.content"></div>
             <div class="progress">
               <!--<div class="progress-num" :style="{width:(item.num/voteData.total_num) + '%'}">{{item.num}}</div>-->
-              <div class="progress-num" :style="{width:(item.num/voteData.total_num *100) + '%'}">{{item.num}}</div>
+              <div class="progress-num" :style="{width:(item.num/voteData.total_num *100) + '%'}">{{item.num}}&nbsp;</div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="share-area">
+        <img src="../../common/image/bkg/share-btn.png" alt=""  @click="sharePopFun()">
+      </div>
+      <div class="share-pop" v-if="sharePop">
+        <div class="alert-bkg" @click="sharePopFun()">
+          <img class="share-icon" src="../../common/image/activity/share-icon.png" alt="">
         </div>
       </div>
     </div>
@@ -35,6 +43,7 @@
         voteId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
         voteData: '',
+        sharePop: true,
         showAlert: false,
         checkedId: ['1'],
         options: [
@@ -81,6 +90,9 @@
       })
     },
     methods: {
+      sharePopFun(){
+        this.sharePop = !this.sharePop
+      },
       showVoteAlert() {
         this.showAlert = !this.showAlert
       },
@@ -118,6 +130,7 @@
         padding-bottom: 37px;
       }
       .vote-options {
+        padding-bottom: 60px;
         .option-item {
           display: flex;
           line-height: 35px;
@@ -154,6 +167,37 @@
                 color: #ffffff;
               }
             }
+          }
+        }
+      }
+      .share-area{
+        position: fixed;
+        bottom: 45px;
+        right: 60px;
+        img{
+          height: 34px;
+        }
+      }
+      .share-pop{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 200;
+        width: 100%;
+        height: 100%;
+        .alert-bkg {
+          width: 100%;
+          height: 100%;
+          background-color: black;
+          opacity: 0.3;
+          .share-icon{
+            width: 162px;
+            height: 247px;
+            position: absolute;
+            right: 74px;
+            top: 10px;
           }
         }
       }

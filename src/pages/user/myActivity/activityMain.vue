@@ -3,6 +3,7 @@
     <Header title='活动详情' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
+      <div class="check-icon">已参与</div>
       <div class="header-area">
         <div class="title">{{lessonData.name}}</div>
         <div class="heart">
@@ -180,6 +181,19 @@
       border-radius: 10px;
       padding: 30px 23px;
       min-height: calc(100vh - 106px);
+      .check-icon{
+        position: absolute;
+        top: 23px;
+        right: 46px;
+        background: #0a5b8c;
+        width: 70px;
+        height: 27px;
+        line-height: 27px;
+        text-align: center;
+        color: rgb(255,255,255);
+        font-size: 18px;
+        border-radius: 0 0 6px 6px;
+      }
       .header-area {
         display: flex;
         padding-bottom: 12px;

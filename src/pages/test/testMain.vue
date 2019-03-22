@@ -114,21 +114,30 @@
       showVoteAlert() {
         const _this = this
         let postResult = new Array()
+        let asd = []
         _this.results.forEach(function (resultItem, resultIndex) {
-          console.log(resultItem)
           if (resultItem.answer.length === 0) {
             _this.showPop = true
             _this.alertText = '请全部选择'
+            asd.push('1')
           }
           else {
-            _this.postTestFlag = true
+            // _this.postTestFlag = true
           }
         })
+        _this.checkCanPost(asd);
         _this.postResults = postResult
-        _this.postTest()
+        //
       },
       closePop() {
         this.showPop = !this.showPop
+      },
+      checkCanPost(item){
+        if(item.indexOf('1') > -1){
+        }else{
+          this.postTestFlag = true
+          this.postTest();
+        }
       },
       postTest() {
         const _this = this
@@ -190,6 +199,7 @@
         }
         .test-options {
           font-size: 19px;
+          padding-bottom: 80px;
           .option-item {
             display: flex;
             height: 35px;

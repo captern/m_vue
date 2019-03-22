@@ -22,7 +22,8 @@
             <div class="ranking-icon">{{index + 1}}</div>
             <img :src="item.img" alt="">
             <p class="option-dec">{{item.name}}</p>
-            <p class="vote-num">{{item.num}}票</p>
+            <p class="vote-num check" v-if="item.checked == 1">{{item.num}}票(已选)</p>
+            <p class="vote-num" v-else>{{item.num}}票</p>
           </router-link>
         </div>
       </div>
@@ -187,7 +188,7 @@
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
-      min-height: calc(100vh - 180px);
+      min-height: calc(100vh - 106px);
       .des-area{
         text-align: center;
         .success-icon{
@@ -269,8 +270,11 @@
           .vote-num{
             font-size: 21px;
             line-height: 27px;
-            color: #3ab2ed;
+
             padding-bottom: 5px;
+            &.check{
+              color: #3ab2ed;
+            }
           }
         }
       }

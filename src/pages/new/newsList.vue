@@ -9,8 +9,8 @@
       <div class="news-item" v-for="(item, index) in newsList" :key="index" :newsId="item.id" @click="jumpLink(index)">
         <img class="news-img" :src='item.cover' alt="tupian">
         <div class="news-dec">
-          <div class="news-title" v-html="item.content"></div>
-          <!--<div class="news-title">{{item.content}}</div>-->
+          <!--<div class="news-title" v-html="item.content"></div>-->
+          <div class="news-title">{{item.title}}</div>
           <div class="news-time">{{item.updated_time}}</div>
         </div>
       </div>
@@ -102,7 +102,7 @@
         padding: 20px 20px 0;
         border-radius: 24px;
         margin-bottom: 16px;
-        height: 414px;
+        /*height: 414px;*/
         display: block;
         .news-img {
           width: 100%;

@@ -2,11 +2,25 @@
   <div class="vote-page" v-wechat-title="$route.meta.title='投票'">
     <Header title='投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
-    <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
+    <div class="select-area">
+      <div class="select-type-area">
+        <div class="select-type" :class="{check: checked[1].itemIndex == 1 }" @click="changeCheck(1)">
+          <span>正在投票</span>
+          <span class="icon-down-area"><i class="icon-down"></i></span>
+        </div>
+        <div class="select-type" :class="{check: checked[1].itemIndex == 2 }" @click="changeCheck(2)">
+          <span>投票结束</span>
+          <span class="icon-down-area"><i class="icon-down"></i></span>
+        </div>
+      </div>
+    </div>
+    <!--<Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>-->
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in voteList" :key="index">
       <p class="title">{{item.name}}</p>
       <p class="des">{{item.des}}</p>
-      <p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>
+      <!--<p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>-->
+      <p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>
+      <p class="time" v-else></p>
     </router-link>
   </div>
 </template>
@@ -111,6 +125,7 @@
       changeCheck(checked) {
         console.log('获取到子组件的选择内容');
         console.log(checked)
+        this.checked[1].itemIndex = checked
         this.getVoteList();
       },
       scrolling() {
@@ -152,6 +167,32 @@
     width: 100%;
     overflow: scroll;
     /*背景固定不滚动*/
+    .select-area {
+      height: 62px;
+      line-height: 62px;
+      background: #FFFFFF;
+      z-index: 100;
+      position: -webkit-sticky;
+      position:sticky;
+      top: 0;
+      .select-type-area {
+        display: flex;
+        .select-type {
+          flex: 1;
+          text-align: center;
+          font-size: 23px;
+          color: rgb(134, 134, 134);
+          position: relative;
+          border-right: 1px solid #3ab2ed;
+          &:last-child {
+            border-right: none;
+          }
+          &.check{
+            color: rgb(58, 178, 237);
+          }
+        }
+      }
+    }
     .vote-item {
       background: #FFFFFF;
       margin: 23px;
@@ -183,11 +224,22 @@
         /* autoprefixer: on */
       }
       .time {
+        /*text-align: right;*/
+        /*font-size: 18px;*/
+        /*line-height: 26px;*/
+        /*color: #3ab2ed;*/
+        /*padding-top: 20px;*/
+
         text-align: right;
         font-size: 18px;
         line-height: 26px;
-        color: #3ab2ed;
+        color: rgb(255, 255, 255);
         padding-top: 20px;
+        span{
+          padding: 3px 5.5px;
+          background: #3ab2ed;
+          border-radius: 5px;
+        }
       }
     }
   }

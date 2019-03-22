@@ -4,34 +4,49 @@
     <HomeIcon></HomeIcon>
     <div class="select-area">
       <div class="select-type-area">
-        <div class="select-type" @click="changeCheck(1)">
+        <div class="select-type" :class="{check: pageType == 'one' }"  @click="changeCheck(1)">
           <span>活动</span>
           <span class="icon-down-area"><i class="icon-down"></i></span>
         </div>
-        <div class="select-type" @click="changeCheck(2)">
+        <div class="select-type" :class="{check: pageType == 'two' }" @click="changeCheck(2)">
           <span>投票</span>
           <span class="icon-down-area"><i class="icon-down"></i></span>
         </div>
       </div>
     </div>
     <div v-if="pageType == 'one'">
-      <router-link :to="'/activityDec/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
-        <div class="type-one">
-          <div class="title">{{item.name}}</div>
-          <div class="des">{{item.desc}}</div>
-        </div>
-        <div class="author-time">
-          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-          <div class="time">授课时间：{{item.start_time}}</div>
-        </div>
-      </router-link>
+      <div v-for="(item, index) in listData" :key="index">
+        <router-link :to="'/activityDec/' + item.id " class="lesson-item" v-if="item.is_sign">
+          <div class="type-one">
+            <div class="title">{{item.name}}</div>
+            <div class="des">{{item.desc}}</div>
+          </div>
+          <div class="author-time">
+            <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+            <div class="time">授课时间：{{item.start_time}}</div>
+          </div>
+        </router-link>
+        <router-link :to="'/activityMain/' + item.id " class="lesson-item" v-if="item.is_sign">
+          <div class="type-one">
+            <div class="title">{{item.name}}</div>
+            <div class="des">{{item.desc}}</div>
+          </div>
+          <div class="author-time">
+            <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+            <div class="time">授课时间：{{item.start_time}}</div>
+          </div>
+        </router-link>
+      </div>
+
     </div>
     <div v-else-if="pageType == 'two'">
       <router-link :to="'/voteItem/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
         <div class="vote">
           <div class="title">{{item.name}}</div>
           <div class="des" v-html="item.des"></div>
-          <div class="time">{{item.end_time}}</div>
+          <!--<div class="time">{{item.end_time}}</div>-->
+          <div class="end-time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></div>
+          <div class="end-time" v-else></div>
         </div>
       </router-link>
     </div>
@@ -159,10 +174,13 @@
           text-align: center;
           font-size: 23px;
           position: relative;
-          color: rgb(58, 178, 237);
+          color: rgb(134, 134, 134);
           border-right: 1px solid #3ab2ed;
           &:last-child {
             border-right: none;
+          }
+          &.check{
+            color: rgb(58, 178, 237);
           }
         }
       }
@@ -219,6 +237,19 @@
           line-height: 26px;
           color: #3ab2ed;
           padding-top: 20px;
+        }
+        .end-time{
+          text-align: right;
+          font-size: 18px;
+          line-height: 26px;
+          color: rgb(255, 255, 255);
+          padding-top: 20px;
+          padding-bottom: 29px;
+          span{
+            padding: 3px 5.5px;
+            background: #3ab2ed;
+            border-radius: 5px;
+          }
         }
       }
       .type-two {

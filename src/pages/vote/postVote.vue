@@ -8,9 +8,10 @@
         <div class="option-item" v-for="(item, index) in voteData.list">
           <div class="check-icon" @click="changeCheck(item.id)"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
           <div class="option-dec">
-            <div class="option-dec-main" v-html="item.content" @click="changeCheck(item.id)">
+            <div class="option-dec-main" @click="changeCheck(item.id)">
+              {{item.name}}
             </div>
-            <div class="option-link" @click="jumpOption(item.id)" :class="{check: checkedId.indexOf(item.id) !=-1}">(查看详情)</div>
+            <div class="option-link" @click="jumpOption(item.id)" :class="{check: checkedId.indexOf(item.id) !=-1}">(查看介绍)</div>
           </div>
         </div>
       </div>
@@ -170,6 +171,7 @@
               display: inline-block;
             }
             .option-link{
+              color: rgb(179,179,179);
               &.check{
                 color: #5ac7f2;
               }
