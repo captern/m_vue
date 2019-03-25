@@ -83,6 +83,7 @@
     border-radius: 24px;
     .tip-area {
       position: absolute;
+      z-index: 201;
       top: 390px;
       left: calc(50% - 249.5px);
       width: 499px;
