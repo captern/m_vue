@@ -31,7 +31,7 @@
         </div>
         <div class="text-area">
           <p>课程反馈:</p>
-          <p class="desc-area">{{evaluateData.remark}}dddddd</p>
+          <p class="desc-area">{{evaluateData.remark}}</p>
         </div>
       </div>
       <div class="type-two" v-else-if="evaluateData.type == 2">
@@ -43,7 +43,7 @@
         </div>
         <div class="text-area">
           <p>课程反馈:</p>
-          <p class="desc-area">{{evaluateData.remark}}dddddd</p>
+          <p class="desc-area">{{evaluateData.remark}}</p>
         </div>
       </div>
     </div>
