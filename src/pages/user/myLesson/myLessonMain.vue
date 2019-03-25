@@ -190,6 +190,8 @@
             }else{
               this.getData()
             }
+            this.successAlert = !this.successAlert
+            this.alertText = '签到成功'
           } else {
             this.successAlert = !this.successAlert
             this.alertText = res.msg

@@ -6,19 +6,27 @@
       <div class="vote-dec">{{voteData.name}}</div>
       <div class="vote-options">
         <div class="option-item" v-for="(item, index) in voteData.list">
-          <div class="check-icon" @click="changeCheck(item.id)"><span class="icon" :class="{check: checkedId.indexOf(item.id) !=-1}"></span></div>
+          <div class="check-icon" @click="changeCheck(item.id)"><span class="icon"
+                                                                      :class="{check: checkedId.indexOf(item.id) !=-1}"></span>
+          </div>
           <div class="option-dec">
             <div class="option-dec-main" @click="changeCheck(item.id)">
               {{item.name}}
             </div>
-            <div class="option-link" @click="jumpOption(item.id)" :class="{check: checkedId.indexOf(item.id) !=-1}">(查看介绍)</div>
+            <div class="option-link" @click="jumpOption(item.id)" :class="{check: checkedId.indexOf(item.id) !=-1}">
+              (查看介绍)
+            </div>
           </div>
         </div>
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交投票</div>
       <!--提示框弹出部分-->
-      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postVote" tipType="three" alertText="是否提交本次投票？" btnOne="返回" btnTwo="提交"/>
-      <alert-tip v-if="showFalseAlert" @closeTip="showVoteFalseAlert" @confirmTip="postVote" tipType="one" alertText="请选择投票选项" btnOne="返回"/>
+      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postVote" tipType="three" alertText="是否提交本次投票？"
+                 btnOne="返回" btnTwo="提交"/>
+      <alert-tip v-if="showFalseAlert" @closeTip="showVoteFalseAlert" @confirmTip="postVote" tipType="one"
+                 :alertText="alertText" btnOne="返回"/>
+      <alert-tip v-if="showResultSuccess" @closeTip="resultSuccess" @confirmTip="" tipType="one" alertText="投票成功"
+                 btnOne="返回"/>
     </div>
   </div>
 </template>
@@ -41,8 +49,9 @@
         voteData: '',
         showAlert: false,
         showFalseAlert: false,
+        showResultSuccess: false,
         checkedId: [],
-        alertText: '待定义',
+        alertText: '',
       }
     },
     computed: {
@@ -63,6 +72,11 @@
       })
     },
     methods: {
+      resultSuccess() {
+        console.log('投票成功')
+        this.showResultSuccess = !this.showResultSuccess
+        this.$router.push('/voteResult/' + this.voteId);
+      },
       changeCheck(optionId) {
         let checkType = this.voteData.type;
         //checkType 表示选择的类型  1为单选 2 为多选
@@ -70,10 +84,10 @@
           const newCheck = optionId;
           this.checkedId = []
           this.checkedId.push(newCheck);
-        } else if(checkType === 2) {//多选
+        } else if (checkType === 2) {//多选
           const newCheck = optionId;
           if (this.checkedId.indexOf(newCheck) !== -1) {
-            if(this.checkedId.length > 1){
+            if (this.checkedId.length > 1) {
               for (var i = 0; i < this.checkedId.length; i++) {
                 if (this.checkedId[i] == newCheck) {
                   this.checkedId.splice(i, 1);
@@ -86,29 +100,31 @@
           }
         }
       },
-      showVoteAlert(){
-        if(this.checkedId == ''){
+      showVoteAlert() {
+        if (this.checkedId == '') {
           console.log('请选择')
-          this.showFalseAlert =!this.showFalseAlert
-        }else{
-          this.showAlert =! this.showAlert
+          this.showFalseAlert = !this.showFalseAlert
+          this.alertText = '请选择投票选项'
+        } else {
+          this.showAlert = !this.showAlert
         }
       },
-      showVoteFalseAlert(){
+      showVoteFalseAlert() {
         this.showFalseAlert = !this.showFalseAlert
       },
-      postVote(){
+      postVote() {
         // postVote(this.voteId, this.checkedId).then(res=>{
-        postVote(this.voteId, JSON.stringify(this.checkedId)).then(res=>{
-          console.log(res)
-          if(res.status){ //提交成功
-            this.$router.push('/voteResult/' + this.voteId);
-          }else{
-
+        postVote(this.voteId, JSON.stringify(this.checkedId)).then(res => {
+          if (res.status) { //提交成功
+            this.showResultSuccess = !this.showResultSuccess
+            // this.$router.push('/voteResult/' + this.voteId);
+          } else {
+            this.showFalseAlert = !this.showFalseAlert
+            this.alertText = res.msg
           }
         })
       },
-      jumpOption(optionId){
+      jumpOption(optionId) {
         this.$router.push('/voteOptionMain/' + optionId);
       }
     },
@@ -167,12 +183,12 @@
           .option-dec {
             flex: 513;
             display: inline-block;
-            .option-dec-main,.option-link{
+            .option-dec-main, .option-link {
               display: inline-block;
             }
-            .option-link{
-              color: rgb(179,179,179);
-              &.check{
+            .option-link {
+              color: rgb(179, 179, 179);
+              &.check {
                 color: #5ac7f2;
               }
             }

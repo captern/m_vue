@@ -43,7 +43,7 @@
         voteId: '',
         checkType: 2,    //checkType 表示选择的类型  1为单选 2 为多选
         voteData: '',
-        sharePop: true,
+        sharePop: false,
         showAlert: false,
         checkedId: ['1'],
         options: [

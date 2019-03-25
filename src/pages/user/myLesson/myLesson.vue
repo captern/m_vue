@@ -182,6 +182,14 @@
           line-height: 31px;
           color: #727171;
           padding-top: 14px;
+          max-height: 93px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          /*! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /* autoprefixer: on */
         }
       }
       .type-two {

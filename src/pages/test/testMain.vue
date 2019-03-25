@@ -21,7 +21,7 @@
       <!--提示框弹出部分-->
       <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后在进行提交'"
                  btnOne="返回"/>
-      <alert-tip v-if="showAlert" @closeTip="showVoteAlert" @confirmTip="postTest" tipType="three"
+      <alert-tip v-if="showAlert" @closeTip="showCanVoteAlert" @confirmTip="postTest" tipType="three"
                  alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
     </div>
   </div>
@@ -82,6 +82,9 @@
     },
     methods: {
       // 单选多选处置
+      showCanVoteAlert() {
+        this.showAlert = !this.showAlert
+      },
       changeCheck(testIndex, optionIndex) {
         let question = this.testData[testIndex]
         if (question.type === 2) {//多选
@@ -102,9 +105,9 @@
           }
         } else {//单选
           // 因为是单选，所以需要先将题目清空
-          if(this.results[testIndex].answer == optionIndex + 1){
+          if (this.results[testIndex].answer == optionIndex + 1) {
             this.results[testIndex].answer = [];
-          }else{
+          } else {
             this.results[testIndex].answer = [];
             this.results[testIndex].answer.push(optionIndex + 1)
           }
@@ -118,7 +121,7 @@
         _this.results.forEach(function (resultItem, resultIndex) {
           if (resultItem.answer.length === 0) {
             _this.showPop = true
-            _this.alertText = '请全部选择'
+            _this.alertText = '请完成所有测试题后在进行提交'
             asd.push('1')
           }
           else {
@@ -132,11 +135,12 @@
       closePop() {
         this.showPop = !this.showPop
       },
-      checkCanPost(item){
-        if(item.indexOf('1') > -1){
-        }else{
+      checkCanPost(item) {
+        if (item.indexOf('1') > -1) {
+        } else {
+          this.showAlert = !this.showAlert
           this.postTestFlag = true
-          this.postTest();
+          // this.postTest();
         }
       },
       postTest() {
@@ -202,7 +206,7 @@
           padding-bottom: 80px;
           .option-item {
             display: flex;
-            height: 35px;
+            /*height: 35px;*/
             line-height: 35px;
             .check-icon {
               flex: 35;
