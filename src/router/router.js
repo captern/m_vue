@@ -184,7 +184,7 @@ export default new Router({
       path: '/testMain/:testId/:lessonId?',
       component: TestMain
     }, {
-      path: '/testResult/:testId/:lessonId',
+      path: '/testResult/:testId/:lessonId?',
       component: TestResult
     }, {
       path: '/testFail/:testId/:lessonId',
