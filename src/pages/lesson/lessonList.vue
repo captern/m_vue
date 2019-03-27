@@ -6,53 +6,78 @@
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
     <div v-for="(item, index) in voteList" :key="index">
       <!--已经报名课程-->
-      <router-link :to="'/myLessonMain/' + item.id " class="lesson-item" v-if="item.is_sign">
-        <div class="type-one" v-if="item.has_teacher_img == 0">
-          <p class="title">{{item.name}}</p>
-          <p class="des">{{item.desc}}</p>
-        </div>
-        <div class="type-two" v-else-if="item.has_teacher_img == 1">
-          <div class="author-img">
-            <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
-            <img :src="item.teacher_img" alt="">
+      <div class="lesson-item" v-if="item.is_sign">
+        <router-link :to="'/myLessonMain/' + item.id ">
+          <div class="type-one" v-if="item.has_teacher_img == 0">
+            <p class="title">{{item.name}}</p>
+            <p class="des">{{item.desc}}</p>
           </div>
-          <p class="title">{{item.name}}</p>
+          <div class="type-two" v-else-if="item.has_teacher_img == 1">
+            <div class="author-img">
+              <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
+              <img :src="item.teacher_img" alt="">
+            </div>
+            <p class="title">{{item.name}}</p>
+          </div>
+        </router-link>
+        <div class="register-area">
+          <div class="author-time">
+            <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
+            <div class="time">授课时间：<span>{{item.study_time}}</span></div>
+          </div>
+          <div class="register-btns">
+            <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
+            <div class="register-btn" v-else>签到</div>
+            <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
+            <div class="register-btn" v-else>签离</div>
+          </div>
         </div>
-        <div class="author-time">
-          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-          <div class="time">授课时间：{{item.study_time}}</div>
-        </div>
-      </router-link>
+      </div>
       <!--未来得及报名-->
-      <router-link :to="'/lessonMain/' + item.id " class="lesson-item" v-else>
-        <div class="type-one" v-if="item.has_teacher_img == 0">
-          <p class="title">{{item.name}}</p>
-          <p class="des">{{item.desc}}</p>
-        </div>
-        <div class="type-two" v-else-if="item.has_teacher_img == 1">
-          <div class="author-img">
-            <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
-            <img :src="item.teacher_img" alt="">
+      <div  class="lesson-item" v-else>
+        <router-link :to="'/lessonMain/' + item.id ">
+          <div class="type-one" v-if="item.has_teacher_img == 0">
+            <p class="title">{{item.name}}</p>
+            <p class="des">{{item.desc}}</p>
           </div>
-          <p class="title">{{item.name}}</p>
+          <div class="type-two" v-else-if="item.has_teacher_img == 1">
+            <div class="author-img">
+              <!--<img src="../../common/image/bkg/bkg-one.png" alt="">-->
+              <img :src="item.teacher_img" alt="">
+            </div>
+            <p class="title">{{item.name}}</p>
+          </div>
+        </router-link>
+        <div class="register-area">
+          <div class="author-time">
+            <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
+            <div class="time">授课时间：<span>{{item.study_time}}</span></div>
+          </div>
+          <div class="register-btns">
+            <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
+            <div class="register-btn" v-else>签到</div>
+            <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
+            <div class="register-btn" v-else>签离</div>
+          </div>
         </div>
-        <div class="author-time">
-          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-          <div class="time">授课时间：{{item.study_time}}</div>
-        </div>
-      </router-link>
+      </div>
     </div>
+    <!--弹出框部分-->
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" @confirmTip="registerCheckBtn" :tipType="tipType"
+               :alertText="alertText" btnOne="返回" :btnTwo="btnTwo"/>
   </div>
 </template>
 
 <script>
-  import {getUser, getBanner, getIndexLink} from '../../server/api'
+  import alertTip from '../../components/common/alertTip'
   import Search from '../../components/search.vue'
   import Header from '../../components/header.vue'
   import Select from '../../components/select.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
   import {lessonList} from '../../server/lessonApi'
+  import {registerCheck} from '../../server/myApi'
+
 
   // 1 表示线上，2 表示线下
 
@@ -116,7 +141,14 @@
           }
         ],
         voteList: null,
-        searchVal: ''
+        searchVal: '',
+        showAlert: false,
+        tipType: '',
+        btnTwo: '签离',
+        alertText: '',
+        lessonId: '',
+        myLocation: '',
+        checkType: '',    //表示是签到还是签离
       }
     },
     computed: {
@@ -134,8 +166,74 @@
     mounted() {
       this.type = this.$route.params.type;
       this.getLessonList();
+      this.addressDetail();
     },
     methods: {
+      // 获取地理位置
+      addressDetail() { //获取地理位置
+        let _this = this;
+        var vm = this;
+//全局的this在方法中不能使用，需要重新定义一下
+        var geolocation = new BMap.Geolocation();
+        var gc = new BMap.Geocoder();
+        geolocation.getCurrentPosition(function (r) {
+          if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            const myGeo = new BMap.Geocoder()
+            myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat), data => {
+              if (data.addressComponents) {
+                const result = data.addressComponents
+                const location = {
+                  creditLongitude: r.point.lat, // 经度
+                  creditLatitude: r.point.lng, // 纬度
+//                  creditStreet: (result.street || '') + (result.streetNumber || '') // 街道
+                }
+//                _this.myLocation = location.creditLongitude + ',' + location.creditLatitude
+                _this.myLocation = location.creditLatitude + ',' + location.creditLongitude
+                console.log(location)
+              }
+            })
+          }
+        })
+      },
+      registerCheckBtn() {
+        let postData = {
+          id: this.lessonId,
+          coordinates: this.myLocation
+        }
+        registerCheck(postData).then(res => {
+          if (res.status) {
+            if (this.checkType == 'one') {
+              this.alertText = '签到成功'
+            } else if (this.checkType == 'two') {
+              this.alertText = '签离成功'
+            }
+            this.showAlert = true;
+            this.tipType = 'one';
+          } else {
+            this.showAlert = true;
+            this.tipType = 'one';
+            this.alertText = res.msg
+          }
+        })
+      },
+      registerIn(id) {
+        console.log('签到')
+        this.showAlert = true;
+        this.tipType = 'three';
+        this.alertText = '是否进行签到';
+        this.btnTwo = '签到';
+        this.lessonId = id;
+        this.checkType = 'one';
+      },
+      registerOut(id) {
+        console.log('签离')
+        this.showAlert = true;
+        this.tipType = 'three';
+        this.alertText = '是否进行签离';
+        this.btnTwo = '签离';
+        this.lessonId = id;
+        this.checkType = 'two';
+      },
       changeSearch(val) {
         this.searchVal = val
         this.getLessonList();
@@ -194,7 +292,8 @@
       Header,
       Search,
       Select,
-      HomeIcon
+      HomeIcon,
+      alertTip
     },
   }
 </script>
@@ -254,23 +353,49 @@
           color: #000;
         }
       }
-      .author-time {
+      .register-area {
         display: flex;
-        .author, .time {
+        margin: 30px 0 20px;
+        .author-time {
+          padding-right: auto;
+          max-width: 50vw;
           flex: 1;
-          font-size: 17px;
-          line-height: 36px;
           /*color: #b2b2b3;*/
-          margin: 10px 0 15px;
-          color: #3ab2ed;
-        }
-        .author {
-          span {
-            color: #000;
+          .author, .time {
+            font-size: 17px;
+            line-height: 33px;
+            height: 33px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .time {
+            color: #3ab2ed;
+          }
+          .author {
+            color: rgb(35, 24, 21);
+            span {
+              color: #3ab2ed;
+            }
           }
         }
-        .time {
-          text-align: right;
+        .register-btns {
+          margin-top: 20px;
+          .register-btn {
+            display: inline-block;
+            width: 90px;
+            height: 43px;
+            line-height: 43px;
+            background: #b3b3b3;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            font-size: 28px;
+            border-radius: 12px;
+            margin-left: 20px;
+            &.check {
+              background: #3ab2ee;
+            }
+          }
         }
       }
     }

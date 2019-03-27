@@ -7,9 +7,9 @@
         <div class="title">
           {{testData.name}}
         </div>
-        <div class="heart">
-          <Heart heart="false"></Heart>
-        </div>
+        <!--<div class="heart">-->
+          <!--<Heart heart="false"></Heart>-->
+        <!--</div>-->
       </div>
       <div class="author-time">
         <div class="author">发布人：{{testData.author}}</div>

@@ -4,19 +4,19 @@
     <HomeIcon></HomeIcon>
     <div class="select-area">
       <div class="select-type-area">
-        <div class="select-type" :class="{check: pageType == 'one' }"  @click="changeCheck(1)">
-          <span>活动</span>
+        <div class="select-type" :class="{check: pageType == 'one' }" @click="changeCheck(1)">
+          <span>未报名</span>
           <span class="icon-down-area"><i class="icon-down"></i></span>
         </div>
         <div class="select-type" :class="{check: pageType == 'two' }" @click="changeCheck(2)">
-          <span>投票</span>
+          <span>已报名</span>
           <span class="icon-down-area"><i class="icon-down"></i></span>
         </div>
       </div>
     </div>
     <div v-if="pageType == 'one'">
       <div v-for="(item, index) in listData" :key="index">
-        <div class="lesson-item" v-if="!item.is_sign">
+        <div class="lesson-item">
           <router-link :to="'/activityDec/' + item.id ">
             <div class="type-one">
               <div class="title">{{item.name}}</div>
@@ -26,18 +26,22 @@
           <div class="register-area">
             <div class="author">
               <router-link :to="'/activityDec/' + item.id ">
-                <div>主讲人：<span>{{item.teacher}}</span></div>
+                <div>活动时间：<span>{{item.teacher}}</span></div>
               </router-link>
             </div>
             <div class="register-btns">
-              <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-              <div class="register-btn" v-else>签到</div>
-              <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-              <div class="register-btn" v-else>签离</div>
+              <div class="register-btn">签到</div>
+              <div class="register-btn">签离</div>
             </div>
           </div>
         </div>
-        <div class="lesson-item" v-else>
+
+      </div>
+
+    </div>
+    <div v-else-if="pageType == 'two'">
+      <div v-for="(item, index) in listData" :key="index">
+        <div class="lesson-item">
           <router-link :to="'/activityMain/' + item.id ">
             <div class="type-one">
               <div class="title">{{item.name}}</div>
@@ -59,33 +63,23 @@
           </div>
         </div>
       </div>
-
-    </div>
-    <div v-else-if="pageType == 'two'">
-      <router-link :to="'/voteItem/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
-        <div class="vote">
-          <div class="title">{{item.name}}</div>
-          <div class="des" v-html="item.des"></div>
-          <!--<div class="time">{{item.end_time}}</div>-->
-          <div class="end-time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></div>
-          <p class="end-time down" v-else><span>00天00小时00分</span></p>
-        </div>
-      </router-link>
     </div>
     <!--弹出框部分-->
-    <alert-tip v-if="showAlert" @closeTip="showAlert = false" @confirmTip="registerCheckBtn" :tipType="tipType" :alertText="alertText" btnOne="返回" :btnTwo="btnTwo"/>
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" @confirmTip="registerCheckBtn" :tipType="tipType"
+               :alertText="alertText" btnOne="返回" :btnTwo="btnTwo"/>
+
   </div>
 </template>
 
 <script>
-  import alertTip from '../../components/common/alertTip'
   import Header from '../../components/header.vue'
   import Select from '../../components/select.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {mapState, mapActions} from 'vuex'
-  import {getActivityLists, getTestLists} from '../../server/activityApi'
-  import {voteList} from '../../server/voteApi'
+  import alertTip from '../../components/common/alertTip'
+  import {getActivityLists, activityRegisteList} from '../../server/activityApi'
   import {activityRegister} from '../../server/myApi'
+
 
   export default {
     data() {
@@ -97,6 +91,7 @@
         tipType: '',
         btnTwo: '签离',
         alertText: '',
+        activityId: '',
         myLocation: '',
         checkType: '',    //表示是签到还是签离
       }
@@ -112,54 +107,14 @@
     destroyed() {
     },
     mounted() {
-      // 获取用户地址信息
-      this.addressDetail()
-      if(this.pageType == 'one'){
-        this.getActivityList();
-      }else if(this.pageType == 'two'){
-        this.getTestList()
+      this.addressDetail();
+      if (this.pageType == 'one') {
+        this.getActivityList('2');
+      } else if (this.pageType == 'two') {
+        this.getActivityList('1');
       }
     },
     methods: {
-      registerCheckBtn() {
-        let postData = {
-          id: this.activityId,
-          coordinates: this.myLocation
-        }
-        activityRegister(postData).then(res => {
-          if (res.status) {
-            if(this.checkType == 'one'){
-              this.alertText = '签到成功'
-            }else if(this.checkType == 'two'){
-              this.alertText = '签离成功'
-            }
-            this.showAlert = true;
-            this.tipType = 'one';
-          } else {
-            this.showAlert = true;
-            this.tipType = 'one';
-            this.alertText = res.msg
-          }
-        })
-      },
-      registerIn(id){
-        console.log('签到')
-        this.showAlert = true;
-        this.tipType = 'three';
-        this.alertText = '是否进行签到';
-        this.btnTwo = '签到';
-        this.activityId = id;
-        this.checkType = 'one';
-      },
-      registerOut(id){
-        console.log('签离')
-        this.showAlert = true;
-        this.tipType = 'three';
-        this.alertText = '是否进行签离';
-        this.btnTwo =  '签离';
-        this.activityId = id;
-        this.checkType = 'two';
-      },
       // 获取地理位置
       addressDetail() { //获取地理位置
         let _this = this;
@@ -184,35 +139,65 @@
               }
             })
           }
-        });
+        })
       },
-      changeCheck(checked) {
-        console.log(checked)
-        if(checked == '1'){
-          this.pageType = 'one';
-          this.getActivityList();
-        }else if(checked == '2'){
-          this.pageType = 'two';
-          this.getTestList();
+      registerCheckBtn() {
+        let postData = {
+          id: this.activityId,
+          coordinates: this.myLocation
         }
-        this.type = checked
-      },
-      getActivityList(){
-//        lessonList(getData).then(res => {
-        getActivityLists().then(res => {
+        activityRegister(postData).then(res => {
           if (res.status) {
-            this.listData = res.list
+            if (this.checkType == 'one') {
+              this.alertText = '签到成功'
+            } else if (this.checkType == 'two') {
+              this.alertText = '签离成功'
+            }
+            this.showAlert = true;
+            this.tipType = 'one';
+          } else {
+            this.showAlert = true;
+            this.tipType = 'one';
+            this.alertText = res.msg
           }
         })
       },
-      getTestList(){
-        let getData = {
-          time: 1,
-          flag: 1
+      registerIn(id) {
+        console.log('签到')
+        this.showAlert = true;
+        this.tipType = 'three';
+        this.alertText = '是否进行签到';
+        this.btnTwo = '签到';
+        this.activityId = id;
+        this.checkType = 'one';
+      },
+      registerOut(id) {
+        console.log('签离')
+        this.showAlert = true;
+        this.tipType = 'three';
+        this.alertText = '是否进行签离';
+        this.btnTwo = '签离';
+        this.activityId = id;
+        this.checkType = 'two';
+      },
+      changeCheck(checked) {
+        if (checked == '1') {
+          this.pageType = 'one';
+          this.getActivityList('2');
+        } else if (checked == '2') {
+          this.pageType = 'two';
+          this.getActivityList('1');
         }
-        voteList(getData).then(res => {
+        this.type = checked
+      },
+      getActivityList(type) {
+//        lessonList(getData).then(res => {
+        let getData = {
+          type: type
+        }
+        activityRegisteList(getData).then(res => {
           if (res.status) {
-            this.listData = res.list
+            this.listData = res.data
           }
         })
       },
@@ -240,7 +225,7 @@
       Header,
       Select,
       HomeIcon,
-      alertTip
+      alertTip,
     },
   }
 </script>
@@ -262,7 +247,7 @@
       background: #FFFFFF;
       z-index: 100;
       position: -webkit-sticky;
-      position:sticky;
+      position: sticky;
       top: 0;
       .select-type-area {
         display: flex;
@@ -276,7 +261,7 @@
           &:last-child {
             border-right: none;
           }
-          &.check{
+          &.check {
             color: rgb(58, 178, 237);
           }
         }
@@ -309,51 +294,6 @@
 
         }
       }
-      .vote{
-        .title {
-          font-size: 23px;
-          line-height: 31px;
-          color: #231815;
-        }
-        .des {
-          font-size: 18px;
-          line-height: 31px;
-          color: #727171;
-          padding-top: 14px;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          /*! autoprefixer: off */
-          -webkit-box-orient: vertical;
-          /* autoprefixer: on */
-        }
-        .time {
-          text-align: right;
-          font-size: 18px;
-          line-height: 26px;
-          color: #3ab2ed;
-          padding-top: 20px;
-        }
-        .end-time{
-          text-align: right;
-          font-size: 18px;
-          line-height: 26px;
-          color: rgb(255, 255, 255);
-          padding-top: 20px;
-          padding-bottom: 29px;
-          span{
-            padding: 3px 5.5px;
-            background: #3ab2ed;
-            border-radius: 5px;
-          }
-          &.down{
-            span{
-              background: #b3b3b3;
-            }
-          }
-        }
-      }
       .type-two {
         display: flex;
         height: 100px;
@@ -383,7 +323,7 @@
           line-height: 43px;
           /*color: #b2b2b3;*/
           color: #3ab2ed;
-          a{
+          a {
             color: #3ab2ed;
           }
         }
@@ -400,7 +340,7 @@
             font-size: 28px;
             border-radius: 12px;
             margin-left: 20px;
-            &.check{
+            &.check {
               background: #3ab2ee;
             }
           }

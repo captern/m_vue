@@ -59,7 +59,6 @@
         })
       },
       postCheck(){
-        console.log('addd')
         if(!this.codeNum){
           this.showAlert = true
           this.alertText = '请填写验证码'

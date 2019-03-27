@@ -10,3 +10,6 @@ export const getTestLists = (getData) => fetch('/test/get-list', getData)
 export const getActivityDes = (getData) => fetch('/active/get-active-by-id', getData)
 // 报名活动
 export const confirmActivity = postData => fetch('/active/sign-up',postData, 'POST');
+
+// 报名活动列表
+export const activityRegisteList = (getData) => fetch('/active/get-new-active-list',getData);

@@ -60,8 +60,9 @@
           this.$router.push('/index');
         }
       },
-      changeSucess(){   // 控制修改成功之后的跳转
-        this.$router.go(-1);
+      changeSucess(){   // 控制修改成功之后,返回个人中心
+        // this.$router.go(-1);
+        this.$router.push('/user');
       },
       async changePas() {
         if (!this.newPassword) {

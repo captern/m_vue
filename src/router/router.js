@@ -27,6 +27,7 @@ const Index = () => import('../pages/index/index')
 const TalentedIndex = () => import('../pages/talented/talentedIndex')
 const ActivityIndex = () => import('../pages/activity/activityIndex')
 const ActivityList = () => import('../pages/activity/activityList')
+const ActivityRegisteList = () => import('../pages/activity/activityRegisteList')
 const ActivityDec = () => import('../pages/activity/activityDec')
 const NewsList = () => import('../pages/new/newsList')
 const News = () => import('../pages/new/news')
@@ -73,6 +74,9 @@ export default new Router({
     },{
       path: '/activityList',
       component: ActivityList,
+    },{
+      path: '/activityRegisteList',
+      component: ActivityRegisteList,
     },{
       path: '/activityDec/:activityId',
       component: ActivityDec,
@@ -187,7 +191,7 @@ export default new Router({
       path: '/testResult/:testId/:lessonId?',
       component: TestResult
     }, {
-      path: '/testFail/:testId/:lessonId',
+      path: '/testFail/:testId/:lessonId?',
       component: TestFail
     },
     // 课程部分

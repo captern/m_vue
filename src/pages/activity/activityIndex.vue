@@ -6,7 +6,7 @@
     <!--<mainList/>-->
     <div class="main-list-area">
       <div class="main-list">
-        <router-link to="/activityList" class="list-item">
+        <router-link to="/activityRegisteList" class="list-item">
           <img src="../../common/image/activity/one.png" alt="">
         </router-link>
         <router-link to="/myActivity" class="list-item">

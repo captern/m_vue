@@ -19,7 +19,7 @@
       </div>
       <div class="vote-btn" @click="showVoteAlert">提交</div>
       <!--提示框弹出部分-->
-      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后在进行提交'"
+      <alert-tip v-if="showPop" @closeTip="closePop" tipType="one" :alertText="alertText ? alertText : '请完成所有测试题后再进行提交'"
                  btnOne="返回"/>
       <alert-tip v-if="showAlert" @closeTip="showCanVoteAlert" @confirmTip="postTest" tipType="three"
                  alertText="是否提交本次测试答案？" btnOne="返回" btnTwo="提交"/>
