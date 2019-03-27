@@ -7,7 +7,7 @@
       <div class="header-area">
         <div class="title">{{voteData.name}}</div>
         <!--<div class="heart">-->
-          <!--<img src="../../common/icon/icon-item-0@3x.png" alt="">-->
+        <!--<img src="../../common/icon/icon-item-0@3x.png" alt="">-->
         <!--</div>-->
       </div>
       <div class="author-time">
@@ -16,9 +16,14 @@
       </div>
       <div class="vote-main" v-html="voteData.content"></div>
       <!--跳转 费图片-->
-      <router-link v-if="voteData.is_img == 0" :to="'/postVote/'+ voteData.id" class="vote-btn">参与投票</router-link>
-      <!--跳转图片-->
-      <router-link v-else-if="voteData.is_img == 1" :to="'/voteOption/'+ voteData.id" class="vote-btn">参与投票</router-link>
+      <div v-if="!voteData.end">
+        <div class="vote-btn no-jump">投票已结束</div>
+      </div>
+      <div v-else="">
+        <router-link v-if="voteData.is_img == 0" :to="'/postVote/'+ voteData.id" class="vote-btn">参与投票</router-link>
+        <!--跳转图片-->
+        <router-link v-else-if="voteData.is_img == 1" :to="'/voteOption/'+ voteData.id" class="vote-btn">参与投票</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -49,16 +54,15 @@
       ])
     },
     mounted() {
-     this.voteId = this.$route.params.voteId;
-     let getData = {
-       id: this.voteId
-     }
+      this.voteId = this.$route.params.voteId;
+      let getData = {
+        id: this.voteId
+      }
       voteMain(getData).then(res => {
         this.voteData = res.data
       })
     },
-    methods: {
-    },
+    methods: {},
     components: {
       Header,
       HomeIcon
@@ -77,7 +81,7 @@
     width: 100%;
     overflow: scroll;
     /*背景固定不滚动*/
-    .check-icon{
+    .check-icon {
       position: absolute;
       top: 23px;
       right: 46px;
@@ -86,7 +90,7 @@
       height: 27px;
       line-height: 27px;
       text-align: center;
-      color: rgb(255,255,255);
+      color: rgb(255, 255, 255);
       font-size: 18px;
       border-radius: 0 0 6px 6px;
     }
@@ -134,18 +138,18 @@
         /*line-height: 30px;*/
         /*color: #000000;*/
         padding-bottom: 111px;
-        img{
+        img {
           max-width: 100%;
         }
-        video{
+        video {
           width: 100%;
           height: auto;
         }
-        iframe{
+        iframe {
           width: 100%;
           height: auto;
         }
-        a{
+        a {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -164,6 +168,9 @@
         text-align: center;
         color: #ffffff;
         border-radius: 10px;
+        &.no-jump{
+          background: #b3b3b3;
+        }
       }
     }
   }
