@@ -11,7 +11,8 @@
           <input type="phone" placeholder="请输入短信验证码" v-model="codeNum">
         </div>
         <div class="right" @click = getPhoneCode()>
-          发送验证码
+          <!--发送验证码-->
+          {{code.text}}
         </div>
       </div>
       <div class="post-btn" @click="postCheck">下一步</div>
@@ -37,6 +38,11 @@
         showAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
+        getCodeLock: '',
+        code: {
+          disabled: false,
+          text: "获取验证码"
+        },
       }
     },
     mounted() {
@@ -48,15 +54,43 @@
     },
     methods: {
       getPhoneCode(){
-        mobilePasCode(this.phoneNum).then(res=>{
-          if(res.status){
-            this.showAlert = true
-            this.alertText = '验证码发送成功'
-          }else{
-            this.showAlert = true
-            this.alertText = res.msg
-          }
-        })
+        if(!this.getCodeLock){
+          mobilePasCode(this.phoneNum).then(res=>{
+            if(res.status){
+              this.showAlert = true
+              this.alertText = '验证码发送成功'
+            }else{
+              this.showAlert = true
+              this.alertText = res.msg
+            }
+          })
+          this.setTime()
+          this.getCodeLock = true
+        }
+      },
+      // 倒计时
+      setTime(timelimit = 60) {
+        if(!this.getCodeLock){
+          let self = this;
+          self.countdown = timelimit;
+          self.timer = setInterval(() => {
+            self.countdown--;
+            self.code = {
+              disabled: true,
+              text: "等待" + self.countdown + "秒"
+            };
+            if (self.countdown === 0) {
+              clearInterval(self.timer);
+              self.timer = null;
+              self.countdown = 60;
+              self.getCodeLock = false;
+              self.code = {
+                disabled: false,
+                text: "重新发送"
+              };
+            }
+          }, 1000);
+        }
       },
       postCheck(){
         if(!this.codeNum){

@@ -109,6 +109,15 @@
 
 <style lang="scss" scoped>
   .change-info-page {
+    background: url("../../../common/image/bkg/bkg-two.png") fixed;
+    background-size: 100% 100%;
+    height: 100%;
+    min-height: 100vh;
+    /*background-position: fixed;*/
+    /*position: fixed;*/
+    /*会导致页面滚动不触发*/
+    width: 100%;
+    overflow: scroll;
     .change-area {
       position: absolute;
       /*margin: 40px;*/
@@ -116,7 +125,7 @@
       width: calc(100% - 50px);
       /*width: calc(100% - 80px);*/
       /*height: calc(100% - 180px);;*/
-      height: calc(100% - 112.5px);
+      height: calc(100% - 56px);
       background: #ffffff;
       /*border-radius: 24px;*/
       border-radius: 15px;

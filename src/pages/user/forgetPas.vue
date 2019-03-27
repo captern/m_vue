@@ -1,6 +1,6 @@
 <template>
-  <div class="register-page" v-wechat-title="$route.meta.title='注册'">
-    <Header title='注册'/>
+  <div class="register-page" v-wechat-title="$route.meta.title='忘记密码'">
+    <Header title='忘记密码'/>
     <div class="register-form">
       <div class="name-area input-area">
         <div class="register-icon"><span>*</span>手机号码</div>
@@ -16,34 +16,7 @@
         </div>
 
       </div>
-      <div class="pas-area input-area">
-        <div class="register-icon"><span>*</span>输入密码</div>
-        <input class="pas-input input" type="password" name="search" placeholder="请输入密码" v-model="registerPassWord" v-focus="this.focus">
-      </div>
-      <div class="repeat-pas-area input-area">
-        <div class="register-icon"><span>*</span>密码确认</div>
-        <input class="pas-input input" type="password" name="search" placeholder="请再次输入密码" v-model="registerRepeatPas" v-focus="this.focus">
-      </div>
-      <div class="sex-area input-area">
-        <div class="register-icon"><span>*</span>性别选择</div>
-        <div class="sex-check input">
-          <div class="sex-item" @click="changeSex()">
-            <span class="sex-icon">
-              <img v-if="this.sex === '1'" src="../../common/image/sex-check.png" alt="">
-              <img v-else src="../../common/image/sex-no.png" alt="">
-            </span>
-            男
-          </div>
-          <div class="sex-item" @click="changeSex()">
-            <span class="sex-icon">
-              <img v-if="this.sex === '1'" src="../../common/image/sex-no.png" alt="">
-              <img v-else src="../../common/image/sex-check.png" alt="">
-            </span>
-            女
-          </div>
-        </div>
-      </div>
-      <div class="register-container" @click="mobileRegister">注册</div>
+      <div class="post-btn" @click="postCheck">下一步</div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
@@ -55,16 +28,12 @@
   import Header from '../../components/header.vue'
   import {mapMutations} from 'vuex'
   import alertTip from '../../components/common/alertTip'
-  import {register, mobileCode} from '../../server/api'
+  import {register, mobilePasCode, checkPasCode} from '../../server/api'
 
   export default {
     data() {
       return {
         registerPhoneNumber: null, // 电话号码
-        userInfo: null, // 获取到的用户信息
-        registerPassWord: null, // 密码
-        registerRepeatPas: null, // 重复密码
-        sex: '1',           //性别
         showAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
@@ -83,10 +52,6 @@
       rightPhoneNumber: function () {
         return /^1\d{10}$/gi.test(this.registerPhoneNumber)
       },
-      rightPas: function () {
-        return this.registerPassWord === this.registerRepeatPas
-      },
-      // 获取验证码
     },
     methods: {
       ...mapMutations([
@@ -94,21 +59,23 @@
         'RECORD_USERINFO',
       ]),
       getCode() {
-        if(this.rightPhoneNumber){
-          mobileCode(this.registerPhoneNumber).then(res=> {
-            if(res.status){
-              this.showAlert = true
-              this.alertText = '验证码发送成功'
-            }else{
-              this.showAlert = true
-              this.alertText = res.msg
-            }
-          })
-          this.setTime()
-          this.getCodeLock = true
-        }else{
-          this.showAlert = true
-          this.alertText = '手机号码不正确'
+        if(!this.getCodeLock){
+          if(this.rightPhoneNumber){
+            mobilePasCode(this.registerPhoneNumber).then(res=> {
+              if(res.status){
+                this.showAlert = true
+                this.alertText = '验证码发送成功'
+              }else{
+                this.showAlert = true
+                this.alertText = res.msg
+              }
+            })
+            this.setTime()
+            this.getCodeLock = true
+          }else{
+            this.showAlert = true
+            this.alertText = '手机号码不正确'
+          }
         }
 
       },
@@ -136,51 +103,23 @@
           }, 1000);
         }
       },
-      changeSex() {
-        if (this.sex === '1') {
-          this.sex = '2'
-        } else if (this.sex === '2') {
-          this.sex = '1'
-        }
-      },
-      async mobileRegister() {
-        this.focus = ''
-        if (!this.registerPhoneNumber) {
+      postCheck(){
+        if(!this.codeNum){
           this.showAlert = true
-          this.alertText = '请输入手机号'
-          return
-        } else if (!this.getCodeLock) {
-          this.showAlert = true
-          this.alertText = '请输入验证码'
-          return
-        } else if (!this.registerPassWord) {
-          this.showAlert = true
-          this.alertText = '请输入密码'
-          return
-        } else if (!this.registerRepeatPas) {
-          this.showAlert = true
-          this.alertText = '请输入密码'
-          return
-        } else if (!this.rightPhoneNumber) {
-          this.showAlert = true
-          this.alertText = '手机号码不正确'
-          return
-        } else if (!this.rightPas) {
-          this.showAlert = true
-          this.alertText = '两次密码不一致'
-          return
-        }
-        let userRegisterData = await register(this.registerPhoneNumber, this.registerPassWord, this.sex, this.codeNum)
-        if (userRegisterData.status) {
-//          设置登录状态为成功
-          this.GET_LOGIN()
-          setTimeout(()=>{
-            this.$router.push('/index');
-          },800)
-          // this.$router.push('/index');
-        } else {
-          this.showAlert = true
-          this.alertText = userRegisterData.msg
+          this.alertText = '请填写验证码'
+        }else{
+          let postData = {
+            mobile: this.registerPhoneNumber,
+            code: this.codeNum
+          }
+          checkPasCode(postData).then(res=>{
+            if(res.status){
+              this.$router.push('/changePas')
+            }else{
+              this.showAlert = true
+              this.alertText = '请填写验证码'
+            }
+          })
         }
       }
     },
@@ -198,13 +137,6 @@
         }
       }
     },
-    watch:{
-      showAlert:function(val,oldval){
-        if(val){
-          window.scrollTo(0, document.documentElement.clientHeight);
-        }
-      }
-    },//以V-model绑定数据时使用的数据变化监测
   }
 </script>
 
@@ -302,36 +234,16 @@
           }
         }
       }
-      .sex-area {
-        .sex-check {
-          display: flex;
-          background: none;
-          .sex-item {
-            flex: 1;
-            .sex-icon {
-              vertical-align: middle;
-              font-size: 0;
-              img {
-                width: 19px;
-                /*width: 30px;*/
-                /*height: 30px;*/
-                height: 19px;
-                vertical-align: middle;
-                margin-top: -1.5px;
-              }
-            }
-          }
-        }
-      }
-      .register-container {
+      .post-btn{
+        font-size: 33px;
+        color: #ffffff;
+        text-align: center;
+        width: 405px;
         height: 66px;
         line-height: 66px;
-        background: rgb(58, 178, 237);
-        font-size: 26px;
-        color: #ffffff;
         border-radius: 15px;
-        text-align: center;
-        margin-top: 25px;
+        background: #3ab2ed;
+        margin: 95px auto 0;
       }
     }
   }

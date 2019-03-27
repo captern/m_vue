@@ -94,21 +94,23 @@
         'RECORD_USERINFO',
       ]),
       getCode() {
-        if(this.rightPhoneNumber){
-          mobileCode(this.registerPhoneNumber).then(res=> {
-            if(res.status){
-              this.showAlert = true
-              this.alertText = '验证码发送成功'
-            }else{
-              this.showAlert = true
-              this.alertText = res.msg
-            }
-          })
-          this.setTime()
-          this.getCodeLock = true
-        }else{
-          this.showAlert = true
-          this.alertText = '手机号码不正确'
+        if(!this.getCodeLock){
+          if(this.rightPhoneNumber){
+            mobileCode(this.registerPhoneNumber).then(res=> {
+              if(res.status){
+                this.showAlert = true
+                this.alertText = '验证码发送成功'
+              }else{
+                this.showAlert = true
+                this.alertText = res.msg
+              }
+            })
+            this.setTime()
+            this.getCodeLock = true
+          }else{
+            this.showAlert = true
+            this.alertText = '手机号码不正确'
+          }
         }
 
       },

@@ -5,6 +5,7 @@ Vue.use(Router)
 // 用户部分
 const Login = () => import('../pages/user/login')
 const Register = () => import('../pages/user/register')
+const ForgetPas = () => import('../pages/user/forgetPas')
 const User = () => import('../pages/user/user')
 const ChangeUserInfo = () => import('../pages/user/module/changeUserInfo')
 const ChangePas = () => import('../pages/user/module/changePas')
@@ -87,6 +88,9 @@ export default new Router({
     }, {
       path: '/register',
       component: Register
+    },{
+      path: '/forgetPas',
+      component: ForgetPas
     },
     // 用户部分
     {

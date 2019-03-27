@@ -25,10 +25,13 @@
         <div class="check">
           <input class="rember-check" type="checkbox" checked/>记住密码
         </div>
-        <router-link :to="'/register'" class="register-link">立即注册</router-link>
+        <router-link :to="'/forgetPas'" class="forget-pas-link">忘记密码</router-link>
         <!--<div class="register-link">立即注册</div>-->
       </div>
       <div class="login-container" @click="mobileLogin">登录</div>
+      <div class="register-link">
+        <router-link :to="'/register'">立即注册</router-link>
+      </div>
     </div>
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" :tipType="tipType" :alertText="alertText"/>
@@ -220,7 +223,7 @@
         /*line-height: 106px;*/
         line-height: 66px;
         display: flex;
-        .check, .register-link {
+        .check, .forget-pas-link {
           flex: 1;
           color: rgb(114, 113, 113);
         }
@@ -234,7 +237,7 @@
             margin-left: 6.25px;
           }
         }
-        .register-link {
+        .forget-pas-link {
           text-align: right;
         }
       }
@@ -250,6 +253,16 @@
         color: rgb(255,255,255);
         /*font-size: 42px;*/
         font-size: 26px;
+      }
+      .register-link{
+        width: 100%;
+        display: block;
+        margin: 21px auto;
+        text-align: center;
+        a{
+          color: rgb(77,77,77);
+          font-size: 21px;
+        }
       }
     }
   }
