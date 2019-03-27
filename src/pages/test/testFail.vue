@@ -130,7 +130,7 @@
           font-size: 19px;
           .option-item {
             display: flex;
-            height: 35px;
+            /*height: 35px;*/
             line-height: 35px;
             .check-icon {
               flex: 35;
