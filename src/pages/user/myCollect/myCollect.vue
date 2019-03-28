@@ -9,7 +9,7 @@
       </div>
       <div class="type-two" v-else-if="item.has_teacher_img == 1">
         <div class="author-img">
-          <img src="../../../common/image/bkg/bkg-one.png" alt="">
+          <img :src="item.teacher_img" alt="">
         </div>
         <p class="title">{{item.name}}</p>
       </div>
@@ -88,6 +88,14 @@
           line-height: 31px;
           color: #727171;
           padding-top: 14px;
+          max-height: 93px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          /*! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /* autoprefixer: on */
         }
       }
       .type-two {

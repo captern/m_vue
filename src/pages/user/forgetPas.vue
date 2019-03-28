@@ -114,7 +114,7 @@
           }
           checkPasCode(postData).then(res=>{
             if(res.status){
-              this.$router.push('/changePas')
+              this.$router.push('/changepas')
             }else{
               this.showAlert = true
               this.alertText = '请填写验证码'

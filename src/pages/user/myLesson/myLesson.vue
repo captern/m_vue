@@ -21,11 +21,17 @@
           <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
           <div class="time">授课时间：<span>{{item.study_time}}</span></div>
         </div>
-        <div class="register-btns">
+        <div class="register-btns" v-if="item.type == 2">
           <div class="register-btn check" v-if="item.start" @click="registerIn(item.cou_id)">签到</div>
           <div class="register-btn" v-else>签到</div>
           <div class="register-btn check" v-if="item.end" @click="registerOut(item.cou_id)">签离</div>
           <div class="register-btn" v-else>签离</div>
+        </div>
+        <div class="register-btns" v-else>
+          <!--<div class="register-btn check" v-if="item.start" @click="registerIn(item.cou_id)">签到</div>-->
+          <!--<div class="register-btn" v-else>签到</div>-->
+          <!--<div class="register-btn check" v-if="item.end" @click="registerOut(item.cou_id)">签离</div>-->
+          <!--<div class="register-btn" v-else>签离</div>-->
         </div>
       </div>
     </div>
@@ -165,9 +171,11 @@
         registerCheck(postData).then(res => {
           if (res.status) {
             if (this.checkType == 'one') {
-              this.alertText = '签到成功'
+              this.alertText = '签到成功';
+              this.getLessonList();
             } else if (this.checkType == 'two') {
-              this.alertText = '签离成功'
+              this.alertText = '签离成功';
+              this.getLessonList();
             }
             this.showAlert = true;
             this.tipType = 'one';

@@ -150,8 +150,18 @@
           if (res.status) {
             if (this.checkType == 'one') {
               this.alertText = '签到成功'
+              if (this.pageType == 'one') {
+                this.getActivityList('2');
+              } else if (this.pageType == 'two') {
+                this.getActivityList('1');
+              }
             } else if (this.checkType == 'two') {
               this.alertText = '签离成功'
+              if (this.pageType == 'one') {
+                this.getActivityList('2');
+              } else if (this.pageType == 'two') {
+                this.getActivityList('1');
+              }
             }
             this.showAlert = true;
             this.tipType = 'one';

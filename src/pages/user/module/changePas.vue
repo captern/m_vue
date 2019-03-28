@@ -56,8 +56,8 @@
           // 修改密码无个人信息展示型东西，估 不用获取，  因为后台cookie 自带用户信息
           // getUser().then(res => {})
         }else{
-          console.log('用户未登录')
-          this.$router.push('/index');
+//          console.log('用户未登录')
+//          this.$router.push('/index');
         }
       },
       changeSucess(){   // 控制修改成功之后,返回个人中心

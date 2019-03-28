@@ -32,7 +32,7 @@
         </div>
         <div class="text-area">
           <p>课程反馈:</p>
-          <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" />
+          <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" @blur="out()"/>
         </div>
       </div>
       <div class="type-two" v-else-if="evaluateData.type == 2">
@@ -44,14 +44,16 @@
         </div>
         <div class="text-area">
           <p>课程反馈:</p>
-          <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" />
+          <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" @blur="out()"/>
         </div>
       </div>
     </div>
     <!--<div class="vote-btn" @click="registerCheck">上课签到</div>-->
     <div class="vote-btn" @click="postEvaluate">提交</div>
-    <alert-tip v-if="showAlert" @closeTip="closeAlert" @confirmTip="" tipType="one" :alertText="alertText ? alertText : '请全部选择'" btnOne="返回" btnTwo="取消报名"/>
-    <alert-tip v-if="confirmAlert" @closeTip="closeConfirmAlert" @confirmTip="postConfirm" tipType="three" alertText="是否提交课程评价" btnOne="返回" btnTwo="提交"/>
+    <alert-tip v-if="showAlert" @closeTip="closeAlert" @confirmTip="" tipType="one"
+               :alertText="alertText ? alertText : '请全部选择'" btnOne="返回" btnTwo="取消报名"/>
+    <alert-tip v-if="confirmAlert" @closeTip="closeConfirmAlert" @confirmTip="postConfirm" tipType="three"
+               alertText="是否提交课程评价" btnOne="返回" btnTwo="提交"/>
   </div>
 </template>
 
@@ -64,11 +66,12 @@
   import {mapState, mapActions} from 'vuex'
   import {lessonMain, signLesson} from '../../../server/lessonApi'
   import {myLessonMain, postEvaluate, cancelSignIn, getEvaluate} from '../../../server/myApi'
+
   export default {
     data() {
       return {
         starData: 4,
-        starAll: [1,2,3,4,5],
+        starAll: [1, 2, 3, 4, 5],
         evaluateId: '',
         evaluateData: '',
         showAlert: false,
@@ -91,7 +94,7 @@
         id: this.evaluateId
       }
       getEvaluate(getData).then(res => {
-        if(res.data.type == 1){
+        if (res.data.type == 1) {
           let postResult = new Array()
           res.data.items.forEach(function (item, index) {
             let checkItem = {
@@ -105,60 +108,63 @@
       })
     },
     methods: {
-      setStar(index){
+      out() {
+        window.scrollTo(0, document.documentElement.clientHeight);
+      },
+      setStar(index) {
         console.log(index)
         this.starData = index + 1
       },
-      closeAlert(){
+      closeAlert() {
         this.showAlert = false
       },
-      closeConfirmAlert(){
+      closeConfirmAlert() {
         this.confirmAlert = false
       },
       changeCheck(evaluateIndex, optionIndex) {
         this.postResult[evaluateIndex].checked = '';
         this.postResult[evaluateIndex].checked = optionIndex
       },
-      postEvaluate(){
+      postEvaluate() {
         let _this = this
-        if(this.evaluateData.type == 1){
+        if (this.evaluateData.type == 1) {
           let asd = new Array();
           console.log(asd)
           this.postResult.forEach(function (item, index) {
-            if(item.checked === ''){
+            if (item.checked === '') {
               _this.showAlert = true
               return
-            }else{
+            } else {
               asd.push(item.checked)
               _this.confirmAlert = true
             }
           })
           this.postResults = asd;
-        }else if(this.evaluateData.type == 2){
+        } else if (this.evaluateData.type == 2) {
           _this.confirmAlert = true
         }
       },
-      postConfirm(){
-        let postData =''
-        if(this.evaluateData.type == 1){
+      postConfirm() {
+        let postData = ''
+        if (this.evaluateData.type == 1) {
           postData = {
             id: this.evaluateId,
             result: JSON.stringify(this.postResults),
             remark: this.desc
           }
-        }else if(this.evaluateData.type == 2){
+        } else if (this.evaluateData.type == 2) {
           postData = {
             id: this.evaluateId,
             star: this.starData,
             remark: this.desc
           }
         }
-        postEvaluate(postData).then(res=>{
-          if(res.status){
+        postEvaluate(postData).then(res => {
+          if (res.status) {
             console.log('提交成功')
             this.$router.push('/myLessonMain/evaluateResult/' + this.evaluateId)
-          }else{
-            this.showAlert =!this.showAlert
+          } else {
+            this.showAlert = !this.showAlert
             this.alertText = res.msg
           }
         })
@@ -266,9 +272,10 @@
         .text-area {
           padding-top: 32px;
           padding-bottom: 111px;
-          .desc-area{
+          .desc-area {
             margin-top: 20px;
-            display: block;width: 100%;
+            display: block;
+            width: 100%;
             font-size: 19px;
             line-height: 30px;
             min-height: 90px;
@@ -276,15 +283,15 @@
           }
         }
       }
-      .type-two{
+      .type-two {
         margin-top: 82px;
-        .stars-area{
+        .stars-area {
           display: flex;
           padding: 0 50px;
-          .star-item{
+          .star-item {
             flex: 1;
             text-align: center;
-            img{
+            img {
               width: 37px;
               height: 37px;
             }
@@ -293,9 +300,10 @@
         .text-area {
           padding-top: 32px;
           padding-bottom: 111px;
-          .desc-area{
+          .desc-area {
             margin-top: 20px;
-            display: block;width: 100%;
+            display: block;
+            width: 100%;
             font-size: 19px;
             line-height: 30px;
             min-height: 90px;
@@ -304,7 +312,7 @@
         }
       }
     }
-    .vote-btn{
+    .vote-btn {
       position: fixed;
       left: 46px;
       bottom: 55px;

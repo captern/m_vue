@@ -166,8 +166,10 @@
           if (res.status) {
             if (this.checkType == 'one') {
               this.alertText = '签到成功'
+              this.getActivityList();
             } else if (this.checkType == 'two') {
               this.alertText = '签离成功'
+              this.getActivityList();
             }
             this.showAlert = true;
             this.tipType = 'one';
