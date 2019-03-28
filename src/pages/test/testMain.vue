@@ -121,7 +121,7 @@
         _this.results.forEach(function (resultItem, resultIndex) {
           if (resultItem.answer.length === 0) {
             _this.showPop = true
-            _this.alertText = '请完成所有测试题后在进行提交'
+            _this.alertText = '请完成所有测试题后再进行提交'
             asd.push('1')
           }
           else {
