@@ -109,7 +109,11 @@
     },
     methods: {
       out() {
-        window.scrollTo(0, document.documentElement.clientHeight);
+        setTimeout(function() {
+          var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+          window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+        }, 100);
+//        window.scrollTo(0, document.documentElement.clientHeight);
       },
       setStar(index) {
         console.log(index)

@@ -76,8 +76,10 @@
     },
     mounted() {
       this.evaluateId = this.$route.params.evaluateId;
+      this.uid = this.$route.params.uid;
       let getData = {
-        id: this.evaluateId
+        id: this.evaluateId,
+        uid: this.uid ? this.uid : 0,
       }
       getEvaluateResult(getData).then(res => {
         this.evaluateData = res.appraise

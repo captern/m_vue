@@ -133,7 +133,7 @@ export default new Router({
       path: '/myLessonMain/evaluate/:evaluateId',
       component: Evaluate
     },{
-      path: '/myLessonMain/evaluateResult/:evaluateId',
+      path: '/myLessonMain/evaluateResult/:evaluateId/:uid?',
       component: EvaluateResult
     }, {
       path: '/myActivity',
