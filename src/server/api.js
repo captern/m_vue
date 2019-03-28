@@ -103,9 +103,10 @@ export const register = (mobile, password, sex, code) => fetch('/user/sign-up', 
 // export const changeInfo = (user_id, userName, IdCard, workSpace) => fetch('/changeInfo', {
 export const changeInfo = postData => fetch('/user/modify-stu', postData, 'POST');
 // 修改用户密码
-export const changePas = (password, newpassword) => fetch('/user/reset-password', {
+export const changePas = (password, newpassword, mobile) => fetch('/user/reset-password', {
   password,
-  newpassword
+  newpassword,
+  mobile
 }, 'POST');
 
 // 发送帐号

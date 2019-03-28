@@ -100,7 +100,7 @@ export default new Router({
       path: '/changeuserinfo',
       component: ChangeUserInfo
     }, {
-      path: '/changepas',
+      path: '/changepas/:phoneNum?',
       component: ChangePas
     }, {
       path: '/changepascheck',

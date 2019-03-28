@@ -40,9 +40,12 @@
         showSuccessAlert: false, // 显示提示组件
         alertText: null,// 提示的内容
         tipType: 'one',          //提示的内容
+        phoneNum: '',
       }
     },
     mounted() {
+      this.phoneNum = this.$route.params.phoneNum;
+      console.log(this.phoneNum)
       this.initData()
     },
     computed: {
@@ -80,7 +83,7 @@
 //          return
 //        }
         // 发送重置信息
-        let res = await changePas(this.newPassword, this.repeatPassword);
+        let res = await changePas(this.newPassword, this.repeatPassword, this.phoneNum ? this.phoneNum : '');
         if (res.status) {
           this.showSuccessAlert = true;
           this.alertText = '密码修改成功';
