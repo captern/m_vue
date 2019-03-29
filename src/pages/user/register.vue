@@ -225,7 +225,7 @@
       /*margin: 250px auto 0;*/
       margin: 156px auto 0;
       /*width: 638px;*/
-      width: 413px;
+      width: 483px;
       .input-area {
         width: 100%;
         display: flex;
