@@ -36,6 +36,7 @@
 </template>
 
 <script>
+  import {hideVideo} from '../../../common/js/util'
   import {MP} from '../../../common/js/map'
   import {getUser, getBanner, getIndexLink} from '../../../server/api'
   import Header from '../../../components/header.vue'
@@ -161,6 +162,17 @@
       alertTip,
       Heart
     },
+    watch: {
+      showAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      },
+      successAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      },
+      cancelSuccessAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      }
+    }
   }
 </script>
 

@@ -12,22 +12,23 @@
           <!--<div class="left">编辑：{{newsData.author}}</div>-->
           <!--<div class="right">{{newsData.created_time}}</div>-->
         </div>
-        <div class="text-area" v-html="newsData.content"></div>
+        <div class="text-area" v-html="newsData.content" ref="asdasdad"></div>
         <div v-if="newsData.show_button === '1'" class="enlist-area" @click="showEnlist()">
           点击报名
         </div>
       </div>
     </div>
     <!--提示框弹出部分-->
-    <enlist-tip v-if="enlistTip" @closeTip="hideEnlist" :alertText="alertText"/>
+    <enlist-tip v-if="enlistTip" :showTip="enlistTip" @closeTip="hideEnlist" :alertText="alertText"/>
     <!--确定取消提示框弹出部分-->
-    <alert-tip v-if="showAlert" @closeTip="showAlert = false" tipType="one" alertText="报名成功"/>
+    <alert-tip v-if="showAlert" :showTip="showAlert" @closeTip="showAlert = false" tipType="one" alertText="报名成功"/>
 
 
   </div>
 </template>
 
 <script>
+  import {hideVideo} from '../../common/js/util'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
   import {newsDetail} from '../../server/api'
@@ -67,6 +68,14 @@
       enlistTip,
       alertTip,
       HomeIcon
+    },
+    watch: {
+      enlistTip(newVal, oldVal) {
+        hideVideo(newVal);
+      },
+      showAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      }
     }
   }
 </script>
@@ -121,11 +130,11 @@
             width: 100%;
             height: auto;
           }
-          video{
+          video {
             width: 100%;
             height: auto;
           }
-          a{
+          a {
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

@@ -1,6 +1,6 @@
 <template>
-  <div class="lesson-page" v-wechat-title="$route.meta.title='课程列表'">
-    <Header title='课程列表' noBackShow='noBackShow'/>
+  <div class="lesson-page" v-wechat-title="$route.meta.title='我的课程'">
+    <Header title='我的课程' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
     <div class="lesson-item" v-for="(item, index) in voteList" :key="index">

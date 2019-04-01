@@ -29,6 +29,7 @@
 </template>
 
 <script>
+  import {hideVideo} from '../../common/js/util'
   import {getUser, getBanner, getIndexLink} from '../../server/api'
   import Header from '../../components/header.vue'
   import HomeIcon from '../../components/common/homeIcon.vue'
@@ -144,6 +145,14 @@
       alertTip,
       Heart
     },
+    watch: {
+      showAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      },
+      successAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      }
+    }
   }
 </script>
 

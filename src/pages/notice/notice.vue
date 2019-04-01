@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import {hideVideo} from '../../common/js/util'
   import Header from '../../components/header.vue'
   import {newsDetail} from '../../server/api'
   import enlistTip from '../../components/common/enlistTip'
@@ -65,6 +66,14 @@
       Header,
       enlistTip,
       alertTip
+    },
+    watch: {
+      enlistTip(newVal, oldVal) {
+        hideVideo(newVal);
+      },
+      showAlert(newVal, oldVal) {
+        hideVideo(newVal);
+      }
     }
   }
 </script>

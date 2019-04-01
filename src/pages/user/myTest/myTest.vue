@@ -1,6 +1,6 @@
 <template>
-  <div class="vote-page" v-wechat-title="$route.meta.title='在线测试'">
-    <Header title='在线测试' noBackShow='noBackShow'/>
+  <div class="vote-page" v-wechat-title="$route.meta.title='我的测试'">
+    <Header title='我的测试' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <router-link :to="'/testResult/' + item.id " class="test-item" v-for="(item, index) in myTestList" :key="index">
       <p class="title">{{item.name}}</p>

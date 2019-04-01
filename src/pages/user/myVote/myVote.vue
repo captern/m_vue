@@ -1,6 +1,6 @@
 <template>
-  <div class="vote-page" v-wechat-title="$route.meta.title='投票'">
-    <Header title='投票' noBackShow='noBackShow'/>
+  <div class="vote-page" v-wechat-title="$route.meta.title='我的投票'">
+    <Header title='我的投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in myVoteList" :key="index">
       <p class="title">{{item.name}}</p>

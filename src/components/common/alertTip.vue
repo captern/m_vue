@@ -24,26 +24,50 @@
 </template>
 
 <script>
+  import $ from 'jquery'
   export default {
     data() {
       return {
         positionY: 0,
         timer: null,
+//        showTip: ''
       }
     },
+    props: ['alertText', 'tipType', 'btnOne', 'btnTwo', 'showTip'],
     mounted() {
-
+//      this.checkVideo(this.showTip)
     },
-    props: ['alertText', 'tipType','btnOne','btnTwo'],
     methods: {
+      checkVideo(type) {
+        console.log(this.showTip)
+        console.log(type)
+        let videoClass = $("video")
+        if (type) {
+          const u = navigator.userAgent
+          if (u.indexOf('Android' > -1) || u.indexOf('Linux') > -1) {
+            videoClass.hide()
+          }
+        } else {
+          console.log('要首位')
+          videoClass.show()
+        }
+      },
       closeTip() {
         this.$emit('closeTip')
       },
       confirmTip() {
         this.$emit('confirmTip')
         this.closeTip()
-      }
-    }
+      },
+    },
+    watch: {
+      showTip: {
+        handler(newValue, oldValue) {
+          console.l
+        },
+      },
+      deep: true
+    },
   }
 </script>
 

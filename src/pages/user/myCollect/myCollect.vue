@@ -2,22 +2,42 @@
   <div class="lesson-page" v-wechat-title="$route.meta.title='我的收藏'">
     <Header title='我的收藏' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
-    <router-link :to="'/myCollectMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in myCollectList" :key="index">
-      <div class="type-one" v-if="item.has_teacher_img == 0">
-        <p class="title">{{item.name}}</p>
-        <p class="des">{{item.desc}}</p>
-      </div>
-      <div class="type-two" v-else-if="item.has_teacher_img == 1">
-        <div class="author-img">
-          <img :src="item.teacher_img" alt="">
+    <div v-if="item.is_sign">
+      <router-link :to="'/myLessonMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in myCollectList" :key="index">
+        <div class="type-one" v-if="item.has_teacher_img == 0">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
         </div>
-        <p class="title">{{item.name}}</p>
-      </div>
-      <div class="author-time">
-        <div class="author">主讲人：<span>{{item.teacher}}</span></div>
-        <div class="time">授课时间：{{item.study_time}}</div>
-      </div>
-    </router-link>
+        <div class="type-two" v-else-if="item.has_teacher_img == 1">
+          <div class="author-img">
+            <img :src="item.teacher_img" alt="">
+          </div>
+          <p class="title">{{item.name}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+          <div class="time">授课时间：{{item.study_time}}</div>
+        </div>
+      </router-link>
+    </div>
+    <div v-else>
+      <router-link :to="'/lessonMain/' + item.cou_id " class="lesson-item" v-for="(item, index) in myCollectList" :key="index">
+        <div class="type-one" v-if="item.has_teacher_img == 0">
+          <p class="title">{{item.name}}</p>
+          <p class="des">{{item.desc}}</p>
+        </div>
+        <div class="type-two" v-else-if="item.has_teacher_img == 1">
+          <div class="author-img">
+            <img :src="item.teacher_img" alt="">
+          </div>
+          <p class="title">{{item.name}}</p>
+        </div>
+        <div class="author-time">
+          <div class="author">主讲人：<span>{{item.teacher}}</span></div>
+          <div class="time">授课时间：{{item.study_time}}</div>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
