@@ -44,7 +44,7 @@
 
       changeSearch(val){
         this.searchVal = val
-        this.getData()
+        this.getData(this.typeId)
       },
       getData(typeId){
         let getData = {
