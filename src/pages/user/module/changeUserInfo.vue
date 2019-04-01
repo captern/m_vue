@@ -10,8 +10,10 @@
           <div class="item-right">
             <div class="avatar-input-area">
               <img class="avatar-icon" :src="avatar?avatar:require('../../../common/image/user-icon.png')" alt="">
+              <!--<input type="file" class="avatar-input" name="avatar" placeholder="点击更改" ref="" @change="changeImage"-->
+                     <!--accept="image/gif,image/jpeg,image/jpg,image/png">-->
               <input type="file" class="avatar-input" name="avatar" placeholder="点击更改" ref="" @change="changeImage"
-                     accept="image/gif,image/jpeg,image/jpg,image/png">
+                     accept="image/*">
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@
         let getData = {
           type: 1,
           name: this.searchVal,
-          group: typeId
+          group: this.typeId
         }
         getNewsList(getData).then(res => {
           if (res.status) {

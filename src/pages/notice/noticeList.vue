@@ -48,7 +48,7 @@
         let getData = {
           type: 2,
           name: this.searchVal,
-          group: typeId
+          group: this.typeId
         }
         newsNotice(getData).then(res => {
           if (res.status) {
