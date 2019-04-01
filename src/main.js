@@ -7,6 +7,7 @@ import router from './router/router'
 import fastclick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
 
+
 import {getStore} from './config/mUtils'
 import {getUser} from './server/api'
 
