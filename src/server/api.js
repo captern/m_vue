@@ -2,7 +2,7 @@ import fetch from '../config/fetch'
 import {getStore} from '../config/mUtils'
 
 // 检测是否登录
-export const checkLogin = getData => fetch('user/is-login', getData)
+export const checkLogin = getData => fetch('/user/is-login', getData)
 
 
 // 获取新闻列表
