@@ -41,20 +41,28 @@ Vue.use(VueLazyload, {
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
-router.beforeEach((to, from, next) => {
-  console.log('asdasdasdasd')
-  console.log(from.path)
-  if(from.path.indexOf('login') > -1 || from.path.indexOf('newslist') > -1 || from.path.indexOf('noticelist') > -1 || from.path.indexOf('activityIndex') > -1 || from.path.indexOf('talentedIndex') > -1 || from.path == '/' || from.path == '/index' ){
-    console.log('从登陆过来的,不校验是否登录')
 
+router.beforeEach((to, from, next) => {
+  // console.log(from.path)
+  // console.log(to.path)
+  if(from.path.indexOf('login') > -1 || to.path.indexOf('newslist') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
+  // if( to.path.indexOf('newslist') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
+    console.log('从登陆过来的,不校验是否登录')
+    next();
   }else {
     checkLogin().then(res =>{
       if(res.status){
         console.log('用户已经登录')
+        next();
       }else{
-        router.push('/login');
+        console.log('asdasdasdsssssss')
+        // router.push('/login');
+        next()
+        next({path: "/login"});
+        // router.push('/login');
       }
     })
+    // next()
   }
   // console.log(to)
   // console.log(from)
@@ -73,12 +81,12 @@ router.beforeEach((to, from, next) => {
   //   console.log('用户未登录')
   //   router.push('/index');
   // }
-
-  next();
 });
 
 
 router.afterEach((to,from,next) => {
+  // console.log(to)
+  // console.log(from)
   window.scrollTo(0,0);
 })
 
