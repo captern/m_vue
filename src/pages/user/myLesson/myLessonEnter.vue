@@ -1,6 +1,6 @@
 <template>
-  <div class="vote-item-page" v-wechat-title="$route.meta.title='课件列表'">
-    <Header title='课件列表' noBackShow='noBackShow'/>
+  <div class="vote-item-page" v-wechat-title="$route.meta.title='我的课程'">
+    <Header title='我的课程' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <div class="vote-item-area">
       <!--<router-link :to="'/myLessonMain/' + item.cou_id ">-->
