@@ -44,8 +44,9 @@ Vue.use(VueWechatTitle)
 router.beforeEach((to, from, next) => {
   console.log('asdasdasdasd')
   console.log(from.path)
-  if(from.path.indexOf('login') > -1){
+  if(from.path.indexOf('login') > -1 || from.path.indexOf('newslist') > -1 || from.path.indexOf('noticelist') > -1 || from.path.indexOf('activityIndex') > -1 || from.path.indexOf('talentedIndex') > -1 || from.path == '/' || from.path == '/index' ){
     console.log('从登陆过来的,不校验是否登录')
+
   }else {
     checkLogin().then(res =>{
       if(res.status){
