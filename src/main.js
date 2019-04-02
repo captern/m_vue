@@ -7,6 +7,8 @@ import router from './router/router'
 import fastclick from 'fastclick'
 import VueLazyload from 'vue-lazyload'
 
+import {checkLogin} from './server/api'
+
 
 import {getStore} from './config/mUtils'
 import {getUser} from './server/api'
@@ -40,9 +42,22 @@ import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
-  console.log(next)
+  console.log('asdasdasdasd')
+  console.log(from.path)
+  if(from.path.indexOf('login') > -1){
+    console.log('从登陆过来的,不校验是否登录')
+  }else {
+    checkLogin().then(res =>{
+      if(res.status){
+        console.log('用户已经登录')
+      }else{
+        router.push('/login');
+      }
+    })
+  }
+  // console.log(to)
+  // console.log(from)
+  // console.log(next)
   // console.log('在这之前，验证是否登录')
   // if (getStore('user_id')) {
   //   getUser().then(res => {
