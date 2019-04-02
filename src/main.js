@@ -40,6 +40,9 @@ import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
 router.beforeEach((to, from, next) => {
+  console.log(to)
+  console.log(from)
+  console.log(next)
   // console.log('在这之前，验证是否登录')
   // if (getStore('user_id')) {
   //   getUser().then(res => {
