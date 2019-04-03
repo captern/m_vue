@@ -26,7 +26,7 @@
           <div class="register-area">
             <div class="author">
               <router-link :to="'/activityDec/' + item.id ">
-                <div>活动时间：<span>{{item.teacher}}</span></div>
+                <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
             </div>
             <div class="register-btns">
@@ -51,7 +51,7 @@
           <div class="register-area">
             <div class="author">
               <router-link :to="'/activityMain/' + item.id ">
-                <div>主讲人：<span>{{item.teacher}}</span></div>
+                <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
             </div>
             <div class="register-btns">
