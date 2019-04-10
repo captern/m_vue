@@ -60,7 +60,8 @@
         logOutTest: false,
         successAlert: false,
         alertText: null,
-        myLocation: ''
+        myLocation: '',
+        showCancelSuccess : false
       }
     },
     computed: {
