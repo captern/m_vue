@@ -23,7 +23,7 @@
     <!--提示框弹出部分-->
     <alert-tip v-if="showAlert" @closeTip="showCancelAlert" @confirmTip="cancelSignUp" tipType="three"
                alertText="是否报名本活动" btnOne="返回" btnTwo="报名"/>
-    <alert-tip v-if="successAlert" @closeTip="showSuccessAlert" tipType="one"
+    <alert-tip v-if="successAlert" @closeTip="showSuccessAlert"  tipType="one"
                :alertText="alertText ? alertText : '报名成功'" btnOne="返回"/>
   </div>
 </template>
@@ -103,7 +103,8 @@
         this.showAlert = !this.showAlert
       },
       showSuccessAlert() {
-        this.successAlert = !this.successAlert
+        this.successAlert = !this.successAlert;
+        this.$router.go(-1);
       },
       // 取消报名课程
       cancelSignUp() {
