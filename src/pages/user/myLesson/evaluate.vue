@@ -35,11 +35,39 @@
           <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" @blur="out()"/>
         </div>
       </div>
+      <!--2是选星模式-->
       <div class="type-two" v-else-if="evaluateData.type == 2">
         <div class="stars-area">
           <div class="star-item" v-for="(item, index) in starAll" :key="index" @click="setStar(index)">
             <img v-if="index <starData" src="../../../common/icon/star_none.png" alt="有星星">
             <img v-else src="../../../common/icon/star_check.png" alt="有星星">
+          </div>
+        </div>
+        <div class="text-area">
+          <p>课程反馈:</p>
+          <textarea class="desc-area" placeholder="请输入" maxlength="500" v-model="desc" @blur="out()"/>
+        </div>
+      </div>
+      <!--3是选项选星模式-->
+      <div class="type-three" v-else-if="evaluateData.type == 3">
+        <div class="stars-area">
+          <div class="star-item" v-for="(item, index) in starAll" :key="index" @click="setStar(index)">
+            <img v-if="index <starData" src="../../../common/icon/star_none.png" alt="有星星">
+            <img v-else src="../../../common/icon/star_check.png" alt="有星星">
+          </div>
+        </div>
+        <div class="test-item" v-for="(evaluateItem, evaluateIndex) in evaluateData.items" :key="evaluateIndex">
+          <div class="test-dec">
+            {{evaluateIndex + 1}}、{{evaluateItem.title}}
+          </div>
+          <div class="test-options">
+            <div class="option-item" v-for="(optionItem, optionIndex) in evaluateItem.content"
+                 @click="changeCheck(evaluateIndex,optionIndex)">
+              <div class="check-icon">
+                <span class="icon" :class="{check: postResult[evaluateIndex].checked === optionIndex}"></span>
+              </div>
+              <div class="option-dec">{{optionItem}}</div>
+            </div>
           </div>
         </div>
         <div class="text-area">
@@ -94,7 +122,7 @@
         id: this.evaluateId
       }
       getEvaluate(getData).then(res => {
-        if (res.data.type == 1) {
+        if (res.data.type == 1 || res.data.type == 3) {
           let postResult = new Array()
           res.data.items.forEach(function (item, index) {
             let checkItem = {
@@ -146,6 +174,19 @@
           this.postResults = asd;
         } else if (this.evaluateData.type == 2) {
           _this.confirmAlert = true
+        } else if (this.evaluateData.type == 3) {
+            let asd = new Array();
+            console.log(asd)
+            this.postResult.forEach(function (item, index) {
+                if (item.checked === '') {
+                    _this.showAlert = true
+                    return
+                } else {
+                    asd.push(item.checked)
+                    _this.confirmAlert = true
+                }
+            })
+            this.postResults = asd;
         }
       },
       postConfirm() {
@@ -162,6 +203,13 @@
             star: this.starData,
             remark: this.desc
           }
+        } else if (this.evaluateData.type == 3) {
+            postData = {
+                id: this.evaluateId,
+                result: JSON.stringify(this.postResults),
+                remark: this.desc,
+                star : this.starData
+            }
         }
         postEvaluate(postData).then(res => {
           if (res.status) {
@@ -301,6 +349,118 @@
             }
           }
         }
+        .test-item {
+          /*border-top: 1px solid #dcdcdc;*/
+          padding-top: 32px;
+          .test-dec {
+            font-size: 19px;
+            line-height: 30px;
+            color: #000000;
+            padding-bottom: 23px;
+          }
+          .test-options {
+            font-size: 19px;
+            .option-item {
+              display: flex;
+              height: 35px;
+              line-height: 35px;
+              .check-icon {
+                flex: 35;
+                .icon {
+                  display: inline-block;
+                  vertical-align: middle;
+                  width: 21px;
+                  height: 21px;
+                  background: #ececec;
+                  border-radius: 50%;
+                  &.check {
+                    background: #5ac7f2;
+                    box-sizing: border-box;
+                    border: 3px solid #ececec;
+                  }
+                }
+              }
+              .option-dec {
+                flex: 513;
+                display: inline-block;
+              }
+            }
+          }
+          &:first-child {
+            border: none;
+            padding-top: 0;
+          }
+        }
+        .text-area {
+          padding-top: 32px;
+          padding-bottom: 111px;
+          .desc-area {
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+            font-size: 19px;
+            line-height: 30px;
+            min-height: 90px;
+            border: 1px solid #999999;
+          }
+        }
+      }
+      .type-three {
+        margin-top: 82px;
+        .stars-area {
+          display: flex;
+          padding: 0 50px;
+          .star-item {
+            flex: 1;
+            text-align: center;
+            img {
+              width: 37px;
+              height: 37px;
+            }
+          }
+        }
+          .test-item {
+              /*border-top: 1px solid #dcdcdc;*/
+              padding-top: 32px;
+              .test-dec {
+                  font-size: 19px;
+                  line-height: 30px;
+                  color: #000000;
+                  padding-bottom: 23px;
+              }
+              .test-options {
+                  font-size: 19px;
+                  .option-item {
+                      display: flex;
+                      height: 35px;
+                      line-height: 35px;
+                      .check-icon {
+                          flex: 35;
+                          .icon {
+                              display: inline-block;
+                              vertical-align: middle;
+                              width: 21px;
+                              height: 21px;
+                              background: #ececec;
+                              border-radius: 50%;
+                              &.check {
+                                  background: #5ac7f2;
+                                  box-sizing: border-box;
+                                  border: 3px solid #ececec;
+                              }
+                          }
+                      }
+                      .option-dec {
+                          flex: 513;
+                          display: inline-block;
+                      }
+                  }
+              }
+              &:first-child {
+                  border: none;
+                  padding-top: 0;
+              }
+          }
         .text-area {
           padding-top: 32px;
           padding-bottom: 111px;
