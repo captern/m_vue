@@ -127,7 +127,7 @@
         }
         cancelActivity(postData).then(res => {
           if (res.status) {
-            this.showCancelSuccess = !this.showCancelSuccess
+            this.cancelSuccessAlert = !this.cancelSuccessAlert
             this.alertText = '取消报名成功'
           } else {
             this.successAlert = !this.successAlert
