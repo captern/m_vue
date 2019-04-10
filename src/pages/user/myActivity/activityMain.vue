@@ -111,8 +111,8 @@
         })
       },
       cancelSuccessJump(){
-        this.showCancelSuccess = !this.showCancelSuccess
-        this.$router.push('/myActivity');
+        this.showCancelSuccess = !this.showCancelSuccess;
+        this.$router.go(-1);
       },
       showCancelAlert() {
         this.showAlert = !this.showAlert
