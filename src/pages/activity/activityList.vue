@@ -17,6 +17,7 @@
     <div v-if="pageType == 'one'">
       <div v-for="(item, index) in listData" :key="index">
         <div class="lesson-item" v-if="!item.is_sign">
+          <div class="vote-check" v-if="item.is_sign">已参与</div>
           <router-link :to="'/activityDec/' + item.id ">
             <div class="type-one">
               <div class="title">{{item.name}}</div>
@@ -38,6 +39,7 @@
           </div>
         </div>
         <div class="lesson-item" v-else>
+          <div class="vote-check"  v-if="item.is_sign">已参与</div>
           <router-link :to="'/activityMain/' + item.id ">
             <div class="type-one">
               <div class="title">{{item.name}}</div>
@@ -63,6 +65,7 @@
     </div>
     <div v-else-if="pageType == 'two'">
       <router-link :to="'/voteItem/' + item.id " class="lesson-item" v-for="(item, index) in listData" :key="index">
+        <div class="vote-check" v-if="item.is_sub">已参与</div>
         <div class="vote">
           <div class="title">{{item.name}}</div>
           <div class="des" v-html="item.des"></div>
@@ -293,11 +296,24 @@
       }
     }
     .lesson-item {
+      position: relative;
       background: #FFFFFF;
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px 5px;
       display: block;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       .type-one {
         .title {
           font-size: 23px;

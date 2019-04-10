@@ -3,8 +3,38 @@
     <Header title='我的活动' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
+
+
+    <!--<div>-->
+      <!--<div class="lesson-item">-->
+        <!--<div class="vote-check">已参与</div>-->
+        <!--<router-link :to="'/activityMain/33'">-->
+          <!--<div class="type-one">-->
+            <!--<div class="title">活动title</div>-->
+            <!--<div class="des">活动描述</div>-->
+          <!--</div>-->
+        <!--</router-link>-->
+        <!--<div class="register-area">-->
+          <!--<div class="author">-->
+            <!--<router-link :to="'/activityMain/dsa/111'">-->
+              <!--<div>主讲人：<span>主讲人</span></div>-->
+            <!--</router-link>-->
+          <!--</div>-->
+          <!--&lt;!&ndash;<div class="register-btns">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="register-btn check" v-if="item.start" @click="registerIn(item.cou_id)">签到</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="register-btn" v-else>签到</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="register-btn check" v-if="item.end" @click="registerOut(item.cou_id)">签离</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="register-btn" v-else>签离</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+
+
     <div v-for="(item, index) in activityList" :key="index">
       <div class="lesson-item">
+        <div class="vote-check" v-if="item.is_sub">已参与</div>
         <router-link :to="'/activityMain/' + item.cou_id ">
           <div class="type-one">
             <div class="title">{{item.name}}</div>
@@ -263,6 +293,19 @@
       border-radius: 10px;
       padding: 30px 23px 5px;
       display: block;
+      position: relative;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       .type-one {
         .title {
           font-size: 23px;

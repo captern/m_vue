@@ -14,8 +14,28 @@
         </div>
       </div>
     </div>
+
+
+    <!--<router-link :to="'/voteItem/3'" class="vote-item">-->
+      <!--<div class="vote-check">已参与</div>-->
+      <!--<p class="title">投票标题</p>-->
+      <!--<p class="des">投票描述</p>-->
+      <!--&lt;!&ndash;<p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>&ndash;&gt;-->
+      <!--&lt;!&ndash;<p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>&ndash;&gt;-->
+      <!--<p class="time down"><span>00天00小时00分</span></p>-->
+    <!--</router-link>-->
+    <!--<router-link :to="'/voteItem/3'" class="vote-item">-->
+      <!--<p class="title">投票标题</p>-->
+      <!--<p class="des">投票描述</p>-->
+      <!--&lt;!&ndash;<p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>&ndash;&gt;-->
+      <!--&lt;!&ndash;<p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>&ndash;&gt;-->
+      <!--<p class="time down"><span>00天00小时00分</span></p>-->
+    <!--</router-link>-->
+
+
     <!--<Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>-->
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in voteList" :key="index">
+      <div class="vote-check" v-if="item.is_sub">已参与</div>
       <p class="title">{{item.name}}</p>
       <p class="des">{{item.des}}</p>
       <!--<p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>-->
@@ -194,6 +214,19 @@
       }
     }
     .vote-item {
+      position: relative;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       background: #FFFFFF;
       margin: 23px;
       border-radius: 10px;

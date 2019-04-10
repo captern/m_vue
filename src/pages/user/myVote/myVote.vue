@@ -3,6 +3,7 @@
     <Header title='我的投票' noBackShow='noBackShow'/>
     <HomeIcon></HomeIcon>
     <router-link :to="'/voteItem/' + item.id " class="vote-item" v-for="(item, index) in myVoteList" :key="index">
+      <div class="vote-check" v-if="item.is_sub">已参与</div>
       <p class="title">{{item.name}}</p>
       <p class="des" v-html="item.content"></p>
       <!--<p class="time">{{item.updated_time}}</p>-->
@@ -68,11 +69,24 @@
     overflow: scroll;
     /*背景固定不滚动*/
     .vote-item {
+      position: relative;
       background: #FFFFFF;
       margin: 23px;
       border-radius: 10px;
       padding: 30px 23px;
       display: block;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       .title {
         font-size: 23px;
         line-height: 31px;
