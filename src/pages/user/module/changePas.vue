@@ -4,11 +4,11 @@
     <div class="change-area">
       <div class="change-form">
         <div class="name-area change-item">
-          <div class="item-left"><span>*</span>密 码 ：</div>
+          <div class="item-left"><span>*</span>密 码 :</div>
           <input class="item-right" type="password" name="name" placeholder="输入新密码" v-model="newPassword">
         </div>
         <div class="IdCard-area change-item">
-          <div class="item-left"><span>*</span>确认密码 ：</div>
+          <div class="item-left"><span>*</span>确认密码 :</div>
           <input class="item-right" type="password" name="IdCard" placeholder="输入新密码再次确认" v-model="repeatPassword">
         </div>
 

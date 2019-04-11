@@ -5,7 +5,7 @@
       <div class="change-form">
         <div class="avatar-area change-item">
           <div class="item-left">
-            修改头像 ：
+            修改头像 :
           </div>
           <div class="item-right">
             <div class="avatar-input-area">
@@ -20,14 +20,14 @@
         <div class="phone-area change-item">
           <div class="item-left">
             <span>*</span>
-            手机号 ：
+            手机号 :
           </div>
           <div class="item-right phone-number">{{phoneNumber}}</div>
         </div>
         <div class="sex-area change-item">
           <div class="item-left">
             <span>*</span>
-            性&nbsp;&nbsp;&nbsp;别 ：
+            性&nbsp;&nbsp;&nbsp;别 :
           </div>
           <div class="item-right sex-check">
             <div class="sex-item" @click="changeSex()">
@@ -50,22 +50,22 @@
 
           <div class="item-left">
             <span>*</span>
-            姓&nbsp;&nbsp;&nbsp;名 ：
+            姓&nbsp;&nbsp;&nbsp;名 :
           </div>
           <input class="item-right" type="text" name="name" placeholder="请输入姓名" v-model="userName" v-focus="this.focus">
         </div>
         <div class="IdCard-area change-item">
-          <div class="item-left">身份证号码 ：</div>
+          <div class="item-left">身份证号码 :</div>
           <input class="item-right" type="number" name="IdCard" placeholder="请输入身份证号码" v-model="IdCard"
                  v-focus="this.focus">
         </div>
         <div class="work-area change-item">
-          <div class="item-left">工作单位 ：</div>
+          <div class="item-left">工作单位 :</div>
           <input class="item-right" type="text" name="workSpace" placeholder="请输入工作单位" v-model="workSpace"
                  v-focus="this.focus">
         </div>
         <div class="work-area change-item">
-          <div class="item-left">职 位 ：</div>
+          <div class="item-left">职 位 :</div>
           <input class="item-right" type="text" name="workSpace" placeholder="请输入职位" v-model="workLevel"
                  v-focus="this.focus">
         </div>
