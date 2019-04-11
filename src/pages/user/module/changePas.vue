@@ -134,7 +134,7 @@
       border-radius: 15px;
       .change-form {
         /*width: 669px;*/
-        width: 430px;
+        width: 440px;
         /*margin: 231px auto 0;*/
         margin: 144px auto 0;
         color: rgb(58, 178, 237);

@@ -282,7 +282,7 @@
       background: #ffffff;
       border-radius: 15px;
       .change-form {
-        width: 430px;
+        width: 440px;
         margin: 144px auto 0;
         color: rgb(58, 178, 237);
         .change-item {
