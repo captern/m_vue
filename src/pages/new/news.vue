@@ -64,7 +64,6 @@
         this.enlistTip = !this.enlistTip
         if (type) {
           this.confirmRegister();
-          this.showAlert = true
         } else {
         }
       },

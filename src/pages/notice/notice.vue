@@ -19,9 +19,10 @@
       </div>
     </div>
     <!--提示框弹出部分-->
-    <enlist-tip v-if="enlistTip" @closeTip="hideEnlist" :alertText="alertText"/>
+    <enlist-tip v-if="enlistTip" @closeTip="hideEnlist" :alertText="alertText" :couId = 'newsData.cou_id'/>
+    <!--<enlist-tip v-if="enlistTip" @closeTip="hideEnlist" :alertText="alertText" :couId = '31'/>-->
     <!--确定取消提示框弹出部分-->
-    <alert-tip v-if="showAlert" @closeTip="showAlert = false" tipType="one" alertText="报名成功"/>
+    <alert-tip v-if="showAlert" @closeTip="showAlert = false" tipType="one" :alertText=" alertText ? alertText : '报名成功'"/>
 
 
   </div>
@@ -33,6 +34,7 @@
   import {newsDetail} from '../../server/api'
   import enlistTip from '../../components/common/enlistTip'
   import alertTip from '../../components/common/alertTip'
+  import {lessonMain, signLesson} from '../../server/lessonApi'
 
   export default {
     data() {
@@ -46,20 +48,37 @@
     },
     mounted() {
       this.newsId = this.$route.params.noticeId;
-      newsDetail(this.newsId).then(res => {
-        this.newsData = res.data
-      })
+      this.getData();
     },
     methods: {
+      getData(){
+        newsDetail(this.newsId).then(res => {
+          this.newsData = res.data
+        })
+      },
       showEnlist(){
         this.enlistTip = !this.enlistTip
       },
       hideEnlist(type){
         this.enlistTip = !this.enlistTip
         if(type){
-          this.showAlert = true
+          this.confirmRegister();
         }else{
         }
+      },
+      confirmRegister(){
+        let postData = {
+          id:this.newsData.cou_id
+        }
+        signLesson(postData).then(res => {
+          if(res.status){
+            this.showAlert = true
+            this.getData();
+          }else{
+            this.showAlert = true
+            this.alertText = res.msg
+          }
+        })
       }
     },
     components: {
@@ -93,17 +112,28 @@
       border-radius: 24px;
       margin: 35px;
       .news-main {
-        padding: 37px 37px 0;
+        padding: 37px 37px 130px;
         margin-bottom: 25px;
         display: block;
         .enlist-area{
-          width: 337px;
-          height: 74px;
-          margin: 70px auto 50px;
-          background-color: rgb(192,50,48);
+          /*width: 337px;*/
+          /*height: 74px;*/
+          /*margin: 70px auto 50px;*/
+          /*background-color: rgb(192,50,48);*/
+          /*color: #ffffff;*/
+          /*text-align: center;*/
+          /*line-height: 74px;*/
+          /*border-radius: 24px;*/
+
+          position: fixed;
+          bottom: 56px;
+          width: 497px;
+          height: 66px;
+          line-height: 66px;
+          margin: 0 auto;
+          background-color: rgb(58, 178, 237);
           color: #ffffff;
           text-align: center;
-          line-height: 74px;
           border-radius: 24px;
         }
         .header-area{

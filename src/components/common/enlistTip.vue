@@ -124,6 +124,7 @@
             text-align: left;
             flex: 4;
             color: rgb(35, 24, 21);
+            overflow: hidden;
           }
           &.three{
             padding-top: 20px;
