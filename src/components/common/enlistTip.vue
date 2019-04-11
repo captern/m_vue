@@ -5,16 +5,16 @@
       <img class="enlist-title" src="../../common/image/enlist.png" alt="">
       <div class="enlist-main">
         <div class="one line">
-          <div class="left">名称 :</div>
-          <div class="right">技术服务人才中高级培训课程</div>
+          <div class="left">名称 : </div>
+          <div class="right">{{lessonData.name}}</div>
         </div>
         <div class="two line">
           <div class="left">时间 :</div>
-          <div class="right">2018年11月15日(周四)</div>
+          <div class="right">{{lessonData.study_time}}</div>
         </div>
         <div class="three line">
           <div class="left">地点 :</div>
-          <div class="right">上海市徐汇区小木桥路681号外经大厦21楼会议室</div>
+          <div class="right">{{lessonData.study_addr}}</div>
         </div>
       </div>
       <p class="confirm-text">您是否要报名</p>
@@ -29,18 +29,28 @@
 </template>
 
 <script>
+  import {lessonMain, signLesson} from '../../server/lessonApi'
   export default {
     data() {
       return {
         positionY: 0,
         timer: null,
+        lessonData: '',
       }
     },
     mounted() {
-
+      this.getMain();
     },
-    props: ['alertText'],
+    props: ['alertText', 'couId'],
     methods: {
+      getMain(){
+        let getData = {
+          id: this.couId
+        }
+        lessonMain(getData).then(res => {
+          this.lessonData = res.data
+        })
+      },
       closeTip(type) {
         this.$emit('closeTip', type)
       }

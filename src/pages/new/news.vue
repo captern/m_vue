@@ -19,9 +19,9 @@
       </div>
     </div>
     <!--提示框弹出部分-->
-    <enlist-tip v-if="enlistTip" :showTip="enlistTip" @closeTip="hideEnlist" :alertText="alertText"/>
+    <enlist-tip v-if="enlistTip" :showTip="enlistTip" @closeTip="hideEnlist" :alertText="alertText" :couId = 'newsData.cou_id'/>
     <!--确定取消提示框弹出部分-->
-    <alert-tip v-if="showAlert" :showTip="showAlert" @closeTip="showAlert = false" tipType="one" alertText="报名成功"/>
+    <alert-tip v-if="showAlert" :showTip="showAlert" @closeTip="showAlert = false" tipType="one" :alertText="alertText ? alertText : '报名成功'"/>
 
 
   </div>
@@ -35,6 +35,8 @@
   import enlistTip from '../../components/common/enlistTip'
   import alertTip from '../../components/common/alertTip'
 
+  import {lessonMain, signLesson} from '../../server/lessonApi'
+
   export default {
     data() {
       return {
@@ -47,20 +49,38 @@
     },
     mounted() {
       this.newsId = this.$route.params.newsId;
-      newsDetail(this.newsId).then(res => {
-        this.newsData = res.data
-      })
+      this.getData();
     },
     methods: {
+      getData(){
+        newsDetail(this.newsId).then(res => {
+          this.newsData = res.data
+        })
+      },
       showEnlist() {
         this.enlistTip = !this.enlistTip
       },
       hideEnlist(type) {
         this.enlistTip = !this.enlistTip
         if (type) {
+          this.confirmRegister();
           this.showAlert = true
         } else {
         }
+      },
+      confirmRegister(){
+        let postData = {
+          id:this.newsData.cou_id
+        }
+        signLesson(postData).then(res => {
+          if(res.status){
+            this.showAlert = true
+            this.getData();
+          }else{
+            this.showAlert = true
+            this.alertText = res.msg
+          }
+        })
       }
     },
     components: {
