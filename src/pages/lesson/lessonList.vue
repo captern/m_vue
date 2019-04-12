@@ -54,25 +54,24 @@
             <p class="title">{{item.name}}</p>
           </div>
         </router-link>
-        <div class="register-area">
+        <div class="register-area" v-if="item.type == 2">
           <div class="author-time">
             <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
             <div class="time">授课时间：<span>{{item.study_time}}</span></div>
           </div>
-          <div class="register-btns" v-if="item.type == 2">
+          <div class="register-btns">
             <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
             <div class="register-btn" v-else>签到</div>
             <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
             <div class="register-btn" v-else>签离</div>
           </div>
-          <div class="register-btns" v-else>
-            <!--<div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>-->
-            <!--<div class="register-btn" v-else>签到</div>-->
-            <!--<div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>-->
-            <!--<div class="register-btn" v-else>签离</div>-->
-          </div>
         </div>
-      </div>
+        <div class="register-area register-type-one" v-else>
+          <div class="author-time-one">
+            <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
+            <div class="time">授课时间：<span>{{item.study_time}}</span></div>
+          </div>
+        </div>      </div>
     </div>
     <!--弹出框部分-->
     <alert-tip v-if="showAlert" @closeTip="showAlert = false" @confirmTip="registerCheckBtn" :tipType="tipType"
