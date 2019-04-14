@@ -4,6 +4,7 @@
     <HomeIcon></HomeIcon>
     <Select :selectAreaData=selectAreaData :checked=checked @parentMethod="changeCheck"></Select>
     <div class="lesson-item" v-for="(item, index) in voteList" :key="index">
+      <div class="vote-check" v-if="type == 1">已参与</div>
       <router-link :to="'/myLessonEnter/' + item.cou_id ">
         <div class="type-one" v-if="item.has_teacher_img == 0">
           <p class="title">{{item.name}}</p>
@@ -269,6 +270,19 @@
       border-radius: 10px;
       padding: 30px 23px 5px;
       display: block;
+      position: relative;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       .type-one {
         .title {
           font-size: 23px;

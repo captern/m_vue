@@ -7,6 +7,7 @@
     <div v-for="(item, index) in voteList" :key="index">
       <!--已经报名课程-->
       <div class="lesson-item" v-if="item.is_sign">
+        <div class="vote-check" v-if="item.is_sign">已参与</div>
         <router-link :to="'/myLessonMain/' + item.id ">
           <div class="type-one" v-if="item.has_teacher_img == 0">
             <p class="title">{{item.name}}</p>
@@ -24,12 +25,6 @@
           <div class="author-time">
             <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
             <div class="time">授课时间：<span>{{item.study_time}}</span></div>
-          </div>
-          <div class="register-btns">
-            <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-            <div class="register-btn" v-else>签到</div>
-            <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-            <div class="register-btn" v-else>签离</div>
           </div>
         </div>
         <div class="register-area register-type-one" v-else>
@@ -58,12 +53,6 @@
           <div class="author-time">
             <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
             <div class="time">授课时间：<span>{{item.study_time}}</span></div>
-          </div>
-          <div class="register-btns">
-            <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-            <div class="register-btn" v-else>签到</div>
-            <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-            <div class="register-btn" v-else>签离</div>
           </div>
         </div>
         <div class="register-area register-type-one" v-else>
@@ -327,6 +316,19 @@
       border-radius: 10px;
       padding: 30px 23px 5px;
       display: block;
+      position: relative;
+      .vote-check{
+        width: 85px;
+        height: 27px;
+        line-height: 27px;
+        position: absolute;
+        top:0;
+        font-size: 16px;
+        text-align: center;
+        color: rgb(255,255,255);
+        background: #3ab2ed;
+        border-radius: 0 0 8px 8px;
+      }
       .type-one {
         .title {
           font-size: 23px;
