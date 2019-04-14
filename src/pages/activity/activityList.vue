@@ -30,12 +30,6 @@
                 <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
             </div>
-            <div class="register-btns">
-              <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-              <div class="register-btn" v-else>签到</div>
-              <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-              <div class="register-btn" v-else>签离</div>
-            </div>
           </div>
         </div>
         <div class="lesson-item" v-else>
@@ -52,12 +46,6 @@
                 <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
             </div>
-            <div class="register-btns">
-              <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-              <div class="register-btn" v-else>签到</div>
-              <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-              <div class="register-btn" v-else>签离</div>
-            </div>
           </div>
         </div>
       </div>
@@ -71,7 +59,7 @@
           <div class="des" v-html="item.des"></div>
           <!--<div class="time">{{item.end_time}}</div>-->
           <div class="end-time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></div>
-          <p class="end-time down" v-else><span>00天00小时00分</span></p>
+          <p class="end-time down" v-else><span>投票已结束</span></p>
         </div>
       </router-link>
     </div>
