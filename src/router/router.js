@@ -118,7 +118,7 @@ export default new Router({
       path: '/myVote',
       component: MyVote
     },{
-      path: '/myLesson',
+      path: '/myLesson/:type?',
       component: MyLesson
     },{
       path: '/myLessonEnter/:lessonId',

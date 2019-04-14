@@ -21,7 +21,7 @@
           <div class="author"><span>主讲人：</span>{{item.teacher}}</div>
           <div class="time">授课时间：<span>{{item.study_time}}</span></div>
         </div>
-        <div class="register-btns">
+        <div class="register-btns" v-if="type != 1">
           <div class="register-btn check" v-if="item.start" @click="registerIn(item.cou_id)">签到</div>
           <div class="register-btn" v-else>签到</div>
           <div class="register-btn check" v-if="item.end" @click="registerOut(item.cou_id)">签离</div>
@@ -55,6 +55,7 @@
   export default {
     data() {
       return {
+        type : "",
         requestFlag: true, // 是否请求接口
         selectAreaData: [
           {
@@ -133,7 +134,8 @@
       window.removeEventListener('scroll', this.scrolling);
     },
     mounted() {
-      this.getLessonList();
+        this.type = this.$route.params.type;
+        this.getLessonList();
       this.addressDetail();
     },
     methods: {

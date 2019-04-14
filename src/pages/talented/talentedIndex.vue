@@ -10,7 +10,7 @@
         <router-link to="/lessonList/1" class="list-item"><img src="../../common/image/talented/two.png" alt=""></router-link>
         <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/three.png" alt=""></router-link>
         <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/four.png" alt=""></router-link>
-        <router-link to="/myLesson" class="list-item"><img src="../../common/image/talented/five.png" alt=""></router-link>
+        <router-link to="/myLesson/1" class="list-item"><img src="../../common/image/talented/five.png" alt=""></router-link>
         <router-link to="/test" class="list-item"><img src="../../common/image/talented/six.png" alt=""></router-link>
         <router-link to="/noticelist/2" class="list-item"><img src="../../common/image/talented/seven.png" alt="">
         </router-link>
