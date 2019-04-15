@@ -322,6 +322,7 @@
         height: 27px;
         line-height: 27px;
         position: absolute;
+        right:30px;
         top:0;
         font-size: 16px;
         text-align: center;
