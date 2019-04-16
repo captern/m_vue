@@ -30,10 +30,7 @@
                 <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
             </div>
-            <div class="register-btns">
-              <div class="register-btn">签到</div>
-              <div class="register-btn">签离</div>
-            </div>
+
           </div>
         </div>
 
@@ -55,12 +52,6 @@
               <router-link :to="'/activityMain/' + item.id ">
                 <div>活动时间：<span>{{item.start_time}}</span></div>
               </router-link>
-            </div>
-            <div class="register-btns">
-              <div class="register-btn check" v-if="item.start" @click="registerIn(item.id)">签到</div>
-              <div class="register-btn" v-else>签到</div>
-              <div class="register-btn check" v-if="item.end" @click="registerOut(item.id)">签离</div>
-              <div class="register-btn" v-else>签离</div>
             </div>
           </div>
         </div>
