@@ -39,8 +39,8 @@
       <p class="title">{{item.name}}</p>
       <p class="des">{{item.des}}</p>
       <!--<p class="time">投票时间{{item.start_time}}-{{item.end_time}}</p>-->
-      <p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>
-      <p class="time down" v-else><span>00天00小时00分</span></p>
+      <p class="time" v-if="item.count_down != '投票已结束'"><span>{{item.count_down}}</span></p>
+      <p class="time down" v-else><span>投票已结束</span></p>
     </router-link>
   </div>
 </template>
