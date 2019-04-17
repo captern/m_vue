@@ -103,6 +103,7 @@
         .title {
           font-size: 23px;
           line-height: 31px;
+          height:62px;
           color: #231815;
         }
         .des {
@@ -110,6 +111,7 @@
           line-height: 31px;
           color: #727171;
           padding-top: 14px;
+          height:93px;
           max-height: 93px;
           display: -webkit-box;
           -webkit-line-clamp: 3;
