@@ -7,7 +7,7 @@
       <p class="title">{{item.name}}</p>
       <p class="des" v-html="item.content"></p>
       <!--<p class="time">{{item.updated_time}}</p>-->
-      <p class="time" v-if="item.count_down != ''"><span>{{item.count_down}}</span></p>
+      <p class="time" v-if="item.count_down != '投票已结束'"><span>{{item.count_down}}</span></p>
       <p class="time" v-else></p>
     </router-link>
   </div>
