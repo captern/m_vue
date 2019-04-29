@@ -38,6 +38,8 @@
   import {mapState, mapActions} from 'vuex'
   import {activityMain, cancelActivity, activityRegister, cancelSignIn, registerCheck} from '../../server/myApi'
   import {getActivityDes, confirmActivity} from '../../server/activityApi'
+  import wx from 'weixin-js-sdk';
+
 
   export default {
     data() {
@@ -50,7 +52,8 @@
         logOutTest: false,
         successAlert: false,
         alertText: null,
-        myLocation: ''
+        myLocation: '',
+        signPackage: ''
       }
     },
     computed: {
@@ -96,8 +99,11 @@
         }
 //        myLessonMain(getData).then(res => {
         getActivityDes(getData).then(res => {
-          this.lessonData = res.data
+          this.lessonData = res.data;
+          this.signPackage = res.signPackage;
         })
+          this.setShare();
+
       },
       showCancelAlert() {
         this.showAlert = !this.showAlert
@@ -139,6 +145,60 @@
           }
         })
       },
+        setShare(){
+            wx.config({
+                debug: true,
+                appId: this.signPackage.appId, // 和获取Ticke的必须一样------必填，公众号的唯一标识
+                timestamp:this.signPackage.timestamp, // 必填，生成签名的时间戳
+                nonceStr: this.signPackage.nonceStr, // 必填，生成签名的随机串
+                signature: this.signPackage.signature,// 必填，签名，见附录1
+                //需要分享的列表项:发送给朋友，分享到朋友圈，分享到QQ，分享到QQ空间
+                jsApiList: [
+                    'onMenuShareAppMessage','onMenuShareTimeline',
+                    // 'onMenuShareQQ','onMenuShareQZone'
+                ]
+            });
+            //处理验证失败的信息
+            wx.error(function (res) {
+                logUtil.printLog('验证失败返回的信息:',res);
+            });
+            //处理验证成功的信息
+            wx.ready(function () {
+                //              alert(window.location.href.split('#')[0]);
+                //分享到朋友圈
+                wx.onMenuShareTimeline({
+                    title: this.lessonData.name, // 分享标题
+                    link:  this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: "", // 分享图标
+                    success: function (res) {
+                        // 用户确认分享后执行的回调函数
+                        logUtil.printLog("分享到朋友圈成功返回的信息为:",res);
+                        _this.showMsg("分享成功!")
+                    },
+                    cancel: function (res) {
+                        // 用户取消分享后执行的回调函数
+                        logUtil.printLog("取消分享到朋友圈返回的信息为:",res);
+                    }
+                });
+                //分享给朋友
+                wx.onMenuShareAppMessage({
+                    title: this.lessonData.name, // 分享标题
+                    desc: this.lessonData.desc, // 分享描述
+                    link: this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: _this.newDetailObj.thu_image, // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function (res) {
+                        // 用户确认分享后执行的回调函数
+                        logUtil.printLog("分享给朋友成功返回的信息为:",res);
+                    },
+                    cancel: function (res) {
+                        // 用户取消分享后执行的回调函数
+                        logUtil.printLog("取消分享给朋友返回的信息为:",res);
+                    }
+                });
+            });
+        }
     },
     components: {
       Header,
