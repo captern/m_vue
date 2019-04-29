@@ -101,8 +101,8 @@
         getActivityDes(getData).then(res => {
           this.lessonData = res.data;
           this.signPackage = res.signPackage;
+            this.setShare();
         })
-          this.setShare();
 
       },
       showCancelAlert() {
