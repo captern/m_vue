@@ -146,12 +146,13 @@
         })
       },
         setShare(){
+          var _this = this;
             wx.config({
-                debug: true,
-                appId: this.signPackage.appId, // 和获取Ticke的必须一样------必填，公众号的唯一标识
-                timestamp:this.signPackage.timestamp, // 必填，生成签名的时间戳
-                nonceStr: this.signPackage.nonceStr, // 必填，生成签名的随机串
-                signature: this.signPackage.signature,// 必填，签名，见附录1
+                debug: false,
+                appId: _this.signPackage.appId, // 和获取Ticke的必须一样------必填，公众号的唯一标识
+                timestamp:_this.signPackage.timestamp, // 必填，生成签名的时间戳
+                nonceStr: _this.signPackage.nonceStr, // 必填，生成签名的随机串
+                signature: _this.signPackage.signature,// 必填，签名，见附录1
                 //需要分享的列表项:发送给朋友，分享到朋友圈，分享到QQ，分享到QQ空间
                 jsApiList: [
                     'onMenuShareAppMessage','onMenuShareTimeline',
@@ -167,9 +168,9 @@
                 //              alert(window.location.href.split('#')[0]);
                 //分享到朋友圈
                 wx.onMenuShareTimeline({
-                    title: this.lessonData.name, // 分享标题
-                    link:  this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                    imgUrl: "", // 分享图标
+                    title: _this.lessonData.name, // 分享标题
+                    link:  _this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: _this.lessonData.img, // 分享图标
                     success: function (res) {
                         // 用户确认分享后执行的回调函数
                         logUtil.printLog("分享到朋友圈成功返回的信息为:",res);
@@ -182,10 +183,10 @@
                 });
                 //分享给朋友
                 wx.onMenuShareAppMessage({
-                    title: this.lessonData.name, // 分享标题
-                    desc: this.lessonData.desc, // 分享描述
-                    link: this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                    imgUrl:'', // 分享图标
+                    title: _this.lessonData.name, // 分享标题
+                    desc: _this.lessonData.desc, // 分享描述
+                    link: _this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl:_this.lessonData.img, // 分享图标
                     type: '', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function (res) {
