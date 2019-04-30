@@ -141,7 +141,7 @@
                     //分享给朋友
                     wx.onMenuShareAppMessage({
                         title: _this.lessonData.name, // 分享标题
-                        desc: _this.lessonData.introduction, // 分享描述
+                        desc: _this.lessonData.desc, // 分享描述
                         link: _this.lessonData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                         imgUrl: _this.lessonData.img, // 分享图标
                         type: '', // 分享类型,music、video或link，不填默认为link
