@@ -17,7 +17,8 @@
             <div class="vote-main" v-html="voteData.content"></div>
             <!--跳转 费图片-->
             <div v-if="!voteData.end">
-                <div class="vote-btn no-jump">投票已结束</div>
+                <router-link  :to="'/voteResult/'+ voteData.id" class="vote-btn">查看结果
+                </router-link>
             </div>
             <div v-else="">
                 <router-link v-if="voteData.is_img == 0" :to="'/postVote/'+ voteData.id" class="vote-btn">参与投票
