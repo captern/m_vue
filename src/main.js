@@ -42,27 +42,42 @@ import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
 
+
+
 router.beforeEach((to, from, next) => {
   // console.log(from.path)
   // console.log(to.path)
-  if(from.path.indexOf('login') > -1 || to.path.indexOf('newslist') > -1 || to.path.indexOf('news') > -1 || to.path.indexOf('notice') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
+  if(to.path.indexOf('newslist') > -1 || to.path.indexOf('news') > -1 || to.path.indexOf('notice') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
   // if( to.path.indexOf('newslist') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
     console.log('从登陆过来的,不校验是否登录')
     next();
-  }else {
-    checkLogin().then(res =>{
+  } else if (from.path.indexOf('login') > -1 ){
+      checkLogin().then(res =>{
+          if(res.status){
+              console.log('用户已经登录')
+              next();
+          }else{
+              console.log('asdasdasdsssssss');
+              // router.push({path: "/login"});
+              next();
+              router.go(-1);
+              // router.push('/login');
+          }
+      })
+  }
+    else {
+      checkLogin().then(res =>{
       if(res.status){
         console.log('用户已经登录')
         next();
       }else{
-        console.log('asdasdasdsssssss')
-        // router.push('/login');
-        next()
-        next({path: "/login"});
+        console.log('asdasdasdsssssss');
+       // router.push({path: "/login"});
+        next();
+        router.push({path:"/login"});
         // router.push('/login');
       }
     })
-    // next()
   }
   // console.log(to)
   // console.log(from)
@@ -82,6 +97,7 @@ router.beforeEach((to, from, next) => {
   //   router.push('/index');
   // }
 });
+
 
 
 router.afterEach((to,from,next) => {
