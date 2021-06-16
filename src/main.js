@@ -9,20 +9,16 @@ import VueLazyload from 'vue-lazyload'
 
 import {checkLogin} from './server/api'
 
-
 import {getStore} from './config/mUtils'
 import {getUser} from './server/api'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
 import 'lib-flexible'
-
-
-
 
 // import 'common/stylus/index.styl'
 // import 'common/stylus/index.scss'
@@ -41,40 +37,34 @@ Vue.use(VueLazyload, {
 import VueWechatTitle from 'vue-wechat-title'
 Vue.use(VueWechatTitle)
 
-
-
-
 router.beforeEach((to, from, next) => {
-  // console.log(from.path)
-  // console.log(to.path)
-  if(to.path.indexOf('newslist') > -1 || to.path.indexOf('news') > -1 || to.path.indexOf('notice') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
+  if (to.path.indexOf('newslist') > -1 || to.path.indexOf('news') > -1 || to.path.indexOf('notice') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index') {
   // if( to.path.indexOf('newslist') > -1 || to.path.indexOf('noticelist') > -1 || to.path.indexOf('activityIndex') > -1 || to.path.indexOf('talentedIndex') > -1 || to.path == '/' || to.path == '/index' ){
     console.log('从登陆过来的,不校验是否登录')
-    next();
-  } else if (from.path.indexOf('login') > -1 ){
-      checkLogin().then(res =>{
-          if(res.status){
-              console.log('用户已经登录')
-              next();
-          }else{
-              console.log('asdasdasdsssssss');
+    next()
+  } else if (from.path.indexOf('login') > -1) {
+    if (to.path.indexOf('register') > -1) {
+      next()
+    } else {
+      checkLogin().then(res => {
+        if (res.status) {
+          next()
+        } else {
               // router.push({path: "/login"});
-              next();
-              router.go(-1);
+          next()
+          router.go(-1)
               // router.push('/login');
-          }
+        }
       })
-  }
-    else {
-      checkLogin().then(res =>{
-      if(res.status){
-        console.log('用户已经登录')
-        next();
-      }else{
-        console.log('asdasdasdsssssss');
+    }
+  } else {
+    checkLogin().then(res => {
+      if (res.status) {
+        next()
+      } else {
        // router.push({path: "/login"});
-        next();
-        router.push({path:"/login"});
+        next()
+        router.push({path: '/login'})
         // router.push('/login');
       }
     })
@@ -96,14 +86,12 @@ router.beforeEach((to, from, next) => {
   //   console.log('用户未登录')
   //   router.push('/index');
   // }
-});
+})
 
-
-
-router.afterEach((to,from,next) => {
+router.afterEach((to, from, next) => {
   // console.log(to)
   // console.log(from)
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0)
 })
 
 // const historySongs = loadPlay()
